@@ -1,0 +1,12 @@
+{
+    "default": {
+        "user": { "first_name": "Ada" },
+        "action_url": "https://example.com/security",
+        "details": [
+            { "label": "When", "value": "24 August 2026 at 14:07 UTC" },
+            { "label": "Device", "value": "Chrome on macOS" },
+            { "label": "Near", "value": "Lagos, Nigeria" },
+            { "label": "IP address", "value": "102.89.34.12", "mono": true }
+        ]
+    }
+}

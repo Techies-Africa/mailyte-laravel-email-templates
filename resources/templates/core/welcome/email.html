@@ -1,0 +1,20 @@
+{{ heading({ text: heading_text, level: '1' }) }}
+
+{% if user.first_name %}{{ text({ text: 'Hi ' ~ user.first_name ~ ',' }) }}{% endif %}
+
+{{ text({ text: body }) }}
+
+{{ button({ label: button_label, url: action_url }) }}
+
+{% if steps %}
+    {{ heading({ text: 'Start here', level: '3' }) }}
+    {{ list({ items: steps, style: 'number' }) }}
+{% endif %}
+
+{% if account_details %}
+    {{ key_value({ rows: account_details }) }}
+{% endif %}
+
+{{ divider() }}
+
+{{ text({ text: closing, size: 'small', muted: true }) }}

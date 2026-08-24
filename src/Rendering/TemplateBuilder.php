@@ -38,6 +38,8 @@ final class TemplateBuilder
 
     private string $locale = 'en';
 
+    private ?string $forceScheme = null;
+
     public function __construct(
         private readonly string $slug,
         private readonly SourceChain $sources,
@@ -105,6 +107,17 @@ final class TemplateBuilder
         return $this;
     }
 
+    /**
+     * Force a colour scheme. For previewing only -- a real send leaves this
+     * alone so dark values stay inside the media query where they belong.
+     */
+    public function forceScheme(?string $scheme): self
+    {
+        $this->forceScheme = in_array($scheme, ['light', 'dark'], true) ? $scheme : null;
+
+        return $this;
+    }
+
     public function manifest(): TemplateManifest
     {
         return $this->sources->get($this->slug);
@@ -130,6 +143,7 @@ final class TemplateBuilder
             data: $data,
             locale: $this->locale,
             warnings: $sanitized['warnings'],
+            forceScheme: $this->forceScheme,
         );
     }
 

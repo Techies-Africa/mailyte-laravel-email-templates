@@ -7,7 +7,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
                 @foreach($props['rows'] as $row)
                     <tr>
-                        <td valign="top" width="40%" align="left" style="width:40%;padding:10px 12px 10px 0;border-bottom:1px solid {{ $props['border_color'] }};font-family:{{ $t['font.body'] }};font-size:{{ $props['type']['size'] ?? '14px' }};line-height:{{ $props['type']['line_height'] ?? '22px' }};color:{{ $props['label_color'] }};text-align:left;">{{ $row['label'] }}</td>
+                        <td class="m-muted" valign="top" width="40%" align="left" style="width:40%;padding:10px 12px 10px 0;border-bottom:1px solid {{ $props['border_color'] }};font-family:{{ $t['font.body'] }};font-size:{{ $props['type']['size'] ?? '14px' }};line-height:{{ $props['type']['line_height'] ?? '22px' }};color:{{ $props['label_color'] }};text-align:left;">{{ $row['label'] }}</td>
                         <td valign="top" align="left" style="padding:10px 0;border-bottom:1px solid {{ $props['border_color'] }};font-family:@if($row['mono']){{ $props['mono_font'] }}@else{{ $t['font.body'] }}@endif;font-size:{{ $props['type']['size'] ?? '14px' }};line-height:{{ $props['type']['line_height'] ?? '22px' }};color:{{ $props['value_color'] }};text-align:left;@if($row['mono'])word-break:break-all;@endif">{{ $row['value'] }}</td>
                     </tr>
                 @endforeach

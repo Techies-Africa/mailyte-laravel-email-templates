@@ -25,12 +25,25 @@ namespace Mailyte\EmailTemplates\Themes;
  */
 final class ThemeCompiler
 {
-    public function compile(Theme $theme): string
+    /**
+     * @param  string|null  $forceScheme  preview-only: 'light' drops the dark rules,
+     *                                    'dark' applies them unconditionally so a
+     *                                    reviewer can see dark mode without changing
+     *                                    their OS setting. Sends always pass null.
+     */
+    public function compile(Theme $theme, ?string $forceScheme = null): string
     {
+        if ($forceScheme === 'light') {
+            return implode("\n", array_filter([
+                $this->base($theme),
+                $this->responsive($theme),
+            ]));
+        }
+
         return implode("\n", array_filter([
             $this->base($theme),
             $this->responsive($theme),
-            $this->dark($theme),
+            $this->dark($theme, $forceScheme === 'dark'),
         ]));
     }
 
@@ -63,7 +76,7 @@ final class ThemeCompiler
         CSS;
     }
 
-    private function dark(Theme $theme): string
+    private function dark(Theme $theme, bool $force = false): string
     {
         $bg = (string) $theme->get('color.bg', null, 'dark');
         $surface = (string) $theme->get('color.surface', null, 'dark');
@@ -102,6 +115,12 @@ final class ThemeCompiler
         foreach ($declarations as [$selector, $body, $ogscSelector]) {
             $media .= "    {$selector} { {$body} }\n";
             $outlook .= "{$ogscSelector} { {$body} }\n";
+        }
+
+        if ($force) {
+            // Preview only: same declarations, no media query, so the reviewer
+            // sees dark mode regardless of what their operating system prefers.
+            return str_replace('    ', '', $media);
         }
 
         return "@media (prefers-color-scheme: dark) {\n{$media}}\n{$outlook}";

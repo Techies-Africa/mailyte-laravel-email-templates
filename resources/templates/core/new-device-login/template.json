@@ -1,0 +1,33 @@
+{
+    "slug": "new-device-login",
+    "name": "New device sign-in",
+    "description": "Security alert sent when an account is accessed from an unrecognised device or location.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "account",
+    "supported_layouts": ["plain", "minimal", "branded"],
+    "audience": ["saas", "fintech", "developer-tools"],
+    "tone": "urgent",
+    "tags": ["security", "login", "alert"],
+    "authors": [{ "name": "Mailyte", "url": "https://mailyte.com" }],
+    "license": "MIT",
+    "origin": { "kind": "original" },
+
+    "subject": "New sign-in to your {{ product.name }} account",
+    "preheader": "If this was you, no action is needed.",
+
+    "blocks_used": ["status_banner", "heading", "text", "key_value", "button", "divider"],
+
+    "variables": {
+        "user.first_name": { "type": "string", "description": "Recipient's first name.", "default": "", "example": "Ada" },
+        "heading_text": { "type": "string", "description": "Main headline.", "default": "New sign-in to your account" },
+        "body": { "type": "text", "description": "Opening paragraph.", "default": "We noticed a sign-in from a device we haven't seen before. If that was you, there's nothing to do." },
+        "details": { "type": "array", "description": "Sign-in provenance. Naming the device, place and time is what lets someone judge whether it was them.", "default": [], "example": [{ "label": "When", "value": "24 August 2026 at 14:07 UTC" }, { "label": "Device", "value": "Chrome on macOS" }, { "label": "Near", "value": "Lagos, Nigeria" }, { "label": "IP address", "value": "102.89.34.12", "mono": true }] },
+        "location_caveat": { "type": "text", "description": "Honesty note about IP-based geolocation, which is routinely wrong by a city or more.", "default": "Location is approximate, based on IP address." },
+        "action_url": { "type": "url", "description": "Where to go to secure the account.", "required": true, "example": "https://example.com/security" },
+        "button_label": { "type": "string", "description": "CTA label.", "default": "Secure your account" },
+        "security_note": { "type": "text", "description": "Closing line.", "default": "If this wasn't you, change your password now and sign out of all devices." }
+    }
+}

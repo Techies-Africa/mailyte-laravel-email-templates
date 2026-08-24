@@ -37,6 +37,7 @@ final class RenderPipeline
         array $data,
         string $locale = 'en',
         array $warnings = [],
+        ?string $forceScheme = null,
     ): RenderedEmail {
         $twig = $this->sandbox->make($theme, $layout);
 
@@ -44,7 +45,7 @@ final class RenderPipeline
         $subject = $this->renderInline($twig, $manifest, (string) ($data['subject'] ?? $manifest->subject()), 'subject', $data);
         $preheader = $this->renderInline($twig, $manifest, (string) ($data['preheader'] ?? $manifest->preheader()), 'preheader', $data);
 
-        $css = $this->compiler->compile($theme);
+        $css = $this->compiler->compile($theme, $forceScheme);
 
         if ($styles = $manifest->styles()) {
             $css .= "\n".$styles;

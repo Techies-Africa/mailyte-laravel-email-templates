@@ -6,7 +6,7 @@
         <td align="center" style="padding:{{ $props['space_above'] }} 0 {{ $props['space_below'] }};">
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:separate;">
                 <tr>
-                    <td align="center" bgcolor="{{ $props['background'] }}" style="padding:24px 16px;background-color:{{ $props['background'] }};border-radius:{{ $props['radius'] }};">
+                    <td class="m-alt" align="center" bgcolor="{{ $props['background'] }}" style="padding:24px 16px;background-color:{{ $props['background'] }};border-radius:{{ $props['radius'] }};">
                         @if($props['label'] !== '')
                             <p style="margin:0 0 8px;font-family:{{ $t['font.body'] }};font-size:{{ $t['type.small.size'] }};line-height:{{ $t['type.small.line_height'] }};color:{{ $t['color.text_muted'] }};text-transform:uppercase;letter-spacing:0.08em;">{{ $props['label'] }}</p>
                         @endif

@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates;
 
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Mailyte\EmailTemplates\Blocks\BlockRegistry;
+use Mailyte\EmailTemplates\Console\ListCommand;
+use Mailyte\EmailTemplates\Console\SendTestCommand;
+use Mailyte\EmailTemplates\Http\Middleware\Authorize;
 use Mailyte\EmailTemplates\Rendering\RenderPipeline;
 use Mailyte\EmailTemplates\Sources\DirectorySource;
 use Mailyte\EmailTemplates\Sources\SourceChain;
@@ -80,9 +84,36 @@ class EmailTemplatesServiceProvider extends ServiceProvider
         // like the framework's markdown mail components.
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'mailyte');
 
+        $this->registerRoutes();
+
         if ($this->app->runningInConsole()) {
             $this->registerPublishing();
+
+            $this->commands([
+                ListCommand::class,
+                SendTestCommand::class,
+            ]);
         }
+    }
+
+    protected function registerRoutes(): void
+    {
+        $config = $this->app['config'];
+
+        if (! $config->get('mailyte.dashboard.enabled', true)) {
+            return;
+        }
+
+        Route::group([
+            'domain' => $config->get('mailyte.dashboard.domain'),
+            'prefix' => $config->get('mailyte.dashboard.path', 'mailyte'),
+            'middleware' => array_merge(
+                (array) $config->get('mailyte.dashboard.middleware', ['web']),
+                [Authorize::class],
+            ),
+        ], function (): void {
+            $this->loadRoutesFrom(__DIR__.'/../routes/dashboard.php');
+        });
     }
 
     /**

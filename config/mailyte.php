@@ -167,16 +167,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Preview gallery
+    | Dashboard
     |--------------------------------------------------------------------------
     |
-    | Served at /_mailyte in local environments only.
+    | A gated UI for browsing the catalog, previewing a template across themes,
+    | layouts, viewports and colour schemes, editing content, and sending test
+    | messages.
+    |
+    | Access is decided by Mailyte\EmailTemplates\Dashboard::check(): a callback
+    | registered via Dashboard::auth(), otherwise the `viewMailyte` gate,
+    | otherwise local environments only. It renders real message content and can
+    | send mail, so it stays shut in production until you say who may open it.
     |
     */
 
-    'preview' => [
-        'enabled' => env('MAILYTE_PREVIEW', null), // null = only in local/testing
-        'path' => '_mailyte',
+    'dashboard' => [
+        'enabled' => env('MAILYTE_DASHBOARD', true),
+        'path' => env('MAILYTE_DASHBOARD_PATH', 'mailyte'),
+        'domain' => env('MAILYTE_DASHBOARD_DOMAIN'),
         'middleware' => ['web'],
     ],
 

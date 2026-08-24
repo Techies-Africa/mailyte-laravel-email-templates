@@ -11,7 +11,7 @@
                         <td valign="top" style="padding:0 0 10px;font-family:{{ $t['font.body'] }};font-size:{{ $props['type']['size'] ?? '16px' }};line-height:{{ $props['type']['line_height'] ?? '26px' }};color:{{ $props['color'] }};">
                             {{ $item['text'] }}
                             @if($item['detail'] !== '')
-                                <span style="display:block;color:{{ $props['muted_color'] }};font-size:{{ $t['type.small.size'] }};line-height:{{ $t['type.small.line_height'] }};">{{ $item['detail'] }}</span>
+                                <span class="m-muted" style="display:block;color:{{ $props['muted_color'] }};font-size:{{ $t['type.small.size'] }};line-height:{{ $t['type.small.line_height'] }};">{{ $item['detail'] }}</span>
                             @endif
                         </td>
                     </tr>

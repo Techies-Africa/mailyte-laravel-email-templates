@@ -1,0 +1,33 @@
+{
+    "slug": "welcome",
+    "name": "Welcome",
+    "description": "Sent once the account is confirmed, to orient a new user and point at a first useful action.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "onboarding",
+    "supported_layouts": ["minimal", "branded", "editorial"],
+    "audience": ["saas", "developer-tools"],
+    "tone": "friendly",
+    "tags": ["welcome", "onboarding", "activation"],
+    "authors": [{ "name": "Mailyte", "url": "https://mailyte.com" }],
+    "license": "MIT",
+    "origin": { "kind": "derived", "source": "https://github.com/ActiveCampaign/postmark-templates", "note": "Structure follows the Postmark welcome template (MIT, Wildbit); visual design and markup are this package's own." },
+
+    "subject": "Welcome to {{ product.name }}",
+    "preheader": "Here's how to get your first result in the next few minutes.",
+
+    "blocks_used": ["heading", "text", "button", "list", "key_value", "divider"],
+
+    "variables": {
+        "user.first_name": { "type": "string", "description": "Recipient's first name.", "default": "", "example": "Ada" },
+        "heading_text": { "type": "string", "description": "Main headline.", "default": "You're all set" },
+        "body": { "type": "text", "description": "Opening paragraph.", "default": "Thanks for signing up. Your account is ready, and the fastest way to see what this does is to start with one of the steps below." },
+        "action_url": { "type": "url", "description": "Primary CTA destination.", "required": true, "example": "https://example.com/dashboard" },
+        "button_label": { "type": "string", "description": "Primary CTA label.", "default": "Open your dashboard" },
+        "steps": { "type": "array", "description": "First actions worth taking. Keep to three or fewer; a longer list reads as homework.", "default": [], "example": [{ "text": "Connect your domain", "detail": "Takes about two minutes" }, { "text": "Invite a teammate", "detail": "Collaboration is where this gets useful" }, { "text": "Send a test message", "detail": "Confirm everything works end to end" }] },
+        "account_details": { "type": "array", "description": "Reference details worth restating, e.g. the login address and plan.", "default": [], "example": [{ "label": "Signed in as", "value": "ada@example.com" }, { "label": "Plan", "value": "Starter trial, 14 days" }] },
+        "closing": { "type": "text", "description": "Sign-off.", "default": "If anything looks off, just reply to this email -- it reaches a person." }
+    }
+}

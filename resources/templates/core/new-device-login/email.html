@@ -1,0 +1,21 @@
+{{ status_banner({
+    level: 'warning',
+    label: 'Security alert',
+    text: 'A new device signed in to your account.'
+}) }}
+
+{{ heading({ text: heading_text, level: '1' }) }}
+
+{% if user.first_name %}{{ text({ text: 'Hi ' ~ user.first_name ~ ',' }) }}{% endif %}
+
+{{ text({ text: body }) }}
+
+{% if details %}{{ key_value({ rows: details }) }}{% endif %}
+
+{{ text({ text: location_caveat, size: 'small', muted: true }) }}
+
+{{ button({ label: button_label, url: action_url, variant: 'danger' }) }}
+
+{{ divider() }}
+
+{{ text({ text: security_note, size: 'small', muted: true }) }}

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mailyte\EmailTemplates\Rendering;
 
+use Mailyte\EmailTemplates\Mail\TemplateMailable;
+
 /**
  * The finished message: HTML, plain-text alternative, and the headers worth
  * setting alongside them.
@@ -49,6 +51,11 @@ final class RenderedEmail
     public function willBeClippedByGmail(): bool
     {
         return $this->bytes() > 102400;
+    }
+
+    public function toMailableFrom(): TemplateMailable
+    {
+        return new TemplateMailable($this);
     }
 
     public function __toString(): string

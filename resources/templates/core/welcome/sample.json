@@ -1,0 +1,18 @@
+{
+    "default": {
+        "user": { "first_name": "Ada" },
+        "action_url": "https://example.com/dashboard",
+        "steps": [
+            { "text": "Connect your domain", "detail": "Takes about two minutes" },
+            { "text": "Invite a teammate", "detail": "Collaboration is where this gets useful" },
+            { "text": "Send a test message", "detail": "Confirm everything works end to end" }
+        ],
+        "account_details": [
+            { "label": "Signed in as", "value": "ada@example.com" },
+            { "label": "Plan", "value": "Starter trial, 14 days" }
+        ]
+    },
+    "minimal-data": {
+        "action_url": "https://example.com/dashboard"
+    }
+}
