@@ -1,0 +1,221 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://mailyte.com/schema/template.schema.json",
+    "title": "Mailyte email template manifest",
+    "description": "Describes one email template bundle. Validated by `mailyte:lint` and in CI on every pull request.",
+    "type": "object",
+    "required": ["slug", "name", "description", "version", "engine", "type", "category", "supported_layouts", "license", "variables"],
+    "additionalProperties": false,
+    "properties": {
+        "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "minLength": 2,
+            "maxLength": 64,
+            "description": "Kebab-case identifier, unique within the catalog. Also the directory name."
+        },
+        "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80
+        },
+        "description": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 300,
+            "description": "One sentence on when to send this email."
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$",
+            "description": "The template's own semver, independent of the package version."
+        },
+        "engine": {
+            "type": "string",
+            "description": "Semver constraint on the block API this template was written against, e.g. \"^1.0\". Prevents a v2 block change from silently breaking community bundles.",
+            "minLength": 2
+        },
+        "status": {
+            "enum": ["active", "deprecated"],
+            "default": "active"
+        },
+        "superseded_by": {
+            "type": "string",
+            "description": "Slug that replaces this one. Required when status is deprecated."
+        },
+        "tier": {
+            "enum": ["core", "community"],
+            "default": "community"
+        },
+
+        "type": {
+            "enum": ["transactional", "notification", "marketing"],
+            "description": "Compliance class, and the linter reads it. `marketing` requires an unsubscribe affordance, List-Unsubscribe headers and a postal address (MT019-MT021); `notification` warns; `transactional` is exempt."
+        },
+        "category": {
+            "enum": [
+                "account",
+                "onboarding",
+                "billing",
+                "collaboration",
+                "ecommerce",
+                "notifications",
+                "system",
+                "marketing",
+                "newsletter",
+                "events",
+                "support"
+            ],
+            "description": "Functional domain, using the categories email platforms and app teams already use."
+        },
+        "supported_layouts": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "enum": ["plain", "minimal", "branded", "editorial"] },
+            "description": "Which render-time style presets this template is designed for. A receipt has no business in `editorial`."
+        },
+        "audience": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "enum": ["saas", "ecommerce", "fintech", "developer-tools", "professional-services", "community"]
+            }
+        },
+        "tone": {
+            "enum": ["neutral", "friendly", "urgent", "celebratory", "apologetic"],
+            "default": "neutral"
+        },
+        "tags": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+            "maxItems": 12
+        },
+
+        "authors": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": ["name"],
+                "additionalProperties": false,
+                "properties": {
+                    "name": { "type": "string", "minLength": 1 },
+                    "github": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" }
+                }
+            }
+        },
+        "license": {
+            "const": "MIT",
+            "description": "All catalog templates are MIT. Contributions are accepted only under MIT."
+        },
+        "origin": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind"],
+            "properties": {
+                "kind": { "enum": ["original", "derived"] },
+                "source": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Required when kind is `derived`: the MIT-compatible work this was derived from."
+                },
+                "note": { "type": "string" }
+            }
+        },
+
+        "subject": {
+            "type": "string",
+            "description": "Default subject line. Tokens allowed. Every visible string is a variable with a default, and this is no exception."
+        },
+        "preheader": {
+            "type": "string",
+            "maxLength": 140,
+            "description": "Default preheader. 85-100 characters, front-loaded, complementing rather than repeating the subject."
+        },
+        "blocks_used": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string" }
+        },
+        "locales": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z]{2}(_[A-Z]{2})?$" },
+            "default": ["en"]
+        },
+
+        "variables": {
+            "type": "object",
+            "description": "Every token the template reads. The linter cross-checks this against the markup in both directions: an undeclared token is an error (MT042), and a declared-but-unused one is a warning.",
+            "minProperties": 1,
+            "additionalProperties": {
+                "type": "object",
+                "required": ["type", "description"],
+                "additionalProperties": false,
+                "properties": {
+                    "type": {
+                        "enum": ["string", "text", "html", "number", "money", "boolean", "url", "email", "date", "datetime", "array", "object"]
+                    },
+                    "description": { "type": "string", "minLength": 3 },
+                    "required": { "type": "boolean", "default": false },
+                    "default": {},
+                    "example": {},
+                    "enum": { "type": "array" },
+                    "items": { "type": "object" }
+                }
+            }
+        },
+
+        "headers": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "suggested": {
+                    "type": "object",
+                    "description": "Headers the sending application should set, e.g. List-Unsubscribe and List-Unsubscribe-Post on marketing mail.",
+                    "additionalProperties": { "type": "string" }
+                }
+            }
+        },
+
+        "lint": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ignore": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["rule", "reason"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "rule": { "type": "string", "pattern": "^MT\\d{3}$" },
+                            "reason": {
+                                "type": "string",
+                                "minLength": 15,
+                                "description": "A written justification is mandatory. Waiving a rule silently is how a catalog rots."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "allOf": [
+        {
+            "if": { "properties": { "status": { "const": "deprecated" } }, "required": ["status"] },
+            "then": { "required": ["superseded_by"] }
+        },
+        {
+            "if": {
+                "properties": { "origin": { "properties": { "kind": { "const": "derived" } }, "required": ["kind"] } },
+                "required": ["origin"]
+            },
+            "then": { "properties": { "origin": { "required": ["source"] } } }
+        }
+    ]
+}

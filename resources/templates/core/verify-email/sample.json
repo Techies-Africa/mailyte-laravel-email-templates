@@ -1,0 +1,26 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "action_url": "https://example.com/verify/8f2c1d",
+        "expires_in": "10 minutes",
+        "verification_code": "294 501"
+    },
+    "code-only": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "action_url": "",
+        "expires_in": "5 minutes",
+        "verification_code": "294501"
+    },
+    "no-name": {
+        "user": {
+            "first_name": ""
+        },
+        "action_url": "https://example.com/verify/8f2c1d",
+        "expires_in": "24 hours",
+        "verification_code": "817 264"
+    }
+}

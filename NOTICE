@@ -1,0 +1,38 @@
+mailyte/email-templates
+Copyright (c) 2026 Mailyte
+
+This product includes work derived from the following MIT-licensed projects.
+
+
+-------------------------------------------------------------------------------
+Postmark Transactional Email Templates
+https://github.com/ActiveCampaign/postmark-templates
+
+The MIT License (MIT)
+Copyright (c) 2015 Wildbit
+
+Portions of this package's block markup -- specifically the bulletproof button
+construction, the Outlook ghost-table scaffolding, and the receipt/invoice
+line-item table structure -- are derived from the Postmark transactional email
+templates. These are well-tested solutions to email-client quirks and
+reimplementing them from scratch would have produced worse output, not more
+original work.
+
+Not derived from that project: the visual design (replaced by this package's
+theme token system), the templating syntax (Mustachio; this package uses a
+sandboxed Twig dialect), and the build tooling (MailMason, a grunt/Node
+pipeline; this package has no Node dependency).
+
+
+-------------------------------------------------------------------------------
+Can I email...
+https://github.com/hteumeuleu/caniemail
+
+The email-client CSS support dataset vendored at resources/data/css-support.json
+is derived from the caniemail project's published data. See
+resources/data/LICENSE-caniemail for the upstream license and attribution.
+
+Note that this package layers resources/data/css-support.overrides.json on top
+of that dataset: several caniemail entries relevant to this package (notably
+prefers-color-scheme, last tested 2023-03-08) are stale enough to give actively
+wrong advice. Each override records its reason and source.

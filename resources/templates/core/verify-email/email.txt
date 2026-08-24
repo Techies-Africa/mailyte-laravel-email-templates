@@ -1,0 +1,14 @@
+{{ heading_text }}
+
+{% if user.first_name %}Hi {{ user.first_name }},
+
+{% endif %}{{ body }}
+
+Verification code: {{ verification_code }}
+This code expires in {{ expires_in }}.
+{% if action_url %}
+Verify your email address:
+{{ action_url }}
+{% endif %}
+--
+{{ security_note }}

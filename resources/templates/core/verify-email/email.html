@@ -1,0 +1,25 @@
+{{ heading({ text: heading_text, level: '1' }) }}
+
+{% if user.first_name %}
+    {{ text({ text: 'Hi ' ~ user.first_name ~ ',' }) }}
+{% endif %}
+
+{{ text({ text: body }) }}
+
+{{ code({
+    code: verification_code,
+    label: 'Verification code',
+    note: 'This code expires in ' ~ expires_in ~ '.'
+}) }}
+
+{% if action_url %}
+    {{ button({
+        label: button_label,
+        url: action_url,
+        fallback_text: 'Or paste this link into your browser:'
+    }) }}
+{% endif %}
+
+{{ divider() }}
+
+{{ text({ text: security_note, size: 'small', muted: true }) }}

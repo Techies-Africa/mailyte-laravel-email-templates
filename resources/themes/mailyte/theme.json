@@ -1,0 +1,46 @@
+{
+    "$schema": "../../schema/theme.schema.json",
+    "name": "mailyte",
+    "extends": "neutral",
+    "description": "Mailyte brand palette and email type scale, transcribed from BRAND_GUIDE.md.",
+    "tokens": {
+        "color": {
+            "primary": { "light": "#DBA500", "dark": "#F7BE29" },
+            "primary_text": { "light": "#1F1B17", "dark": "#1F1B17" },
+            "accent": { "light": "#FF9900", "dark": "#FFB24D" },
+            "bg": { "light": "#F8FAFC", "dark": "#121212" },
+            "surface": { "light": "#FDFCFA", "dark": "#1A1612" },
+            "surface_alt": { "light": "#F6ECE6", "dark": "#26211C" },
+            "text": { "light": "#1F1B17", "dark": "#F0E0D6" },
+            "text_muted": { "light": "#4F4633", "dark": "#D3C5AD" },
+            "text_subtle": { "light": "#817661", "dark": "#B0A48C" },
+            "border": { "light": "#D3C5AD", "dark": "#3C3630" },
+            "link": { "light": "#B88A00", "dark": "#F7BE29" },
+            "danger": { "light": "#BA1A1A", "dark": "#FFB4AB" },
+            "info": { "light": "#0097FB", "dark": "#9FCAFF" }
+        },
+
+        "font": {
+            "body": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+            "heading": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+        },
+
+        "type": {
+            "h1": { "size": "32px", "line_height": "40px", "weight": "700", "letter_spacing": "-0.02em" },
+            "h2": { "size": "24px", "line_height": "32px", "weight": "600", "letter_spacing": "-0.01em" },
+            "h3": { "size": "20px", "line_height": "28px", "weight": "600", "letter_spacing": "0" },
+            "body": { "size": "16px", "line_height": "26px", "weight": "400", "letter_spacing": "0" },
+            "small": { "size": "14px", "line_height": "22px", "weight": "400", "letter_spacing": "0" },
+            "footer": { "size": "14px", "line_height": "22px", "weight": "400", "letter_spacing": "0" },
+            "button": { "size": "16px", "line_height": "16px", "weight": "700", "letter_spacing": "0.04em", "transform": "uppercase" }
+        },
+
+        "radius": { "sm": "4px", "md": "6px", "lg": "8px", "pill": "999px" },
+
+        "logo": {
+            "url": null,
+            "alt": "Mailyte",
+            "width": "132"
+        }
+    }
+}
