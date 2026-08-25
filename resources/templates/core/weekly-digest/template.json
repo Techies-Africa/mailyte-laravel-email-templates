@@ -1,0 +1,138 @@
+{
+    "slug": "weekly-digest",
+    "name": "Weekly digest",
+    "description": "Batches a period's activity into one message — figures first, then grouped lists — so the per-event notifications behind it can be switched off.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "notifications",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "community",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "digest",
+        "summary",
+        "weekly",
+        "activity"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: dashboard digest — a boxed figure row over grouped rule-separated lists, closing on a tinted band that treats the frequency control as an offer rather than as fine print."
+    },
+    "subject": "{{ digest_title }}, {{ period_label }}",
+    "preheader": "Everything from the period in one message, grouped, with a way to make it arrive less often.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "list",
+        "section",
+        "stat_row",
+        "text"
+    ],
+    "variables": {
+        "digest_title": {
+            "type": "string",
+            "description": "What the reader calls this thing when it lands. Keep it the same every send — a digest earns its place by being recognisable in a list of unread mail.",
+            "required": true,
+            "example": "Your week in Acme"
+        },
+        "period_label": {
+            "type": "string",
+            "description": "The window this covers, stated exactly. A digest that does not say what it covers cannot be trusted to be complete, which is the only thing it is selling.",
+            "required": true,
+            "example": "1 – 7 September"
+        },
+        "digest_summary": {
+            "type": "string",
+            "description": "One line separating what happened from what needs the reader. Written by you, not counted by the template, because \"two of these need you\" is a judgement.",
+            "default": "",
+            "example": "Nine things happened. Two are waiting on you."
+        },
+        "stats": {
+            "type": "array",
+            "description": "Two or three figures for the period, each with `value`, `label` and an optional `caption` carrying the comparison that makes the figure mean anything. Four fit; three read.",
+            "default": [],
+            "example": [
+                {
+                    "value": "9",
+                    "label": "Updates",
+                    "caption": "Down from 14"
+                }
+            ]
+        },
+        "groups": {
+            "type": "array",
+            "description": "The activity itself, grouped by what it is rather than when it happened — each entry a `title` and a list of `items`, and each item a `text` with an optional `detail` line under it. Grouping is the whole reason a digest beats nine separate emails.",
+            "default": [],
+            "example": [
+                {
+                    "title": "Waiting on you",
+                    "items": [
+                        {
+                            "text": "Approve the September invoice",
+                            "detail": "Raised by Priya, 3 days ago"
+                        }
+                    ]
+                }
+            ]
+        },
+        "empty_text": {
+            "type": "text",
+            "description": "What the digest says when the period was genuinely quiet. Sending it anyway keeps the rhythm and proves the digest is not broken, so this line has to make a quiet week feel deliberate.",
+            "default": "Nothing needed you this period. The digest still arrives on schedule, so an empty one means quiet rather than broken."
+        },
+        "action_label": {
+            "type": "string",
+            "description": "Label on the action under the lists. It is an overflow route for anything the digest summarised too briefly, not the point of the email.",
+            "default": "Open your dashboard"
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the full activity lives for anyone who wants more than the summary.",
+            "required": true,
+            "example": "https://example.com/app/activity"
+        },
+        "frequency_title": {
+            "type": "string",
+            "description": "Heading on the closing band. This template exists so per-event mail can be switched off, so the switch gets a heading of its own.",
+            "default": "How often you get this"
+        },
+        "frequency_text": {
+            "type": "text",
+            "description": "The offer, in plain terms: this message replaces the individual notifications, and it can arrive more or less often. State it every time — the reader has forgotten what they chose.",
+            "default": "This digest stands in for the individual notifications behind everything listed above. It can arrive daily, weekly, monthly, or not at all."
+        },
+        "frequency_label": {
+            "type": "string",
+            "description": "Label on the outlined button in that band. Offer the change, not the settings screen.",
+            "default": "Change the frequency"
+        },
+        "notification_settings_url": {
+            "type": "url",
+            "description": "Where the frequency actually gets changed. Required rather than optional here: a batched message that offers no way out is how a digest turns into a spam report.",
+            "required": true,
+            "example": "https://example.com/settings/notifications"
+        }
+    }
+}

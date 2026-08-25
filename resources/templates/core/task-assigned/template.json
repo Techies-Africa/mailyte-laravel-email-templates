@@ -1,0 +1,164 @@
+{
+    "slug": "task-assigned",
+    "name": "A task was assigned to you",
+    "description": "Hands someone a piece of work: what it is, who gave it to them, when it is due and how urgent it is, in that order.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "notifications",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "professional-services",
+        "developer-tools"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "task",
+        "assignment",
+        "project",
+        "due-date"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: work item — a priority bar above everything, the due date alone in its own tinted band, one full-width action, and the tracker facts held back until after it."
+    },
+    "subject": "Assigned to you: {{ task_title }}",
+    "preheader": "The due date and the priority are both above the fold; the tracker detail sits under the button.",
+    "blocks_used": [
+        "button",
+        "heading",
+        "key_value",
+        "section",
+        "status_banner",
+        "text"
+    ],
+    "variables": {
+        "task_title": {
+            "type": "string",
+            "description": "The work itself, in the words the tracker holds. It carries the subject line too, so a title written as \"fix it\" produces an unusable email.",
+            "required": true,
+            "example": "Rewrite the CSV importer's retry logic"
+        },
+        "project_name": {
+            "type": "string",
+            "description": "Which board, project or client this belongs to. Set as the eyebrow, because someone holding six projects needs it before they read the title.",
+            "default": "",
+            "example": "Ingest reliability"
+        },
+        "assigned_by": {
+            "type": "string",
+            "description": "Who handed the work over. Work arrives from a person, not from a system, and naming them is what makes the task negotiable.",
+            "default": "",
+            "example": "Priya Raman"
+        },
+        "assigned_at": {
+            "type": "string",
+            "description": "When the assignment happened, for the record kept under the button.",
+            "default": "",
+            "example": "24 August, 09:20"
+        },
+        "task_reference": {
+            "type": "string",
+            "description": "The tracker's own identifier, shown monospaced so it can be pasted into a branch name or a standup without transcription errors.",
+            "default": "",
+            "example": "ENG-2043"
+        },
+        "task_description": {
+            "type": "text",
+            "description": "A short brief on what finished looks like. Deliberately placed under the action rather than above it, so the reader can open the task without reading it.",
+            "default": "",
+            "example": "The current backoff is exponential in name only and retries three times in under a second. Move it to a real backoff with jitter and cap total retry time at two minutes."
+        },
+        "priority_level": {
+            "type": "string",
+            "description": "Severity of the priority bar. Carried as a word, a shape and a rule weight as well as a colour, so it survives a client that inverts the palette.",
+            "default": "info",
+            "enum": [
+                "info",
+                "success",
+                "warning",
+                "danger",
+                "neutral"
+            ],
+            "example": "danger"
+        },
+        "priority_label": {
+            "type": "string",
+            "description": "The urgency in one word. Use the vocabulary your team already argues in, not the tracker's internal enum.",
+            "default": "Normal"
+        },
+        "priority_text": {
+            "type": "string",
+            "description": "Why it carries that priority. \"High\" on its own is a colour; \"High — blocking the September release\" is a reason someone can act on or push back against.",
+            "default": "",
+            "example": "Blocking the September release"
+        },
+        "due_label": {
+            "type": "string",
+            "description": "Heading over the date band. Change it when your team says \"target\" or \"needed by\" rather than \"due\".",
+            "default": "Due"
+        },
+        "due_at": {
+            "type": "string",
+            "description": "The date, set as the largest thing in the message after the title. Written out rather than numeric, because 09/11 means two different days on two continents.",
+            "default": "",
+            "example": "Thursday 11 September"
+        },
+        "due_relative": {
+            "type": "string",
+            "description": "The same date as a distance — \"in four working days\". People act on the distance and forget the date.",
+            "default": "",
+            "example": "In four working days"
+        },
+        "no_due_text": {
+            "type": "text",
+            "description": "What the band says when there is no date. An empty band would read as a rendering fault, and \"no date\" is itself information worth stating.",
+            "default": "No date set. Ask whoever assigned it before you plan around it."
+        },
+        "estimate": {
+            "type": "string",
+            "description": "How much work this was sized at, if your team sizes work. It is the fact people use to decide whether to accept the assignment today or tomorrow.",
+            "default": "",
+            "example": "About half a day"
+        },
+        "action_label": {
+            "type": "string",
+            "description": "Label on the full-width action. Name the task, not the tool.",
+            "default": "Open the task"
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Deep link to the task itself, so accepting or reassigning it is one tap rather than a search through a board.",
+            "required": true,
+            "example": "https://example.com/projects/ingest/tasks/2043"
+        },
+        "notification_settings_url": {
+            "type": "url",
+            "description": "Where assignment mail gets batched or turned off. Someone on a busy board may want a daily list instead of twelve of these.",
+            "default": "",
+            "example": "https://example.com/settings/notifications"
+        },
+        "notification_settings_label": {
+            "type": "string",
+            "description": "Wording of that link. Offer the frequency, not the preferences page.",
+            "default": "Change how often you get these"
+        }
+    }
+}

@@ -1,0 +1,46 @@
+{# Permissions diff. The workspace is the eyebrow, because a person in eleven
+   workspaces needs to know which one before anything else. The old and new
+   role sit side by side as a two-up so the change is a comparison rather than
+   an announcement, and the consequences follow as two inventories: what the
+   role now allows, and what it no longer does. The second list is the one
+   people actually need and the one most products leave out. #}
+{{ heading({ text: workspace_name, level: '3', space_above: '0', space_below: '8px' }) }}
+
+{{ heading({ text: heading_lead ~ ' ' ~ new_role, level: '1', space_above: '0', space_below: '10px' }) }}
+
+{{ text({ text: body, space_below: '26px' }) }}
+
+{# Role above, caption below. The columns block sets its heading in the text
+   colour and its body a step smaller and muted, so the role has to sit in the
+   heading slot or the label would outweigh the thing it labels. #}
+{{ columns({
+    count: 2,
+    items: [
+        { heading: previous_role, text: previous_label },
+        { heading: new_role, text: new_label }
+    ],
+    space_below: '26px'
+}) }}
+
+{% if gained %}
+    {{ heading({ text: gained_label, level: '3', space_above: '0', space_below: '10px' }) }}
+    {{ list({ items: gained, style: 'check', space_below: '26px' }) }}
+{% endif %}
+
+{% if lost %}
+    {{ heading({ text: lost_label, level: '3', space_above: '0', space_below: '10px' }) }}
+    {{ list({ items: lost, style: 'plain', space_below: '26px' }) }}
+{% endif %}
+
+{% if changed_by %}
+    {{ note({
+        tone: 'outline',
+        strong_text: changed_by_prefix ~ ' ' ~ changed_by ~ '.',
+        text: (changed_at ? changed_at_prefix ~ ' ' ~ changed_at ~ '.' : ''),
+        space_below: '24px'
+    }) }}
+{% endif %}
+
+{{ button({ label: button_label, url: workspace_url, align: 'left', shape: 'pill', space_below: '22px' }) }}
+
+{{ text({ text: closing_note, size: 'small', muted: true, space_below: '0' }) }}

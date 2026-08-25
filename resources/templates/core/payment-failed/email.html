@@ -1,0 +1,26 @@
+{{ status_banner({ level: 'warning', label: 'Payment failed', text: 'We could not take ' ~ amount ~ (card_last4 ? ' from the card ending ' ~ card_last4 : '') ~ '.' }) }}
+
+{{ heading({ text: (user.first_name ? user.first_name ~ ', your payment did not go through' : 'Your payment did not go through'), level: '1', space_above: '0' }) }}
+
+{% if failure_reason %}
+    {{ text({ text: failure_reason ~ '. Updating the card usually fixes it in under a minute.' }) }}
+{% else %}
+    {{ text({ text: 'Updating the card usually fixes it in under a minute.' }) }}
+{% endif %}
+
+{% set deadline %}
+    {{ stat_row({ items: [{ value: grace_ends_at, label: 'is when your account is affected' }], size: 'display', space_below: '10px' }) }}
+    {{ text({ text: consequence, size: 'small', muted: true, space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '24px', space_below: '22px', slot: deadline }) }}
+
+{{ button({ label: button_label, url: action_url, align: 'left' }) }}
+
+{% if retry_at %}
+    {{ text({ text: 'If you do nothing, we will try the same card again on ' ~ retry_at ~ '.', size: 'small', muted: true }) }}
+{% endif %}
+
+{% if help_url %}
+    {{ button({ label: 'Think this is a mistake?', url: help_url, variant: 'link', align: 'left', space_above: '0', space_below: '0' }) }}
+{% endif %}

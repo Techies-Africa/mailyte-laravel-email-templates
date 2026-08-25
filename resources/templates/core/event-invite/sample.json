@@ -1,0 +1,38 @@
+{
+    "default": {
+        "event_kind": "Live webinar",
+        "event_title": "Shipping email that lands",
+        "date_line": "Thursday 11 September",
+        "time_line": "15:00 – 16:00 BST (UTC+1)",
+        "duration_label": "60 minutes",
+        "event_description": "A working session on the three things that decide whether your mail reaches an inbox — authentication, sending reputation and list hygiene — with twenty minutes at the end for your own domains.",
+        "hero_image": "https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=1200&q=72&fm=jpg&fit=crop&h=540",
+        "hero_alt": "A speaker on stage in front of a seated audience",
+        "rsvp_label": "Save me a seat",
+        "rsvp_url": "https://example.com/events/deliverability-sept/rsvp",
+        "replay_text": "Can't make it live? Register anyway — the recording goes to everyone who signed up, the morning after.",
+        "speaker_name": "Priya Raman",
+        "speaker_bio": "Deliverability lead at Northwind. Eleven years of getting other people's mail out of the spam folder.",
+        "joining_title": "Joining",
+        "joining_text": "A joining link arrives by email an hour before, and again ten minutes before it starts. Nothing to download.",
+        "permission_note": "You're getting this because you asked to hear about events. One click below ends that for good."
+    },
+    "no-speaker": {
+        "event_kind": "Office hours",
+        "event_title": "Open office hours with the support team",
+        "date_line": "Every Tuesday",
+        "time_line": "09:00 – 09:30 UTC",
+        "duration_label": "30 minutes",
+        "event_description": "",
+        "hero_image": "",
+        "hero_alt": "",
+        "rsvp_label": "Add me to the list",
+        "rsvp_url": "https://example.com/events/office-hours/rsvp",
+        "replay_text": "Nothing is recorded and nobody has to turn a camera on. Drop in with a question or just listen.",
+        "speaker_name": "",
+        "speaker_bio": "",
+        "joining_title": "Joining",
+        "joining_text": "The same link every week, sent once when you sign up. Add it to your calendar and forget about it.",
+        "permission_note": "You're getting this because you asked to hear about events. One click below ends that for good."
+    }
+}

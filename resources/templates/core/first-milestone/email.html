@@ -1,0 +1,33 @@
+{% set opening %}
+    {{ heading({ text: (user.first_name ? user.first_name ~ ', you just' : 'You just'), level: '3', space_above: '0', space_below: '12px', color: '#9FD9C0' }) }}
+    {{ heading({ text: milestone_verb, level: '1', space_above: '0', space_below: (headline_stat ? '26px' : '0'), color: '#F7FBF9' }) }}
+    {% if headline_stat %}
+        {{ stat_row({ items: [{ value: headline_stat, label: headline_stat_label }], size: 'display', value_color: '#F7FBF9', label_color: '#CDE8DA', caption_color: '#CDE8DA', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'dark', background: '#0B5C3F', padding_y: '38px', slot: opening }) }}
+
+{% if stat_rows %}
+    {% set figures %}
+        {{ stat_row({ items: stat_rows, space_below: '0' }) }}
+    {% endset %}
+    {{ section({ tone: 'alt', padding_y: '26px', slot: figures }) }}
+{% endif %}
+
+{% set next %}
+    {{ heading({ text: next_step_heading, level: '2', space_above: '0', space_below: '10px' }) }}
+    {{ text({ text: next_step_text, space_below: '22px' }) }}
+    {% if share_url %}
+        {{ button_group({ items: [
+            { label: button_label, url: action_url, variant: 'primary' },
+            { label: share_label, url: share_url, variant: 'outline' }
+        ], shape: 'pill', space_below: '0' }) }}
+    {% else %}
+        {{ button({ label: button_label, url: action_url, align: 'left', shape: 'pill', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'surface', padding_y: '32px', space_below: '20px', slot: next }) }}
+
+{{ text({ text: closing, size: 'footer', muted: true, space_below: '0' }) }}

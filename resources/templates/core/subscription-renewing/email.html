@@ -1,0 +1,43 @@
+{# Calendar notice. The date is the whole point, so it opens the message in a
+   band of its own and everything after it is subordinate. The price is stated
+   exactly once, in the table, and the cancel path sits beside the change path
+   at the same weight; a renewal notice that hides the exit is a dark pattern. #}
+
+{% set dateplate %}
+    {{ heading({ text: 'Renewal notice', level: '3', space_above: '0', space_below: '14px' }) }}
+    {{ stat_row({ items: [{ value: renews_on, label: 'is the day your plan renews' }], size: 'display', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '32px', space_below: '28px', slot: dateplate }) }}
+
+{{ heading({ text: 'Your ' ~ plan_name ~ ' plan renews automatically', level: '1', space_above: '0', space_below: '10px' }) }}
+
+{{ text({ text: body, space_below: '22px' }) }}
+
+{{ key_value({ rows: terms_rows, label_width: '42%', space_below: '26px' }) }}
+
+{{ divider({ style: 'solid', space_above: '0', space_below: '20px' }) }}
+
+{{ heading({ text: 'If you want to change it', level: '2', space_above: '0', space_below: '8px' }) }}
+
+{{ text({
+    text: 'Anything you do before ' ~ renews_on ~ ' takes effect at the renewal, so a change made today costs you nothing.'
+        ~ (cancel_url
+            ? ' Cancelling leaves your account running to the end of the period you have already paid for.'
+            : ' Cancelling a term billed by invoice is not self-serve, so tell us before the date above and we will stop it.'),
+    size: 'small',
+    space_below: '20px'
+}) }}
+
+{% if cancel_url %}
+    {{ button_group({ items: [
+        { label: change_label, url: manage_url, variant: 'outline' },
+        { label: cancel_label, url: cancel_url, variant: 'outline' }
+    ], align: 'left', space_below: '24px' }) }}
+{% else %}
+    {{ button({ label: change_label, url: manage_url, variant: 'outline', align: 'left', space_below: '24px' }) }}
+{% endif %}
+
+{% if statement_note %}
+    {{ text({ text: statement_note, size: 'footer', muted: true, space_below: '0' }) }}
+{% endif %}

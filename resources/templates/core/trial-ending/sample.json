@@ -1,0 +1,37 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "days_left": 3,
+        "trial_ends_at": "8 September",
+        "plan_name": "Pro",
+        "price_note": "$29 per month after that, cancel any time.",
+        "action_url": "https://example.com/billing/plans",
+        "usage_summary": [
+            {
+                "label": "Projects created",
+                "value": "4"
+            },
+            {
+                "label": "Messages sent",
+                "value": "1,280"
+            },
+            {
+                "label": "Teammates invited",
+                "value": "3"
+            }
+        ]
+    },
+    "last-day": {
+        "user": {
+            "first_name": ""
+        },
+        "days_left": 1,
+        "trial_ends_at": "tomorrow",
+        "plan_name": "Scale",
+        "price_note": "",
+        "action_url": "https://example.com/billing/plans",
+        "usage_summary": []
+    }
+}

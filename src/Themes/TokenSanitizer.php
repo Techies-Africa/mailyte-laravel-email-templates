@@ -31,7 +31,7 @@ final class TokenSanitizer
         $warnings = [];
 
         foreach ($overrides as $path => $value) {
-            if (! is_string($path) || $path === '') {
+            if ($path === '') {
                 throw new InvalidThemeOverride('Theme override keys must be dot-path strings.');
             }
 
@@ -63,6 +63,7 @@ final class TokenSanitizer
 
     /**
      * @param  array<int, string>  $warnings
+     * @return string|array<string, string>
      */
     private function color(string $path, mixed $value, array &$warnings): string|array
     {

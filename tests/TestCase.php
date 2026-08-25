@@ -22,5 +22,6 @@ abstract class TestCase extends Orchestra
         $app['config']->set('mailyte.globals.product.name', 'Acme');
         $app['config']->set('mailyte.globals.product.url', 'https://example.test');
         $app['config']->set('mailyte.globals.company.address', '1 Example Way, Springfield');
+        $app['config']->set('mailyte.globals.unsubscribe_url', 'https://unsubscribe.test/one-click');
     }
 }

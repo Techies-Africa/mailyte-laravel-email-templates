@@ -1,0 +1,17 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "reset_url": "https://example.com/reset/2f9c41ab7d",
+        "expires_in": "60 minutes"
+    },
+    "no-name-long-token": {
+        "user": {
+            "first_name": ""
+        },
+        "reset_url": "https://example.com/account/password/reset?token=9f4b2c8e15a7d63042bb18cf5e90a731&uid=48219&next=%2Fdashboard",
+        "expires_in": "15 minutes",
+        "expiry_note": "It stops working as soon as it is used once, and requesting another cancels this one."
+    }
+}

@@ -82,8 +82,10 @@ final class RenderPipeline
             text: trim($text),
             subject: $subject,
             preheader: $preheader,
-            suggestedHeaders: $manifest->suggestedHeaders(),
+            suggestedHeaders: $this->renderHeaders($twig, $manifest, $data),
             warnings: $warnings,
+            slug: $manifest->slug,
+            templateVersion: $manifest->version(),
         );
     }
 
@@ -115,6 +117,37 @@ final class RenderPipeline
     }
 
     /**
+     * Suggested headers are tokenised like everything else -- a
+     * List-Unsubscribe is `<{{ unsubscribe_url }}>`, because the URL is
+     * per-recipient. They have to be rendered with the same data as the body,
+     * or the message ships a header whose value is literally
+     * `{{ unsubscribe_url }}`: invalid, useless to the one-click unsubscribe
+     * that Gmail and Yahoo now require of bulk senders, and a deliverability
+     * problem rather than the help it was meant to be.
+     *
+     * @param  array<string, mixed>  $data
+     * @return array<string, string>
+     */
+    private function renderHeaders(Environment $twig, TemplateManifest $manifest, array $data): array
+    {
+        $headers = [];
+
+        foreach ($manifest->suggestedHeaders() as $name => $value) {
+            $rendered = trim($this->renderInline($twig, $manifest, $value, "header {$name}", $data));
+
+            // An unresolved token leaves an empty pair of angle brackets or
+            // nothing at all; a header with no value is worse than no header.
+            if ($rendered === '' || $rendered === '<>') {
+                continue;
+            }
+
+            $headers[$name] = $rendered;
+        }
+
+        return $headers;
+    }
+
+    /**
      * @param  array<string, mixed>  $data
      */
     private function renderInline(Environment $twig, TemplateManifest $manifest, string $source, string $what, array $data = []): string
@@ -134,10 +167,21 @@ final class RenderPipeline
 
     private function inlineCss(string $html): string
     {
+        // Extract style blocks from a copy with MSO conditional comments
+        // blanked out first. Those comments are inert HTML to every real
+        // parser -- Outlook alone reads what's inside -- but a plain regex
+        // scanning for <style> tags can't tell the difference, and would
+        // otherwise pull an Outlook-only rule (e.g. the Arial fallback in
+        // document.blade.php's <!--[if mso]> block) into the CSS applied to
+        // every client, silently overriding each theme's real font choice.
+        // $html itself is untouched, so the conditional comment still reaches
+        // Outlook exactly as written.
+        $scanTarget = preg_replace('/<!--\[if[^\]]*\]>.*?<!\[endif\]-->/is', '', $html) ?? $html;
+
         // Inline what can be inlined, but keep the <style> block: media queries
         // and dark-mode overrides cannot be inlined by definition, and the
         // whole dark-mode strategy depends on them surviving.
-        preg_match_all('/<style[^>]*>(.*?)<\/style>/is', $html, $matches);
+        preg_match_all('/<style[^>]*>(.*?)<\/style>/is', $scanTarget, $matches);
 
         $inlinable = '';
 

@@ -1,0 +1,49 @@
+{# Postmortem. A serif document rather than a product email: double rules top
+   and tail, the timeline set as a two-column record with the clock times in
+   Georgia's old-style figures, and the cause named in one paragraph. This is
+   the email that decides whether trust comes back, so nothing in it hedges. #}
+
+{{ heading({ text: eyebrow, level: '3', space_above: '0', space_below: '12px', color: theme('color.text_muted') }) }}
+
+{{ heading({ text: impact_headline, level: '1', space_above: '0', space_below: '8px' }) }}
+
+{{ text({ text: resolved_label ~ ' ' ~ resolved_at ~ ' ' ~ timezone, size: 'small', muted: true, space_below: '16px' }) }}
+
+{{ divider({ style: 'double', space_above: '0', space_below: '24px' }) }}
+
+{{ text({ text: opening, space_below: '28px' }) }}
+
+{% if duration_value and scope_value %}
+    {{ stat_row({ items: [
+        { value: duration_value, label: duration_label },
+        { value: scope_value, label: scope_label }
+    ], space_below: '30px' }) }}
+{% elseif duration_value %}
+    {{ stat_row({ items: [{ value: duration_value, label: duration_label }], space_below: '30px' }) }}
+{% endif %}
+
+{% if timeline %}
+    {{ heading({ text: timeline_heading, level: '2', space_above: '0', space_below: '8px' }) }}
+    {{ key_value({ rows: timeline, label_width: '24%', space_below: '30px' }) }}
+{% endif %}
+
+{{ heading({ text: cause_heading, level: '2', space_above: '0', space_below: '8px' }) }}
+
+{% if cause_text %}
+    {{ text({ text: cause_text, space_below: '28px' }) }}
+{% else %}
+    {{ text({ text: cause_pending_text, space_below: '28px' }) }}
+{% endif %}
+
+{% if remedies %}
+    {{ heading({ text: remedy_heading, level: '2', space_above: '0', space_below: '10px' }) }}
+    {{ list({ items: remedies, style: 'check', space_below: '28px' }) }}
+{% endif %}
+
+{{ divider({ style: 'double', space_above: '0', space_below: '22px' }) }}
+
+{{ text({ text: closing, size: 'small', space_below: (report_url ? '14px' : '0') }) }}
+
+{% if report_url %}
+    {{ button({ label: report_label, url: report_url, variant: 'link', align: 'left', space_below: '0' }) }}
+{% endif %}

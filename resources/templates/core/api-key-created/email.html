@@ -1,0 +1,64 @@
+{#  permit — the credential is written up as an issued document rather than an
+    alert. The key names itself in the h1, the provenance line sits directly
+    under it like a stamp, and the only string ever set in type is the prefix.
+
+    Deliberately light stock: the catalog's dark, monospaced register already
+    belongs to `verify-email`, and a second template wearing it would read as
+    the same email twice.
+
+    The caution bar carries a triangle, a bold word and a border before it
+    carries any colour, because the reader who most needs it may be looking at
+    a greyscale screen or a client that has inverted the whole message. #}
+
+{{ heading({ text: eyebrow, level: '3', space_above: '0', space_below: '12px' }) }}
+
+{{ heading({ text: key_name, level: '1', space_above: '0', space_below: issued_line ? '10px' : '18px' }) }}
+
+{% if issued_line %}
+    {{ text({ text: issued_line, size: 'small', muted: true, space_below: '22px' }) }}
+{% endif %}
+
+{{ text({ text: body, space_below: '24px' }) }}
+
+{{ code({
+    code: key_prefix,
+    label: prefix_label,
+    note: prefix_note,
+    background: theme('color.surface_alt'),
+    space_above: '0',
+    space_below: '16px'
+}) }}
+
+{{ note({
+    tone: 'outline',
+    mark: '▲',
+    mark_color: theme('color.warning'),
+    border_color: theme('color.warning'),
+    strong_text: once_strong,
+    text: once_text,
+    space_below: '32px'
+}) }}
+
+{{ heading({ text: scopes_title, level: '3', space_above: '0', space_below: '10px' }) }}
+
+{% if scopes %}
+    {{ key_value({ rows: scopes, label_width: '52%', space_below: '30px' }) }}
+{% else %}
+    {{ text({ text: no_scopes_text, size: 'small', muted: true, space_below: '30px' }) }}
+{% endif %}
+
+{{ divider({ style: 'solid', space_above: '0', space_below: '24px' }) }}
+
+{{ text({ text: revoke_text, space_below: '18px' }) }}
+
+{{ button({
+    label: revoke_label,
+    url: revoke_url,
+    variant: 'outline',
+    color: theme('color.danger'),
+    align: 'left',
+    shape: 'square',
+    space_below: '24px'
+}) }}
+
+{{ text({ text: rotation_note, size: 'footer', muted: true, space_below: '0' }) }}

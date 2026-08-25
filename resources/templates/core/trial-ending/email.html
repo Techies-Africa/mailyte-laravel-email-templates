@@ -1,0 +1,22 @@
+{{ heading({ text: 'Trial ending', level: '3', space_above: '0', space_below: '18px' }) }}
+
+{{ stat_row({ items: [{
+    value: (days_left == 1 ? '1 day' : days_left ~ ' days'),
+    label: 'left on your ' ~ plan_name ~ ' trial, which ends ' ~ trial_ends_at
+}], size: 'display', space_below: '26px' }) }}
+
+{{ heading({ text: (user.first_name ? 'Keeping this, ' ~ user.first_name ~ '?' : 'Keeping this?'), level: '1', space_above: '0' }) }}
+
+{{ text({ text: consequences }) }}
+
+{{ button({ label: button_label, url: action_url, align: 'left' }) }}
+
+{% if price_note %}
+    {{ text({ text: price_note, size: 'small', muted: true }) }}
+{% endif %}
+
+{% if usage_summary %}
+    {{ divider({ space_above: '10px', space_below: '18px' }) }}
+    {{ heading({ text: 'What you built', level: '3', space_above: '0', space_below: '10px' }) }}
+    {{ key_value({ rows: usage_summary, figures: true, label_width: '62%', space_below: '0' }) }}
+{% endif %}

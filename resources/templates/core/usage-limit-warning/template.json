@@ -1,0 +1,101 @@
+{
+    "slug": "usage-limit-warning",
+    "name": "Usage limit approaching",
+    "description": "Warns that an account is close to a plan limit, showing how much is used, what happens at the ceiling, and the two ways out.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "billing",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "urgent",
+    "tags": [
+        "usage",
+        "limits",
+        "billing",
+        "quota"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: gauge — the percentage as the headline figure, a usage bar, and two unequal remedies."
+    },
+    "subject": "You've used {{ used_percent }} of your {{ limit_name }}",
+    "preheader": "At the limit, {{ at_limit_behaviour }}. Two ways to avoid it.",
+    "blocks_used": [
+        "button",
+        "button_group",
+        "heading",
+        "section",
+        "stat_row",
+        "status_banner",
+        "text"
+    ],
+    "variables": {
+        "limit_name": {
+            "type": "string",
+            "description": "What is running out, in the customer's language.",
+            "required": true,
+            "example": "monthly send allowance"
+        },
+        "used_percent": {
+            "type": "string",
+            "description": "How much is used, as a percentage string. Shown at display size.",
+            "required": true,
+            "example": "82%"
+        },
+        "used_label": {
+            "type": "string",
+            "description": "The same fact in absolute numbers, which is what people actually act on.",
+            "default": "",
+            "example": "8,200 of 10,000 messages"
+        },
+        "resets_at": {
+            "type": "date",
+            "description": "When the allowance resets, if it does. Often the cheapest answer is simply waiting.",
+            "default": "",
+            "example": "1 September"
+        },
+        "at_limit_behaviour": {
+            "type": "text",
+            "description": "What happens at the ceiling. Say it exactly: throttled, queued, blocked or charged.",
+            "default": "further sends are queued until the allowance resets",
+            "example": "further sends are queued"
+        },
+        "upgrade_url": {
+            "type": "url",
+            "description": "Where to raise the limit.",
+            "required": true,
+            "example": "https://example.com/billing/plans"
+        },
+        "upgrade_label": {
+            "type": "string",
+            "description": "Label for the upgrade action.",
+            "default": "Raise the limit"
+        },
+        "usage_url": {
+            "type": "url",
+            "description": "Where the detailed usage breakdown lives, for people who want to reduce instead of upgrade.",
+            "default": "",
+            "example": "https://example.com/app/usage"
+        }
+    }
+}

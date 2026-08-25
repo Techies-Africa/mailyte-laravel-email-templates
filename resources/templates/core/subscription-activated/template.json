@@ -1,0 +1,115 @@
+{
+    "slug": "subscription-activated",
+    "name": "Plan activated",
+    "description": "Confirms a paid plan is live: what it costs, when it renews, and what the account can do now that it could not before.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "billing",
+    "supported_layouts": [
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "celebratory",
+    "tags": [
+        "subscription",
+        "billing",
+        "plan",
+        "activation"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: unlock — accent band with the plan name, then what it buys, then the billing facts."
+    },
+    "subject": "{{ plan_name }} is active on your account",
+    "preheader": "Renews {{ renews_at }} at {{ amount }}. Here is what just unlocked.",
+    "blocks_used": [
+        "button",
+        "heading",
+        "key_value",
+        "list",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "plan_name": {
+            "type": "string",
+            "description": "The plan now active, set at display size on the opening band.",
+            "required": true,
+            "example": "Pro"
+        },
+        "amount": {
+            "type": "money",
+            "description": "What it costs per period, formatted at the call site.",
+            "required": true,
+            "example": "$29.00"
+        },
+        "period": {
+            "type": "string",
+            "description": "Billing period in words.",
+            "default": "per month",
+            "example": "per month"
+        },
+        "renews_at": {
+            "type": "date",
+            "description": "Next renewal date. Stating it here prevents the surprise-charge support ticket.",
+            "required": true,
+            "example": "24 September 2026"
+        },
+        "seats": {
+            "type": "string",
+            "description": "Seat count or usage allowance, if the plan has one.",
+            "default": "",
+            "example": "5 seats"
+        },
+        "unlocked": {
+            "type": "array",
+            "description": "What the account can do now that it could not before, as `text` / optional `detail`. Capabilities, not adjectives.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Custom sending domains"
+                }
+            ]
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where to use the new capability first.",
+            "required": true,
+            "example": "https://example.com/app"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Start using it"
+        },
+        "billing_url": {
+            "type": "url",
+            "description": "Where invoices and the payment method live. Easy access here reduces cancellations made in frustration.",
+            "default": "",
+            "example": "https://example.com/billing"
+        }
+    }
+}

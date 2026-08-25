@@ -1,0 +1,42 @@
+name: Bug report
+description: Something in the package or a template does not work
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: PHP and Laravel versions
+      placeholder: PHP 8.3, Laravel 12
+    validations:
+      required: true
+  - type: input
+    id: template
+    attributes:
+      label: Template slug
+      description: If it is one template, which one, and in which layout and theme.
+      placeholder: verify-email-link, branded, showcase
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Include the output of `php artisan mailyte:lint <slug>` if a template is involved.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+  - type: textarea
+    id: clients
+    attributes:
+      label: Mail clients
+      description: Which clients you saw this in, and which ones render it correctly. A rendering bug is usually specific to one.

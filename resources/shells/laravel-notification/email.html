@@ -1,0 +1,51 @@
+{# The content model here is not ours -- it is whatever MailMessage happened to
+   carry -- so the design has to hold up with almost nothing in it (a greeting
+   and one line) and with a lot (a banded error, four paragraphs, a button and a
+   URL fallback). That rules out anything that needs a specific fact in a
+   specific place. What it gets instead is a clear reading order and real
+   spacing, which is exactly what Laravel's default is missing. #}
+
+{% if level == 'error' %}
+    {# An error-level notification is usually a failed payment or a security
+       event. It earns a band; the other two levels do not. #}
+    {{ status_banner({ tone: 'danger', text: greeting, space_below: '24px' }) }}
+{% else %}
+    {{ heading({ text: greeting, level: '1', space_above: '0', space_below: '18px' }) }}
+{% endif %}
+
+{% for line in lines %}
+    {{ text({ text: line, space_below: '16px' }) }}
+{% endfor %}
+
+{% if action_label and action_url %}
+    {# Shape and variant are read from the design rather than fixed here. A
+       pill button and a squared one are not the same design wearing different
+       colours, and `mailyte:adopt` carries them across from whichever template
+       the design came from. An error-level message still overrides the variant:
+       a failed payment gets the danger treatment whatever the house style. #}
+    {{ button({
+        label: action_label,
+        url: action_url,
+        variant: (level == 'error' ? 'danger' : theme('button.variant', 'primary')),
+        shape: theme('button.shape', 'default'),
+        align: 'left',
+        space_above: '6px',
+        space_below: (outro_lines or subcopy or salutation ? '24px' : '0')
+    }) }}
+{% endif %}
+
+{% for line in outro_lines %}
+    {{ text({ text: line, space_below: '16px' }) }}
+{% endfor %}
+
+{% if salutation %}
+    {{ text({ text: salutation, space_above: '6px', space_below: (subcopy ? '20px' : '0') }) }}
+{% endif %}
+
+{% if subcopy %}
+    {# Laravel prints the raw URL under the button for clients that mangle the
+       link. Kept, but demoted: small, muted and behind a rule, so it stops
+       competing with the action it is a fallback for. #}
+    {{ divider({ space_above: '4px', space_below: '14px' }) }}
+    {{ text({ text: subcopy, size: 'small', muted: true, space_below: '0' }) }}
+{% endif %}

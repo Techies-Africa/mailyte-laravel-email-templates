@@ -1,0 +1,31 @@
+{# Incident. Written before the incident, under no pressure, so that it can be
+   sent during one: severity first, the blast radius as a matched pair, and the
+   promised next update given more weight than anything else on the page —
+   because keeping that promise is what makes the next one get opened. #}
+
+{{ status_banner({ level: severity_level, label: severity_label, text: impact_line, space_below: '22px' }) }}
+
+{{ heading({ text: impact_headline, level: '1', space_above: '0', space_below: '8px' }) }}
+
+{{ text({ text: started_label ~ ' ' ~ started_at ~ ' ' ~ timezone, size: 'small', muted: true, space_below: '18px' }) }}
+
+{{ text({ text: summary, space_below: '26px' }) }}
+
+{{ columns({ count: 2, items: [
+    { heading: affected_heading, text: affected_text },
+    { heading: unaffected_heading, text: unaffected_text }
+], space_below: '24px' }) }}
+
+{{ code({
+    label: next_update_label,
+    code: next_update_at ~ ' ' ~ timezone,
+    note: next_update_note,
+    background: '#1A1512',
+    color: '#FFF3E8',
+    muted_color: '#D6BCA8',
+    space_below: '26px'
+}) }}
+
+{{ button({ label: status_label, url: status_url, align: 'left', shape: 'square', space_below: '26px' }) }}
+
+{{ text({ text: closing, size: 'small', muted: true, space_below: '0' }) }}

@@ -1,0 +1,44 @@
+{# A thread on screen runs oldest first. A notification should not: the new
+   reply is the reason the message was sent, so it leads in full ink behind the
+   accent rule, the two actions sit directly under it where a thumb can reach
+   them without scrolling, and the comment being answered is set back below
+   them — smaller, muted, and marked with a bar in the border colour, which is
+   what a quote-nesting indent looks like once it has to survive Outlook. #}
+
+{{ heading({ text: thread_title, level: '3', space_above: '0', space_below: '10px' }) }}
+
+{{ heading({ text: reply_author ~ ' replied', level: '1', space_above: '0', space_below: '20px' }) }}
+
+{{ quote({ text: reply_text, author: reply_author, role: reply_time, space_above: '0', space_below: '24px' }) }}
+
+{% set actions = [{ label: reply_label, url: reply_url, variant: 'primary' }] %}
+{% if thread_url %}
+    {% set actions = actions|merge([{ label: thread_label, url: thread_url, variant: 'outline' }]) %}
+{% endif %}
+
+{{ button_group({ items: actions, align: 'left', space_below: '30px' }) }}
+
+{% if parent_text %}
+    {{ text({ text: parent_label, size: 'footer', muted: true, space_below: '8px' }) }}
+
+    {% set answered %}
+        {% if parent_author %}
+            {{ text({ text: parent_author ~ ' wrote', size: 'footer', muted: true, space_below: '6px' }) }}
+        {% endif %}
+        {{ text({ text: parent_text, size: 'small', muted: true, space_below: '0' }) }}
+    {% endset %}
+
+    {# The bar is the border colour, not the accent: this block is context, and
+       an accent rule here would put the old comment level with the new one. #}
+    {{ card({ slot: answered, accent: theme('color.border'), padding: '16px', space_below: '24px' }) }}
+{% endif %}
+
+{% if thread_meta %}
+    {{ text({ text: thread_meta, size: 'footer', muted: true, space_below: '16px' }) }}
+{% endif %}
+
+{% if notification_settings_url %}
+    {{ divider({ space_above: '0', space_below: '16px' }) }}
+
+    {{ button({ label: notification_settings_label, url: notification_settings_url, variant: 'link', color: theme('color.text_muted'), align: 'left', space_below: '0' }) }}
+{% endif %}

@@ -1,0 +1,30 @@
+{{ heading({ text: 'Verification code', level: '3', space_above: '0', space_below: '12px' }) }}
+
+{{ heading({ text: heading_text, level: '1', space_above: '0' }) }}
+
+{% if user.first_name %}
+    {{ text({ text: 'Hi ' ~ user.first_name ~ ',', space_below: '4px' }) }}
+{% endif %}
+
+{{ text({ text: body }) }}
+
+{% set panel %}
+    {{ code({
+        code: verification_code,
+        label: '',
+        note: 'Expires in ' ~ expires_in,
+        background: 'transparent',
+        color: '#FFFFFF',
+        muted_color: '#B9B4AA',
+        space_above: '0',
+        space_below: '0'
+    }) }}
+{% endset %}
+
+{{ section({ tone: 'custom', background: theme('color.surface_alt'), padding_y: '30px', align: 'center', space_below: '20px', slot: panel }) }}
+
+{{ text({ text: wrong_window_note, size: 'small', muted: true }) }}
+
+{{ divider({ style: 'dotted', space_above: '6px', space_below: '16px' }) }}
+
+{{ text({ text: security_note, size: 'small', muted: true, space_below: '0' }) }}

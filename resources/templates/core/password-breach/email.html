@@ -1,0 +1,54 @@
+{#  advisory — the headline is a light-weight serif on purpose. Nothing here is
+    the reader's fault and nothing here has gone wrong on this account yet, so
+    the type declines to shout and the copy carries the weight instead.
+
+    Severity arrives late, not first. The facts get a quiet tinted band, the
+    steps get numbers, and only the bar immediately above the button raises its
+    voice — by which point the reader knows what happened and the instruction
+    has somewhere to land. That bar carries a triangle, the instruction as a
+    word, and its own border weight before it carries any colour at all.
+
+    The remedy is deliberately not amber. The thing to click must never look
+    like the thing to be afraid of.
+
+    Structural note: the pair sits in a full-bleed band rather than a card,
+    because a card's slot re-applies the layout gutter inside the card padding
+    and the measure inside it collapses at 320px. #}
+
+{{ heading({ text: heading_text, level: '1', space_above: '0', space_below: '16px' }) }}
+
+{% if user.first_name %}
+    {{ text({ text: user.first_name ~ ',', space_below: '6px' }) }}
+{% endif %}
+
+{{ text({ text: body, space_below: '28px' }) }}
+
+{% set halves %}
+    {{ heading({ text: exposed_title, level: '3', space_above: '0', space_below: '8px' }) }}
+
+    {{ text({ text: exposed_text, size: 'small', space_below: '22px' }) }}
+
+    {{ heading({ text: safe_title, level: '3', space_above: '0', space_below: '8px' }) }}
+
+    {{ text({ text: safe_text, size: 'small', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '28px', space_above: '0', space_below: source_line ? '18px' : '30px', slot: halves }) }}
+
+{% if source_line %}
+    {{ text({ text: source_line, size: 'small', muted: true, space_below: '30px' }) }}
+{% endif %}
+
+{% if steps %}
+    {{ heading({ text: steps_title, level: '3', space_above: '0', space_below: '14px' }) }}
+
+    {{ list({ items: steps, style: 'number', space_below: '30px' }) }}
+{% endif %}
+
+{{ status_banner({ level: 'warning', label: action_label, text: action_text, space_below: '24px' }) }}
+
+{{ button({ label: button_label, url: change_url, align: 'left', space_below: '32px' }) }}
+
+{{ divider({ style: 'dotted', space_above: '0', space_below: '18px' }) }}
+
+{{ text({ text: privacy_note, size: 'footer', muted: true, space_below: '0' }) }}

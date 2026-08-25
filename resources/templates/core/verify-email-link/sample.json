@@ -1,0 +1,16 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "action_url": "https://example.com/verify/8f2c1d4a9b",
+        "expires_in": "1 hour"
+    },
+    "no-name": {
+        "user": {
+            "first_name": ""
+        },
+        "action_url": "https://example.com/verify/8f2c1d4a9b",
+        "expires_in": "24 hours"
+    }
+}

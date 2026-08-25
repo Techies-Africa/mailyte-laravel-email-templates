@@ -1,0 +1,117 @@
+{
+    "tokens": {
+        "font": {
+            "heading": "Georgia, Cambria, 'Times New Roman', Times, serif",
+            "body": "Georgia, Cambria, 'Times New Roman', Times, serif",
+            "mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Courier New', monospace"
+        },
+        "color": {
+            "bg": {
+                "light": "#EEF1F3",
+                "dark": "#0C0F12"
+            },
+            "surface": {
+                "light": "#FFFFFF",
+                "dark": "#14181C"
+            },
+            "surface_alt": {
+                "light": "#E4EAEE",
+                "dark": "#1B2026"
+            },
+            "text": {
+                "light": "#12171C",
+                "dark": "#E8ECEF"
+            },
+            "text_muted": {
+                "light": "#4F585F",
+                "dark": "#A2AAB2"
+            },
+            "text_subtle": {
+                "light": "#5C666E",
+                "dark": "#8A939B"
+            },
+            "border": {
+                "light": "#CBD4DA",
+                "dark": "#242A31"
+            },
+            "primary": {
+                "light": "#1B4965",
+                "dark": "#9FC6DE"
+            },
+            "primary_text": {
+                "light": "#FFFFFF",
+                "dark": "#14181C"
+            },
+            "success": {
+                "light": "#1B4965",
+                "dark": "#9FC6DE"
+            },
+            "link": {
+                "light": "#1B4965",
+                "dark": "#9FC6DE"
+            }
+        },
+        "type": {
+            "h1": {
+                "size": "24px",
+                "line_height": "33px",
+                "weight": "700",
+                "letter_spacing": "-0.012em"
+            },
+            "h2": {
+                "size": "17px",
+                "line_height": "25px",
+                "weight": "700",
+                "letter_spacing": "0"
+            },
+            "h3": {
+                "size": "10px",
+                "line_height": "15px",
+                "weight": "700",
+                "letter_spacing": "0.2em"
+            },
+            "body": {
+                "size": "14.5px",
+                "line_height": "25px",
+                "weight": "400",
+                "letter_spacing": "0"
+            },
+            "small": {
+                "size": "13px",
+                "line_height": "22px",
+                "weight": "400",
+                "letter_spacing": "0"
+            },
+            "footer": {
+                "size": "11.5px",
+                "line_height": "18px",
+                "weight": "400",
+                "letter_spacing": "0"
+            },
+            "button": {
+                "size": "13.5px",
+                "line_height": "13.5px",
+                "weight": "700",
+                "letter_spacing": "0.03em"
+            }
+        },
+        "radius": {
+            "sm": "0",
+            "md": "0",
+            "lg": "0",
+            "pill": "0"
+        },
+        "spacing": {
+            "xs": "6px",
+            "sm": "11px",
+            "md": "18px",
+            "lg": "26px",
+            "xl": "36px"
+        },
+        "layout": {
+            "width": "540px",
+            "gutter": "34px",
+            "outer_padding": "36px"
+        }
+    }
+}

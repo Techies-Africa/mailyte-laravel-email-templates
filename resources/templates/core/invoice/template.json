@@ -7,31 +7,126 @@
     "tier": "core",
     "type": "transactional",
     "category": "billing",
-    "supported_layouts": ["plain", "minimal", "branded"],
-    "audience": ["saas", "fintech", "professional-services"],
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "professional-services"
+    ],
     "tone": "neutral",
-    "tags": ["invoice", "payment", "billing"],
-    "authors": [{ "name": "Mailyte", "url": "https://mailyte.com" }],
+    "tags": [
+        "invoice",
+        "billing",
+        "payment",
+        "receipt"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
     "license": "MIT",
-    "origin": { "kind": "derived", "source": "https://github.com/ActiveCampaign/postmark-templates", "note": "Line-item table structure follows the Postmark invoice template (MIT, Wildbit)." },
-
+    "origin": {
+        "kind": "original",
+        "note": "Design: ledger — document proportions, tabular figures, rule above the total."
+    },
     "subject": "Invoice {{ invoice.number }} from {{ company.name }}",
-    "preheader": "{{ invoice.total }} due by {{ invoice.due_date }}.",
-
-    "blocks_used": ["heading", "text", "card", "key_value", "button", "divider"],
-
+    "preheader": "{{ invoice.total }} due {{ invoice.due_date }}. Pay online or download a copy.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "key_value",
+        "stat_row",
+        "text"
+    ],
     "variables": {
-        "heading_text": { "type": "string", "description": "Main headline.", "default": "Invoice" },
-        "body": { "type": "text", "description": "Opening paragraph.", "default": "Here is your invoice. You can pay it online, or download a PDF copy for your records." },
-        "invoice.number": { "type": "string", "description": "Invoice number. Keep it account-level sequential for EU and UK VAT compliance.", "required": true, "example": "INV-2026-0184" },
-        "invoice.date": { "type": "string", "description": "Issue date, absolute rather than relative.", "default": "", "example": "24 August 2026" },
-        "invoice.due_date": { "type": "string", "description": "Due date.", "default": "", "example": "7 September 2026" },
-        "invoice.total": { "type": "string", "description": "Formatted total. Format with NumberFormatter at the call site -- decimal places are not universal.", "required": true, "example": "$240.00" },
-        "line_items": { "type": "array", "description": "Two columns only. Quantity and unit price belong as a second line inside the description cell, because two columns survive 320px with no media query.", "default": [], "example": [{ "label": "Starter plan, monthly", "value": "$180.00" }, { "label": "Additional seats, 2 x $30.00", "value": "$60.00" }] },
-        "totals": { "type": "array", "description": "Subtotal, tax and total, in their own table below a divider.", "default": [], "example": [{ "label": "Subtotal", "value": "$240.00" }, { "label": "VAT (0%)", "value": "$0.00" }, { "label": "Total due", "value": "$240.00" }] },
-        "pay_url": { "type": "url", "description": "Hosted payment page. Never bake a permanent link -- hosted invoice URLs expire.", "required": true, "example": "https://example.com/pay/INV-2026-0184" },
-        "button_label": { "type": "string", "description": "CTA label.", "default": "Pay invoice" },
-        "manage_subscription_url": { "type": "url", "description": "Near one-click cancellation link. Required by Stripe for FTC and California compliance on billing mail.", "default": "", "example": "https://example.com/billing" },
-        "footer_legal": { "type": "text", "description": "Tax and legal footer. Varies by jurisdiction, so it is a token rather than baked-in prose -- and the email is never the legal document, the PDF or hosted invoice is.", "default": "" }
+        "heading_text": {
+            "type": "string",
+            "description": "Document title, set small and tight like a document heading rather than a marketing headline.",
+            "default": "Invoice"
+        },
+        "body": {
+            "type": "text",
+            "description": "One line of context above the figures. Optional; a clean invoice needs no preamble.",
+            "default": ""
+        },
+        "invoice.number": {
+            "type": "string",
+            "description": "Invoice reference.",
+            "required": true,
+            "example": "INV-2026-0184"
+        },
+        "invoice.date": {
+            "type": "date",
+            "description": "Issue date.",
+            "default": "",
+            "example": "24 August 2026"
+        },
+        "invoice.due_date": {
+            "type": "date",
+            "description": "Due date.",
+            "required": true,
+            "example": "7 September 2026"
+        },
+        "invoice.total": {
+            "type": "money",
+            "description": "Formatted total, set at 40px as the largest element on the page. Format at the call site — decimal separators are not universal.",
+            "required": true,
+            "example": "$240.00"
+        },
+        "line_items": {
+            "type": "array",
+            "description": "Line items as `label`/`value` pairs. Quantity and unit price belong in the label, since two columns survive 320px without a media query.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Starter plan, monthly",
+                    "value": "$180.00"
+                }
+            ]
+        },
+        "totals": {
+            "type": "array",
+            "description": "Subtotal, tax and total. The last row is emphasised automatically, so put the total last.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Total due",
+                    "value": "$240.00"
+                }
+            ]
+        },
+        "pay_url": {
+            "type": "url",
+            "description": "Hosted payment page. Never a permanent link — hosted invoice URLs expire.",
+            "required": true,
+            "example": "https://example.com/pay/INV-2026-0184"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Payment button label.",
+            "default": "Pay invoice"
+        },
+        "manage_subscription_url": {
+            "type": "url",
+            "description": "Cancellation link. Required by Stripe for FTC and California compliance on subscription billing mail.",
+            "default": "",
+            "example": "https://example.com/billing"
+        },
+        "footer_legal": {
+            "type": "text",
+            "description": "Tax and legal footer. Varies by jurisdiction, so it is a token rather than baked into the markup.",
+            "default": ""
+        }
     }
 }

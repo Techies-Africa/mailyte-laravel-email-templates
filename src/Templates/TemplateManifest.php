@@ -51,6 +51,26 @@ final class TemplateManifest
         return (string) ($this->data['category'] ?? 'notifications');
     }
 
+    /**
+     * The template this one is an alternative design for, if any.
+     *
+     * Variants share a job and a variable contract, so swapping between them is
+     * a config change rather than a code change.
+     */
+    public function variantOf(): ?string
+    {
+        $value = $this->data['variant_of'] ?? null;
+
+        return is_string($value) && $value !== '' ? $value : null;
+    }
+
+    public function variantLabel(): string
+    {
+        $value = $this->data['variant_label'] ?? null;
+
+        return is_string($value) ? $value : '';
+    }
+
     public function tier(): string
     {
         return (string) ($this->data['tier'] ?? 'community');
@@ -128,7 +148,7 @@ final class TemplateManifest
         $defaults = [];
 
         foreach ($this->variables() as $name => $spec) {
-            if (is_array($spec) && array_key_exists('default', $spec)) {
+            if (array_key_exists('default', $spec)) {
                 Arr::set($defaults, $name, $spec['default']);
             }
         }
@@ -144,10 +164,6 @@ final class TemplateManifest
         $examples = [];
 
         foreach ($this->variables() as $name => $spec) {
-            if (! is_array($spec)) {
-                continue;
-            }
-
             if (array_key_exists('example', $spec)) {
                 Arr::set($examples, $name, $spec['example']);
             } elseif (array_key_exists('default', $spec)) {
@@ -166,7 +182,7 @@ final class TemplateManifest
         $required = [];
 
         foreach ($this->variables() as $name => $spec) {
-            if (is_array($spec) && ($spec['required'] ?? false) === true) {
+            if (($spec['required'] ?? false) === true) {
                 $required[] = (string) $name;
             }
         }
@@ -233,6 +249,85 @@ final class TemplateManifest
     public function styles(): ?string
     {
         return $this->read('styles.css');
+    }
+
+    /**
+     * When the bundle last changed, taken from the newest file in it.
+     *
+     * File times rather than a field in the manifest: a version bump is a
+     * deliberate act and often lags the edit, while the mtime is the truth
+     * about when someone last touched the template. Returns null for a source
+     * that has no filesystem behind it, such as a database-backed bundle.
+     */
+    public function updatedAt(): ?\DateTimeImmutable
+    {
+        $newest = 0;
+
+        foreach (['template.json', 'email.html', 'design.json', 'sample.json', 'styles.css'] as $file) {
+            $path = $this->path($file);
+
+            if (is_file($path)) {
+                $newest = max($newest, (int) filemtime($path));
+            }
+        }
+
+        return $newest > 0
+            ? (new \DateTimeImmutable)->setTimestamp($newest)
+            : null;
+    }
+
+    /**
+     * The bundle's own design tokens, as dot paths.
+     *
+     * A catalog of a hundred templates that all render in one house style is a
+     * catalog of one template with a hundred bodies. `design.json` is how a
+     * bundle carries its own typography, palette, rhythm and shell -- the same
+     * token shape as a theme, merged *under* the sending application's brand
+     * overrides so the template's design is a starting point, never a
+     * hijacking of someone else's colours.
+     *
+     * @return array<string, mixed>
+     */
+    public function design(): array
+    {
+        $raw = $this->read('design.json');
+
+        if ($raw === null) {
+            return [];
+        }
+
+        /** @var array<string, mixed> $decoded */
+        $decoded = json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+
+        $tokens = $decoded['tokens'] ?? $decoded;
+
+        return is_array($tokens) ? $this->flatten($tokens) : [];
+    }
+
+    /**
+     * Nested token tree to dot paths, stopping at light/dark colour pairs so
+     * they reach Theme::merge() intact.
+     *
+     * @param  array<string, mixed>  $tokens
+     * @return array<string, mixed>
+     */
+    private function flatten(array $tokens, string $prefix = ''): array
+    {
+        $flat = [];
+
+        foreach ($tokens as $key => $value) {
+            $path = $prefix === '' ? (string) $key : $prefix.'.'.$key;
+
+            if (is_array($value) && ! isset($value['light'], $value['dark']) && ! array_is_list($value)) {
+                $flat += $this->flatten($value, $path);
+
+                continue;
+            }
+
+            $flat[$path] = $value;
+        }
+
+        return $flat;
     }
 
     /**

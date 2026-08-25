@@ -1,0 +1,197 @@
+{
+    "slug": "promotion",
+    "name": "Promotional offer",
+    "description": "A discount or limited offer: the claim, the code, the deadline and the small print, in that order.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "marketing",
+    "category": "marketing",
+    "supported_layouts": [
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "ecommerce",
+        "saas"
+    ],
+    "tone": "urgent",
+    "tags": [
+        "offer",
+        "discount",
+        "promotion",
+        "coupon"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: retail bands — split opening, product row, dark closing band."
+    },
+    "subject": "{{ offer_headline }} — ends {{ expires_text }}",
+    "preheader": "Use the code at checkout. It applies to everything in the sale.",
+    "credits": [
+        {
+            "kind": "photo",
+            "author": "Haupes",
+            "source": "Unsplash",
+            "url": "https://unsplash.com/photos/pair-of-brown-leather-boots-jIaJM8sTs04",
+            "asset_url": "https://images.unsplash.com/photo-1555337159-d399aaa99955",
+            "license": "Unsplash License",
+            "license_url": "https://unsplash.com/license",
+            "usage": "sample data only",
+            "title": "Pair of brown leather boots"
+        },
+        {
+            "kind": "photo",
+            "author": "Tusik Only",
+            "source": "Unsplash",
+            "url": "https://unsplash.com/photos/flat-lay-photography-of-cosmetic-kit-ayBCtRueEtI",
+            "asset_url": "https://images.unsplash.com/photo-1569385210018-127685230669",
+            "license": "Unsplash License",
+            "license_url": "https://unsplash.com/license",
+            "usage": "sample data only",
+            "title": "Flat lay photography of cosmetic kit"
+        },
+        {
+            "kind": "photo",
+            "author": "Kat Sylvester",
+            "source": "Unsplash",
+            "url": "https://unsplash.com/photos/a-table-topped-with-black-bottles-and-candles-vXOUWzw1v6o",
+            "asset_url": "https://images.unsplash.com/photo-1694538991472-60a784a9b4cb",
+            "license": "Unsplash License",
+            "license_url": "https://unsplash.com/license",
+            "usage": "sample data only",
+            "title": "A table topped with black bottles and candles"
+        },
+        {
+            "kind": "photo",
+            "author": "Mahbod Akhzami",
+            "source": "Unsplash",
+            "url": "https://unsplash.com/photos/white-and-red-labeled-box-2h0DmbxUOPw",
+            "asset_url": "https://images.unsplash.com/photo-1590240568206-4e97becae4ef",
+            "license": "Unsplash License",
+            "license_url": "https://unsplash.com/license",
+            "usage": "sample data only",
+            "title": "White and red labeled box"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "heading",
+        "note",
+        "product_grid",
+        "section",
+        "split",
+        "text"
+    ],
+    "headers": {
+        "suggested": {
+            "List-Unsubscribe": "<{{ unsubscribe_url }}>",
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+        }
+    },
+    "variables": {
+        "offer_eyebrow": {
+            "type": "string",
+            "description": "Small label above the claim, naming the occasion.",
+            "default": "",
+            "example": "Summer sale"
+        },
+        "offer_headline": {
+            "type": "string",
+            "description": "The claim, set at 38px in the opening split. Short enough to survive a preview pane.",
+            "required": true,
+            "example": "30% off everything"
+        },
+        "offer_text": {
+            "type": "text",
+            "description": "What the offer applies to, stated so nobody has to guess.",
+            "default": "",
+            "example": "Every item in the store, including the ones already reduced."
+        },
+        "hero_image": {
+            "type": "url",
+            "description": "Product shot for the opening split. A photograph of the thing being discounted, not a mood board.",
+            "default": "",
+            "example": "https://example.com/hero.jpg"
+        },
+        "promo_code": {
+            "type": "string",
+            "description": "Code to enter at checkout. Leave empty for an automatic discount.",
+            "default": "",
+            "example": "SUMMER30"
+        },
+        "expires_text": {
+            "type": "string",
+            "description": "The deadline in words. An offer email without a visible deadline is the kind that gets reported.",
+            "required": true,
+            "example": "Sunday at midnight"
+        },
+        "terms": {
+            "type": "text",
+            "description": "The small print. Short, and actually accurate.",
+            "default": "",
+            "example": "One use per customer. Excludes gift cards."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the offer is redeemed.",
+            "required": true,
+            "example": "https://example.com/sale"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Shop the sale"
+        },
+        "products": {
+            "type": "array",
+            "description": "Two or three items to anchor the offer, each with `image`, `title`, `meta`, `price`, `was_price` and `url`.",
+            "default": [],
+            "example": [
+                {
+                    "title": "A product",
+                    "price": "$40",
+                    "url": "https://example.com/p/1"
+                }
+            ]
+        },
+        "products_heading": {
+            "type": "string",
+            "description": "Heading above the product row.",
+            "default": "Popular right now"
+        },
+        "help_heading": {
+            "type": "string",
+            "description": "Heading for the closing dark band.",
+            "default": "Questions before you buy?"
+        },
+        "help_text": {
+            "type": "text",
+            "description": "Closing support line.",
+            "default": "Reply to this email and a person will answer, usually within a couple of hours."
+        },
+        "help_url": {
+            "type": "url",
+            "description": "Where the closing band's link goes.",
+            "default": "",
+            "example": "https://example.com/help"
+        },
+        "footer_note": {
+            "type": "text",
+            "description": "Why they are receiving this, and how to stop.",
+            "default": "You're receiving this because you asked us to tell you about sales."
+        }
+    }
+}

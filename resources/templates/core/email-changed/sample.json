@@ -1,0 +1,17 @@
+{
+    "default": {
+        "old_email": "ada@analyticalengine.example",
+        "new_email": "ada.lovelace@example.com",
+        "cancel_deadline": "27 August 2026",
+        "cancel_url": "https://example.com/account/email/cancel/7c1f"
+    },
+    "immediate-no-deadline": {
+        "old_email": "a.lovelace+billing@very-long-department-name.example.org",
+        "new_email": "accounts-payable@very-long-department-name.example.org",
+        "cancel_deadline": "",
+        "cancel_url": "",
+        "heading_text": "Your sign-in address has changed",
+        "body": "The email address used to sign in to this account has been changed and the new address is already active. The old address no longer works for sign-in or for password resets.",
+        "no_action_note": "Made this change yourself? There is nothing to do. If you did not, contact us straight away — we can reverse it, but not from this message."
+    }
+}

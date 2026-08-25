@@ -1,0 +1,105 @@
+{
+    "slug": "mention",
+    "name": "You were mentioned",
+    "description": "Tells someone their name came up in a comment or document, and carries the sentence it came up in so the mention can be judged without opening anything.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "notifications",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "community",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "mention",
+        "comment",
+        "collaboration",
+        "notification"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: transcript — the quoted sentence set large in Palatino behind an accent rule, the place it was said whispered above it, one rounded action."
+    },
+    "subject": "{{ author_name }} mentioned you",
+    "preheader": "{{ mention_text }}",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "note",
+        "quote",
+        "text"
+    ],
+    "variables": {
+        "author_name": {
+            "type": "string",
+            "description": "Who wrote the mention. A mention from a stranger and a mention from your manager are different emails, and only the name tells them apart.",
+            "required": true,
+            "example": "Priya Raman"
+        },
+        "mention_text": {
+            "type": "text",
+            "description": "The sentence the recipient's name appeared in, verbatim. This is the entire value of the message and it doubles as the preheader, so send the real words rather than a summary.",
+            "required": true,
+            "example": "Can we get Ada to sign off the migration plan before Thursday? She wrote the original importer."
+        },
+        "mention_location": {
+            "type": "string",
+            "description": "Where it was said, in the reader's own vocabulary — a document title, a channel, a card. Without it a quotation is just a fragment.",
+            "default": "",
+            "example": "Q3 roadmap planning, in the Product space"
+        },
+        "mention_time": {
+            "type": "string",
+            "description": "When it was written, in the recipient's timezone if you know it. Attached to the quotation rather than the headline, because it dates the words and not the email.",
+            "default": "",
+            "example": "Today at 11:42"
+        },
+        "action_label": {
+            "type": "string",
+            "description": "Label on the only button. It should promise the thread, not the product.",
+            "default": "Read it in context"
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Deep link to the comment itself, anchored so the reader lands on the quoted line rather than the top of a long document.",
+            "required": true,
+            "example": "https://example.com/docs/roadmap-q3#c-4821"
+        },
+        "context_note": {
+            "type": "text",
+            "description": "The one thing a mention email always has to say: what happens if they hit reply. Most people will try it.",
+            "default": "Replying to this email won't post anything. Use the link above to answer where the conversation is."
+        },
+        "notification_settings_url": {
+            "type": "url",
+            "description": "Where mention alerts get turned down or batched. Mentions are the notification people mute first, so make muting easy rather than making it a search.",
+            "default": "",
+            "example": "https://example.com/settings/notifications"
+        },
+        "notification_settings_label": {
+            "type": "string",
+            "description": "Wording of that link. Name the frequency, not the settings screen.",
+            "default": "Change how often you get these"
+        }
+    }
+}

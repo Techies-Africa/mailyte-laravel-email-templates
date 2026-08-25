@@ -1,0 +1,33 @@
+{# Audit line, then alarm. No greeting: this is a record, not a letter. The
+   metadata is assembled row by row here rather than handed over as an opaque
+   array, so each value can be set in the mono face and so a send with no
+   device data drops the whole record instead of printing empty rows. #}
+{{ heading({ text: heading_text, level: '1', space_above: '0', space_below: '10px' }) }}
+
+{{ text({ text: body, space_below: '26px' }) }}
+
+{% set rows = [] %}
+{% if changed_at %}{% set rows = rows|merge([{ label: 'When', value: changed_at, mono: true }]) %}{% endif %}
+{% if device %}{% set rows = rows|merge([{ label: 'Device', value: device, mono: true }]) %}{% endif %}
+{% if ip_address %}{% set rows = rows|merge([{ label: 'Network address', value: ip_address, mono: true }]) %}{% endif %}
+{% if location %}{% set rows = rows|merge([{ label: 'Near', value: location, mono: true }]) %}{% endif %}
+
+{% if rows %}
+    {{ heading({ text: record_label, level: '3', space_above: '0', space_below: '6px' }) }}
+    {{ key_value({ rows: rows, label_width: '34%', space_below: '10px' }) }}
+    {{ text({ text: metadata_caveat, size: 'small', muted: true, space_below: '28px' }) }}
+{% endif %}
+
+{# The escape hatch gets a band of its own at the foot. A second button beside
+   the first would read as an equal choice; a dark band reads as a stop. #}
+{% set alarm %}
+    {{ heading({ text: alarm_title, level: '2', color: '#F2F4F7', space_above: '0', space_below: '8px' }) }}
+    {{ text({ text: alarm_body, size: 'small', color: '#BCC5D0', space_below: (revoke_url ? '18px' : '0') }) }}
+    {% if revoke_url %}
+        {{ button({ label: revoke_label, url: revoke_url, variant: 'danger', align: 'left', shape: 'square', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'dark', background: '#12161B', text_color: '#F2F4F7', padding_y: '30px', space_above: '0', space_below: '24px', slot: alarm }) }}
+
+{{ text({ text: closing_note, size: 'small', muted: true, space_below: '0' }) }}

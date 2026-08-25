@@ -1,0 +1,23 @@
+{{ status_banner({ level: 'warning', label: 'Approaching limit', text: 'You have used ' ~ used_percent ~ ' of your ' ~ limit_name ~ '.' }) }}
+
+{{ heading({ text: 'Your ' ~ limit_name ~ ' is running low', level: '1', space_above: '0' }) }}
+
+{% set gauge %}
+    {{ stat_row({ items: [
+        { value: used_percent, label: 'used', caption: used_label },
+        { value: (resets_at ?: 'No reset'), label: (resets_at ? 'resets' : 'on this plan') }
+    ], space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '24px', space_below: '20px', slot: gauge }) }}
+
+{{ text({ text: 'At the limit, ' ~ at_limit_behaviour ~ '.' }) }}
+
+{% if usage_url %}
+    {{ button_group({ items: [
+        { label: upgrade_label, url: upgrade_url, variant: 'primary' },
+        { label: 'See what is using it', url: usage_url, variant: 'outline' }
+    ], space_below: '0' }) }}
+{% else %}
+    {{ button({ label: upgrade_label, url: upgrade_url, align: 'left', space_below: '0' }) }}
+{% endif %}

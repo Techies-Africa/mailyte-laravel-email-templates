@@ -1,0 +1,129 @@
+{
+    "slug": "refund-issued",
+    "name": "Refund issued",
+    "description": "Confirms money going back: how much, where it is going, and when it will realistically appear on the statement.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "billing",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "ecommerce",
+        "fintech"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "billing",
+        "refund",
+        "credit-note",
+        "payment"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: credit note — the invoice read backwards, serif on blue-grey stock, one negative line in the tabular column, the bank's delay printed on the page."
+    },
+    "subject": "Refund of {{ amount }} from {{ company.name }}",
+    "preheader": "Released on {{ issued_on }}. Your bank decides the day it lands, not us.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "key_value",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "reference": {
+            "type": "string",
+            "description": "Credit-note reference, so the customer and their accountant can match this against the original invoice. Omit it and the document simply calls itself a credit note.",
+            "default": "",
+            "example": "CN-2026-0057"
+        },
+        "amount": {
+            "type": "money",
+            "description": "What is being returned, formatted at the call site — decimal separators and currency placement differ by locale, and the markup must never guess a symbol. This is the figure the heading is built from.",
+            "required": true,
+            "example": "$192.00"
+        },
+        "issued_on": {
+            "type": "date",
+            "description": "The day the refund left us. Distinct from the day it arrives, and the pair of dates is the whole reason this email avoids a support ticket.",
+            "required": true,
+            "example": "24 August 2026"
+        },
+        "destination": {
+            "type": "string",
+            "description": "Where the money is going, in the words a statement would use: the card brand and last four, or the account it was wired to. Never more of the number than the last four.",
+            "required": true,
+            "example": "the Visa ending 4242"
+        },
+        "reason": {
+            "type": "string",
+            "description": "One clause on why the refund happened, when the customer might not know. A refund with no stated cause reads like a mistake, and a mistake gets a phone call.",
+            "default": "",
+            "example": "It covers the four unused seats on your last invoice."
+        },
+        "reversal_rows": {
+            "type": "array",
+            "description": "The reversal as `label`/`value` pairs, right-aligned on tabular numerals: what was charged, what is coming back as a negative figure, and what the customer is left having paid. Format the figures and the minus sign at the call site; put the net line last, because the last row is emphasised.",
+            "required": true,
+            "example": [
+                {
+                    "label": "Original charge",
+                    "value": "$240.00",
+                    "mono": true
+                },
+                {
+                    "label": "Refund",
+                    "value": "−$192.00",
+                    "mono": true
+                },
+                {
+                    "label": "You paid",
+                    "value": "$48.00",
+                    "mono": true
+                }
+            ]
+        },
+        "arrives_by": {
+            "type": "string",
+            "description": "The realistic outside date for the money appearing. Give the pessimistic end of the range: a customer who gets it early is pleased, and one who was promised Tuesday is on the phone on Wednesday.",
+            "required": true,
+            "example": "8 September"
+        },
+        "delay_note": {
+            "type": "text",
+            "description": "The honest explanation of why a refund is not instant, and what it looks like when it lands. Most refund complaints are really this paragraph being missing.",
+            "default": "The money left us the day it was issued, but card refunds travel back through the same banks the payment came through, which usually takes five to ten working days. Some banks show it as a new credit; others quietly remove the original charge, so it is worth looking at the original line on your statement as well as the newest one."
+        },
+        "receipt_url": {
+            "type": "url",
+            "description": "The original payment or invoice this reverses, so the two documents can be read together.",
+            "default": "",
+            "example": "https://example.com/invoices/INV-2026-0184"
+        },
+        "footer_legal": {
+            "type": "text",
+            "description": "Tax treatment of the credit, which varies by jurisdiction and is why it is a variable rather than a fixed line.",
+            "default": "",
+            "example": "This credit note reverses VAT charged on invoice INV-2026-0184."
+        }
+    }
+}

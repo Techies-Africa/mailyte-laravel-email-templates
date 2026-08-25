@@ -1,0 +1,26 @@
+{{ heading({ text: 'Account active', level: '3', space_above: '0', space_below: '12px' }) }}
+
+{{ divider({ style: 'thick', color: theme('color.primary'), width: '56px', space_above: '0', space_below: '22px' }) }}
+
+{{ heading({ text: (user.first_name ? 'You\'re all set, ' ~ user.first_name : 'You\'re all set'), level: '1', space_above: '0' }) }}
+
+{% if unlocked %}
+    {{ list({ items: unlocked, style: 'check' }) }}
+{% endif %}
+
+{{ button({ label: button_label, url: action_url, align: 'left', shape: 'square' }) }}
+
+{{ divider({ space_above: '6px', space_below: '0' }) }}
+
+{{ heading({ text: 'For your records', level: '3', space_below: '4px' }) }}
+
+{{ key_value({ rows: [
+    { label: 'Signed in as', value: account_email, mono: true },
+    { label: 'Account', value: (account_id ?: '—'), mono: true },
+    { label: 'Plan', value: (plan_name ?: 'Free') },
+    { label: 'Activated', value: (activated_at ?: 'just now') }
+], label_width: '38%' }) }}
+
+{{ note({ tone: 'soft', mark: '✓', text: keep_note }) }}
+
+{{ text({ text: support_note, size: 'small', muted: true, space_below: '0' }) }}

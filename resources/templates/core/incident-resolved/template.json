@@ -1,0 +1,176 @@
+{
+    "slug": "incident-resolved",
+    "name": "Incident resolved",
+    "description": "The follow-up to an incident notice: it is fixed, this is what caused it, and this is what has changed so that it does not recur.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "system",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "fintech"
+    ],
+    "tone": "apologetic",
+    "tags": [
+        "incident",
+        "postmortem",
+        "resolved",
+        "status"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: postmortem — a serif document between double rules, the timeline set in old-style figures, the cause named rather than described."
+    },
+    "subject": "Resolved: {{ impact_headline }}",
+    "preheader": "The timeline, the cause named plainly, and what has changed so it does not recur.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "key_value",
+        "list",
+        "stat_row",
+        "text"
+    ],
+    "variables": {
+        "eyebrow": {
+            "type": "string",
+            "description": "Small label above the headline, classifying the document. This email is a record as much as a message, and the label is what makes it filable.",
+            "default": "Incident report"
+        },
+        "impact_headline": {
+            "type": "string",
+            "description": "The same symptom named in the incident notice, so the two emails are obviously one thread. Do not soften it now that it is over.",
+            "required": true,
+            "example": "Sending failed in the EU region"
+        },
+        "resolved_label": {
+            "type": "string",
+            "description": "Lead-in for the resolution time.",
+            "default": "Resolved"
+        },
+        "resolved_at": {
+            "type": "string",
+            "description": "When impact actually ended for customers, not when the ticket was closed.",
+            "required": true,
+            "example": "14 September, 15:12"
+        },
+        "timezone": {
+            "type": "string",
+            "description": "The timezone every time on this page is stated in, with its offset. The timeline is unreadable without it.",
+            "required": true,
+            "example": "UTC (GMT+0)"
+        },
+        "opening": {
+            "type": "text",
+            "description": "What happened and who it hit, stated without euphemism. No 'some users may have experienced' — if sending failed for ninety minutes, write that sending failed for ninety minutes.",
+            "required": true,
+            "example": "For 90 minutes on 14 September, every message sent through our EU region failed. This was our fault, it was caused by a change we released, and no data was lost."
+        },
+        "duration_label": {
+            "type": "string",
+            "description": "What the first figure counts.",
+            "default": "Of impact"
+        },
+        "duration_value": {
+            "type": "string",
+            "description": "How long customers were affected, set at display size because it is the number that will be quoted back to you. Leave empty if it cannot be stated honestly yet.",
+            "default": "",
+            "example": "90 minutes"
+        },
+        "scope_label": {
+            "type": "string",
+            "description": "What the second figure counts.",
+            "default": "Requests affected"
+        },
+        "scope_value": {
+            "type": "string",
+            "description": "The size of the blast radius as a figure — failed requests, affected accounts, delayed messages. Pair it with the duration so the impact is bounded in both directions.",
+            "default": "",
+            "example": "18,400"
+        },
+        "timeline_heading": {
+            "type": "string",
+            "description": "Heading over the timeline.",
+            "default": "What happened, in order"
+        },
+        "timeline": {
+            "type": "array",
+            "description": "The incident as `label` (the time) and `value` (what happened at it). Include the gap between the fault starting and you noticing it — leaving that row out is the tell that a postmortem is public relations.",
+            "default": [],
+            "example": [
+                {
+                    "label": "13:30",
+                    "value": "A change to connection pooling was released to the EU region."
+                }
+            ]
+        },
+        "cause_heading": {
+            "type": "string",
+            "description": "Heading over the cause.",
+            "default": "What caused it"
+        },
+        "cause_text": {
+            "type": "text",
+            "description": "The actual cause, in language a customer can follow. Name the mechanism rather than an abstraction: 'the pool was sized for one region and we ran two' beats 'an unexpected configuration issue'.",
+            "default": "",
+            "example": "A change to connection pooling assumed one database per region. The EU region runs two, so half of the pool pointed at a host that was not accepting writes."
+        },
+        "cause_pending_text": {
+            "type": "text",
+            "description": "Used when the cause is not established yet. Saying so plainly is more trustworthy than a guess that has to be corrected in a week, which is why this is a separate field rather than a hedge inside the one above.",
+            "default": "We have not established the cause yet. We would rather tell you that than publish a guess and correct it next week."
+        },
+        "remedy_heading": {
+            "type": "string",
+            "description": "Heading over the changes.",
+            "default": "What has changed"
+        },
+        "remedies": {
+            "type": "array",
+            "description": "The specific changes made, as `text` and optional `detail` saying whether each is already done or dated. 'We will improve our processes' is not one of these; a shipped guard rail with a date is.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Pool sizing is now derived from the region's host list",
+                    "detail": "Shipped 14 September"
+                }
+            ]
+        },
+        "closing": {
+            "type": "text",
+            "description": "The closing paragraph. An apology in your own words, and what a customer who lost something should do about it — a credit they must ask for is a credit you did not really offer.",
+            "default": "We are sorry. If this cost you a send you cannot repeat, reply to this email and we will credit the account without you having to make a case for it."
+        },
+        "report_label": {
+            "type": "string",
+            "description": "Label for the link to the full write-up.",
+            "default": "Read the full write-up"
+        },
+        "report_url": {
+            "type": "url",
+            "description": "The full public postmortem, for readers who want the engineering detail this email deliberately leaves out.",
+            "default": "",
+            "example": "https://status.example.com/incidents/eu-sending"
+        }
+    }
+}

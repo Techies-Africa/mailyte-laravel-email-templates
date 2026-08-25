@@ -26,7 +26,7 @@ it('falls back to manifest defaults so a template renders with almost no data', 
         ->with(['verification_code' => '111 222'])
         ->render();
 
-    expect($email->html)->toContain('This code expires in 10 minutes.')
+    expect($email->html)->toContain('Expires in 10 minutes')
         ->and($email->html)->toContain('you can safely ignore this email');
 });
 

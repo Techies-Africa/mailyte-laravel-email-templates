@@ -1,0 +1,67 @@
+{#  shield — a confirmation, not an alarm, so nothing here shouts. The state is
+    carried by a bar under the headline: a mark, the word, a border and only
+    then a colour, which is the same four-channel rule the status banner block
+    follows and the reason this template never leans on green alone.
+
+    The one thing worth doing today — putting the recovery codes somewhere safe
+    — gets the only filled button and a band to itself, well clear of the
+    reversal link so the two are never confused. #}
+
+{% set state_mark = enabled ? '●' : '○' %}
+{% set state_color = enabled ? theme('color.success') : theme('color.warning') %}
+
+{{ heading({ text: heading_text, level: '1', space_above: '0', space_below: '12px' }) }}
+
+{% if user.first_name %}
+    {{ text({ text: user.first_name ~ ',', space_below: '6px' }) }}
+{% endif %}
+
+{{ text({ text: body, space_below: change_line ? '10px' : '22px' }) }}
+
+{% if change_line %}
+    {{ text({ text: change_line, size: 'small', muted: true, space_below: '22px' }) }}
+{% endif %}
+
+{{ note({
+    tone: 'soft',
+    mark: state_mark,
+    mark_color: state_color,
+    border_color: state_color,
+    strong_text: state_word,
+    text: state_detail,
+    space_below: '30px'
+}) }}
+
+{% if changes %}
+    {{ heading({ text: changes_title, level: '3', space_above: '0', space_below: '12px' }) }}
+
+    {{ list({ items: changes, style: 'check', space_below: '28px' }) }}
+{% endif %}
+
+{% if expectations %}
+    {{ columns({ count: 2, items: expectations, space_below: '8px' }) }}
+
+    {{ divider({ style: 'solid', space_above: '0', space_below: '28px' }) }}
+{% endif %}
+
+{% set vault %}
+    {{ heading({ text: recovery_title, level: '3', space_above: '0', space_below: '10px' }) }}
+
+    {{ text({ text: recovery_text, size: 'small', space_below: recovery_url ? '20px' : '0' }) }}
+
+    {% if recovery_url %}
+        {{ button({ label: recovery_label, url: recovery_url, variant: 'primary', shape: 'pill', align: 'left', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '30px', space_above: '0', space_below: '30px', slot: vault }) }}
+
+{{ text({ text: undo_text, size: 'small', muted: true, space_below: settings_url ? '12px' : '20px' }) }}
+
+{% if settings_url %}
+    {{ button({ label: settings_label, url: settings_url, variant: 'link', align: 'left', space_below: '22px' }) }}
+{% endif %}
+
+{{ divider({ style: 'dotted', space_above: '0', space_below: '18px' }) }}
+
+{{ text({ text: not_you_text, size: 'small', muted: true, space_below: '0' }) }}

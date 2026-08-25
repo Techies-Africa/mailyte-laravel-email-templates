@@ -1,0 +1,97 @@
+{
+    "slug": "trial-expired",
+    "name": "Trial expired",
+    "description": "Sent the day a trial lapses: what state the account is in now, how long the data is kept, and how to pick it back up.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "onboarding",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "trial",
+        "expiration",
+        "winback"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: quiet graphite — no accent colour, generous margins, the two load-bearing facts given their own weight."
+    },
+    "subject": "Your {{ product.name }} trial has ended",
+    "preheader": "Your workspace is read-only. Everything in it is still there.",
+    "blocks_used": [
+        "button",
+        "heading",
+        "key_value",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "workspace_name": {
+            "type": "string",
+            "description": "Which workspace this concerns.",
+            "default": "",
+            "example": "Acme Production"
+        },
+        "retention_days": {
+            "type": "number",
+            "description": "How long the data is kept before deletion. A real number, honoured by the system that sends this.",
+            "default": 30,
+            "example": 30
+        },
+        "deletion_date": {
+            "type": "date",
+            "description": "The date the data actually goes. A date is harder to misread than a countdown, and this is the fact people come back to the email for.",
+            "default": "",
+            "example": "23 September 2026"
+        },
+        "current_state": {
+            "type": "text",
+            "description": "Plain description of what still works and what does not.",
+            "default": "Your workspace is read-only. You can still open, export and share everything in it, but new sends are paused."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where to restart on a paid plan.",
+            "required": true,
+            "example": "https://example.com/billing/plans"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Pick up where you left off"
+        },
+        "export_url": {
+            "type": "url",
+            "description": "Link to export their data. Offering the exit honestly is what makes the rest believable.",
+            "default": "",
+            "example": "https://example.com/settings/export"
+        }
+    }
+}

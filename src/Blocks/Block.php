@@ -37,6 +37,22 @@ abstract class Block
         return false;
     }
 
+    /**
+     * Whether this block spans the full canvas rather than sitting inside the
+     * layout gutter.
+     *
+     * The content column has no horizontal padding, so the gutter is applied
+     * per block. A block that returns true here gets none, which is how a
+     * coloured band or a bled photograph reaches the edges of the message the
+     * way it does in every email worth copying.
+     *
+     * @param  array<string, mixed>  $props
+     */
+    public function fullBleed(array $props = []): bool
+    {
+        return false;
+    }
+
     public function view(): string
     {
         return 'mailyte::html.'.$this->name();

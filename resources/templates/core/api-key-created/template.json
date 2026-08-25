@@ -1,0 +1,147 @@
+{
+    "slug": "api-key-created",
+    "name": "API key created",
+    "description": "Sent to the account owner when a developer credential is issued, so a key nobody authorised is noticed on the day it is made rather than at the next audit.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "security",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "developer-tools",
+        "saas",
+        "fintech"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "security",
+        "api-key",
+        "credentials",
+        "developer",
+        "audit"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: permit — a credential written up as an issued document on cool paper. The key names itself in the headline, only a prefix is ever set in type, and the grants are tabled plain-English-first with the exact scope string alongside."
+    },
+    "subject": "A new API key was created on {{ product.name }}",
+    "preheader": "Its prefix, the scopes it was granted, and the link that revokes it.",
+    "blocks_used": [
+        "button",
+        "code",
+        "divider",
+        "heading",
+        "key_value",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "eyebrow": {
+            "type": "string",
+            "description": "The document's own label, set above the headline. It tells a reader scanning a crowded inbox what class of thing this is before they read a word of the key's name.",
+            "default": "API key created"
+        },
+        "key_name": {
+            "type": "string",
+            "description": "The name the key was given, used as the headline. Naming the credential in the h1 is what makes this mail scannable in an audit trail — \"Production deploy bot\" is recognisable where \"A new API key\" is not.",
+            "default": "New API key",
+            "example": "Production deploy bot"
+        },
+        "issued_line": {
+            "type": "string",
+            "description": "Who created the key, from where, and when. This single line is what turns the email from a notification into evidence. Leave it empty rather than guessing at any part of it.",
+            "default": "",
+            "example": "Created by ada@example.com from the dashboard, 24 August 2026 at 09:12 UTC."
+        },
+        "body": {
+            "type": "text",
+            "description": "What the email contains and — just as importantly — what it does not. Saying up front that the secret is not in the message stops people hunting for it.",
+            "default": "A new API key was issued on this account. Below are the first characters of the key, the scopes it was granted, and the link that revokes it. The key itself is not in this email and never will be."
+        },
+        "prefix_label": {
+            "type": "string",
+            "description": "Label above the prefix panel. Call it a prefix, not a key — the wording is what stops someone pasting it into a client and filing a bug.",
+            "default": "Key prefix"
+        },
+        "key_prefix": {
+            "type": "string",
+            "description": "The leading, non-secret characters of the key and nothing more — enough to tell this credential from the others in a secret store, never enough to use. Truncate before the email is composed, not in the template: a full key that reaches this variable is a full key sitting in a mail spool.",
+            "required": true,
+            "example": "mk_live_7Q3FTb…"
+        },
+        "prefix_note": {
+            "type": "text",
+            "description": "Explains what the reader is looking at and what to do with it, so the panel is not mistaken for a credential they were meant to copy.",
+            "default": "The opening characters only. Match them against the keys in your secret store to tell this one apart from the rest."
+        },
+        "once_strong": {
+            "type": "string",
+            "description": "The bold opener of the caution bar. Paired with a triangle mark and a border, so the warning survives greyscale, forced inversion and a colour-blind reader.",
+            "default": "Shown once."
+        },
+        "once_text": {
+            "type": "text",
+            "description": "The fact developers most often learn the hard way: the secret is unrecoverable. Say it here, while there is still time to act on it.",
+            "default": "The full key appeared at creation and we keep only a hash of it. If it was not saved then, revoke this one and issue another — it cannot be shown again."
+        },
+        "scopes_title": {
+            "type": "string",
+            "description": "Heading above the grants table.",
+            "default": "What this key can do"
+        },
+        "scopes": {
+            "type": "array",
+            "description": "One row per granted scope, as `label` / `value`. Put the capability in plain English in `label` and the exact scope string in `value` with `mono` set — the reader who is auditing wants the sentence, the reader who is debugging wants the string, and both are on the row. Send the granted scopes only; a list of everything the API offers tells nobody anything.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Read projects and their settings",
+                    "value": "projects:read",
+                    "mono": true
+                }
+            ]
+        },
+        "no_scopes_text": {
+            "type": "text",
+            "description": "Stands in when the key was issued with no grants at all. A key that can authenticate but do nothing is a real and confusing state, and it deserves a sentence rather than an empty table.",
+            "default": "No scopes were granted. This key can authenticate, but every request it makes will be refused until scopes are added to it."
+        },
+        "revoke_text": {
+            "type": "text",
+            "description": "What revoking does and what it costs. People hesitate over a revoke button because nobody tells them whether anything else breaks.",
+            "default": "If you did not create this key, or it is no longer needed, revoke it. Revocation is immediate, and anything still authenticating with the key will start being refused."
+        },
+        "revoke_label": {
+            "type": "string",
+            "description": "Label for the revoke action. Outlined rather than filled: revoking is destructive, and a filled button invites the accidental click.",
+            "default": "Revoke this key"
+        },
+        "revoke_url": {
+            "type": "url",
+            "description": "Deep link to this key in the credentials list, ready to revoke. Landing on the list with no key selected is how the wrong one gets deleted.",
+            "required": true,
+            "example": "https://example.com/settings/keys/k_7Q3FTb"
+        },
+        "rotation_note": {
+            "type": "text",
+            "description": "The closing line of hygiene advice. Optional in spirit but worth keeping — this is the one email a key's owner reliably reads.",
+            "default": "Keys do not expire on their own. Rotating them on a schedule, and revoking the old one once traffic has moved across, costs far less than discovering a leak."
+        }
+    }
+}

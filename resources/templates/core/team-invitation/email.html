@@ -1,0 +1,29 @@
+{# Invitation card. The workspace is the largest thing on the page and the
+   inviter is a voice rather than a field, because an invitation is accepted
+   on the strength of a place and a person. One action, no competing links,
+   and the expiry kept next to the button where the decision is made. #}
+
+{% set invitation %}
+    {{ heading({ text: eyebrow, level: '3', space_above: '0', space_below: '14px', color: theme('color.text_muted') }) }}
+    {{ heading({ text: workspace_name, level: '1', space_above: '0', space_below: '12px' }) }}
+    {{ text({ text: inviter_name ~ ' invited you to join, with the role of ' ~ role_name ~ '.', space_below: '24px' }) }}
+    {{ button({ label: accept_label, url: accept_url, align: 'left', shape: 'pill', space_below: '14px' }) }}
+    {{ text({ text: expiry_label ~ ' ' ~ expires_at ~ '.', size: 'small', muted: true, space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'custom', background: theme('color.surface_alt'), padding_y: '38px', space_below: '32px', slot: invitation }) }}
+
+{% if message %}
+    {{ quote({ text: message, author: inviter_name, role: inviter_role, avatar: inviter_avatar, space_below: '32px' }) }}
+{% endif %}
+
+{% if capabilities %}
+    {{ heading({ text: capabilities_heading, level: '2', space_above: '0', space_below: '14px' }) }}
+    {{ list({ items: capabilities, style: 'check', space_below: '30px' }) }}
+{% endif %}
+
+{{ divider({ style: 'dotted', space_above: '0', space_below: '16px' }) }}
+
+{{ text({ text: ignore_text, size: 'small', muted: true, space_below: '8px' }) }}
+
+{{ text({ text: sender_label ~ ' ' ~ inviter_email, size: 'footer', muted: true, space_below: '0' }) }}

@@ -25,7 +25,20 @@
                 <tr>
                     <td style="padding:0;">
                         {!! $content !!}
-                        @include('mailyte::html.partials.footer')
+
+                        {{-- The gutter lives on the blocks, so the footer -- which is not a
+                             block -- has to bring its own or it sits flush against the
+                             canvas edge while the body above it does not. --}}
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+                            <tr>
+                                <td class="m-gutter" style="padding:0 {{ $t['layout.gutter'] ?? '24px' }};">
+                                    @include('mailyte::html.partials.footer', [
+                                        'showSocial' => false,
+                                        'showCopyright' => false,
+                                    ])
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>

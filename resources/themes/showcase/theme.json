@@ -1,0 +1,51 @@
+{
+    "$schema": "../../schema/theme.schema.json",
+    "name": "showcase",
+    "extends": "neutral",
+    "description": "Preview theme for the dashboard and documentation: fills in the brand assets a real application would supply — a logo, social accounts and a footer — so the catalog can be judged as it will actually look. Not intended for sending; point `logo.url` and `footer.social_icon_base` at your own public URLs instead.",
+    "tokens": {
+        "logo": {
+            "url": "/mailyte/assets/brand/logo-dark.png",
+            "alt": "Acme",
+            "width": "190",
+            "align": "center",
+            "dark_url": "/mailyte/assets/brand/logo-light.png"
+        },
+        "footer": {
+            "social_style": "round",
+            "social_icon_size": "22",
+            "reason": "You are receiving this because you have an Acme account.",
+            "show_social": true,
+            "show_address": true,
+            "show_copyright": true,
+            "social_icon_base": "/mailyte/assets/social"
+        },
+        "social": [
+            {
+                "name": "X",
+                "url": "https://x.com/example",
+                "label": "X"
+            },
+            {
+                "name": "Instagram",
+                "url": "https://instagram.com/example",
+                "label": "Instagram"
+            },
+            {
+                "name": "LinkedIn",
+                "url": "https://linkedin.com/company/example",
+                "label": "LinkedIn"
+            },
+            {
+                "name": "GitHub",
+                "url": "https://github.com/example",
+                "label": "GitHub"
+            },
+            {
+                "name": "YouTube",
+                "url": "https://youtube.com/@example",
+                "label": "YouTube"
+            }
+        ]
+    }
+}

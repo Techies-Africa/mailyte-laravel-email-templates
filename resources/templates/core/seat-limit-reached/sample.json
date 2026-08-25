@@ -1,0 +1,23 @@
+{
+    "default": {
+        "seats_used": "9",
+        "seat_total": "9",
+        "plan_name": "Team",
+        "invited_email": "rosa@example.com",
+        "add_note": "A tenth seat is $12.00 a month, prorated to 11 September — about $4.40 for what is left of this period.",
+        "add_url": "https://example.com/billing/seats",
+        "manage_url": "https://example.com/team/members",
+        "pending_note": "The invitation to rosa@example.com is held for 14 days and sends itself the moment a seat is free. You do not need to invite her again."
+    },
+    "annual-term-no-self-serve": {
+        "seats_used": "40",
+        "seat_total": "40",
+        "plan_name": "Enterprise",
+        "invited_email": "",
+        "options_intro": "Seats are fixed for the length of an annual term, so there is one self-serve answer and one that needs a conversation.",
+        "add_note": "Extra seats on an annual term are added to your contract rather than bought in the app. Reply to this email and we will send an amended order form the same day, billed pro rata to the end of the term.",
+        "add_url": "",
+        "manage_url": "https://example.com/team/members",
+        "pending_note": ""
+    }
+}

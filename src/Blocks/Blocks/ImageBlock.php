@@ -19,6 +19,11 @@ final class ImageBlock extends Block
         return 'image';
     }
 
+    public function fullBleed(array $props = []): bool
+    {
+        return (bool) ($props['bleed'] ?? false);
+    }
+
     public function normalize(array $props, Theme $theme): array
     {
         return [

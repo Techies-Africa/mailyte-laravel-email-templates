@@ -1,0 +1,80 @@
+{
+    "default": {
+        "issue_number": "Issue 24",
+        "issue_date": "August 2026",
+        "issue_title": "What we learned shipping to 10,000 inboxes",
+        "issue_standfirst": "Three months, two rewrites and one very avoidable outage.",
+        "cover_image": "https://images.pexels.com/photos/7495287/pexels-photo-7495287.jpeg?auto=compress&cs=tinysrgb&w=1240&h=600&fit=crop",
+        "cover_url": "https://example.com/blog/10000-inboxes",
+        "stat_items": [
+            {
+                "value": "10,412",
+                "label": "Messages delivered",
+                "caption": "Up from 6,800 in July"
+            },
+            {
+                "value": "99.1%",
+                "label": "Delivery rate",
+                "caption": "Across 14 providers"
+            },
+            {
+                "value": "2",
+                "label": "Incidents",
+                "caption": "Both under nine minutes"
+            }
+        ],
+        "items": [
+            {
+                "eyebrow": "Engineering",
+                "title": "The retry that made things worse",
+                "text": "Our backoff was exponential in name only. Here is the graph that finally explained the Tuesday spike.",
+                "image": "https://images.pexels.com/photos/6804068/pexels-photo-6804068.jpeg?auto=compress&cs=tinysrgb&w=560&h=420&fit=crop",
+                "url": "https://example.com/blog/retry"
+            },
+            {
+                "eyebrow": "Community",
+                "title": "Notes from the Lagos meetup",
+                "text": "Forty people, six talks and a surprisingly heated argument about plain-text email. We took notes.",
+                "image": "https://images.pexels.com/photos/30688593/pexels-photo-30688593.jpeg?auto=compress&cs=tinysrgb&w=560&h=420&fit=crop",
+                "url": "https://example.com/blog/meetup"
+            },
+            {
+                "eyebrow": "Product",
+                "title": "Templates are now reviewable",
+                "text": "Wording changes go through the same review as code, which turns out to be the feature people actually wanted.",
+                "image": "https://images.pexels.com/photos/5256819/pexels-photo-5256819.jpeg?auto=compress&cs=tinysrgb&w=560&h=420&fit=crop",
+                "url": "https://example.com/blog/review"
+            }
+        ],
+        "quote_text": "We stopped writing transactional emails by hand in March and have not gone back. The review step alone paid for it.",
+        "quote_author": "Priya Raman",
+        "quote_role": "Engineering lead, Northwind",
+        "closing_text": "We're hiring one more person on the delivery team. If you have opinions about SMTP, we would like to hear them.",
+        "closing_url": "https://example.com/jobs",
+        "closing_cta": "See the role"
+    },
+    "text-first": {
+        "issue_number": "Issue 25",
+        "issue_date": "September 2026",
+        "issue_title": "A quieter month, on purpose",
+        "issue_standfirst": "No new features. A lot of removed ones.",
+        "cover_image": "",
+        "cover_url": "https://example.com/blog/quieter-month",
+        "stat_items": [
+            {
+                "value": "18",
+                "label": "Things removed"
+            },
+            {
+                "value": "0",
+                "label": "Things added"
+            }
+        ],
+        "items": [],
+        "quote_text": "",
+        "quote_author": "",
+        "quote_role": "",
+        "closing_text": "",
+        "closing_url": ""
+    }
+}

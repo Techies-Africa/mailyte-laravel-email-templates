@@ -1,0 +1,44 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "plan_name": "Pro",
+        "trial_days": 14,
+        "trial_ends_at": "8 September 2026",
+        "card_required": false,
+        "hero_image": "https://images.pexels.com/photos/8204363/pexels-photo-8204363.jpeg?auto=compress&cs=tinysrgb&w=520&h=600&fit=crop",
+        "action_url": "https://example.com/app",
+        "plans_url": "https://example.com/pricing",
+        "included": [
+            {
+                "text": "Unlimited projects and environments",
+                "detail": "No seat maths while you evaluate"
+            },
+            {
+                "text": "Every integration, including paid-tier ones"
+            },
+            {
+                "text": "Priority support while the trial runs",
+                "detail": "Replies inside four working hours"
+            }
+        ]
+    },
+    "card-on-file": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "plan_name": "Scale",
+        "trial_days": 30,
+        "trial_ends_at": "24 September 2026",
+        "card_required": true,
+        "hero_image": "",
+        "action_url": "https://example.com/app",
+        "plans_url": "",
+        "included": [
+            {
+                "text": "Everything in Pro, plus SSO and audit logs"
+            }
+        ]
+    }
+}

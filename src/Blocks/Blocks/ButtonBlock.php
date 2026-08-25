@@ -27,16 +27,19 @@ final class ButtonBlock extends Block
 
     public function normalize(array $props, Theme $theme): array
     {
-        $variant = $this->enum($props, 'variant', ['primary', 'secondary', 'danger'], 'primary');
+        $variant = $this->enum($props, 'variant', ['primary', 'secondary', 'danger', 'outline', 'link'], 'primary');
+        $shape = $this->enum($props, 'shape', ['default', 'square', 'pill'], 'default');
 
         $background = match ($variant) {
             'secondary' => (string) $theme->get('color.surface_alt'),
             'danger' => (string) $theme->get('color.danger'),
+            'outline', 'link' => 'transparent',
             default => (string) $theme->get('color.primary'),
         };
 
-        $color = match ($variant) {
+        $color = $this->string($props, 'color') ?: match ($variant) {
             'secondary' => (string) $theme->get('color.text'),
+            'outline', 'link' => (string) $theme->get('color.primary'),
             default => (string) $theme->get('color.primary_text'),
         };
 
@@ -48,12 +51,23 @@ final class ButtonBlock extends Block
             'color' => $color,
             'align' => $this->enum($props, 'align', ['left', 'center', 'right'], 'center'),
             'full_width' => $this->bool($props, 'full_width'),
-            'radius' => (string) $theme->get('radius.md'),
+            'shape' => $shape,
+            'border' => $variant === 'outline'
+                ? ($this->string($props, 'border_color') ?: ($this->string($props, 'color') ?: (string) $theme->get('color.primary')))
+                : '',
+            'underline' => $variant === 'link',
+            'radius' => match ($shape) {
+                'square' => '0',
+                'pill' => (string) $theme->get('radius.pill', '999px'),
+                default => (string) $theme->get('radius.md'),
+            },
             'type' => $theme->get('type.button', []),
             'padding_y' => (string) $theme->get('button.padding_y', '14px'),
             'padding_x' => (string) $theme->get('button.padding_x', '28px'),
+            'shadow' => $variant === 'primary' ? (string) $theme->get('shadow.button', '') : '',
+            'bare' => in_array($variant, ['outline', 'link'], true),
             'fallback_text' => $this->string($props, 'fallback_text'),
-            'space_above' => $this->string($props, 'space_above', (string) $theme->get('spacing.md')),
+            'space_above' => $this->string($props, 'space_above', '0'),
             'space_below' => $this->string($props, 'space_below', (string) $theme->get('spacing.md')),
         ];
     }

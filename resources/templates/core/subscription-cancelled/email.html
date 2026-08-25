@@ -1,0 +1,43 @@
+{# Wind-down ledger. Two facing columns of consequence, kept above ending,
+   each line carrying its own date. No persuasion and no "sorry to see you go":
+   the customer has decided, and the only useful thing left for an email to do
+   is say exactly what they keep and exactly what stops. #}
+
+{{ heading({ text: 'Cancelled', level: '3', space_above: '0', space_below: '12px' }) }}
+
+{{ heading({ text: 'Your ' ~ plan_name ~ ' plan is cancelled', level: '1', space_above: '0', space_below: '12px' }) }}
+
+{{ text({ text: 'Access ends ' ~ ends_on ~ '. ' ~ access_note, space_below: '26px' }) }}
+
+{% set winddown %}
+    {% if kept_items %}
+        {{ heading({ text: 'What you keep', level: '3', space_above: '0', space_below: '12px' }) }}
+        {{ list({ items: kept_items, style: 'check', space_below: (ending_items ? '18px' : '0') }) }}
+    {% endif %}
+
+    {% if kept_items and ending_items %}
+        {{ divider({ style: 'dashed', space_above: '0', space_below: '18px' }) }}
+    {% endif %}
+
+    {% if ending_items %}
+        {{ heading({ text: 'What ends on ' ~ ends_on, level: '3', space_above: '0', space_below: '12px' }) }}
+        {{ list({ items: ending_items, style: 'plain', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '28px', space_below: '28px', slot: winddown }) }}
+
+{% if export_url %}
+    {{ note({ tone: 'outline', strong_text: 'Your data is yours.', text: 'The export stays available until ' ~ export_until ~ '.', space_below: '18px' }) }}
+    {{ button({ label: 'Download an export', url: export_url, variant: 'outline', align: 'left', space_below: '28px' }) }}
+{% endif %}
+
+{{ divider({ style: 'solid', space_above: '0', space_below: '20px' }) }}
+
+{{ heading({ text: 'Coming back', level: '2', space_above: '0', space_below: '8px' }) }}
+
+{{ text({ text: return_note, size: 'small', space_below: (reactivate_url ? '14px' : '0') }) }}
+
+{% if reactivate_url %}
+    {{ button({ label: 'Restart the plan', url: reactivate_url, variant: 'link', align: 'left', space_below: '0' }) }}
+{% endif %}

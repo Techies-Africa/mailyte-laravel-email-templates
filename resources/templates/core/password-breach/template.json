@@ -1,0 +1,141 @@
+{
+    "slug": "password-breach",
+    "name": "Password found in a breach",
+    "description": "Sent when a password protecting this account is found in a published third-party breach list, so it can be changed before anyone tries it here.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "security",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "ecommerce",
+        "developer-tools"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "security",
+        "password",
+        "breach",
+        "credentials",
+        "advisory"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: advisory — a light-weight serif headline that declines to shout, the exposure and the non-exposure set as a matched pair in a quiet tinted band, numbered remediation, and severity held back until the bar directly above one calm blue action."
+    },
+    "subject": "Your {{ product.name }} password appeared in a breach elsewhere",
+    "preheader": "It came from another company's breach, not from us — but the password still has to change.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "list",
+        "section",
+        "status_banner",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Names the person on their own line. Never glued to the opening sentence — a breach notice that reads \"Hi Ada, Your password\" looks generated, and a generated breach notice looks like phishing.",
+            "default": "",
+            "example": "Ada"
+        },
+        "heading_text": {
+            "type": "string",
+            "description": "The headline. Put the breach somewhere else in the sentence — the reader has to understand within one line that this happened to another company, not to you and not to them.",
+            "default": "A password you use here appeared in a breach elsewhere"
+        },
+        "body": {
+            "type": "text",
+            "description": "The explanation, and the place the email earns its trust. State plainly that they are not at fault and that nothing has happened on this account, because the reader's first assumption will be the opposite of both.",
+            "default": "You have not done anything wrong, and nothing has happened to your account here. Another company was breached, the stolen credentials were published, and one of the passwords on that list matches the one protecting this account."
+        },
+        "exposed_title": {
+            "type": "string",
+            "description": "Label for the first half of the panel: what the breach actually contained.",
+            "default": "What was exposed"
+        },
+        "exposed_text": {
+            "type": "text",
+            "description": "What was in the published data. Be specific and be narrow — vagueness here is what makes people assume the worst and start closing accounts.",
+            "default": "An email address and a password, taken from another company's systems and published in a public list of stolen credentials."
+        },
+        "safe_title": {
+            "type": "string",
+            "description": "Label for the second half: what was not touched. Half a breach notice should be about the things that are still fine.",
+            "default": "What was not"
+        },
+        "safe_text": {
+            "type": "text",
+            "description": "The reassurance, stated only as far as it is true. If you have not checked for unfamiliar sign-ins, do not claim there were none.",
+            "default": "Anything held here. This account has not been signed in to from anywhere unexpected, nothing has been read, and no payment details were involved."
+        },
+        "source_line": {
+            "type": "string",
+            "description": "Where the list came from and when, if you can say. Naming the source is what separates a real advisory from the phishing mail that imitates one. Leave it empty rather than describe a breach you cannot attribute.",
+            "default": "",
+            "example": "The list was published on 19 August 2026 and is attributed to a 2024 breach at an unrelated retailer."
+        },
+        "action_label": {
+            "type": "string",
+            "description": "The instruction in two or three words, set beside a triangle mark and a border weight so it reads as an instruction on a greyscale screen too.",
+            "default": "Change it now"
+        },
+        "action_text": {
+            "type": "text",
+            "description": "The one sentence that does the most good. Reuse elsewhere is where the actual danger lives, and this is the line that says so.",
+            "default": "The same password on any other site matters more than this one — attackers try a leaked pair everywhere before they try it here."
+        },
+        "steps_title": {
+            "type": "string",
+            "description": "Heading above the numbered steps.",
+            "default": "What to do"
+        },
+        "steps": {
+            "type": "array",
+            "description": "Remediation as ordered steps, each `text` with an optional `detail`. Numbered rather than bulleted because the order matters: changing the password here first, while the old one is still leaked elsewhere, achieves the least.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Change the password here",
+                    "detail": "Pick something this account has never used before."
+                }
+            ]
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Label for the single action. The advisory is amber; the remedy is deliberately not, so the thing to click never looks like the thing to fear.",
+            "default": "Change my password"
+        },
+        "change_url": {
+            "type": "url",
+            "description": "Where the password is changed. Send them to a page they have to authenticate on — a breach notice that opens straight into an editable password field is the exact shape of the phishing mail this warns about.",
+            "required": true,
+            "example": "https://example.com/settings/password"
+        },
+        "privacy_note": {
+            "type": "text",
+            "description": "How you found out, in one sentence. Readers who understand that the password never left your servers stop asking whether this email is itself the attack.",
+            "default": "We compare a partial hash of stored passwords against a public index of breached credentials. The password itself never leaves our systems, and we cannot read it."
+        }
+    }
+}

@@ -1,0 +1,217 @@
+{
+    "slug": "newsletter",
+    "name": "Newsletter",
+    "description": "A multi-section issue: a cover story, a few shorter items, and one number worth remembering. Built for a regular sending rhythm.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "marketing",
+    "category": "newsletter",
+    "supported_layouts": [
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "saas",
+        "community",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "newsletter",
+        "digest",
+        "editorial",
+        "content"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: magazine — serif masthead, full-bleed cover, alternating picture rows, pull quote, dark close."
+    },
+    "subject": "{{ issue_title }}",
+    "preheader": "Plus three shorter reads and the one number we keep coming back to.",
+    "credits": [
+        {
+            "kind": "photo",
+            "author": "Moe Magners",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/office-team-having-a-meeting-in-the-room-7495287/",
+            "asset_url": "https://images.pexels.com/photos/7495287/pexels-photo-7495287.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Office team having a meeting in the room"
+        },
+        {
+            "kind": "photo",
+            "author": "Cottonbro",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/men-sitting-at-the-desks-in-an-office-and-using-computers-6804068/",
+            "asset_url": "https://images.pexels.com/photos/6804068/pexels-photo-6804068.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Men sitting at the desks in an office and using computers"
+        },
+        {
+            "kind": "photo",
+            "author": "Ninthgrid",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/casual-office-meeting-in-lagos-nigeria-30688593/",
+            "asset_url": "https://images.pexels.com/photos/30688593/pexels-photo-30688593.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Casual office meeting in Lagos, Nigeria"
+        },
+        {
+            "kind": "photo",
+            "author": "Thirdman",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/coworkers-with-their-hands-together-5256819/",
+            "asset_url": "https://images.pexels.com/photos/5256819/pexels-photo-5256819.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Coworkers with their hands together"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "image",
+        "media",
+        "quote",
+        "section",
+        "stat_row",
+        "text"
+    ],
+    "headers": {
+        "suggested": {
+            "List-Unsubscribe": "<{{ unsubscribe_url }}>",
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+        }
+    },
+    "variables": {
+        "issue_number": {
+            "type": "string",
+            "description": "Issue label, e.g. \"Issue 24\". Set in caps above the masthead rule.",
+            "default": "",
+            "example": "Issue 24"
+        },
+        "issue_date": {
+            "type": "string",
+            "description": "Date line beside the issue number.",
+            "default": "",
+            "example": "August 2026"
+        },
+        "issue_title": {
+            "type": "string",
+            "description": "Cover headline, set at 40px serif. This is the subject line by default, so write it once and well.",
+            "required": true,
+            "example": "What we learned shipping to 10,000 inboxes"
+        },
+        "issue_standfirst": {
+            "type": "text",
+            "description": "The sentence under the cover headline that earns the click.",
+            "default": "",
+            "example": "Three months, two rewrites and one very avoidable outage."
+        },
+        "cover_image": {
+            "type": "url",
+            "description": "Cover photograph, run full width. Wide crops read better than tall ones at 620px.",
+            "default": "",
+            "example": "https://example.com/cover.jpg"
+        },
+        "cover_url": {
+            "type": "url",
+            "description": "Where the cover story lives.",
+            "required": true,
+            "example": "https://example.com/blog/10000-inboxes"
+        },
+        "cover_cta": {
+            "type": "string",
+            "description": "Cover call to action.",
+            "default": "Read the story"
+        },
+        "stat_items": {
+            "type": "array",
+            "description": "Two or three figures from the period, each with `value`, `label` and an optional `caption` giving the comparison that makes the number mean something.",
+            "default": [],
+            "example": [
+                {
+                    "value": "1,204",
+                    "label": "Messages sent"
+                }
+            ]
+        },
+        "items": {
+            "type": "array",
+            "description": "Shorter items, each with `image`, `eyebrow`, `title`, `text` and `url`. Rows alternate sides automatically. Three is a comfortable issue; five is a chore.",
+            "default": [],
+            "example": [
+                {
+                    "title": "A shorter piece",
+                    "text": "One paragraph.",
+                    "url": "https://example.com/a"
+                }
+            ]
+        },
+        "quote_text": {
+            "type": "text",
+            "description": "A pull quote from the issue, or from a reader. Optional, and the design is fine without it.",
+            "default": "",
+            "example": "We stopped writing emails by hand in March and have not gone back."
+        },
+        "quote_author": {
+            "type": "string",
+            "description": "Who said it.",
+            "default": "",
+            "example": "Priya Raman"
+        },
+        "quote_role": {
+            "type": "string",
+            "description": "Their role and company.",
+            "default": "",
+            "example": "Engineering lead, Northwind"
+        },
+        "closing_title": {
+            "type": "string",
+            "description": "Heading for the closing band.",
+            "default": "One more thing"
+        },
+        "closing_text": {
+            "type": "text",
+            "description": "The sign-off. A newsletter that ends mid-list feels unfinished.",
+            "default": ""
+        },
+        "closing_url": {
+            "type": "url",
+            "description": "Optional link in the closing band.",
+            "default": "",
+            "example": "https://example.com/jobs"
+        },
+        "closing_cta": {
+            "type": "string",
+            "description": "Label for the closing link.",
+            "default": "Read more"
+        },
+        "footer_note": {
+            "type": "text",
+            "description": "Why they are receiving this. Reduces spam reports more reliably than any subject-line trick.",
+            "default": "You're getting this because you subscribed. One click below stops it for good."
+        }
+    }
+}

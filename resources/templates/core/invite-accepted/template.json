@@ -1,0 +1,202 @@
+{
+    "slug": "invite-accepted",
+    "name": "Invitation accepted",
+    "description": "Tells the person who sent an invitation that it worked: who joined, what they can reach, what to do with them, and which invitations are still outstanding.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "collaboration",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "professional-services",
+        "community"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "invitation",
+        "team",
+        "workspace",
+        "seats"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: roster — a narrow measure, the new member as three ruled facts, boxed counts, and the invitations still outstanding kept as a closing ledger."
+    },
+    "subject": "{{ member_name }} joined {{ workspace_name }}",
+    "preheader": "What they can already reach, and which invitations are still outstanding.",
+    "blocks_used": [
+        "button",
+        "button_group",
+        "divider",
+        "heading",
+        "key_value",
+        "list",
+        "section",
+        "stat_row",
+        "text"
+    ],
+    "variables": {
+        "eyebrow": {
+            "type": "string",
+            "description": "Small label above the headline, so a workspace owner who gets several of these a week can classify them at a glance.",
+            "default": "Team update"
+        },
+        "member_name": {
+            "type": "string",
+            "description": "Who accepted, by name. It leads the subject line because that is the only fact the recipient needs from the inbox list.",
+            "required": true,
+            "example": "Kwame Mensah"
+        },
+        "workspace_name": {
+            "type": "string",
+            "description": "Which workspace they joined. Anyone who administers more than one needs this in the subject line to know which inbox rule applies.",
+            "required": true,
+            "example": "Northwind Studio"
+        },
+        "intro": {
+            "type": "text",
+            "description": "One sentence saying that access is already live, so the reader does not go looking for an approval step that does not exist.",
+            "required": true,
+            "example": "They accepted the invitation you sent on 14 September, and their access is already active."
+        },
+        "joined_label": {
+            "type": "string",
+            "description": "Label for the acceptance row.",
+            "default": "Accepted"
+        },
+        "joined_at": {
+            "type": "string",
+            "description": "When they accepted. Useful mostly when it is much later than the invitation, which is the case worth noticing.",
+            "required": true,
+            "example": "17 September, 08:24"
+        },
+        "role_label": {
+            "type": "string",
+            "description": "Label for the role row.",
+            "default": "Role"
+        },
+        "role_name": {
+            "type": "string",
+            "description": "The role they came in on. Shown so the sender can catch a wrong role on the day it is granted rather than at the next access review.",
+            "required": true,
+            "example": "Editor"
+        },
+        "email_label": {
+            "type": "string",
+            "description": "Label for the address row.",
+            "default": "Signs in as"
+        },
+        "member_email": {
+            "type": "email",
+            "description": "The address they accepted with, set in the mono face. It is often not the address the invitation was sent to, and that difference is worth seeing.",
+            "required": true,
+            "example": "kwame@northwind.example.com"
+        },
+        "member_count": {
+            "type": "string",
+            "description": "How many people are now in the workspace, counting the new arrival.",
+            "required": true,
+            "example": "9"
+        },
+        "members_label": {
+            "type": "string",
+            "description": "What the member count counts.",
+            "default": "people in the workspace"
+        },
+        "members_caption": {
+            "type": "string",
+            "description": "A short line under the member count — who is included in it, or what changed. It also keeps the two boxed figures the same height, which an unbalanced pair does not.",
+            "default": "",
+            "example": "Two owners, seven editors"
+        },
+        "seats_value": {
+            "type": "string",
+            "description": "Seats still available on the plan. Leave empty on plans that do not meter seats rather than showing an unbounded figure.",
+            "default": "",
+            "example": "1"
+        },
+        "seats_label": {
+            "type": "string",
+            "description": "What the seat figure counts.",
+            "default": "seats left on your plan"
+        },
+        "seats_caption": {
+            "type": "string",
+            "description": "The consequence of running out, stated once and quietly. This is the only commercial line in the email and it should stay that way.",
+            "default": "",
+            "example": "The next person added moves the plan to the next tier"
+        },
+        "next_heading": {
+            "type": "string",
+            "description": "Heading over the follow-on actions.",
+            "default": "Worth doing while they are new"
+        },
+        "next_text": {
+            "type": "text",
+            "description": "What the sender should actually do now. Without this the email is an announcement nobody acts on — a new member with nothing assigned is the most common way an invitation still fails.",
+            "required": true,
+            "example": "New members are most likely to stay active if they have something of their own in the first week. Assign them a campaign, or point them at the one you invited them for."
+        },
+        "primary_label": {
+            "type": "string",
+            "description": "Label for the main action.",
+            "default": "Assign them something"
+        },
+        "primary_url": {
+            "type": "url",
+            "description": "Where the sender goes to give the new member work, rather than a generic dashboard link.",
+            "required": true,
+            "example": "https://example.com/app/team/kwame"
+        },
+        "secondary_label": {
+            "type": "string",
+            "description": "Label for the lighter second action.",
+            "default": "Review their access"
+        },
+        "secondary_url": {
+            "type": "url",
+            "description": "A second, lighter action — usually the permissions screen. Leave empty and the email carries one action instead of two.",
+            "default": "",
+            "example": "https://example.com/app/team/kwame/permissions"
+        },
+        "pending_heading": {
+            "type": "string",
+            "description": "Heading over the closing ledger of unaccepted invitations.",
+            "default": "Still outstanding"
+        },
+        "pending": {
+            "type": "array",
+            "description": "Invitations sent and not yet accepted, as `text` (the address) and `detail` (how long it has been waiting, and when it expires). This is the part that gets a stalled rollout finished.",
+            "default": [],
+            "example": [
+                {
+                    "text": "dayo@northwind.example.com",
+                    "detail": "Invited 4 days ago, expires on 21 September"
+                }
+            ]
+        },
+        "closing": {
+            "type": "text",
+            "description": "The closing line. Say who gets these emails, because the answer is usually 'every owner' and that is worth knowing before someone replies to all of them.",
+            "default": "Every workspace owner gets this email. Only owners can see the addresses listed above."
+        }
+    }
+}

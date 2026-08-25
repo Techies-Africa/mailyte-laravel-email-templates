@@ -1,0 +1,31 @@
+{{ heading({ text: (user.first_name ? 'Hello, ' ~ user.first_name ~ '!' : 'Hello!'), level: '1', space_above: '0' }) }}
+
+{{ text({ text: intro }) }}
+
+{% if steps %}
+    {% set checklist %}
+        {{ heading({ text: steps_heading, level: '3', space_above: '0', space_below: '4px' }) }}
+        {{ text({
+            text: completed_count ~ ' of ' ~ total_count ~ ' done',
+            size: 'small', muted: true, space_below: '14px'
+        }) }}
+        {{ list({ items: steps, style: 'number', space_below: '0' }) }}
+    {% endset %}
+
+    {{ section({ tone: 'alt', padding_y: '22px', space_below: '4px', slot: checklist }) }}
+{% endif %}
+
+{{ button({ label: button_label, url: action_url, align: 'center', fallback_text: fallback_note }) }}
+
+{% if help_text %}
+    {{ text({ text: help_text }) }}
+{% endif %}
+
+{% if docs_url %}
+    {{ button({ label: 'Read the setup guide', url: docs_url, variant: 'link', align: 'left', space_above: '0', space_below: '0' }) }}
+{% endif %}
+
+{{ divider({ space_above: '18px', space_below: '18px' }) }}
+
+{{ text({ text: signoff ~ ',', space_below: '2px' }) }}
+{{ text({ text: product.name, space_below: '0' }) }}

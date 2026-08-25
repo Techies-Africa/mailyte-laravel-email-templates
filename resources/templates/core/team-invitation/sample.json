@@ -1,0 +1,53 @@
+{
+    "default": {
+        "workspace_name": "Northwind Studio",
+        "inviter_name": "Priya Raman",
+        "role_name": "Editor",
+        "message": "We are moving the September campaign in here this week, so it is worth being in before Thursday. Everything from the shared drive is already there.",
+        "inviter_role": "Head of Marketing, Northwind Studio",
+        "inviter_avatar": "https://images.pexels.com/photos/5918384/pexels-photo-5918384.jpeg?auto=compress&cs=tinysrgb&w=144&h=144&fit=crop",
+        "capabilities": [
+            {
+                "text": "Write and edit campaigns",
+                "detail": "Including the fourteen already drafted"
+            },
+            {
+                "text": "Send to any audience the team has built",
+                "detail": "Sends over 10,000 recipients need a second approver"
+            },
+            {
+                "text": "See delivery and engagement for everything the team sends"
+            },
+            {
+                "text": "You will not be able to change billing or invite others",
+                "detail": "Those stay with the two owners"
+            }
+        ],
+        "accept_label": "Accept and join Northwind",
+        "accept_url": "https://example.com/invitations/8f21c4a9",
+        "expires_at": "on 21 September",
+        "inviter_email": "priya@northwind.example.com"
+    },
+    "no-avatar-no-message": {
+        "workspace_name": "Ledger Ops",
+        "inviter_name": "Tomas Berg",
+        "role_name": "Viewer",
+        "message": "",
+        "inviter_role": "",
+        "inviter_avatar": "",
+        "capabilities": [
+            {
+                "text": "Read every report and export",
+                "detail": "Read-only, across all three accounts"
+            },
+            {
+                "text": "Comment on anything you can see"
+            }
+        ],
+        "accept_label": "Accept the invitation",
+        "accept_url": "https://example.com/invitations/2b7d0e51",
+        "expiry_label": "The link stops working",
+        "expires_at": "after 48 hours",
+        "inviter_email": "t.berg@ledgerops.example.com"
+    }
+}

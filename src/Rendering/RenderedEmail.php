@@ -23,6 +23,8 @@ final class RenderedEmail
         public readonly string $preheader,
         public readonly array $suggestedHeaders = [],
         public readonly array $warnings = [],
+        public readonly string $slug = '',
+        public readonly string $templateVersion = '',
     ) {}
 
     /**

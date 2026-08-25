@@ -27,14 +27,27 @@ final class BlockRegistry
     {
         return [
             new Blocks\PreheaderBlock,
+            new Blocks\SectionBlock,
+            new Blocks\SplitBlock,
+            new Blocks\LineItemsBlock,
+            new Blocks\HeroBlock,
             new Blocks\HeadingBlock,
             new Blocks\TextBlock,
             new Blocks\ButtonBlock,
+            new Blocks\ButtonGroupBlock,
+            new Blocks\NoteBlock,
             new Blocks\DividerBlock,
             new Blocks\SpacerBlock,
             new Blocks\CodeBlock,
             new Blocks\ListBlock,
+            new Blocks\ColumnsBlock,
             new Blocks\ImageBlock,
+            new Blocks\BannerBlock,
+            new Blocks\MediaBlock,
+            new Blocks\ProductGridBlock,
+            new Blocks\StatRowBlock,
+            new Blocks\QuoteBlock,
+            new Blocks\OfferBlock,
             new Blocks\CardBlock,
             new Blocks\StatusBannerBlock,
             new Blocks\KeyValueBlock,
@@ -77,12 +90,35 @@ final class BlockRegistry
 
         $data = $block->normalize($props, $theme);
 
-        return trim($this->views->make($block->view(), [
+        $html = trim($this->views->make($block->view(), [
             'props' => $data,
             'theme' => $theme,
             't' => $theme->flat(),
             'layout' => $layout,
         ])->render());
+
+        return $block->fullBleed($props) ? $html : $this->gutter($html, $theme);
+    }
+
+    /**
+     * Wrap a block in the layout's horizontal gutter.
+     *
+     * A table rather than a padded div: Outlook ignores padding on block-level
+     * elements often enough that the table is the only construction that holds
+     * the measure everywhere.
+     */
+    private function gutter(string $html, Theme $theme): string
+    {
+        $gutter = (string) $theme->get('layout.gutter', '24px');
+
+        if ($gutter === '0' || $gutter === '0px') {
+            return $html;
+        }
+
+        return '<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" '
+            .'style="border-collapse:collapse;"><tr><td class="m-gutter" style="padding:0 '.$gutter.';">'
+            .$html
+            .'</td></tr></table>';
     }
 
     /**

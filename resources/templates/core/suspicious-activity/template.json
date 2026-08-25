@@ -1,0 +1,136 @@
+{
+    "slug": "suspicious-activity",
+    "name": "Sign-in attempt blocked",
+    "description": "Sent when a sign-in to the account was refused — repeated wrong passwords, a failed second factor, or a network we do not trust — and the account holder has to say whether it was them.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "security",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools"
+    ],
+    "tone": "urgent",
+    "tags": [
+        "security",
+        "login",
+        "blocked",
+        "account",
+        "alert"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: siren — bookended bands. A reversed oxblood alarm band carries the headline, a thick rule cuts it off, the attempt is tabled on white, and a sober charcoal band closes on the record."
+    },
+    "subject": "We blocked a sign-in to your {{ product.name }} account",
+    "preheader": "The attempt did not succeed. We need to know whether it was yours.",
+    "blocks_used": [
+        "button",
+        "button_group",
+        "divider",
+        "heading",
+        "key_value",
+        "note",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Names the person so the alert reads as being about their account and not a broadcast. Omitted cleanly when unknown.",
+            "default": "",
+            "example": "Ada"
+        },
+        "status_label": {
+            "type": "string",
+            "description": "The severity word inside the alarm band. It is set beside a square mark so the state survives colour blindness, greyscale and forced inversion.",
+            "default": "Attempt blocked"
+        },
+        "heading_text": {
+            "type": "string",
+            "description": "The headline, reversed out of the alarm band. Keep it short — it is the only line most people read on a lock screen.",
+            "default": "We blocked a sign-in to your account"
+        },
+        "band_line": {
+            "type": "text",
+            "description": "The one reassurance that has to arrive before anything else: this was an attempt, not a breach.",
+            "default": "Nothing was accessed. The attempt was stopped before it reached your account."
+        },
+        "body": {
+            "type": "text",
+            "description": "Why the block happened, in the plainest terms available. Guessing is worse than admitting the trigger is mundane.",
+            "default": "A sign-in was refused after several wrong passwords in a row. That usually means someone was guessing, and occasionally it means a saved password somewhere has gone stale."
+        },
+        "attempt_label": {
+            "type": "string",
+            "description": "Heading above the metadata table. A separate field because teams word this differently — \"The attempt\", \"Request detail\", \"What we saw\".",
+            "default": "The attempt"
+        },
+        "attempt": {
+            "type": "array",
+            "description": "What was observed, as `label` / `value` pairs. Set `mono` on anything a person may have to read character by character, such as an IP address. Send only what you actually recorded; a row reading \"Unknown\" invites a support ticket.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Method",
+                    "value": "Password, refused 6 times"
+                }
+            ]
+        },
+        "location_caveat": {
+            "type": "text",
+            "description": "Pre-empts the commonest reply to this email, which is \"that isn't my city\". IP geolocation is routinely wrong by a region.",
+            "default": "Location is estimated from the network address and is often wrong by a city or more, particularly on mobile data or a VPN."
+        },
+        "secure_url": {
+            "type": "url",
+            "description": "The lock-down path: sign out every session and force a password change. This is the heavy action and carries the filled button.",
+            "required": true,
+            "example": "https://example.com/security/lock"
+        },
+        "secure_label": {
+            "type": "string",
+            "description": "Label for the lock-down action. Write it in the first person so it reads as the reader's decision, not an instruction.",
+            "default": "Secure my account"
+        },
+        "confirm_url": {
+            "type": "url",
+            "description": "Optional acknowledgement that clears the block for that device. Offering it stops people locking themselves out over their own forgotten password.",
+            "default": "",
+            "example": "https://example.com/security/confirm/4b19ac"
+        },
+        "confirm_label": {
+            "type": "string",
+            "description": "Label for the light action. Deliberately outlined, never filled — it must not compete with locking down.",
+            "default": "This was me"
+        },
+        "choice_note": {
+            "type": "text",
+            "description": "What each button actually does. People hesitate over security buttons precisely because nobody tells them the consequence.",
+            "default": "Confirming clears the block for that device. Securing the account signs out every session everywhere and starts a password change."
+        },
+        "record_note": {
+            "type": "text",
+            "description": "The closing band. States that the message is a record rather than a demand, so ignoring it is a legitimate choice.",
+            "default": "An automated security record. We send one for every blocked attempt, whether or not you act on it, so that a silent lockout can never happen."
+        }
+    }
+}

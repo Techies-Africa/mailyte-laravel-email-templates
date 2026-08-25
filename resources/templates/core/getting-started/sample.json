@@ -1,0 +1,41 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "action_url": "https://example.com/setup/domain",
+        "docs_url": "https://example.com/docs/setup",
+        "completed_count": 0,
+        "total_count": 3,
+        "steps": [
+            {
+                "text": "Connect your domain",
+                "detail": "So messages come from you, not from us"
+            },
+            {
+                "text": "Invite one teammate",
+                "detail": "Everything here works better with a second pair of eyes"
+            },
+            {
+                "text": "Send a test message",
+                "detail": "Confirms the whole path end to end"
+            }
+        ]
+    },
+    "part-done": {
+        "user": {
+            "first_name": ""
+        },
+        "action_url": "https://example.com/setup/team",
+        "docs_url": "",
+        "help_text": "",
+        "completed_count": 2,
+        "total_count": 3,
+        "steps": [
+            {
+                "text": "Send a test message",
+                "detail": "The last one, and the quickest"
+            }
+        ]
+    }
+}

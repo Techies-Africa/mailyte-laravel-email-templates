@@ -1,0 +1,164 @@
+{
+    "slug": "role-changed",
+    "name": "Role changed in a workspace",
+    "description": "Sent when someone's permissions in a shared workspace are changed, showing the old and new role side by side and spelling out what the person can and can no longer do.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "collaboration",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "professional-services",
+        "community"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "permissions",
+        "role",
+        "workspace",
+        "collaboration",
+        "access"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: permissions diff — the workspace as eyebrow, the old and new role as a two-up comparison, and the consequences as paired inventories of what is now allowed and what is not."
+    },
+    "subject": "You're now {{ new_role }} in {{ workspace_name }}",
+    "preheader": "What the new role lets you do, and what it no longer does.",
+    "blocks_used": [
+        "button",
+        "columns",
+        "heading",
+        "list",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "workspace_name": {
+            "type": "string",
+            "description": "Which workspace this concerns, used as the eyebrow. Someone who belongs to eleven of them needs this before anything else on the page.",
+            "required": true,
+            "example": "Acme Production"
+        },
+        "heading_lead": {
+            "type": "string",
+            "description": "The words before the role in the headline. Kept separate so the role itself can be any noun without the sentence needing an article that agrees with it.",
+            "default": "Your new role is"
+        },
+        "new_role": {
+            "type": "string",
+            "description": "The role now in force, exactly as it is named in the product. Inventing a friendlier word here means the reader cannot find it in the interface.",
+            "required": true,
+            "example": "Editor"
+        },
+        "previous_role": {
+            "type": "string",
+            "description": "The role held until now. Present so the reader can tell whether this was a promotion or a restriction without having to remember what they had.",
+            "required": true,
+            "example": "Viewer"
+        },
+        "previous_label": {
+            "type": "string",
+            "description": "Caption printed under the old role. It sits a step smaller and muted beneath the role itself, so keep it to one word — the two columns stack at 320px.",
+            "default": "Previously"
+        },
+        "new_label": {
+            "type": "string",
+            "description": "Caption printed under the new role.",
+            "default": "Now"
+        },
+        "body": {
+            "type": "text",
+            "description": "One sentence on what changed and where. Do not congratulate: a role change is as often a restriction as a promotion, and the same email is sent either way.",
+            "default": "Your permissions in this workspace have been updated. Everything already shared with you is still there — only what you are allowed to do with it has changed."
+        },
+        "gained_label": {
+            "type": "string",
+            "description": "Small heading over the list of new abilities.",
+            "default": "What you can do now"
+        },
+        "gained": {
+            "type": "array",
+            "description": "Abilities the new role adds, as `text` and optional `detail` pairs. Write them as actions the person would take, not as permission constants from your authorisation layer.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Edit and publish documents",
+                    "detail": "Including ones created by other members"
+                }
+            ]
+        },
+        "lost_label": {
+            "type": "string",
+            "description": "Small heading over the list of removed abilities.",
+            "default": "What you can no longer do"
+        },
+        "lost": {
+            "type": "array",
+            "description": "Abilities the new role removes, in the same shape. This is the list people actually need and the one most products leave out — an empty array simply hides the section.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Remove members from the workspace",
+                    "detail": "Owners only"
+                }
+            ]
+        },
+        "changed_by": {
+            "type": "string",
+            "description": "Who made the change. Attribution turns an anonymous permission drop into something the reader can take up with a colleague instead of with support.",
+            "default": "",
+            "example": "Grace Hopper"
+        },
+        "changed_by_prefix": {
+            "type": "string",
+            "description": "The words before the name in the attribution bar, separated so a translation can reorder them.",
+            "default": "Changed by"
+        },
+        "changed_at": {
+            "type": "datetime",
+            "description": "When the change took effect. Optional: some directories sync roles in bulk and cannot say honestly when a given one moved.",
+            "default": "",
+            "example": "24 August 2026 at 09:15 UTC"
+        },
+        "changed_at_prefix": {
+            "type": "string",
+            "description": "The words before the timestamp in the attribution bar.",
+            "default": "Applied"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Label on the link into the workspace. Send them to the thing itself, not to a settings page about it.",
+            "default": "Open the workspace"
+        },
+        "workspace_url": {
+            "type": "url",
+            "description": "Where the workspace lives, so the reader can confirm what they see against what this email claims.",
+            "required": true,
+            "example": "https://example.com/w/acme-production"
+        },
+        "closing_note": {
+            "type": "text",
+            "description": "The route to a correction. Roles are set by people, and people make mistakes, so say who can undo this rather than making the reader guess.",
+            "default": "Roles are set by the owners of a workspace, not by us. If this does not look right, ask an owner to change it back."
+        }
+    }
+}

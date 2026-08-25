@@ -1,0 +1,57 @@
+{
+    "default": {
+        "reference": "CN-2026-0057",
+        "amount": "$192.00",
+        "issued_on": "24 August 2026",
+        "destination": "the Visa ending 4242",
+        "reason": "It covers the four seats you removed on 2 August.",
+        "reversal_rows": [
+            {
+                "label": "Original charge, INV-2026-0184",
+                "value": "$240.00",
+                "mono": true
+            },
+            {
+                "label": "Refunded 24 August",
+                "value": "−$192.00",
+                "mono": true
+            },
+            {
+                "label": "You paid for this period",
+                "value": "$48.00",
+                "mono": true
+            }
+        ],
+        "arrives_by": "8 September",
+        "receipt_url": "https://example.com/invoices/INV-2026-0184",
+        "footer_legal": "This credit note reverses the VAT charged on invoice INV-2026-0184. Acme Inc, VAT ID EX123456789."
+    },
+    "full-refund-card-gone": {
+        "reference": "",
+        "amount": "£48,00",
+        "issued_on": "24 August 2026",
+        "destination": "the account ending 0042, by bank transfer",
+        "reason": "The card it was taken from has been closed, so your bank asked us to send it as a transfer instead.",
+        "reversal_rows": [
+            {
+                "label": "Original charge",
+                "value": "£48,00",
+                "mono": true
+            },
+            {
+                "label": "Refunded in full",
+                "value": "−£48,00",
+                "mono": true
+            },
+            {
+                "label": "You paid",
+                "value": "£0,00",
+                "mono": true
+            }
+        ],
+        "arrives_by": "12 September",
+        "delay_note": "A transfer takes longer than a card refund because it is a new payment rather than a reversal, and it clears at your bank's pace. It will appear as a credit from Acme Inc rather than as the original charge disappearing.",
+        "receipt_url": "",
+        "footer_legal": ""
+    }
+}

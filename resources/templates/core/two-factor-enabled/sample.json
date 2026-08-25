@@ -1,0 +1,88 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "enabled": true,
+        "state_word": "On",
+        "change_line": "Changed 24 August 2026, 11:02 UTC from a signed-in session on macOS.",
+        "changes": [
+            {
+                "text": "Two-step verification is on",
+                "detail": "Applies to every sign-in on the web and in the mobile apps."
+            },
+            {
+                "text": "Authenticator app registered",
+                "detail": "Added from Pixel 9 on 24 August 2026."
+            },
+            {
+                "text": "Existing sessions left alone",
+                "detail": "You were not signed out anywhere. Sessions already open stay valid until they expire."
+            }
+        ],
+        "expectations": [
+            {
+                "heading": "We will ask for",
+                "text": "Your password, then the six-digit code your authenticator app is showing at that moment."
+            },
+            {
+                "heading": "We will never ask for",
+                "text": "A code over the phone, by email or in a chat window. Anyone who does is not us."
+            }
+        ],
+        "recovery_url": "https://example.com/security/recovery-codes",
+        "settings_url": "https://example.com/settings/security"
+    },
+    "turned-off": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "enabled": false,
+        "state_word": "Off",
+        "state_detail": "— a password on its own is now enough to sign in to this account.",
+        "heading_text": "Two-step verification is off",
+        "body": "The second step has been removed from this account. From your next sign-in, your password is the only thing standing between anyone and your data.",
+        "change_line": "Changed 24 August 2026, 18:40 UTC from a signed-in session on macOS.",
+        "changes": [
+            {
+                "text": "Two-step verification is off",
+                "detail": "No code will be requested at sign-in, on any device."
+            },
+            {
+                "text": "Authenticator app removed",
+                "detail": "Pixel 9 is no longer registered against this account."
+            },
+            {
+                "text": "Recovery codes voided",
+                "detail": "The ten codes issued in August will no longer work. New ones are generated if you turn the control back on."
+            }
+        ],
+        "expectations": [
+            {
+                "heading": "We will ask for",
+                "text": "Your password alone, until you turn two-step verification back on."
+            },
+            {
+                "heading": "We will never ask for",
+                "text": "Your password over the phone, by email or in a chat window. Anyone who does is not us."
+            }
+        ],
+        "recovery_text": "There are no recovery codes on this account while the second step is off. Turning it back on issues a fresh set.",
+        "recovery_url": "",
+        "undo_text": "You can turn two-step verification back on in security settings. It takes about a minute and needs the camera on your phone.",
+        "settings_url": "https://example.com/settings/security"
+    },
+    "sparse": {
+        "user": {
+            "first_name": ""
+        },
+        "enabled": true,
+        "state_word": "On",
+        "change_line": "",
+        "changes": [],
+        "expectations": [],
+        "recovery_text": "Your recovery codes were shown once during setup and are not retrievable from here. If you did not save them, turn the control off and on again to be issued a new set.",
+        "recovery_url": "",
+        "settings_url": ""
+    }
+}

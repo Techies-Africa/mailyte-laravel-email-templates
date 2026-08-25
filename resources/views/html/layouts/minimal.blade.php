@@ -19,5 +19,9 @@
 @endsection
 
 @section('footer')
-    @include('mailyte::html.partials.footer')
+    @include('mailyte::html.partials.footer', [
+        'showSocial' => true,
+        'showAddress' => true,
+        'showCopyright' => true,
+    ])
 @endsection

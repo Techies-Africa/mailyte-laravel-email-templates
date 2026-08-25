@@ -1,0 +1,27 @@
+{# Credit note. The invoice's sibling, read backwards: the same document
+   proportions and the same right-aligned tabular column, but the middle line
+   is negative and the last line is what the customer actually paid in the end.
+   The delay is stated on the page rather than left for support to explain. #}
+
+{{ heading({ text: (reference ? 'Credit note ' ~ reference : 'Credit note'), level: '3', space_above: '0', space_below: '14px' }) }}
+
+{{ heading({ text: amount ~ ' is on its way back to you', level: '1', space_above: '0', space_below: '8px' }) }}
+
+{{ text({ text: 'Released ' ~ issued_on ~ ' to ' ~ destination ~ '.' ~ (reason ? ' ' ~ reason : ''), size: 'small', muted: true, space_below: '20px' }) }}
+
+{{ divider({ style: 'double', color: theme('color.text'), space_above: '0', space_below: '18px' }) }}
+
+{{ key_value({ rows: reversal_rows, figures: true, emphasise_last: true, label_width: '58%', space_below: '26px' }) }}
+
+{{ note({ tone: 'soft', strong_text: 'Expect it by ' ~ arrives_by ~ '.', text: 'That is a bank estimate, not ours.', space_below: '20px' }) }}
+
+{{ text({ text: delay_note, size: 'small', space_below: '20px' }) }}
+
+{% if receipt_url %}
+    {{ button({ label: 'See the original payment', url: receipt_url, variant: 'link', align: 'left', space_below: '18px' }) }}
+{% endif %}
+
+{% if footer_legal %}
+    {{ divider({ style: 'dotted', space_above: '0', space_below: '14px' }) }}
+    {{ text({ text: footer_legal, size: 'footer', muted: true, space_below: '0' }) }}
+{% endif %}

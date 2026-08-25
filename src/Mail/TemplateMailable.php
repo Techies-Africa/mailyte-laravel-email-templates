@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Headers;
 use Illuminate\Queue\SerializesModels;
+use Mailyte\EmailTemplates\Listeners\RecordTemplateUsage;
 use Mailyte\EmailTemplates\Rendering\RenderedEmail;
 use Symfony\Component\Mime\Email as SymfonyEmail;
 
@@ -39,7 +40,17 @@ class TemplateMailable extends Mailable
 
     public function headers(): Headers
     {
-        return new Headers(text: $this->email->suggestedHeaders);
+        $headers = $this->email->suggestedHeaders;
+
+        // Marker headers so usage can be counted at send time rather than at
+        // render time. RecordTemplateUsage strips them before the message
+        // leaves, so they never reach a recipient or a relay.
+        if ($this->email->slug !== '' && config('mailyte.usage.enabled', true)) {
+            $headers[RecordTemplateUsage::HEADER] = $this->email->slug;
+            $headers[RecordTemplateUsage::VERSION_HEADER] = $this->email->templateVersion;
+        }
+
+        return new Headers(text: $headers);
     }
 
     /**

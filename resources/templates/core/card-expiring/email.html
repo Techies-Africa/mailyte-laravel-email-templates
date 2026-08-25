@@ -1,0 +1,25 @@
+{# Wallet. The card is the object the message is about, so it is drawn first
+   and the sentence explains it afterwards. Nothing here is a status banner and
+   nothing is red: no payment has failed, and an alarm would be a lie. #}
+
+{% set card_face %}
+    {{ text({ text: 'Card on file', size: 'footer', color: theme('color.text_muted'), space_below: '9px' }) }}
+    {{ heading({ text: (card_brand ? card_brand ~ ' ending ' ~ card_last4 : 'Card ending ' ~ card_last4), level: '2', space_above: '0', space_below: '5px' }) }}
+    {{ text({ text: 'Expires ' ~ expires_on, size: 'small', muted: true, space_below: '0' }) }}
+{% endset %}
+
+{{ card({ slot: card_face, accent: theme('color.primary'), padding: '20px 22px', space_below: '26px' }) }}
+
+{{ heading({ text: 'The card on file expires ' ~ expires_on, level: '1', space_above: '0', space_below: '10px' }) }}
+
+{{ text({ text: body, space_below: '20px' }) }}
+
+{% if next_charge_on %}
+    {{ note({ tone: 'outline', strong_text: 'Next charge ' ~ next_charge_on ~ '.', text: 'Replace the card before then and nothing about your plan changes.', space_below: '24px' }) }}
+{% endif %}
+
+{{ button({ label: button_label, url: update_url, align: 'left', space_below: '24px' }) }}
+
+{{ divider({ style: 'dotted', space_above: '0', space_below: '16px' }) }}
+
+{{ text({ text: security_note, size: 'small', muted: true, space_below: '0' }) }}

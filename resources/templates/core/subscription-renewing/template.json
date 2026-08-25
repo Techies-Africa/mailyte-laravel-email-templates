@@ -1,0 +1,116 @@
+{
+    "slug": "subscription-renewing",
+    "name": "Subscription renewing",
+    "description": "The advance notice before a subscription renews: the date, what renews, the price, and how to change or cancel while it is still free to do so.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "billing",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "billing",
+        "subscription",
+        "renewal",
+        "cancel"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: calendar notice — the date opens the page in a band of its own, serif heading, price stated once, cancel offered at the same weight as change."
+    },
+    "subject": "Your {{ plan_name }} plan renews on {{ renews_on }}",
+    "preheader": "The terms, the amount and the way out, while changing your mind is still free.",
+    "blocks_used": [
+        "button",
+        "button_group",
+        "divider",
+        "heading",
+        "key_value",
+        "section",
+        "stat_row",
+        "text"
+    ],
+    "variables": {
+        "plan_name": {
+            "type": "string",
+            "description": "The plan as the customer knows it, not the internal price-book name.",
+            "required": true,
+            "example": "Studio"
+        },
+        "renews_on": {
+            "type": "date",
+            "description": "The renewal date, set at display size and repeated in the sentence about changing your mind. Keep it short-form — this is the largest text in the email and a full date with a year wraps on a phone.",
+            "required": true,
+            "example": "12 September"
+        },
+        "body": {
+            "type": "text",
+            "description": "One paragraph under the heading. Its job is to say that no action is required, so that the actions below read as options rather than demands.",
+            "default": "This is the notice we send before every renewal. You do not need to do anything — the plan continues and the card on file is charged on the day. The details below are what will be charged, so that nothing on your statement is a surprise."
+        },
+        "terms_rows": {
+            "type": "array",
+            "description": "The renewal terms as `label`/`value` pairs: plan, price, period, payment method. Money is formatted here at the call site because decimal separators and currency placement are not universal, and the price appears in this table only — stating it twice in one email is how a reader ends up unsure which number is real.",
+            "required": true,
+            "example": [
+                {
+                    "label": "Plan",
+                    "value": "Studio, monthly"
+                },
+                {
+                    "label": "Renewal price",
+                    "value": "$48.00 per month"
+                }
+            ]
+        },
+        "manage_url": {
+            "type": "url",
+            "description": "Where the plan itself is changed — a different destination from the cancel path, because a customer who wants a smaller plan should not have to walk through a cancellation flow to find one.",
+            "required": true,
+            "example": "https://example.com/billing/plan"
+        },
+        "change_label": {
+            "type": "string",
+            "description": "Label for the change action.",
+            "default": "Change the plan"
+        },
+        "cancel_url": {
+            "type": "url",
+            "description": "The direct cancel path. Given equal visual weight on purpose: a renewal notice that buries the exit is the thing regulators and customers both read as a trap. Leave it empty only where cancellation genuinely is not self-serve.",
+            "default": "",
+            "example": "https://example.com/billing/cancel"
+        },
+        "cancel_label": {
+            "type": "string",
+            "description": "Label for the cancel action. Say the word — \"cancel\" — rather than a euphemism.",
+            "default": "Cancel the renewal"
+        },
+        "statement_note": {
+            "type": "text",
+            "description": "The descriptor the charge appears under on a bank statement, and any tax note. It is here so that an unrecognised line on a statement does not become a chargeback.",
+            "default": "",
+            "example": "The charge appears on your statement as ACME SOFTWARE."
+        }
+    }
+}

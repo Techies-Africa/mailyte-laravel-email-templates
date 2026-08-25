@@ -1,0 +1,16 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "verification_code": "294 501",
+        "expires_in": "10 minutes"
+    },
+    "long-code": {
+        "user": {
+            "first_name": ""
+        },
+        "verification_code": "8F2C-1D4A",
+        "expires_in": "5 minutes"
+    }
+}

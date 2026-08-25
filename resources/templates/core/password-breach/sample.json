@@ -1,0 +1,37 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "source_line": "The list was published on 19 August 2026 and is attributed to a 2024 breach at an unrelated retailer.",
+        "steps": [
+            {
+                "text": "Change the password on this account",
+                "detail": "Pick something this account has never used before, and something no other account uses either."
+            },
+            {
+                "text": "Change it anywhere you reused it",
+                "detail": "Start with email and banking. A leaked pair gets tried against those first."
+            },
+            {
+                "text": "Turn on two-step verification",
+                "detail": "A second factor makes a stolen password on its own worth very little."
+            },
+            {
+                "text": "Look through your recent sign-ins",
+                "detail": "Anything you do not recognise, end the session and tell us."
+            }
+        ],
+        "change_url": "https://example.com/settings/password"
+    },
+    "sparse": {
+        "user": {
+            "first_name": ""
+        },
+        "body": "You have not done anything wrong, and nothing has happened to your account here. A password on this account turned up in a published list of stolen credentials gathered from other companies.",
+        "safe_text": "Anything held here. No payment details were involved. We have not reviewed this account's sign-in history, so we are not going to tell you it is clean — check it yourself once the password is changed.",
+        "source_line": "",
+        "steps": [],
+        "change_url": "https://example.com/settings/password"
+    }
+}

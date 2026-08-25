@@ -48,12 +48,15 @@ final class KeyValueBlock extends Block
 
         return [
             'rows' => $rows,
-            'label_color' => (string) $theme->get('color.text_muted'),
-            'value_color' => (string) $theme->get('color.text'),
-            'border_color' => (string) $theme->get('color.border'),
+            'figures' => $this->bool($props, 'figures'),
+            'emphasise_last' => $this->bool($props, 'emphasise_last'),
+            'label_width' => $this->string($props, 'label_width', '40%'),
+            'label_color' => $this->string($props, 'label_color', (string) $theme->get('color.text_muted')),
+            'value_color' => $this->string($props, 'value_color', (string) $theme->get('color.text')),
+            'border_color' => $this->string($props, 'border_color', (string) $theme->get('color.border')),
             'mono_font' => (string) $theme->get('font.mono'),
             'type' => $theme->get('type.small', []),
-            'space_above' => $this->string($props, 'space_above', (string) $theme->get('spacing.sm')),
+            'space_above' => $this->string($props, 'space_above', '0'),
             'space_below' => $this->string($props, 'space_below', (string) $theme->get('spacing.md')),
         ];
     }

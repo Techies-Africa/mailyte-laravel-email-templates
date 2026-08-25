@@ -1,0 +1,111 @@
+{
+    "slug": "import-complete",
+    "name": "Import complete",
+    "description": "Tells someone their data import finished, what came through, and what did not, with the failures named rather than buried.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "system",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "import",
+        "migration",
+        "data",
+        "report"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: report — monospaced figures, ruled grid, failures given equal weight."
+    },
+    "subject": "Import finished: {{ imported_count }} of {{ total_count }} records",
+    "preheader": "Everything that came through is live. Anything that didn't is listed with a reason.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "key_value",
+        "note",
+        "stat_row"
+    ],
+    "variables": {
+        "source_name": {
+            "type": "string",
+            "description": "What they imported from.",
+            "required": true,
+            "example": "Mailchimp"
+        },
+        "imported_count": {
+            "type": "number",
+            "description": "Records that landed successfully.",
+            "required": true,
+            "example": 4820
+        },
+        "total_count": {
+            "type": "number",
+            "description": "Records attempted.",
+            "required": true,
+            "example": 4855
+        },
+        "failed_count": {
+            "type": "number",
+            "description": "Records that failed. Zero is a perfectly good value and the template adapts to it.",
+            "default": 0,
+            "example": 35
+        },
+        "duration": {
+            "type": "string",
+            "description": "How long it took.",
+            "default": "",
+            "example": "6 minutes"
+        },
+        "failures": {
+            "type": "array",
+            "description": "Why records failed, grouped by reason as `label`/`value` pairs rather than listed one by one. A list of 35 rows is not a report.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Missing email address",
+                    "value": "28"
+                }
+            ]
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the imported data now lives.",
+            "required": true,
+            "example": "https://example.com/app/contacts"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "View imported data"
+        },
+        "error_report_url": {
+            "type": "url",
+            "description": "Downloadable report of the failed rows, so the fix is mechanical rather than detective work.",
+            "default": "",
+            "example": "https://example.com/imports/42/errors.csv"
+        }
+    }
+}

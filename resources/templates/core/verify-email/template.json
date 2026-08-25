@@ -18,28 +18,35 @@
     ],
     "tone": "neutral",
     "tags": [
-        "signup",
         "verification",
-        "otp"
+        "account",
+        "security",
+        "signup"
     ],
     "authors": [
         {
-            "name": "Mailyte",
-            "url": "https://mailyte.com"
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
         }
     ],
     "license": "MIT",
     "origin": {
-        "kind": "original"
+        "kind": "original",
+        "note": "Design: terminal — dark stock, monospaced headings, the code given a band of its own."
     },
     "subject": "{{ verification_code }} is your {{ product.name }} verification code",
-    "preheader": "Confirm your email address to finish setting up your account.",
+    "preheader": "The code is good for {{ expires_in }} and works once.",
     "blocks_used": [
-        "heading",
-        "text",
-        "code",
         "button",
-        "divider"
+        "code",
+        "heading",
+        "note",
+        "section",
+        "text"
     ],
     "variables": {
         "user.first_name": {
@@ -48,43 +55,42 @@
             "default": "",
             "example": "Ada"
         },
-        "action_url": {
-            "type": "url",
-            "description": "One-click verification link. Omit it to send a code-only email.",
-            "default": "",
-            "example": "https://example.com/verify/abc123"
-        },
-        "expires_in": {
+        "heading_text": {
             "type": "string",
-            "description": "How long the code stays valid. Stated explicitly because senders genuinely differ here, from 5 minutes to 24 hours.",
-            "default": "10 minutes",
-            "example": "10 minutes"
+            "description": "Main headline. Every visible string is a variable, so this is editable without touching markup.",
+            "default": "Confirm your email address"
         },
         "body": {
             "type": "text",
             "description": "Opening paragraph.",
             "default": "Enter this code in the window where you started signing up. It only works once."
         },
+        "verification_code": {
+            "type": "string",
+            "description": "The code shown in the panel and in the subject line.",
+            "required": true,
+            "example": "294 501"
+        },
+        "expires_in": {
+            "type": "string",
+            "description": "How long the code stays valid. Stated explicitly because senders genuinely differ here, from five minutes to 24 hours.",
+            "default": "10 minutes"
+        },
+        "action_url": {
+            "type": "url",
+            "description": "One-click verification link. Omit it to send a code-only email.",
+            "default": "",
+            "example": "https://example.com/verify/abc123"
+        },
         "button_label": {
             "type": "string",
-            "description": "CTA label, used only when action_url is set.",
+            "description": "Call to action, used only when action_url is set.",
             "default": "Verify email address"
         },
         "security_note": {
             "type": "text",
-            "description": "Closing reassurance. Near-universal convention in shipped verification emails.",
-            "default": "If you didn't create an account, you can safely ignore this email."
-        },
-        "verification_code": {
-            "type": "string",
-            "description": "The verification code shown in the card and in the subject line.",
-            "required": true,
-            "example": "294 501"
-        },
-        "heading_text": {
-            "type": "string",
-            "description": "Main headline. Every visible string is a variable, so this is editable without touching markup.",
-            "default": "Confirm your email address"
+            "description": "Closing reassurance. Near-universal convention in shipped verification email.",
+            "default": "If you didn't create an account, you can safely ignore this email. Nothing happens until the code is used."
         }
     }
 }

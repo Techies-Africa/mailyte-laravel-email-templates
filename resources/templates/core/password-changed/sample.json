@@ -1,0 +1,18 @@
+{
+    "default": {
+        "changed_at": "24 August 2026 at 14:02 UTC",
+        "device": "Chrome 128 on macOS",
+        "ip_address": "203.0.113.42",
+        "location": "Lagos, Nigeria",
+        "revoke_url": "https://example.com/account/recover"
+    },
+    "no-metadata-no-recovery": {
+        "changed_at": "",
+        "device": "",
+        "ip_address": "",
+        "location": "",
+        "revoke_url": "",
+        "body": "The password on your account has been changed. If that was you, there is nothing to do — this message is only the record.",
+        "alarm_body": "Then somebody else set that password and can sign in as you right now. Contact us straight away and we will lock the account while we sort it out."
+    }
+}

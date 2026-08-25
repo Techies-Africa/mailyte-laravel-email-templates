@@ -18,7 +18,10 @@ final class DividerBlock extends Block
     {
         return [
             'color' => $this->string($props, 'color', (string) $theme->get('color.border')),
-            'space_above' => $this->string($props, 'space_above', (string) $theme->get('spacing.md')),
+            'style' => $this->enum($props, 'style', ['solid', 'dotted', 'dashed', 'double', 'thick'], 'solid'),
+            'width' => $this->string($props, 'width', '100%'),
+            'align' => $this->enum($props, 'align', ['left', 'center'], 'left'),
+            'space_above' => $this->string($props, 'space_above', '0'),
             'space_below' => $this->string($props, 'space_below', (string) $theme->get('spacing.md')),
         ];
     }

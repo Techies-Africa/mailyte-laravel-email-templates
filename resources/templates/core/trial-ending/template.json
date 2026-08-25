@@ -1,0 +1,107 @@
+{
+    "slug": "trial-ending",
+    "name": "Trial ending soon",
+    "description": "Sent a few days before a trial lapses: what they built, what they lose, and one clear way to keep it.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "onboarding",
+    "supported_layouts": [
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "urgent",
+    "tags": [
+        "trial",
+        "expiration",
+        "conversion"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: countdown — dark field, one oversized figure, everything else subordinated."
+    },
+    "subject": "Your trial ends {{ trial_ends_at }}",
+    "preheader": "Keep your projects and settings by choosing a plan before then.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "key_value",
+        "stat_row",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "days_left": {
+            "type": "number",
+            "description": "Days remaining, set at 56px as the focal point of the design. Keep it accurate at send time.",
+            "required": true,
+            "example": 3
+        },
+        "trial_ends_at": {
+            "type": "date",
+            "description": "The end date in words.",
+            "required": true,
+            "example": "8 September"
+        },
+        "plan_name": {
+            "type": "string",
+            "description": "Plan they have been trialling.",
+            "default": "Pro"
+        },
+        "price_note": {
+            "type": "string",
+            "description": "What it costs to continue, stated once and plainly.",
+            "default": "",
+            "example": "$29 per month, cancel any time"
+        },
+        "usage_summary": {
+            "type": "array",
+            "description": "What they actually did during the trial, as `label`/`value` pairs. Specific numbers beat encouragement.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Projects created",
+                    "value": "4"
+                }
+            ]
+        },
+        "consequences": {
+            "type": "text",
+            "description": "What happens if they do nothing. Say it straight; vagueness here reads as a trap.",
+            "default": "If the trial lapses, your workspace stays intact and read-only for 30 days. Nothing is deleted in that window."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where to choose a plan.",
+            "required": true,
+            "example": "https://example.com/billing/plans"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Choose a plan"
+        }
+    }
+}

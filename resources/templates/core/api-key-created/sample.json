@@ -1,0 +1,33 @@
+{
+    "default": {
+        "key_name": "Production deploy bot",
+        "issued_line": "Created by ada@example.com from the dashboard, 24 August 2026 at 09:12 UTC.",
+        "key_prefix": "mk_live_7Q3FTb…",
+        "scopes": [
+            {
+                "label": "Read projects and their settings",
+                "value": "projects:read",
+                "mono": true
+            },
+            {
+                "label": "Start and cancel deployments",
+                "value": "deployments:write",
+                "mono": true
+            },
+            {
+                "label": "Read build and runtime logs",
+                "value": "logs:read",
+                "mono": true
+            }
+        ],
+        "revoke_url": "https://example.com/settings/keys/k_7Q3FTb"
+    },
+    "sparse": {
+        "key_name": "Unnamed key",
+        "issued_line": "",
+        "body": "A new API key was issued on this account. It arrived through the API rather than the dashboard, so there is no record of who asked for it or what it is for.",
+        "key_prefix": "mk_test_A19…",
+        "scopes": [],
+        "revoke_url": "https://example.com/settings/keys/k_A19d02"
+    }
+}

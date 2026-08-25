@@ -1,0 +1,25 @@
+{# Stark utility. The greeting sits above the headline as a small muted line so
+   the h1 lands on the one thing the reader came for, and so the whole message
+   collapses to a single sentence and a button when there is no name. #}
+{% if user.first_name %}
+    {{ text({ text: 'Hi ' ~ user.first_name ~ ',', size: 'small', muted: true, space_below: '10px' }) }}
+{% endif %}
+
+{{ heading({ text: heading_text, level: '1', space_above: '0', space_below: '10px' }) }}
+
+{{ text({ text: body, space_below: '24px' }) }}
+
+{{ button({
+    label: button_label,
+    url: reset_url,
+    align: 'left',
+    shape: 'square',
+    fallback_text: fallback_note,
+    space_below: '20px'
+}) }}
+
+{{ note({ tone: 'plain', strong_text: 'This link expires in ' ~ expires_in ~ '.', text: expiry_note, space_below: '18px' }) }}
+
+{{ divider({ style: 'solid', space_above: '0', space_below: '16px' }) }}
+
+{{ text({ text: not_you_note, size: 'small', muted: true, space_below: '0' }) }}

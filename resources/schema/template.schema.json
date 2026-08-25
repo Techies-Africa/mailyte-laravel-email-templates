@@ -47,6 +47,16 @@
             "enum": ["core", "community"],
             "default": "community"
         },
+        "variant_of": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Slug of the template this is an alternative design for. Same job, same variables, different look -- so an application can swap `verify-email` for `verify-email-stylish` without touching the code that sends it. The catalog groups variants together rather than listing them as unrelated templates."
+        },
+        "variant_label": {
+            "type": "string",
+            "maxLength": 40,
+            "description": "How this variant differs, in a couple of words: \"Stylish\", \"Plain text\", \"Dark\". Shown beside the name in the catalog."
+        },
 
         "type": {
             "enum": ["transactional", "notification", "marketing"],
@@ -55,6 +65,7 @@
         "category": {
             "enum": [
                 "account",
+                "security",
                 "onboarding",
                 "billing",
                 "collaboration",
@@ -134,6 +145,30 @@
             "type": "string",
             "maxLength": 140,
             "description": "Default preheader. 85-100 characters, front-loaded, complementing rather than repeating the subject."
+        },
+        "credits": {
+            "type": "array",
+            "description": "Third-party assets this bundle references, one entry per asset. Sample data may point at stock photography; the catalog does not redistribute those files, but it does say whose work it is and under what licence.",
+            "uniqueItems": true,
+            "items": {
+                "type": "object",
+                "required": ["kind", "source", "license", "usage"],
+                "additionalProperties": false,
+                "properties": {
+                    "kind": { "enum": ["photo", "illustration", "icon", "font", "copy"] },
+                    "title": { "type": "string" },
+                    "author": { "type": "string", "description": "Creator, as they are credited on the source site." },
+                    "source": { "type": "string", "description": "Where it came from, e.g. \"Unsplash\"." },
+                    "url": { "type": "string", "format": "uri", "description": "Canonical page for the asset, so the credit is checkable." },
+                    "asset_url": { "type": "string", "format": "uri", "description": "The file this bundle actually references." },
+                    "license": { "type": "string" },
+                    "license_url": { "type": "string", "format": "uri" },
+                    "usage": {
+                        "type": "string",
+                        "description": "Where the asset appears, e.g. \"sample data only\" -- shipped defaults never hotlink third-party media."
+                    }
+                }
+            }
         },
         "blocks_used": {
             "type": "array",

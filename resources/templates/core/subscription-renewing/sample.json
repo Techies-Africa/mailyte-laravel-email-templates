@@ -1,0 +1,54 @@
+{
+    "default": {
+        "plan_name": "Studio",
+        "renews_on": "12 September",
+        "terms_rows": [
+            {
+                "label": "Plan",
+                "value": "Studio, monthly"
+            },
+            {
+                "label": "Renewal price",
+                "value": "$48.00 per month"
+            },
+            {
+                "label": "Next period",
+                "value": "12 September to 11 October"
+            },
+            {
+                "label": "Payment method",
+                "value": "Visa ending 4242"
+            }
+        ],
+        "manage_url": "https://example.com/billing/plan",
+        "cancel_url": "https://example.com/billing/cancel",
+        "statement_note": "The charge appears on your statement as ACME SOFTWARE. VAT is shown on the invoice we send on the day."
+    },
+    "annual-invoiced": {
+        "plan_name": "Studio Annual",
+        "renews_on": "3 March 2027",
+        "body": "Your annual term ends on 3 March. We are writing six weeks ahead because an annual renewal is a bigger decision than a monthly one, and because your finance team will want the invoice in the right quarter.",
+        "terms_rows": [
+            {
+                "label": "Plan",
+                "value": "Studio Annual, 12 seats"
+            },
+            {
+                "label": "Renewal price",
+                "value": "€4.320,00 per year"
+            },
+            {
+                "label": "Next term",
+                "value": "3 March 2027 to 2 March 2028"
+            },
+            {
+                "label": "Payment method",
+                "value": "Invoice, 14 days"
+            }
+        ],
+        "manage_url": "https://example.com/billing/plan",
+        "change_label": "Change seats or plan",
+        "cancel_url": "",
+        "statement_note": ""
+    }
+}

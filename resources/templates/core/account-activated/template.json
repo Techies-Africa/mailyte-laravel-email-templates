@@ -1,0 +1,115 @@
+{
+    "slug": "account-activated",
+    "name": "Account activated",
+    "description": "Confirms an account is fully active after verification or approval, and states exactly what is now available.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "onboarding",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools"
+    ],
+    "tone": "friendly",
+    "tags": [
+        "activation",
+        "account",
+        "confirmation"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: certificate — no imagery, rule-led, account facts set as a record."
+    },
+    "subject": "Your {{ product.name }} account is active",
+    "preheader": "Everything is unlocked. Here is where to start and who to ask for help.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "key_value",
+        "list",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "account_email": {
+            "type": "email",
+            "description": "The address the account is tied to. Restating it surfaces a typo now rather than at the next sign-in.",
+            "required": true,
+            "example": "ada@example.com"
+        },
+        "account_id": {
+            "type": "string",
+            "description": "Account or workspace reference, if you have one worth quoting to support.",
+            "default": "",
+            "example": "ACC-4192"
+        },
+        "plan_name": {
+            "type": "string",
+            "description": "Plan the account starts on.",
+            "default": "",
+            "example": "Starter"
+        },
+        "activated_at": {
+            "type": "datetime",
+            "description": "When activation completed, in the recipient's own timezone if you know it.",
+            "default": "",
+            "example": "24 August 2026 at 09:14 UTC"
+        },
+        "unlocked": {
+            "type": "array",
+            "description": "What is available now. Concrete capabilities, three or fewer.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Create and publish projects"
+                }
+            ]
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where to go first.",
+            "required": true,
+            "example": "https://example.com/app"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Go to your account"
+        },
+        "support_note": {
+            "type": "text",
+            "description": "Where to get help, phrased as an invitation rather than a deflection.",
+            "default": "If something doesn't work the way you expected, reply and tell us what you were trying to do."
+        },
+        "keep_note": {
+            "type": "text",
+            "description": "Why this email is worth keeping. A confirmation that says so gets filed instead of deleted.",
+            "default": "Worth keeping: this message has the details support will ask for."
+        }
+    }
+}

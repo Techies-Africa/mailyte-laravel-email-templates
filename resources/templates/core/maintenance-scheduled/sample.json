@@ -1,0 +1,66 @@
+{
+    "default": {
+        "headline": "Database upgrade",
+        "window_date": "Sunday 14 September",
+        "window_summary": "Sunday 14 September, 02:00 to 04:00 UTC",
+        "intro": "We are moving the primary database onto newer hardware. It is the last step of a migration that has been running for six weeks, and it needs a short window with nothing writing to it.",
+        "window_start": "02:00",
+        "window_end": "04:00",
+        "timezone": "UTC (GMT+0)",
+        "duration": "Up to 20 minutes, near the start",
+        "affected": [
+            {
+                "text": "The dashboard",
+                "detail": "Returns a maintenance page rather than an error"
+            },
+            {
+                "text": "The write endpoints of the API",
+                "detail": "Respond 503 with a Retry-After header"
+            },
+            {
+                "text": "CSV and report exports",
+                "detail": "Queue, and run once the window closes"
+            }
+        ],
+        "unaffected_text": "Inbound email, webhooks and anything already scheduled to send carry on as normal.",
+        "prepare": [
+            {
+                "text": "Finish anything mid-edit before 02:00",
+                "detail": "Saved drafts survive the window; unsaved edits in an open tab do not"
+            },
+            {
+                "text": "Set retries on write calls to back off for an hour",
+                "detail": "The 503 carries Retry-After, so most clients handle this already"
+            },
+            {
+                "text": "Move any export you need on Sunday morning to Saturday"
+            }
+        ],
+        "status_url": "https://status.example.com",
+        "closing": "We will send one short note when the window closes and everything is back."
+    },
+    "single-service": {
+        "headline": "Certificate rotation on the webhook sender",
+        "window_date": "Thursday 2 October",
+        "window_summary": "Thursday 2 October, 23:30 to 23:45 Africa/Lagos (GMT+1)",
+        "intro": "We are rotating the TLS certificate that signs outbound webhooks. It is routine, it happens twice a year, and it affects one service rather than the product.",
+        "start_label": "Opens",
+        "window_start": "23:30",
+        "end_label": "Closes",
+        "window_end": "23:45",
+        "timezone": "Africa/Lagos (GMT+1)",
+        "duration": "",
+        "affected_heading": "What this affects",
+        "affected": [
+            {
+                "text": "Outbound webhook delivery",
+                "detail": "Pauses, then delivers the backlog in order"
+            }
+        ],
+        "unaffected_text": "",
+        "prepare": [],
+        "status_url": "",
+        "closing": "Nothing is expected of you. We are telling you because a fifteen-minute gap in webhooks looks like a fault if you were not told.",
+        "date_label": "Night of"
+    }
+}

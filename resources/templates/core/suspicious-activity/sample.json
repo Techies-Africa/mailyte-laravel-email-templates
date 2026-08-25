@@ -1,0 +1,41 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "secure_url": "https://example.com/security/lock",
+        "confirm_url": "https://example.com/security/confirm/4b19ac",
+        "attempt": [
+            {
+                "label": "Method",
+                "value": "Password, refused 6 times"
+            },
+            {
+                "label": "Device",
+                "value": "Firefox 131 on Windows 11"
+            },
+            {
+                "label": "Network address",
+                "value": "198.51.100.204",
+                "mono": true
+            },
+            {
+                "label": "Estimated location",
+                "value": "Sofia, Bulgaria"
+            },
+            {
+                "label": "Last attempt",
+                "value": "24 August 2026, 03:41 UTC"
+            }
+        ]
+    },
+    "sparse": {
+        "user": {
+            "first_name": ""
+        },
+        "body": "A sign-in was refused. We are not able to say much about where it came from — the request was dropped at the edge before it told us anything useful.",
+        "attempt": [],
+        "secure_url": "https://example.com/security/lock",
+        "confirm_url": ""
+    }
+}

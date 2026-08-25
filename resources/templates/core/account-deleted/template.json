@@ -1,0 +1,132 @@
+{
+    "slug": "account-deleted",
+    "name": "Account scheduled for deletion",
+    "description": "Sent when an account has been scheduled for deletion: the exact date recovery closes, what is erased, what is retained, and where to take a copy of the data first.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "account",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "account",
+        "deletion",
+        "offboarding",
+        "data"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: wind-down — serif at a regular weight, no accent colour, wide margins, the recovery deadline set larger than the headline, and the inventory of what goes and what stays written as prose rather than ticked lists."
+    },
+    "subject": "Your {{ product.name }} account is scheduled for deletion",
+    "preheader": "The date recovery closes, what is erased, and what is kept.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "heading_text": {
+            "type": "string",
+            "description": "The headline. Scheduled, not done — a deletion email that reads as already-final stops people acting inside the window they still have.",
+            "default": "Your account is scheduled for deletion"
+        },
+        "body": {
+            "type": "text",
+            "description": "The opening paragraph. State the request plainly and stop. There is no case to argue here, and an attempt to talk someone out of leaving is what makes this email resented.",
+            "default": "We have received the request to delete this account and have started closing it down. Nothing has been erased yet."
+        },
+        "recovery_label": {
+            "type": "string",
+            "description": "The line introducing the deadline. Leave it empty when there is no window and the figure beneath speaks for itself.",
+            "default": "You can still change your mind until"
+        },
+        "recovery_deadline": {
+            "type": "date",
+            "description": "The date recovery closes, set as the largest element in the message. A date rather than a countdown: this email gets kept and reread, and a countdown is wrong by the second reading.",
+            "default": "",
+            "example": "23 September 2026"
+        },
+        "no_recovery_text": {
+            "type": "string",
+            "description": "Stands in for the date when a product deletes immediately. Say so in the same position and at the same size — the absence of a window is the most important fact there is.",
+            "default": "There is no recovery window"
+        },
+        "recovery_note": {
+            "type": "text",
+            "description": "How recovery actually works, or what replaces it. Say what the person has to do, since signing in is often both the cancellation and the recovery.",
+            "default": "Signing in before that date cancels the deletion and puts everything back as it was. After it, we cannot restore the account for you."
+        },
+        "deleted_label": {
+            "type": "string",
+            "description": "Small heading over the erasure paragraph.",
+            "default": "What is erased"
+        },
+        "deleted_text": {
+            "type": "text",
+            "description": "Everything that goes, in the concrete terms the person would use for their own work — not in the schema names your database uses.",
+            "default": "Your profile, your projects and their history, uploaded files, saved views, and every API key issued to this account. Anything shared into a workspace you do not own stays with that workspace."
+        },
+        "kept_label": {
+            "type": "string",
+            "description": "Small heading over the retention paragraph.",
+            "default": "What is kept"
+        },
+        "kept_text": {
+            "type": "text",
+            "description": "What survives deletion and why. Invoices and audit records usually must be retained by law, and saying so before someone asks is the difference between a policy and a surprise.",
+            "default": "Invoices and payment records, which tax law requires us to hold for seven years, and a record that this account existed and was deleted. Neither can be used to sign in, and neither is used for anything else."
+        },
+        "export_label": {
+            "type": "string",
+            "description": "Label on the export link. It is set as a plain underlined link rather than a button because this message should not be pushing anyone anywhere.",
+            "default": "Download a copy of your data"
+        },
+        "export_url": {
+            "type": "url",
+            "description": "Where the export is prepared. Offer it while the window is open, not after — an export link that has already expired is worse than none.",
+            "default": "",
+            "example": "https://example.com/settings/export"
+        },
+        "cancel_label": {
+            "type": "string",
+            "description": "Label on the link that stops the deletion.",
+            "default": "Cancel the deletion"
+        },
+        "cancel_url": {
+            "type": "url",
+            "description": "Where the deletion is called off. Empty when the product has no cancellation path, in which case the link simply does not appear.",
+            "default": "",
+            "example": "https://example.com/account/restore"
+        },
+        "closing_note": {
+            "type": "text",
+            "description": "The last line. A quiet route back to a human, and confirmation that this is the last message they will get.",
+            "default": "This is the last email we will send to this address. If the request was not yours, reply to this message before the date above."
+        }
+    }
+}

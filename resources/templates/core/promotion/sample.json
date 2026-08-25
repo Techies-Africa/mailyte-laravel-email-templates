@@ -1,0 +1,52 @@
+{
+    "default": {
+        "offer_eyebrow": "Summer sale",
+        "offer_headline": "30% off everything",
+        "offer_text": "Every item in the store, including the ones already reduced.",
+        "hero_image": "https://images.unsplash.com/photo-1590240568206-4e97becae4ef?w=520&q=72&fm=jpg&fit=crop&h=620",
+        "promo_code": "SUMMER30",
+        "expires_text": "Sunday at midnight",
+        "terms": "One use per customer. Excludes gift cards. Discount applies before shipping and tax.",
+        "action_url": "https://example.com/sale",
+        "help_url": "https://example.com/help",
+        "products": [
+            {
+                "image": "https://images.unsplash.com/photo-1555337159-d399aaa99955?w=360&q=72&fm=jpg&fit=crop&h=270",
+                "title": "Harrow boot",
+                "meta": "Full-grain leather",
+                "price": "$126",
+                "was_price": "$180",
+                "url": "https://example.com/p/harrow",
+                "badge": "Low stock"
+            },
+            {
+                "image": "https://images.unsplash.com/photo-1569385210018-127685230669?w=360&q=72&fm=jpg&fit=crop&h=270",
+                "title": "Everyday kit",
+                "meta": "Six-piece set",
+                "price": "$49",
+                "was_price": "$70",
+                "url": "https://example.com/p/kit"
+            },
+            {
+                "image": "https://images.unsplash.com/photo-1694538991472-60a784a9b4cb?w=360&q=72&fm=jpg&fit=crop&h=270",
+                "title": "Ember candle",
+                "meta": "Cedar and smoke",
+                "price": "$28",
+                "was_price": "$40",
+                "url": "https://example.com/p/ember"
+            }
+        ]
+    },
+    "no-code": {
+        "offer_eyebrow": "",
+        "offer_headline": "Free shipping this week",
+        "offer_text": "No code needed, it comes off automatically at checkout.",
+        "hero_image": "",
+        "promo_code": "",
+        "expires_text": "Friday",
+        "terms": "Standard delivery only. UK and EU addresses.",
+        "action_url": "https://example.com/shop",
+        "help_url": "",
+        "products": []
+    }
+}

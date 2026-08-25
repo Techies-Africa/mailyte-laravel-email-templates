@@ -1,0 +1,100 @@
+{
+    "tokens": {
+        "font": {
+            "heading": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            "body": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+        },
+        "color": {
+            "bg": {
+                "light": "#F3F0EA",
+                "dark": "#0A0B0D"
+            },
+            "surface": {
+                "light": "#FFFFFF",
+                "dark": "#131417"
+            },
+            "surface_alt": {
+                "light": "#FAF6EF",
+                "dark": "#1B1D21"
+            },
+            "text": {
+                "light": "#17181C",
+                "dark": "#F2F3F5"
+            },
+            "text_muted": {
+                "light": "#5C6067",
+                "dark": "#9AA1AB"
+            },
+            "border": {
+                "light": "#E5E0D7",
+                "dark": "#24272C"
+            },
+            "primary": {
+                "light": "#F5A524",
+                "dark": "#F5A524"
+            },
+            "primary_text": {
+                "light": "#17181C",
+                "dark": "#17181C"
+            },
+            "warning": {
+                "light": "#8A5200",
+                "dark": "#F5A524"
+            },
+            "link": {
+                "light": "#8A5200",
+                "dark": "#F5A524"
+            }
+        },
+        "type": {
+            "h1": {
+                "size": "26px",
+                "line_height": "34px",
+                "weight": "700",
+                "letter_spacing": "-0.02em"
+            },
+            "h3": {
+                "size": "11px",
+                "line_height": "16px",
+                "weight": "700",
+                "letter_spacing": "0.14em"
+            },
+            "body": {
+                "size": "15px",
+                "line_height": "25px",
+                "weight": "400",
+                "letter_spacing": "0"
+            },
+            "small": {
+                "size": "13px",
+                "line_height": "21px",
+                "weight": "400",
+                "letter_spacing": "0"
+            },
+            "button": {
+                "size": "15px",
+                "line_height": "15px",
+                "weight": "700",
+                "letter_spacing": "0"
+            }
+        },
+        "radius": {
+            "sm": "4px",
+            "md": "6px",
+            "lg": "10px",
+            "pill": "999px"
+        },
+        "spacing": {
+            "xs": "8px",
+            "sm": "12px",
+            "md": "20px",
+            "lg": "30px",
+            "xl": "44px"
+        },
+        "layout": {
+            "width": "560px",
+            "gutter": "34px",
+            "outer_padding": "36px"
+        }
+    }
+}

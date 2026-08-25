@@ -10,6 +10,7 @@ use Mailyte\EmailTemplates\Rendering\RenderPipeline;
 use Mailyte\EmailTemplates\Rendering\TemplateBuilder;
 use Mailyte\EmailTemplates\Sources\SourceChain;
 use Mailyte\EmailTemplates\Templates\TemplateManifest;
+use Mailyte\EmailTemplates\Themes\BrandTokens;
 use Mailyte\EmailTemplates\Themes\ThemeRepository;
 use Mailyte\EmailTemplates\Themes\TokenSanitizer;
 
@@ -26,6 +27,7 @@ final class MailyteManager
             pipeline: $this->app->make(RenderPipeline::class),
             sanitizer: $this->app->make(TokenSanitizer::class),
             config: $this->app->make('config'),
+            brand: $this->app->make(BrandTokens::class),
         );
     }
 

@@ -1,0 +1,47 @@
+name: Template request
+description: Suggest an email the catalog does not cover yet
+labels: [template]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: What email is it
+      placeholder: Payment method expiring
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - account
+        - security
+        - onboarding
+        - billing
+        - collaboration
+        - ecommerce
+        - notifications
+        - system
+        - marketing
+        - newsletter
+        - events
+        - support
+    validations:
+      required: true
+  - type: textarea
+    id: when
+    attributes:
+      label: When it gets sent
+      description: The trigger, and what the recipient is supposed to do next.
+    validations:
+      required: true
+  - type: textarea
+    id: data
+    attributes:
+      label: What data it needs
+      description: The variables the template would read.
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Links to examples you think get this right.

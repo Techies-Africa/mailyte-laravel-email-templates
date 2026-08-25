@@ -1,0 +1,30 @@
+{{ heading({ text: 'Import report', level: '3', space_above: '0', space_below: '10px' }) }}
+
+{{ heading({ text: 'Your import from ' ~ source_name ~ ' is done', level: '1', space_above: '0', space_below: '18px' }) }}
+
+{{ stat_row({ items: [
+    { value: imported_count, label: 'imported', caption: 'of ' ~ total_count ~ ' attempted' },
+    { value: failed_count, label: 'failed', caption: (failed_count > 0 ? 'listed below' : 'nothing to fix') }
+], space_below: '22px' }) }}
+
+{{ button({ label: button_label, url: action_url, align: 'left', shape: 'square' }) }}
+
+{{ divider({ space_above: '4px', space_below: '0' }) }}
+
+{{ heading({ text: 'Run detail', level: '3', space_below: '4px' }) }}
+
+{{ key_value({ rows: [
+    { label: 'Source', value: source_name },
+    { label: 'Duration', value: (duration ?: 'a few moments') },
+    { label: 'Outcome', value: (failed_count > 0 ? 'Completed with errors' : 'Completed cleanly') }
+], label_width: '38%' }) }}
+
+{% if failures %}
+    {{ heading({ text: 'What did not come through', level: '3', space_below: '4px' }) }}
+    {{ key_value({ rows: failures, figures: true, label_width: '68%' }) }}
+
+    {% if error_report_url %}
+        {{ note({ tone: 'soft', mark: '↓', strong_text: 'Row-by-row report', text: 'available as a CSV so the fix is mechanical.', space_below: '14px' }) }}
+        {{ button({ label: 'Download the error report', url: error_report_url, variant: 'link', align: 'left', space_below: '0' }) }}
+    {% endif %}
+{% endif %}

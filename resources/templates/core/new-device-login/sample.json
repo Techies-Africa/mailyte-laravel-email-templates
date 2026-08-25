@@ -1,12 +1,42 @@
 {
     "default": {
-        "user": { "first_name": "Ada" },
-        "action_url": "https://example.com/security",
+        "user": {
+            "first_name": "Ada"
+        },
+        "action_url": "https://example.com/security/sessions",
+        "confirm_url": "https://example.com/security/confirm/8f2c1d",
         "details": [
-            { "label": "When", "value": "24 August 2026 at 14:07 UTC" },
-            { "label": "Device", "value": "Chrome on macOS" },
-            { "label": "Near", "value": "Lagos, Nigeria" },
-            { "label": "IP address", "value": "102.89.34.12", "mono": true }
+            {
+                "label": "Device",
+                "value": "Chrome 128 on macOS 15"
+            },
+            {
+                "label": "IP address",
+                "value": "203.0.113.42",
+                "mono": true
+            },
+            {
+                "label": "Estimated location",
+                "value": "Lagos, Nigeria"
+            },
+            {
+                "label": "Time",
+                "value": "24 August 2026, 09:14 UTC"
+            }
+        ]
+    },
+    "sparse": {
+        "user": {
+            "first_name": ""
+        },
+        "action_url": "https://example.com/security/sessions",
+        "confirm_url": "",
+        "details": [
+            {
+                "label": "IP address",
+                "value": "198.51.100.7",
+                "mono": true
+            }
         ]
     }
 }

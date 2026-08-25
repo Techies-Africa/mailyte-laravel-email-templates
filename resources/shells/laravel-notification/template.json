@@ -1,0 +1,69 @@
+{
+    "slug": "laravel-notification",
+    "name": "Laravel notification shell",
+    "description": "Receives whatever a Laravel MailMessage carries -- greeting, lines, an action, a salutation -- so every notification in an application is designed without touching a single notification class.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "notifications",
+    "supported_layouts": ["plain", "minimal", "branded"],
+    "tone": "neutral",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "origin": {
+        "kind": "original",
+        "note": "The content model is Laravel's MailMessage, so this is a like-for-like replacement for the framework's notifications::email view."
+    },
+    "subject": "A message from {{ product.name }}",
+    "preheader": "There is something waiting for you in your account.",
+    "variables": {
+        "greeting": {
+            "type": "string",
+            "description": "Opening line, from MailMessage::greeting(). Laravel defaults it to \"Hello!\", or \"Whoops!\" on an error-level message.",
+            "default": "Hello!"
+        },
+        "lines": {
+            "type": "array",
+            "description": "The paragraphs before the action button, from MailMessage::line(). One string per paragraph.",
+            "items": { "type": "string" }
+        },
+        "action_label": {
+            "type": "string",
+            "description": "Button text, from the first argument to MailMessage::action(). Omit it and the button is left out entirely."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the button goes, from the second argument to MailMessage::action()."
+        },
+        "outro_lines": {
+            "type": "array",
+            "description": "Paragraphs after the action button, which is where Laravel puts any line() added after action().",
+            "items": { "type": "string" }
+        },
+        "salutation": {
+            "type": "string",
+            "description": "Sign-off, from MailMessage::salutation(). Laravel defaults to \"Regards, {app name}\"."
+        },
+        "subcopy": {
+            "type": "text",
+            "description": "The fallback Laravel prints under the button so a recipient whose client eats the link can still copy the URL."
+        },
+        "level": {
+            "type": "string",
+            "description": "MailMessage level: info, success or error. Decides the button's colour and whether the message is banded as a problem.",
+            "enum": ["info", "success", "error"],
+            "default": "info"
+        }
+    },
+    "credits": []
+}

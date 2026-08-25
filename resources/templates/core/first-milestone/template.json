@@ -1,0 +1,138 @@
+{
+    "slug": "first-milestone",
+    "name": "First milestone reached",
+    "description": "Marks the moment an account does the thing the product exists for, and turns that moment into the next one.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "onboarding",
+    "supported_layouts": [
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "community"
+    ],
+    "tone": "celebratory",
+    "tags": [
+        "milestone",
+        "activation",
+        "engagement"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: celebration — dark opening band, the earned figure at display size, one forward action."
+    },
+    "subject": "You just {{ milestone_verb }}",
+    "preheader": "Here is what it added up to, and the obvious next thing to try.",
+    "credits": [
+        {
+            "kind": "photo",
+            "author": "Thirdman",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/coworkers-with-their-hands-together-5256819/",
+            "asset_url": "https://images.pexels.com/photos/5256819/pexels-photo-5256819.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Coworkers with their hands together"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "button_group",
+        "heading",
+        "section",
+        "stat_row",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "milestone_verb": {
+            "type": "string",
+            "description": "What they did, past tense, phrased the way they would say it. Set at 36px, so keep it to a handful of words.",
+            "required": true,
+            "example": "sent your first campaign"
+        },
+        "headline_stat": {
+            "type": "string",
+            "description": "The single number that makes the moment concrete, shown at display size on the opening band. Leave empty and the band carries the headline alone.",
+            "default": "",
+            "example": "1,204"
+        },
+        "headline_stat_label": {
+            "type": "string",
+            "description": "What that number counts.",
+            "default": "",
+            "example": "people received it"
+        },
+        "stat_rows": {
+            "type": "array",
+            "description": "Supporting figures as `value` / `label` / optional `caption`. Two or three; this is a moment, not a report.",
+            "default": [],
+            "example": [
+                {
+                    "value": "38%",
+                    "label": "Opened so far"
+                }
+            ]
+        },
+        "next_step_heading": {
+            "type": "string",
+            "description": "Heading above the follow-on suggestion.",
+            "default": "The obvious next thing"
+        },
+        "next_step_text": {
+            "type": "text",
+            "description": "One suggestion that builds on what they just did.",
+            "default": "Now that one is out, set up a second so you can compare how they land against each other."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the next step lives.",
+            "required": true,
+            "example": "https://example.com/app/new"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Do the next one"
+        },
+        "share_url": {
+            "type": "url",
+            "description": "Optional secondary action, usually sharing the result with a teammate.",
+            "default": "",
+            "example": "https://example.com/app/share"
+        },
+        "share_label": {
+            "type": "string",
+            "description": "Label for the secondary action.",
+            "default": "Share with the team"
+        },
+        "closing": {
+            "type": "text",
+            "description": "Sign-off under the final rule.",
+            "default": "Milestone emails like this one only go out the first time. We won't make a fuss every week."
+        }
+    }
+}

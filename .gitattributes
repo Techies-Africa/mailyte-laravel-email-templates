@@ -1,0 +1,25 @@
+# Everything a consumer does not need when they `composer require` this package.
+# The catalog itself (resources/) and the docs stay: they are the product.
+/.github            export-ignore
+/samples            export-ignore
+/tests              export-ignore
+/workbench          export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/phpunit.xml.dist   export-ignore
+/phpstan.neon.dist  export-ignore
+/pint.json          export-ignore
+/testbench.yaml     export-ignore
+/CONTRIBUTING.md    export-ignore
+
+# 6.5 MB of preview renders. They exist so people can look at the catalog on
+# GitHub before installing anything; once installed, `/mailyte` renders the
+# same previews live against the application's own data.
+/docs/previews      export-ignore
+/docs/gallery       export-ignore
+/docs/gallery.md    export-ignore
+
+# Keep line endings sane for template files edited on Windows.
+*.html  text eol=lf
+*.json  text eol=lf
+*.css   text eol=lf

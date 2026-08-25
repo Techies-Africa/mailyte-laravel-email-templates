@@ -1,0 +1,21 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "blocking_step": "verify your sending domain",
+        "time_estimate": "about two minutes",
+        "action_url": "https://example.com/setup/domain",
+        "sender_name": "Sam from Acme"
+    },
+    "no-name": {
+        "user": {
+            "first_name": ""
+        },
+        "blocking_step": "add a payment method",
+        "why_it_matters": "Your projects are live, but we can't process any usage beyond the free tier until there's a card on file.",
+        "time_estimate": "under a minute",
+        "action_url": "https://example.com/billing",
+        "sender_name": ""
+    }
+}

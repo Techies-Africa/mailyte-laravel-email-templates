@@ -1,0 +1,35 @@
+{
+    "default": {
+        "greeting": "Hello!",
+        "lines": [
+            "You are receiving this email because we received a password reset request for your account."
+        ],
+        "action_label": "Reset Password",
+        "action_url": "https://acme.test/password/reset/9f2c1d8a",
+        "outro_lines": [
+            "This password reset link will expire in 60 minutes.",
+            "If you did not request a password reset, no further action is required."
+        ],
+        "salutation": "Regards,\nAcme",
+        "subcopy": "If you're having trouble clicking the \"Reset Password\" button, copy and paste this URL into your browser: https://acme.test/password/reset/9f2c1d8a",
+        "level": "info"
+    },
+    "bare-line": {
+        "greeting": "Hello!",
+        "lines": ["Your export finished and is ready to download from your account."],
+        "salutation": "Regards,\nAcme",
+        "level": "info"
+    },
+    "error-level": {
+        "greeting": "Whoops!",
+        "lines": [
+            "We could not charge the card on file for your Acme subscription.",
+            "Nothing has been cancelled yet, and your workspace is untouched."
+        ],
+        "action_label": "Update payment method",
+        "action_url": "https://acme.test/billing/card",
+        "outro_lines": ["We will try again in three days."],
+        "salutation": "Regards,\nAcme",
+        "level": "error"
+    }
+}

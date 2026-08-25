@@ -1,0 +1,62 @@
+{# A tracker email that reads like a tracker: the priority bar lands before
+   anything else, the title states the work, and the due date is lifted out of
+   the metadata into a band of its own — because the date is the only fact the
+   reader will act on today. The action sits directly under that band, and the
+   brief and the tracker facts are held back until after it, so opening the task
+   never requires reading the whole page first. #}
+
+{{ status_banner({ level: priority_level, label: priority_label, text: priority_text, space_above: '0', space_below: '26px' }) }}
+
+{% if project_name %}
+    {{ heading({ text: project_name, level: '3', space_above: '0', space_below: '10px' }) }}
+{% endif %}
+
+{{ heading({ text: task_title, level: '1', space_above: '0', space_below: (assigned_by ? '6px' : '22px') }) }}
+
+{% if assigned_by %}
+    {{ text({ text: assigned_by ~ ' assigned this to you', size: 'small', muted: true, space_below: '24px' }) }}
+{% endif %}
+
+{% set due_band %}
+    {{ heading({ text: due_label, level: '3', space_above: '0', space_below: '8px' }) }}
+
+    {% if due_at %}
+        {{ heading({ text: due_at, level: '2', space_above: '0', space_below: (due_relative ? '4px' : '0') }) }}
+
+        {% if due_relative %}
+            {{ text({ text: due_relative, size: 'small', muted: true, space_below: '0' }) }}
+        {% endif %}
+    {% else %}
+        {# A missing date is a fact, not an empty box. #}
+        {{ text({ text: no_due_text, size: 'small', muted: true, space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '24px', space_below: '28px', slot: due_band }) }}
+
+{{ button({ label: action_label, url: action_url, shape: 'square', full_width: true, space_below: '28px' }) }}
+
+{% if task_description %}
+    {{ text({ text: task_description, space_below: '24px' }) }}
+{% endif %}
+
+{% set facts = [] %}
+{% if task_reference %}
+    {% set facts = facts|merge([{ label: 'Reference', value: task_reference, mono: true }]) %}
+{% endif %}
+{% if assigned_at %}
+    {% set facts = facts|merge([{ label: 'Assigned', value: assigned_at }]) %}
+{% endif %}
+{% if estimate %}
+    {% set facts = facts|merge([{ label: 'Estimate', value: estimate }]) %}
+{% endif %}
+
+{% if facts %}
+    {{ key_value({ rows: facts, label_width: '36%', space_below: '18px' }) }}
+{% endif %}
+
+{% if notification_settings_url %}
+    {# No rule above this: the table's own last hairline is already the
+       separator, and a second one would read as a footer that isn't there. #}
+    {{ button({ label: notification_settings_label, url: notification_settings_url, variant: 'link', color: theme('color.text_muted'), align: 'left', space_below: '0' }) }}
+{% endif %}

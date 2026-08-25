@@ -1,0 +1,45 @@
+{
+    "default": {
+        "away_since": "March",
+        "highlight_eyebrow": "Shipped in June",
+        "highlight_title": "Reports you can actually read",
+        "highlight_text": "The reporting page used to take a minute to load and then tell you very little. The rebuilt one answers the three questions people were exporting to a spreadsheet to answer, and it opens in under a second.",
+        "highlight_image": "https://images.unsplash.com/photo-1742198865450-cf9ce4335a33?w=560&q=72&fm=jpg&fit=crop&h=420",
+        "highlight_image_alt": "A desk with a monitor showing a dashboard",
+        "highlight_url": "https://example.com/changelog/reports",
+        "changes": [
+            {
+                "text": "Imports no longer time out",
+                "detail": "A 200,000-row file takes about 40 seconds, down from failing at 90"
+            },
+            {
+                "text": "Two-person review on anything that sends",
+                "detail": "The thing three of you asked for in the same week"
+            },
+            {
+                "text": "The API returns real error messages",
+                "detail": "Every 4xx now names the field that was wrong"
+            },
+            {
+                "text": "Starter includes five seats",
+                "detail": "It included one when you were last here, at the same price"
+            }
+        ],
+        "action_url": "https://example.com/login"
+    },
+    "no-image-no-list": {
+        "away_since": "last spring",
+        "headline": "One change, and it is the one you complained about",
+        "intro": "You have not signed in for a while, so this is short. There is exactly one thing worth telling you about, and it is the thing that made you stop.",
+        "highlight_eyebrow": "",
+        "highlight_title": "Scheduled sends no longer drift",
+        "highlight_text": "The queue was rewritten in April. A send scheduled for 09:00 now goes at 09:00 rather than somewhere in the following twenty minutes, and the schedule page shows the real send time rather than the intended one.",
+        "highlight_image": "",
+        "highlight_image_alt": "",
+        "highlight_url": "https://example.com/changelog/scheduling",
+        "changes": [],
+        "action_url": "https://example.com/login",
+        "button_label": "Sign back in",
+        "action_note": "Your workspace, your templates and your two API keys are all still there."
+    }
+}

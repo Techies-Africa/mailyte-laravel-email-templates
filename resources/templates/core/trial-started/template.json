@@ -1,0 +1,137 @@
+{
+    "slug": "trial-started",
+    "name": "Trial started",
+    "description": "Confirms a free trial has begun, states plainly when it ends and what happens then, and points at the first thing worth doing.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "onboarding",
+    "supported_layouts": [
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "friendly",
+    "tags": [
+        "trial",
+        "onboarding",
+        "subscription"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: soft product — pastel split opening, rounded geometry, the end date restated in a bar."
+    },
+    "subject": "Your {{ product.name }} trial is running",
+    "preheader": "Full access until {{ trial_ends_at }}. No card on file, nothing to cancel.",
+    "credits": [
+        {
+            "kind": "photo",
+            "author": "Kampus",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/four-people-working-in-the-office-8204363/",
+            "asset_url": "https://images.pexels.com/photos/8204363/pexels-photo-8204363.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Four people working in the office"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "heading",
+        "list",
+        "note",
+        "section",
+        "split",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "plan_name": {
+            "type": "string",
+            "description": "Plan the trial grants access to.",
+            "default": "Pro",
+            "example": "Pro"
+        },
+        "trial_days": {
+            "type": "number",
+            "description": "Length of the trial in days.",
+            "default": 14,
+            "example": 14
+        },
+        "trial_ends_at": {
+            "type": "date",
+            "description": "Human-readable end date. State it explicitly — \"14 days\" makes people do arithmetic.",
+            "required": true,
+            "example": "8 September 2026"
+        },
+        "card_required": {
+            "type": "boolean",
+            "description": "Whether a card is on file. Drives the sentence about what happens at the end, which is the sentence people actually look for.",
+            "default": false
+        },
+        "hero_image": {
+            "type": "url",
+            "description": "Optional image for the opening split. Leave empty for a text-only opening, which is faster and survives image blocking.",
+            "default": "",
+            "example": "https://example.com/hero.jpg"
+        },
+        "included": {
+            "type": "array",
+            "description": "What the trial unlocks, as `text` / optional `detail`. Concrete capabilities, not adjectives.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Unlimited projects"
+                }
+            ]
+        },
+        "included_heading": {
+            "type": "string",
+            "description": "Heading above the list of what is included.",
+            "default": "What's unlocked while it runs"
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Primary destination, usually the workspace.",
+            "required": true,
+            "example": "https://example.com/app"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Open your workspace"
+        },
+        "plans_url": {
+            "type": "url",
+            "description": "Optional secondary action for people who want to see pricing before the trial ends.",
+            "default": "",
+            "example": "https://example.com/pricing"
+        },
+        "closing": {
+            "type": "text",
+            "description": "Sign-off.",
+            "default": "We'll remind you before the trial ends. No surprise charges either way."
+        }
+    }
+}

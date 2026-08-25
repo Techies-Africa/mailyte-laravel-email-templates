@@ -1,0 +1,17 @@
+{
+    "default": {
+        "recovery_deadline": "23 September 2026",
+        "export_url": "https://example.com/settings/export",
+        "cancel_url": "https://example.com/account/restore"
+    },
+    "immediate-no-window": {
+        "recovery_label": "",
+        "recovery_deadline": "",
+        "recovery_note": "The account and its contents were erased when the request was confirmed. We cannot restore them, and neither can support.",
+        "export_url": "",
+        "cancel_url": "",
+        "heading_text": "Your account has been deleted",
+        "body": "The request to delete this account has been carried out. It was immediate, as the deletion settings on this workspace required.",
+        "closing_note": "This is the last email we will send to this address. If the request was not yours, reply to this message and we will look into how it was made."
+    }
+}

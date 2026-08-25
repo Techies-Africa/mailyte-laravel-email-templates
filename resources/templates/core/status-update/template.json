@@ -1,0 +1,141 @@
+{
+    "slug": "status-update",
+    "name": "Status update",
+    "description": "Tells someone a long-running job, review or request has moved, which state it is in now, and where that state sits in the sequence.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "system",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "status",
+        "progress",
+        "workflow",
+        "queue"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: progress — a tinted status strip, then the sequence on a ruled rail with the current stage numbered."
+    },
+    "subject": "{{ item_name }} — {{ state_label }}",
+    "preheader": "Where this sits in the sequence, and when the next change is expected.",
+    "blocks_used": [
+        "button",
+        "card",
+        "divider",
+        "heading",
+        "key_value",
+        "list",
+        "note",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "item_name": {
+            "type": "string",
+            "description": "What moved, named the way the recipient would name it rather than as an internal job id. It leads the subject line, so a queue name beats a UUID.",
+            "required": true,
+            "example": "Q3 revenue export"
+        },
+        "state_label": {
+            "type": "string",
+            "description": "The state it is in right now, in one or two words. This is the fact the recipient opened the email for, so it also carries the subject line.",
+            "required": true,
+            "example": "In progress"
+        },
+        "headline": {
+            "type": "string",
+            "description": "One line saying what actually changed. Written as a statement about the work, not about the email — 'Compiling 48,000 records', not 'Your request has been updated'.",
+            "required": true,
+            "example": "Compiling 48,000 records"
+        },
+        "position_text": {
+            "type": "string",
+            "description": "Where the current state sits in the run, so the reader can tell a long wait from a nearly-finished one. Leave empty for workflows with no fixed number of stages.",
+            "default": "",
+            "example": "Stage 2 of 4"
+        },
+        "summary": {
+            "type": "text",
+            "description": "A sentence or two on what this state means for the recipient — whether they need to do anything, and what happens without them.",
+            "required": true,
+            "example": "Nothing is needed from you while this runs. We will send one more email when the file is ready to download."
+        },
+        "stages_heading": {
+            "type": "string",
+            "description": "Heading over the sequence, so the numbered list is read as a route rather than as instructions.",
+            "default": "Where this sits"
+        },
+        "stages": {
+            "type": "array",
+            "description": "The full sequence as `text` (the stage) and `detail` (what happened at it, or that it has not started). Listing the stages already passed is what turns a status into a position.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Queued",
+                    "detail": "Accepted 09:14"
+                }
+            ]
+        },
+        "reference_label": {
+            "type": "string",
+            "description": "Label for the reference row. Say what support will ask for, e.g. 'Job reference' or 'Ticket'.",
+            "default": "Reference"
+        },
+        "reference": {
+            "type": "string",
+            "description": "The identifier a support conversation will start from. Set in the mono face so a long id can be read aloud a character at a time.",
+            "default": "",
+            "example": "exp_9f42c1b7"
+        },
+        "eta_label": {
+            "type": "string",
+            "description": "Lead-in for the expectation line, changed to suit the workflow — 'Expected to finish', 'Decision expected by'.",
+            "default": "Expected to finish"
+        },
+        "eta_value": {
+            "type": "string",
+            "description": "When the next change is expected, stated with a timezone if it is a clock time. Leave empty rather than guessing; an absent estimate reads better than one that slips.",
+            "default": "",
+            "example": "around 16:30 UTC today"
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the recipient can watch this themselves instead of waiting for the next email.",
+            "default": "",
+            "example": "https://example.com/app/exports/9f42"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Label for the action. Name the destination, not the verb — 'Open the export', not 'Click here'.",
+            "default": "Follow it live"
+        },
+        "footer_text": {
+            "type": "text",
+            "description": "The closing line. Says how often these go out, which is what stops a status email from feeling like noise.",
+            "default": "You get one of these each time the state changes, and nothing in between."
+        }
+    }
+}

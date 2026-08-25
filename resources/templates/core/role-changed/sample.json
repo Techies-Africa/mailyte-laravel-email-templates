@@ -1,0 +1,56 @@
+{
+    "default": {
+        "workspace_name": "Acme Production",
+        "new_role": "Billing manager",
+        "previous_role": "Administrator",
+        "workspace_url": "https://example.com/w/acme-production",
+        "changed_by": "Grace Hopper",
+        "changed_at": "24 August 2026 at 09:15 UTC",
+        "gained": [
+            {
+                "text": "See invoices, receipts and payment methods",
+                "detail": "Including invoices issued before your role changed"
+            },
+            {
+                "text": "Change the plan and the billing contact",
+                "detail": "Downgrades take effect at the end of the period"
+            }
+        ],
+        "lost": [
+            {
+                "text": "Add, remove or re-role members",
+                "detail": "Ask an owner instead"
+            },
+            {
+                "text": "Edit, publish or delete documents",
+                "detail": "You can still read all of them"
+            }
+        ]
+    },
+    "restriction-no-attribution": {
+        "workspace_name": "Northwind Group",
+        "new_role": "Viewer",
+        "previous_role": "Administrator",
+        "workspace_url": "https://example.com/w/northwind-group",
+        "changed_by": "",
+        "changed_at": "",
+        "body": "Your permissions in this workspace have been reduced. Everything already shared with you is still there, and you can still read all of it.",
+        "gained": [],
+        "lost": [
+            {
+                "text": "Change anyone's role, including your own"
+            },
+            {
+                "text": "Add or remove members",
+                "detail": "Ask an owner instead"
+            },
+            {
+                "text": "Edit documents, upload files, or delete anything"
+            },
+            {
+                "text": "See billing, invoices and the audit log"
+            }
+        ],
+        "closing_note": "Roles are set by the owners of a workspace, not by us. Nobody recorded a reason for this change — an owner of Northwind Group can tell you why, and can undo it."
+    }
+}

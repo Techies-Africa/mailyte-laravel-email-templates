@@ -1,0 +1,113 @@
+{
+    "tokens": {
+        "font": {
+            "heading": "'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif",
+            "body": "'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif",
+            "mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Courier New', monospace"
+        },
+        "color": {
+            "bg": {
+                "light": "#EBEDEA",
+                "dark": "#101210"
+            },
+            "surface": {
+                "light": "#FFFFFF",
+                "dark": "#181A18"
+            },
+            "surface_alt": {
+                "light": "#F4F5F2",
+                "dark": "#1F221F"
+            },
+            "text": {
+                "light": "#191B19",
+                "dark": "#E7E9E6"
+            },
+            "text_muted": {
+                "light": "#575B57",
+                "dark": "#A6ABA6"
+            },
+            "text_subtle": {
+                "light": "#5D615D",
+                "dark": "#8B908B"
+            },
+            "border": {
+                "light": "#D6D9D3",
+                "dark": "#2A2D2A"
+            },
+            "primary": {
+                "light": "#2C3330",
+                "dark": "#DDE1DC"
+            },
+            "primary_text": {
+                "light": "#FFFFFF",
+                "dark": "#181A18"
+            },
+            "link": {
+                "light": "#2F6350",
+                "dark": "#83C4A6"
+            }
+        },
+        "type": {
+            "h1": {
+                "size": "23px",
+                "line_height": "31px",
+                "weight": "700",
+                "letter_spacing": "-0.015em"
+            },
+            "h2": {
+                "size": "16px",
+                "line_height": "23px",
+                "weight": "700",
+                "letter_spacing": "0.005em"
+            },
+            "h3": {
+                "size": "10.5px",
+                "line_height": "15px",
+                "weight": "700",
+                "letter_spacing": "0.14em"
+            },
+            "body": {
+                "size": "14.5px",
+                "line_height": "24px",
+                "weight": "400",
+                "letter_spacing": "0"
+            },
+            "small": {
+                "size": "13px",
+                "line_height": "22px",
+                "weight": "400",
+                "letter_spacing": "0"
+            },
+            "footer": {
+                "size": "11.5px",
+                "line_height": "18px",
+                "weight": "400",
+                "letter_spacing": "0"
+            },
+            "button": {
+                "size": "13.5px",
+                "line_height": "13.5px",
+                "weight": "600",
+                "letter_spacing": "0.01em"
+            }
+        },
+        "radius": {
+            "sm": "3px",
+            "md": "4px",
+            "lg": "6px",
+            "pill": "999px"
+        },
+        "spacing": {
+            "xs": "7px",
+            "sm": "11px",
+            "md": "19px",
+            "lg": "27px",
+            "xl": "38px"
+        },
+        "layout": {
+            "width": "560px",
+            "gutter": "36px",
+            "outer_padding": "34px"
+        }
+    }
+}

@@ -1,0 +1,124 @@
+{
+    "slug": "password-changed",
+    "name": "Password changed",
+    "description": "Sent after a password is successfully changed: the change recorded with its metadata, and a way to undo it if the person who made it was not the account holder.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "account",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools",
+        "ecommerce"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "password",
+        "account",
+        "security",
+        "confirmation"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: audit line, then alarm — no greeting, the change set as a monospaced record, and the escape hatch given a dark band of its own at the foot rather than a second button beside the first."
+    },
+    "subject": "Your {{ product.name }} password was changed",
+    "preheader": "A record of the change, and what to do if it wasn't you.",
+    "blocks_used": [
+        "button",
+        "heading",
+        "key_value",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "heading_text": {
+            "type": "string",
+            "description": "The headline. State the completed fact — a recipient who did not make this change needs to know that in the preview pane, not three lines in.",
+            "default": "Your password was changed"
+        },
+        "body": {
+            "type": "text",
+            "description": "The opening sentence. Give the recipient permission to stop reading if it was them, so the band at the foot is aimed only at the person it is for.",
+            "default": "The password on your account has been changed. If that was you, there is nothing to do — this message is only the record."
+        },
+        "record_label": {
+            "type": "string",
+            "description": "Small heading over the metadata. It is a label, not a sentence, so keep it to one or two words.",
+            "default": "Recorded"
+        },
+        "changed_at": {
+            "type": "datetime",
+            "description": "When the change went through, formatted at the call site and ideally with the time zone spelled out — a bare clock time is unverifiable to someone travelling.",
+            "default": "",
+            "example": "24 August 2026 at 14:02 UTC"
+        },
+        "device": {
+            "type": "string",
+            "description": "Browser and operating system as your session store recorded them. Recognition is the whole point, so use what the person would recognise, not the raw user agent.",
+            "default": "",
+            "example": "Chrome 128 on macOS"
+        },
+        "ip_address": {
+            "type": "string",
+            "description": "The address the change came from. Meaningless to most readers and decisive to the few who check it, which is why it is present but set quietly.",
+            "default": "",
+            "example": "203.0.113.42"
+        },
+        "location": {
+            "type": "string",
+            "description": "Approximate place derived from the address. Omit it rather than guess: a wrong city turns a reassuring email into an alarming one.",
+            "default": "",
+            "example": "Lagos, Nigeria"
+        },
+        "metadata_caveat": {
+            "type": "text",
+            "description": "The honest footnote under the record. Geolocation is routinely a city or two out, and a reader who knows that will not panic at an unfamiliar name.",
+            "default": "Location is estimated from the network address and is often a city or two out. Mobile networks are worse than most."
+        },
+        "alarm_title": {
+            "type": "string",
+            "description": "Heading of the closing band. Address the one reader it is for.",
+            "default": "If this wasn't you"
+        },
+        "alarm_body": {
+            "type": "text",
+            "description": "What is actually at stake and what to do about it. Say it plainly: whoever changed the password can currently read everything in the account.",
+            "default": "Then somebody else set that password and can sign in as you right now. End every session and take the account back."
+        },
+        "revoke_label": {
+            "type": "string",
+            "description": "Label on the recovery action. Name both halves — signing out and resetting — because doing only one of them leaves the intruder in.",
+            "default": "Sign out everywhere and reset"
+        },
+        "revoke_url": {
+            "type": "url",
+            "description": "Where the account recovery flow starts. Leave it empty if your product has no self-service recovery, and point the band's copy at support instead.",
+            "default": "",
+            "example": "https://example.com/account/recover"
+        },
+        "closing_note": {
+            "type": "text",
+            "description": "Why this email exists at all. Saying that it is sent on every change stops the next one being mistaken for a phishing attempt.",
+            "default": "We send this every time a password changes, including changes you make yourself from account settings. We will never ask you to reply with a password."
+        }
+    }
+}

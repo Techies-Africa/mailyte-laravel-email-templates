@@ -4,12 +4,15 @@ providers:
 env:
   - APP_NAME="Acme"
   - APP_ENV=local
-  - APP_URL=http://localhost:8321
+  - APP_URL=http://127.0.0.1:8321
   - MAIL_MAILER=smtp
   - MAIL_HOST=127.0.0.1
   - MAIL_PORT=1025
   - MAIL_FROM_ADDRESS="hello@acme.test"
   - MAIL_FROM_NAME="Acme"
-  - MAILYTE_THEME=neutral
+  - CACHE_STORE=file
+  - MAILYTE_THEME=showcase
   - MAILYTE_COMPANY_ADDRESS="Acme Inc, 1 Example Way, Springfield"
   - MAILYTE_SUPPORT_URL=https://acme.test/support
+  - MAILYTE_UNSUBSCRIBE_URL=https://acme.test/unsubscribe/8f2c1d
+  - MAILYTE_PREFERENCES_URL=https://acme.test/email-preferences

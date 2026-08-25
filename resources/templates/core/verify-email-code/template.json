@@ -1,0 +1,92 @@
+{
+    "slug": "verify-email-code",
+    "name": "Verify email address",
+    "description": "Confirms an address with a code and no link at all, for flows that must survive link rewriting by a security gateway or complete on another device.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "variant_of": "verify-email",
+    "variant_label": "Code only",
+    "type": "transactional",
+    "category": "account",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "verification",
+        "account",
+        "signup",
+        "otp"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: single figure — the code is the whole message, sized as such, with no link to compete with or to be rewritten."
+    },
+    "subject": "{{ verification_code }} is your {{ product.name }} code",
+    "preheader": "Type it into the window you already have open. Good for {{ expires_in }}.",
+    "blocks_used": [
+        "code",
+        "divider",
+        "heading",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "heading_text": {
+            "type": "string",
+            "description": "Main headline.",
+            "default": "Your verification code"
+        },
+        "body": {
+            "type": "text",
+            "description": "Opening paragraph. Say where the code goes, since there is no link to carry them there.",
+            "default": "Type this into the window where you started signing up. It works once, and only there."
+        },
+        "verification_code": {
+            "type": "string",
+            "description": "The code, set at 46px as the entire point of the message.",
+            "required": true,
+            "example": "294 501"
+        },
+        "expires_in": {
+            "type": "string",
+            "description": "How long the code stays valid.",
+            "default": "10 minutes"
+        },
+        "wrong_window_note": {
+            "type": "text",
+            "description": "What to do if they no longer have the window open. Worth stating: a code-only flow has no way to recover otherwise.",
+            "default": "Closed the window? Start again and we'll send a new code."
+        },
+        "security_note": {
+            "type": "text",
+            "description": "Closing reassurance. Codes are phished more often than links, so this line does real work.",
+            "default": "We will never ask you for this code by phone, chat or email. If you didn't request it, ignore this message."
+        }
+    }
+}

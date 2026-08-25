@@ -1,0 +1,90 @@
+{
+    "default": {
+        "digest_title": "Your week in Acme",
+        "period_label": "1 – 7 September",
+        "digest_summary": "Nine things happened. Two are waiting on you.",
+        "stats": [
+            {
+                "value": "9",
+                "label": "Updates",
+                "caption": "Down from 14"
+            },
+            {
+                "value": "2",
+                "label": "Waiting on you",
+                "caption": "Oldest is 3 days"
+            },
+            {
+                "value": "4",
+                "label": "People active",
+                "caption": "Across 2 projects"
+            }
+        ],
+        "groups": [
+            {
+                "title": "Waiting on you",
+                "items": [
+                    {
+                        "text": "Approve the September invoice",
+                        "detail": "Raised by Priya Raman, 3 days ago"
+                    },
+                    {
+                        "text": "Review ENG-2043, the importer retry rewrite",
+                        "detail": "Assigned to you on Tuesday"
+                    }
+                ]
+            },
+            {
+                "title": "Finished",
+                "items": [
+                    {
+                        "text": "Ingest reliability: retry backoff shipped",
+                        "detail": "Tomás Beltrán, Friday"
+                    },
+                    {
+                        "text": "Onboarding copy rewritten end to end",
+                        "detail": "Ines Okonjo, Thursday"
+                    },
+                    {
+                        "text": "Two support escalations closed",
+                        "detail": "Both under an hour"
+                    }
+                ]
+            },
+            {
+                "title": "Discussed",
+                "items": [
+                    {
+                        "text": "Deploy pipeline times out on large migrations",
+                        "detail": "11 replies, last one this morning"
+                    },
+                    {
+                        "text": "Q3 roadmap planning",
+                        "detail": "6 replies"
+                    }
+                ]
+            }
+        ],
+        "empty_text": "Nothing needed you this period. The digest still arrives on schedule, so an empty one means quiet rather than broken.",
+        "action_label": "Open your dashboard",
+        "action_url": "https://example.com/app/activity",
+        "frequency_title": "How often you get this",
+        "frequency_text": "This digest stands in for the individual notifications behind everything listed above. It can arrive daily, weekly, monthly, or not at all.",
+        "frequency_label": "Change the frequency",
+        "notification_settings_url": "https://example.com/settings/notifications"
+    },
+    "quiet-week": {
+        "digest_title": "Your week in Acme",
+        "period_label": "8 – 14 September",
+        "digest_summary": "",
+        "stats": [],
+        "groups": [],
+        "empty_text": "Nothing needed you this period. The digest still arrives on schedule, so an empty one means quiet rather than broken.",
+        "action_label": "Open your dashboard",
+        "action_url": "https://example.com/app/activity",
+        "frequency_title": "How often you get this",
+        "frequency_text": "You are getting this weekly. If a quiet week is not worth an email, monthly is one click away.",
+        "frequency_label": "Change the frequency",
+        "notification_settings_url": "https://example.com/settings/notifications"
+    }
+}

@@ -1,18 +1,78 @@
 {
     "default": {
-        "user": { "first_name": "Ada" },
-        "action_url": "https://example.com/dashboard",
-        "steps": [
-            { "text": "Connect your domain", "detail": "Takes about two minutes" },
-            { "text": "Invite a teammate", "detail": "Collaboration is where this gets useful" },
-            { "text": "Send a test message", "detail": "Confirm everything works end to end" }
+        "user": {
+            "first_name": "Ada"
+        },
+        "action_url": "https://example.com/setup/domain",
+        "hero_image": "https://images.pexels.com/photos/3865639/pexels-photo-3865639.jpeg?auto=compress&cs=tinysrgb&w=520&h=640&fit=crop",
+        "help_url": "https://example.com/docs",
+        "capabilities": [
+            {
+                "heading": "Send from your own domain",
+                "text": "Recipients see you rather than a shared sender, and delivery improves with it."
+            },
+            {
+                "heading": "Templates the whole team can edit",
+                "text": "Wording changes stop being a deploy and start being a review."
+            },
+            {
+                "heading": "One place to see what sent",
+                "text": "Including what bounced, and the reason the provider gave."
+            }
         ],
-        "account_details": [
-            { "label": "Signed in as", "value": "ada@example.com" },
-            { "label": "Plan", "value": "Starter trial, 14 days" }
+        "steps": [
+            {
+                "text": "Connect your domain",
+                "detail": "Two DNS records, about two minutes"
+            },
+            {
+                "text": "Invite a teammate",
+                "detail": "Reviews are what stop a bad send"
+            },
+            {
+                "text": "Send a test to yourself",
+                "detail": "Confirms the whole path end to end"
+            }
+        ],
+        "account_rows": [
+            {
+                "label": "Signed in as",
+                "value": "ada@example.com",
+                "mono": true
+            },
+            {
+                "label": "Plan",
+                "value": "Starter trial"
+            },
+            {
+                "label": "Trial ends",
+                "value": "8 September 2026"
+            }
         ]
     },
-    "minimal-data": {
-        "action_url": "https://example.com/dashboard"
+    "text-only": {
+        "user": {
+            "first_name": ""
+        },
+        "action_url": "https://example.com/setup/domain",
+        "hero_image": "",
+        "help_url": "",
+        "capabilities": [],
+        "steps": [
+            {
+                "text": "Connect your domain",
+                "detail": "Two DNS records, about two minutes"
+            },
+            {
+                "text": "Send a test to yourself"
+            }
+        ],
+        "account_rows": [
+            {
+                "label": "Signed in as",
+                "value": "ops@example.com",
+                "mono": true
+            }
+        ]
     }
 }

@@ -1,0 +1,125 @@
+{
+    "slug": "email-changed",
+    "name": "Email address changed",
+    "description": "Sent to both the old and the new address when the sign-in email on an account changes, with the two addresses compared side by side and a window in which to stop it.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "account",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools",
+        "ecommerce"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "email",
+        "account",
+        "security",
+        "confirmation"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: before and after — the two addresses set as a two-row comparison in an accented card, the cancel window stated as a deadline, and one action that stops the change."
+    },
+    "subject": "Your {{ product.name }} sign-in address is changing",
+    "preheader": "Check the new address is one you control before it takes over.",
+    "blocks_used": [
+        "button",
+        "card",
+        "divider",
+        "heading",
+        "key_value",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "heading_text": {
+            "type": "string",
+            "description": "The headline. Say that the address is changing rather than that it has changed — the whole design rests on there still being time to intervene.",
+            "default": "Your sign-in address is changing"
+        },
+        "dual_delivery_note": {
+            "type": "string",
+            "description": "States that both addresses received this. Without it the copy landing in the old inbox looks like a misdirected email and gets deleted, which is the one inbox that most needs to see it.",
+            "default": "This was sent to both the old and the new address."
+        },
+        "body": {
+            "type": "text",
+            "description": "What is happening and what to use in the meantime. People try the new address immediately and lock themselves out, so say which one still works.",
+            "default": "The email address used to sign in to this account is being changed. Carry on using the old address until the new one has been confirmed."
+        },
+        "old_email": {
+            "type": "email",
+            "description": "The address being replaced, set in the mono face so an unfamiliar character in a lookalike domain is visible.",
+            "required": true,
+            "example": "ada@analyticalengine.example"
+        },
+        "new_email": {
+            "type": "email",
+            "description": "The address taking over. It is the emphasised row: a recipient who does not recognise it should notice within a second of opening the message.",
+            "required": true,
+            "example": "ada.lovelace@example.com"
+        },
+        "current_label": {
+            "type": "string",
+            "description": "Row label for the outgoing address. One word — the labels sit in a 30% column that still has to work at 320px.",
+            "default": "Current"
+        },
+        "new_label": {
+            "type": "string",
+            "description": "Row label for the incoming address.",
+            "default": "New"
+        },
+        "cancel_deadline": {
+            "type": "date",
+            "description": "The last moment the change can be reversed. Leave it empty when your product applies the change immediately, and the deadline bar disappears rather than printing a hollow promise.",
+            "default": "",
+            "example": "27 August 2026"
+        },
+        "stop_by_label": {
+            "type": "string",
+            "description": "Opening words of the deadline bar, joined to the date. Kept separate from the date so a translation can put the verb where its grammar needs it.",
+            "default": "You can stop this change until"
+        },
+        "deadline_note": {
+            "type": "string",
+            "description": "What happens once the window closes. The consequence, not the mechanism.",
+            "default": "After that the old address stops working for sign-in and for password resets."
+        },
+        "cancel_label": {
+            "type": "string",
+            "description": "Label on the one action. It is a refusal, so word it as one.",
+            "default": "Stop this change"
+        },
+        "cancel_url": {
+            "type": "url",
+            "description": "Where the change is reversed. Should work from the old address without a password — someone whose account was taken over cannot sign in to cancel anything.",
+            "default": "",
+            "example": "https://example.com/account/email/cancel/7c1f"
+        },
+        "no_action_note": {
+            "type": "text",
+            "description": "The closing line for the majority who made this change themselves, and the route for the person who no longer controls the old mailbox.",
+            "default": "Made this change yourself? There is nothing to do — the new address takes over on its own. If you have lost access to the old address, contact us rather than replying to this message."
+        }
+    }
+}

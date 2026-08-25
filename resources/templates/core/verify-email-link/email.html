@@ -1,0 +1,15 @@
+{{ heading({ text: 'Confirm', level: '3', space_above: '0', space_below: '12px' }) }}
+
+{{ heading({ text: heading_text, level: '1', space_above: '0' }) }}
+
+{% if user.first_name %}
+    {{ text({ text: 'Hi ' ~ user.first_name ~ ',', space_below: '4px' }) }}
+{% endif %}
+
+{{ text({ text: body }) }}
+
+{{ button({ label: button_label, url: action_url, align: 'center', full_width: true, fallback_text: fallback_note, space_above: '6px' }) }}
+
+{{ note({ tone: 'outline', mark: '◷', strong_text: 'The link expires in ' ~ expires_in ~ '.', text: 'Request another if it runs out.' }) }}
+
+{{ text({ text: security_note, size: 'small', muted: true, space_below: '0' }) }}

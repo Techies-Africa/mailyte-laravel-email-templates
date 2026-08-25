@@ -1,20 +1,48 @@
-{{ heading({ text: heading_text, level: '1' }) }}
+{{ split({
+    tone: 'alt',
+    eyebrow: (user.first_name ? eyebrow ~ ', ' ~ user.first_name : eyebrow),
+    title: heading_text,
+    text: body,
+    image: hero_image,
+    image_alt: '',
+    button_label: button_label,
+    button_url: action_url,
+    image_percent: 40
+}) }}
 
-{% if user.first_name %}{{ text({ text: 'Hi ' ~ user.first_name ~ ',' }) }}{% endif %}
+{% if capabilities %}
+    {% set gains %}
+        {{ heading({ text: capabilities_heading, level: '2', space_above: '0', space_below: '20px' }) }}
+        {{ columns({ count: capabilities|length, items: capabilities, space_below: '0' }) }}
+    {% endset %}
 
-{{ text({ text: body }) }}
-
-{{ button({ label: button_label, url: action_url }) }}
+    {{ section({ tone: 'surface', padding_y: '32px', slot: gains }) }}
+{% endif %}
 
 {% if steps %}
-    {{ heading({ text: 'Start here', level: '3' }) }}
-    {{ list({ items: steps, style: 'number' }) }}
+    {% set first_run %}
+        {{ heading({ text: steps_heading, level: '3', space_above: '0', space_below: '16px' }) }}
+        {{ list({ items: steps, style: 'number', space_below: '0' }) }}
+    {% endset %}
+
+    {{ section({ tone: 'custom', background: theme('color.bg'), padding_y: '32px', slot: first_run }) }}
 {% endif %}
 
-{% if account_details %}
-    {{ key_value({ rows: account_details }) }}
+{% if account_rows %}
+    {% set facts %}
+        {{ heading({ text: 'Your account', level: '3', space_above: '0', space_below: '8px' }) }}
+        {{ key_value({ rows: account_rows, label_width: '40%', space_below: '0' }) }}
+    {% endset %}
+
+    {{ section({ tone: 'surface', padding_y: '28px', slot: facts }) }}
 {% endif %}
 
-{{ divider() }}
+{% set closing %}
+    {{ heading({ text: help_heading, level: '2', space_above: '0', space_below: '10px', color: '#FFFFFF' }) }}
+    {{ text({ text: help_text, color: '#C9C2B8', space_below: (help_url ? '18px' : '0') }) }}
+    {% if help_url %}
+        {{ button({ label: help_link_label, url: help_url, variant: 'outline', color: '#FFFFFF', align: 'left', shape: 'pill', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
 
-{{ text({ text: closing, size: 'small', muted: true }) }}
+{{ section({ tone: 'dark', background: '#1C1917', padding_y: '34px', slot: closing }) }}

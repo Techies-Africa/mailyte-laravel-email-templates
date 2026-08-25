@@ -1,17 +1,50 @@
 {
     "default": {
-        "invoice": { "number": "INV-2026-0184", "date": "24 August 2026", "due_date": "7 September 2026", "total": "$240.00" },
+        "invoice": {
+            "number": "INV-2026-0184",
+            "date": "24 August 2026",
+            "due_date": "7 September 2026",
+            "total": "$240.00"
+        },
         "pay_url": "https://example.com/pay/INV-2026-0184",
         "manage_subscription_url": "https://example.com/billing",
+        "footer_legal": "VAT ID EX123456789. Payment terms: 14 days from issue.",
         "line_items": [
-            { "label": "Starter plan, monthly", "value": "$180.00" },
-            { "label": "Additional seats, 2 x $30.00", "value": "$60.00" }
+            {
+                "label": "Starter plan, monthly",
+                "value": "$180.00"
+            },
+            {
+                "label": "Additional seats, 2 x $30.00",
+                "value": "$60.00"
+            }
         ],
         "totals": [
-            { "label": "Subtotal", "value": "$240.00" },
-            { "label": "VAT (0%)", "value": "$0.00" },
-            { "label": "Total due", "value": "$240.00" }
-        ],
-        "footer_legal": "Acme Inc, 1 Example Way, Springfield. VAT ID EX123456789."
+            {
+                "label": "Subtotal",
+                "value": "$240.00"
+            },
+            {
+                "label": "VAT (0%)",
+                "value": "$0.00"
+            },
+            {
+                "label": "Total due",
+                "value": "$240.00"
+            }
+        ]
+    },
+    "minimal": {
+        "invoice": {
+            "number": "INV-2026-0185",
+            "date": "",
+            "due_date": "on receipt",
+            "total": "£48.00"
+        },
+        "pay_url": "https://example.com/pay/INV-2026-0185",
+        "manage_subscription_url": "",
+        "footer_legal": "",
+        "line_items": [],
+        "totals": []
     }
 }

@@ -1,0 +1,161 @@
+{
+    "slug": "incident-notice",
+    "name": "Incident notice",
+    "description": "Sent while something is broken: the severity, what is affected, what is not, and the time the next update will arrive.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "system",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "fintech"
+    ],
+    "tone": "urgent",
+    "tags": [
+        "incident",
+        "outage",
+        "status",
+        "downtime"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: incident — severity first, the blast radius as a matched pair of columns, and the next-update time set as the specimen of the page."
+    },
+    "subject": "{{ severity_label }} — {{ impact_headline }}",
+    "preheader": "What is affected, what is not, and the time the next update lands.",
+    "blocks_used": [
+        "button",
+        "code",
+        "columns",
+        "heading",
+        "status_banner",
+        "text"
+    ],
+    "variables": {
+        "severity_level": {
+            "type": "string",
+            "description": "Drives the banner's weight, glyph and colour. Use `danger` for an outage, `warning` for degraded service. Severity is carried by the word as well as the colour, so it survives a client that repaints it.",
+            "default": "danger",
+            "enum": [
+                "danger",
+                "warning",
+                "info",
+                "neutral"
+            ],
+            "example": "danger"
+        },
+        "severity_label": {
+            "type": "string",
+            "description": "Your own severity vocabulary, so the reader can match this against your status page and your contract. Leads the subject line.",
+            "required": true,
+            "example": "Major outage"
+        },
+        "impact_line": {
+            "type": "string",
+            "description": "The banner sentence: what a customer cannot do right now. Written from their side of the API, not ours.",
+            "required": true,
+            "example": "Messages sent through the EU region are failing."
+        },
+        "impact_headline": {
+            "type": "string",
+            "description": "The headline, and the rest of the subject line. Name the symptom, not the suspected cause — the cause changes during an incident and the symptom does not.",
+            "required": true,
+            "example": "Sending is failing in the EU region"
+        },
+        "started_label": {
+            "type": "string",
+            "description": "Lead-in for the start time.",
+            "default": "Started"
+        },
+        "started_at": {
+            "type": "string",
+            "description": "When impact began, not when you noticed. The gap between the two is the number a customer will reconstruct anyway, so state it yourself.",
+            "required": true,
+            "example": "13:42"
+        },
+        "timezone": {
+            "type": "string",
+            "description": "The timezone both times on this page are given in, with its offset. An incident email is read in every timezone you sell into, so this is never implicit.",
+            "required": true,
+            "example": "UTC (GMT+0)"
+        },
+        "summary": {
+            "type": "text",
+            "description": "What is known, in two or three sentences. No hedging and no 'some users may have experienced' — say what is failing and what you are doing. If the cause is unknown, say that it is unknown.",
+            "required": true,
+            "example": "Requests to the EU sending endpoint are returning 500s. We have confirmed the failure is in the EU region only and are rolling back a change released at 13:30."
+        },
+        "affected_heading": {
+            "type": "string",
+            "description": "Heading over the affected column.",
+            "default": "Affected"
+        },
+        "affected_text": {
+            "type": "text",
+            "description": "What is broken, in one short paragraph. Specific enough that a reader can tell whether it touches them.",
+            "required": true,
+            "example": "The EU sending endpoint, and any send scheduled to leave from it since 13:42."
+        },
+        "unaffected_heading": {
+            "type": "string",
+            "description": "Heading over the unaffected column.",
+            "default": "Not affected"
+        },
+        "unaffected_text": {
+            "type": "text",
+            "description": "What is still working. Naming this is what stops a regional fault being read as a total outage, and it is the half of the email most senders leave out.",
+            "required": true,
+            "example": "The US region, the dashboard, webhooks, and everything already delivered. No data has been lost."
+        },
+        "next_update_label": {
+            "type": "string",
+            "description": "Label above the next-update time.",
+            "default": "Next update"
+        },
+        "next_update_at": {
+            "type": "string",
+            "description": "The clock time of the next update — the single most important line in this email. A promised time you keep is what makes the next incident email get opened.",
+            "required": true,
+            "example": "15:00"
+        },
+        "next_update_note": {
+            "type": "string",
+            "description": "The cadence under the time, so the reader knows whether to sit and watch or to go away and come back.",
+            "default": "and every 30 minutes after that, whether or not anything has changed."
+        },
+        "status_url": {
+            "type": "url",
+            "description": "The live status page, which is where a reader should go rather than into your support queue.",
+            "required": true,
+            "example": "https://status.example.com/incidents/eu-sending"
+        },
+        "status_label": {
+            "type": "string",
+            "description": "Label for the status page action.",
+            "default": "Live status page"
+        },
+        "closing": {
+            "type": "text",
+            "description": "The closing line. Say who is reachable and how — during an incident this line is doing customer support on its own.",
+            "default": "Replies to this email reach the engineers working on it. You do not need to open a ticket."
+        }
+    }
+}

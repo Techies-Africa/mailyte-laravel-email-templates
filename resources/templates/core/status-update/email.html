@@ -1,0 +1,43 @@
+{# Progress. A tinted strip states the thing and the state it is in; the
+   sequence below it sits on an accented rail so a reader can see how much
+   route is behind them and how much is still ahead. #}
+
+{% set strip %}
+    {{ heading({ text: item_name, level: '3', space_above: '0', space_below: '10px', color: theme('color.text_muted') }) }}
+    {{ heading({ text: headline, level: '1', space_above: '0', space_below: '10px' }) }}
+    {% if position_text %}
+        {{ text({ text: state_label ~ ' — ' ~ position_text, size: 'small', muted: true, space_below: '0' }) }}
+    {% else %}
+        {{ text({ text: state_label, size: 'small', muted: true, space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'custom', background: theme('color.surface_alt'), padding_y: '30px', space_below: '26px', slot: strip }) }}
+
+{{ text({ text: summary, space_below: '24px' }) }}
+
+{% if stages or reference %}
+    {% set rail %}
+        {% if stages %}
+            {{ heading({ text: stages_heading, level: '3', space_above: '22px', space_below: '14px' }) }}
+            {{ list({ items: stages, style: 'number', space_below: (reference ? '2px' : '22px') }) }}
+        {% endif %}
+        {% if reference %}
+            {{ key_value({ rows: [{ label: reference_label, value: reference, mono: true }], label_width: '46%', space_above: (stages ? '0' : '22px'), space_below: '18px' }) }}
+        {% endif %}
+    {% endset %}
+
+    {{ card({ slot: rail, background: theme('color.surface'), accent: theme('color.primary'), space_below: '26px' }) }}
+{% endif %}
+
+{% if eta_value %}
+    {{ note({ tone: 'outline', strong_text: eta_label, text: eta_value, space_below: '24px' }) }}
+{% endif %}
+
+{% if action_url %}
+    {{ button({ label: button_label, url: action_url, align: 'left', shape: 'square', space_below: '26px' }) }}
+{% endif %}
+
+{{ divider({ style: 'dashed', space_above: '0', space_below: '16px' }) }}
+
+{{ text({ text: footer_text, size: 'footer', muted: true, space_below: '0' }) }}

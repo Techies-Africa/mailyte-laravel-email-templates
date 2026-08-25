@@ -25,13 +25,15 @@ final class CodeBlock extends Block
     {
         return [
             'code' => $this->string($props, 'code'),
+            'align' => $this->enum($props, 'align', ['left', 'center'], 'center'),
             'label' => $this->string($props, 'label'),
             'note' => $this->string($props, 'note'),
             'background' => $this->string($props, 'background', (string) $theme->get('color.surface_alt')),
             'color' => $this->string($props, 'color', (string) $theme->get('color.text')),
+            'muted_color' => $this->string($props, 'muted_color', (string) $theme->get('color.text_muted')),
             'radius' => (string) $theme->get('radius.lg'),
             'type' => $theme->get('type.code', ['size' => '32px', 'line_height' => '40px', 'weight' => '700', 'letter_spacing' => '0.18em']),
-            'space_above' => $this->string($props, 'space_above', (string) $theme->get('spacing.md')),
+            'space_above' => $this->string($props, 'space_above', '0'),
             'space_below' => $this->string($props, 'space_below', (string) $theme->get('spacing.md')),
         ];
     }

@@ -1,0 +1,35 @@
+{
+    "default": {
+        "severity_level": "danger",
+        "severity_label": "Major outage",
+        "impact_line": "Messages sent through the EU region are failing.",
+        "impact_headline": "Sending is failing in the EU region",
+        "started_at": "13:42",
+        "timezone": "UTC (GMT+0)",
+        "summary": "Requests to the EU sending endpoint are returning 500s. We have confirmed the failure is limited to that region and are rolling back a change released at 13:30. The rollback is running now.",
+        "affected_text": "The EU sending endpoint, and every send that was due to leave it since 13:42. Those sends are queued, not dropped.",
+        "unaffected_text": "The US region, the dashboard, webhooks, and everything already delivered. No data has been lost.",
+        "next_update_at": "15:00",
+        "status_url": "https://status.example.com/incidents/eu-sending"
+    },
+    "degraded-single-service": {
+        "severity_level": "warning",
+        "severity_label": "Degraded service",
+        "impact_line": "Search results are up to ten minutes behind.",
+        "impact_headline": "Search is lagging behind writes",
+        "started_label": "Noticed at",
+        "started_at": "08:05",
+        "timezone": "Africa/Lagos (GMT+1)",
+        "summary": "The search index is rebuilding after a schema change, so a record you save now may not appear in search for up to ten minutes. Nothing is failing and nothing is being lost — the index is simply behind. We do not yet know why the rebuild is running this slowly.",
+        "affected_heading": "Affected",
+        "affected_text": "Search, and anything that reads from it: saved views, and the record picker.",
+        "unaffected_heading": "Not affected",
+        "unaffected_text": "Everything else, including the API, exports and reporting, which read the database directly.",
+        "next_update_label": "Next update",
+        "next_update_at": "10:00",
+        "next_update_note": "and then hourly until the index has caught up.",
+        "status_url": "https://status.example.com/incidents/search-lag",
+        "status_label": "Status page",
+        "closing": "If a specific record is missing from search and you need it found now, reply with the record id and we will look it up directly."
+    }
+}

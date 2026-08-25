@@ -1,0 +1,34 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "account_email": "ada@example.com",
+        "account_id": "ACC-4192",
+        "plan_name": "Starter",
+        "activated_at": "24 August 2026 at 09:14 UTC",
+        "action_url": "https://example.com/app",
+        "unlocked": [
+            {
+                "text": "Create and publish unlimited projects"
+            },
+            {
+                "text": "Invite up to three teammates"
+            },
+            {
+                "text": "Connect a custom sending domain"
+            }
+        ]
+    },
+    "sparse": {
+        "user": {
+            "first_name": ""
+        },
+        "account_email": "ops@example.com",
+        "account_id": "",
+        "plan_name": "",
+        "activated_at": "",
+        "action_url": "https://example.com/app",
+        "unlocked": []
+    }
+}

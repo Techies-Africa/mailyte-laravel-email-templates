@@ -1,0 +1,40 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "milestone_verb": "sent your first campaign",
+        "headline_stat": "1,204",
+        "headline_stat_label": "people received it, of 1,210 attempted",
+        "action_url": "https://example.com/app/campaigns/new",
+        "share_url": "https://example.com/app/campaigns/1/share",
+        "stat_rows": [
+            {
+                "value": "38%",
+                "label": "Opened so far",
+                "caption": "Against a 21% category average"
+            },
+            {
+                "value": "4 min",
+                "label": "Time to send",
+                "caption": "From first draft to delivered"
+            },
+            {
+                "value": "0",
+                "label": "Bounces",
+                "caption": "Your domain is set up correctly"
+            }
+        ]
+    },
+    "no-numbers": {
+        "user": {
+            "first_name": ""
+        },
+        "milestone_verb": "shipped your first automation",
+        "headline_stat": "",
+        "headline_stat_label": "",
+        "action_url": "https://example.com/app/automations/new",
+        "share_url": "",
+        "stat_rows": []
+    }
+}

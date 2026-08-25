@@ -1,30 +1,73 @@
 {
-    "name": "mailyte/email-templates",
-    "description": "A repository of production-ready, mobile-responsive, deliverability-checked email templates for Laravel, with a themeable block engine and a sandboxed template format anyone can contribute to.",
+    "name": "mailyte/laravel-email-templates",
+    "description": "The largest open-source library of ready-to-use HTML email templates for Laravel and PHP: 50 free, responsive, dark-mode transactional email templates -- welcome, verify email, password reset, invoice, receipt, newsletter and more -- each with its own design, contrast-audited to WCAG AA, deliverability-checked, on a sandboxed block engine.",
     "keywords": [
         "laravel",
+        "laravel-package",
+        "php",
         "email",
         "email-templates",
-        "transactional-email",
-        "mail",
+        "html-email",
         "responsive-email",
-        "deliverability"
+        "transactional-email",
+        "transactional",
+        "mail",
+        "mailable",
+        "smtp",
+        "email-design",
+        "email-template-library",
+        "email-builder",
+        "dark-mode",
+        "accessibility",
+        "wcag",
+        "deliverability",
+        "spam-score",
+        "gmail",
+        "outlook",
+        "blade",
+        "twig",
+        "welcome-email",
+        "password-reset",
+        "verify-email",
+        "invoice",
+        "receipt",
+        "newsletter",
+        "notification",
+        "onboarding",
+        "billing",
+        "design-system",
+        "design-tokens",
+        "open-source",
+        "laravel-notifications",
+        "mailmessage",
+        "notifications"
     ],
-    "homepage": "https://github.com/mailyte/email-templates",
+    "homepage": "https://github.com/Techies-Africa/mailyte-laravel-email-templates",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mailyte",
-            "homepage": "https://mailyte.com"
+            "name": "Confidence Ugolo",
+            "homepage": "https://www.linkedin.com/in/confidence-ugolo",
+            "role": "Creator, original author and founder of Mailyte"
+        },
+        {
+            "name": "Joel Omojefe",
+            "homepage": "https://www.linkedin.com/in/joel-omojefe",
+            "role": "Co-author"
+        },
+        {
+            "name": "Techies Africa",
+            "homepage": "https://techies.africa",
+            "role": "Maintainer"
         }
     ],
     "require": {
         "php": "^8.2",
         "ext-dom": "*",
         "ext-libxml": "*",
-        "illuminate/support": "^11.0|^12.0",
-        "illuminate/mail": "^11.0|^12.0",
-        "illuminate/view": "^11.0|^12.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "illuminate/mail": "^11.0|^12.0|^13.0",
+        "illuminate/view": "^11.0|^12.0|^13.0",
         "opis/json-schema": "^2.3",
         "symfony/html-sanitizer": "^7.0",
         "tijsverkoyen/css-to-inline-styles": "^2.2",
@@ -33,7 +76,7 @@
     "require-dev": {
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.18",
-        "orchestra/testbench": "^9.0|^10.0",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
         "pestphp/pest": "^3.0",
         "pestphp/pest-plugin-laravel": "^3.0",
         "phpstan/phpstan": "^2.0",
@@ -54,17 +97,20 @@
     },
     "scripts": {
         "test": "pest",
-        "test:snapshots": "pest --group=snapshots",
+        "test:coverage": "pest --coverage",
+        "analyse": "phpstan analyse",
+        "format": "pint",
+        "format:check": "pint --test",
+        "preview": "@php vendor/bin/testbench serve",
         "check": [
-            "@lint:templates",
+            "@format:check",
             "@analyse",
+            "@lint",
+            "@deliverability",
             "@test"
         ],
-        "lint:templates": "@php vendor/bin/testbench mailyte:lint --all",
-        "preview": "@php vendor/bin/testbench mailyte:preview",
-        "new-template": "@php vendor/bin/testbench mailyte:make-template",
-        "analyse": "phpstan analyse",
-        "format": "pint"
+        "lint": "@php vendor/bin/testbench mailyte:lint --strict",
+        "deliverability": "@php vendor/bin/testbench mailyte:deliverability --strict"
     },
     "config": {
         "sort-packages": true,
@@ -83,5 +129,20 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "type": "library",
+    "support": {
+        "issues": "https://github.com/Techies-Africa/mailyte-laravel-email-templates/issues",
+        "source": "https://github.com/Techies-Africa/mailyte-laravel-email-templates",
+        "docs": "https://github.com/Techies-Africa/mailyte-laravel-email-templates/tree/main/docs"
+    },
+    "scripts-descriptions": {
+        "test": "Run the test suite",
+        "analyse": "Run static analysis",
+        "format": "Fix code style",
+        "preview": "Serve the preview gallery at /mailyte",
+        "check": "Everything CI runs",
+        "lint": "Check every template bundle against the schema and house rules",
+        "deliverability": "Check what a spam filter makes of every rendered message"
+    }
 }

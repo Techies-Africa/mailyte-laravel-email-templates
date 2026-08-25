@@ -1,0 +1,27 @@
+{{ heading({ text: 'Verification', level: '3', space_above: '0', space_below: '12px' }) }}
+
+{{ divider({ space_above: '0', space_below: '20px' }) }}
+
+{{ heading({ text: heading_text, level: '1', space_above: '0' }) }}
+
+{% if user.first_name %}
+    {{ text({ text: 'Hi ' ~ user.first_name ~ ',', space_below: '4px' }) }}
+{% endif %}
+
+{{ text({ text: body }) }}
+
+{{ divider({ style: 'solid', space_above: '6px', space_below: '0' }) }}
+
+{{ code({ code: verification_code, label: '', note: '', background: 'transparent', space_above: '18px', space_below: '14px' }) }}
+
+{{ divider({ style: 'solid', space_above: '0', space_below: '18px' }) }}
+
+{{ text({ text: 'Expires in ' ~ expires_in ~ '. Request a new one if it runs out.', size: 'small', align: 'center', muted: true }) }}
+
+{% if action_url %}
+    {{ button({ label: button_label, url: action_url, align: 'center', shape: 'square' }) }}
+{% endif %}
+
+{{ divider({ style: 'dotted', space_above: '10px', space_below: '16px' }) }}
+
+{{ text({ text: security_note, size: 'small', muted: true, space_below: '0' }) }}

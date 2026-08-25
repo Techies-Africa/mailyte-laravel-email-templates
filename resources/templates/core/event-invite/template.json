@@ -1,0 +1,164 @@
+{
+    "slug": "event-invite",
+    "name": "Event invitation",
+    "description": "Invites someone to a webinar or live session: when it is, in their timezone, how long it runs, who is speaking, and what happens if they cannot attend.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "marketing",
+    "category": "events",
+    "supported_layouts": [
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "saas",
+        "community",
+        "professional-services"
+    ],
+    "tone": "friendly",
+    "tags": [
+        "event",
+        "webinar",
+        "invitation",
+        "rsvp"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: ticket — a navy face carrying the date in saffron, a dashed perforation under it, then the stub: RSVP, the replay promise, and two cells of small print."
+    },
+    "subject": "You're invited: {{ event_title }}",
+    "preheader": "Live, with time for questions, and everything needed to join in one place.",
+    "credits": [
+        {
+            "kind": "photo",
+            "author": "Miguel Henriques",
+            "source": "Unsplash",
+            "url": "https://unsplash.com/photos/man-speaking-in-front-of-crowd-RfiBK6Y_upQ",
+            "asset_url": "https://images.unsplash.com/photo-1544531586-fde5298cdd40",
+            "license": "Unsplash License",
+            "license_url": "https://unsplash.com/license",
+            "usage": "sample data only",
+            "title": "Man speaking in front of a crowd"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "columns",
+        "divider",
+        "heading",
+        "image",
+        "note",
+        "section",
+        "text"
+    ],
+    "headers": {
+        "suggested": {
+            "List-Unsubscribe": "<{{ unsubscribe_url }}>",
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+        }
+    },
+    "variables": {
+        "event_kind": {
+            "type": "string",
+            "description": "What sort of thing this is, in two words, before the title has to explain itself. \"Live webinar\" and \"Office hours\" set very different expectations of how much attention is being asked for.",
+            "default": "Live webinar"
+        },
+        "event_title": {
+            "type": "string",
+            "description": "What the session is about. It carries the subject line, so it has to promise something specific enough to book an hour against.",
+            "required": true,
+            "example": "Shipping email that lands: deliverability for small teams"
+        },
+        "date_line": {
+            "type": "string",
+            "description": "The date, written out and set as the largest figure on the ticket face. Spelling the weekday out is what stops a reader mentally filing it as \"some time next month\".",
+            "required": true,
+            "example": "Thursday 11 September"
+        },
+        "time_line": {
+            "type": "string",
+            "description": "Start and end time with the timezone named, ideally the reader's own. A time without a zone costs you the attendees on the other side of an ocean.",
+            "required": true,
+            "example": "15:00 – 16:00 BST (UTC+1)"
+        },
+        "duration_label": {
+            "type": "string",
+            "description": "How long it runs, stated separately from the clock times because that is the number people check against their calendar.",
+            "default": "60 minutes"
+        },
+        "event_description": {
+            "type": "text",
+            "description": "What will actually happen in the room. Two or three sentences: the shape of the session, and what someone walks away able to do.",
+            "default": "",
+            "example": "A working session on the three things that decide whether your mail reaches an inbox — authentication, sending reputation and list hygiene."
+        },
+        "hero_image": {
+            "type": "url",
+            "description": "A wide photograph of the event, or of the last one. Optional and never shipped as a default: the invitation has to read the same with images blocked, which is how most people will first see it.",
+            "default": "",
+            "example": "https://example.com/event-hero.jpg"
+        },
+        "hero_alt": {
+            "type": "string",
+            "description": "What the photograph shows, for the readers and clients that will never load it.",
+            "default": "",
+            "example": "A speaker on stage in front of a seated audience"
+        },
+        "rsvp_label": {
+            "type": "string",
+            "description": "Label on the only button. Ask for the seat rather than the click.",
+            "default": "Save me a seat"
+        },
+        "rsvp_url": {
+            "type": "url",
+            "description": "Registration link. Deep-link it to the event so nobody lands on a list of events and has to find this one again.",
+            "required": true,
+            "example": "https://example.com/events/deliverability-sept/rsvp"
+        },
+        "replay_text": {
+            "type": "text",
+            "description": "The objection-handler, placed directly under the button because \"I'm busy that afternoon\" is the reason most people close the email. Promising the recording converts the ones who cannot come live.",
+            "default": "Can't make it live? Register anyway — the recording goes to everyone who signed up, the morning after."
+        },
+        "speaker_name": {
+            "type": "string",
+            "description": "Who is running the session. A named person turns a webinar from a broadcast into an appointment; leave it empty for a panel or an internal session and the cell disappears.",
+            "default": "",
+            "example": "Priya Raman"
+        },
+        "speaker_bio": {
+            "type": "string",
+            "description": "One line on why this person is worth an hour — the role and the specific experience, not the job title alone.",
+            "default": "",
+            "example": "Deliverability lead at Northwind. Eleven years of getting other people's mail out of the spam folder."
+        },
+        "joining_title": {
+            "type": "string",
+            "description": "Heading over the joining instructions.",
+            "default": "Joining"
+        },
+        "joining_text": {
+            "type": "text",
+            "description": "How they actually get in on the day, and what they need beforehand. Answering this in the invitation is what stops the \"where's the link?\" mail an hour before.",
+            "default": "A joining link arrives by email an hour before, and again ten minutes before it starts. Nothing to download."
+        },
+        "permission_note": {
+            "type": "text",
+            "description": "Why this invitation reached them. Naming the reason reduces spam complaints more reliably than any amount of subject-line craft.",
+            "default": "You're getting this because you asked to hear about events. One click below ends that for good."
+        }
+    }
+}

@@ -1,0 +1,124 @@
+{
+    "slug": "getting-started",
+    "name": "Getting started checklist",
+    "description": "A short, ordered checklist that walks a new account to its first real result, in the plain framework-notification style.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "onboarding",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "friendly",
+    "tags": [
+        "onboarding",
+        "checklist",
+        "activation"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "derived",
+        "source": "https://github.com/laravel/framework",
+        "note": "Design homage to Laravel's default markdown mail (MIT). Markup, tokens and copy are this package's own; the proportions, the centred blue button and the raw-URL fallback are deliberately familiar."
+    },
+    "subject": "Three steps to your first {{ product.name }} result",
+    "preheader": "Each one takes a couple of minutes, and you can stop after the first if you like.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "list",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name. Used in the greeting line.",
+            "default": "",
+            "example": "Ada"
+        },
+        "intro": {
+            "type": "text",
+            "description": "Opening paragraph. Say what the checklist is worth, not that it exists.",
+            "default": "You're set up. These three steps take about five minutes between them, and at the end you'll have sent something real."
+        },
+        "completed_count": {
+            "type": "number",
+            "description": "How many steps are already done. Shown as progress so the email is honest about where they actually are.",
+            "default": 0,
+            "example": 1
+        },
+        "total_count": {
+            "type": "number",
+            "description": "How many steps there are in total.",
+            "default": 3,
+            "example": 3
+        },
+        "steps_heading": {
+            "type": "string",
+            "description": "Label introducing the list, so the steps arrive with a name rather than appearing out of nowhere.",
+            "default": "What's left"
+        },
+        "steps": {
+            "type": "array",
+            "description": "Ordered steps, each with a `text` label and an optional `detail` line.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Connect your domain",
+                    "detail": "So messages come from you, not from us"
+                }
+            ]
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the primary button goes — straight into the next step, not a generic dashboard.",
+            "required": true,
+            "example": "https://example.com/setup"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Start step one"
+        },
+        "help_text": {
+            "type": "text",
+            "description": "Offer of help, placed after the action where someone stuck would look for it.",
+            "default": "Stuck on any of them? Reply to this email and a person will read it."
+        },
+        "docs_url": {
+            "type": "url",
+            "description": "Optional link to written instructions, for people who would rather not reply.",
+            "default": "",
+            "example": "https://example.com/docs/setup"
+        },
+        "signoff": {
+            "type": "string",
+            "description": "Sign-off line above the sender name.",
+            "default": "Regards"
+        },
+        "fallback_note": {
+            "type": "text",
+            "description": "The trouble-clicking line that precedes the raw URL. Familiar to the point of invisibility, and genuinely useful when a button is stripped.",
+            "default": "If you're having trouble with the button above, copy and paste the URL below into your web browser:"
+        }
+    }
+}

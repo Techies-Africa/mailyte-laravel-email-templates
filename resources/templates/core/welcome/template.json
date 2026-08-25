@@ -1,33 +1,170 @@
 {
     "slug": "welcome",
     "name": "Welcome",
-    "description": "Sent once the account is confirmed, to orient a new user and point at a first useful action.",
+    "description": "Sent once the account is confirmed, to orient a new user, state what they now have, and point at one first action.",
     "version": "1.0.0",
     "engine": "^1.0",
     "tier": "core",
     "type": "transactional",
     "category": "onboarding",
-    "supported_layouts": ["minimal", "branded", "editorial"],
-    "audience": ["saas", "developer-tools"],
+    "supported_layouts": [
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "professional-services"
+    ],
     "tone": "friendly",
-    "tags": ["welcome", "onboarding", "activation"],
-    "authors": [{ "name": "Mailyte", "url": "https://mailyte.com" }],
+    "tags": [
+        "welcome",
+        "onboarding",
+        "activation"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
     "license": "MIT",
-    "origin": { "kind": "derived", "source": "https://github.com/ActiveCampaign/postmark-templates", "note": "Structure follows the Postmark welcome template (MIT, Wildbit); visual design and markup are this package's own." },
-
+    "origin": {
+        "kind": "original",
+        "note": "Design: banded welcome — split opening, capability row, ordered first run, account facts, human close."
+    },
     "subject": "Welcome to {{ product.name }}",
-    "preheader": "Here's how to get your first result in the next few minutes.",
-
-    "blocks_used": ["heading", "text", "button", "list", "key_value", "divider"],
-
+    "preheader": "Your account is ready. Here is the one thing worth doing first.",
+    "credits": [
+        {
+            "kind": "photo",
+            "author": "Olly",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/cheerful-diverse-colleagues-of-different-ages-working-on-laptop-during-startup-project-3865639/",
+            "asset_url": "https://images.pexels.com/photos/3865639/pexels-photo-3865639.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Cheerful diverse colleagues working on a laptop during a startup project"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "columns",
+        "heading",
+        "key_value",
+        "list",
+        "section",
+        "split",
+        "text"
+    ],
     "variables": {
-        "user.first_name": { "type": "string", "description": "Recipient's first name.", "default": "", "example": "Ada" },
-        "heading_text": { "type": "string", "description": "Main headline.", "default": "You're all set" },
-        "body": { "type": "text", "description": "Opening paragraph.", "default": "Thanks for signing up. Your account is ready, and the fastest way to see what this does is to start with one of the steps below." },
-        "action_url": { "type": "url", "description": "Primary CTA destination.", "required": true, "example": "https://example.com/dashboard" },
-        "button_label": { "type": "string", "description": "Primary CTA label.", "default": "Open your dashboard" },
-        "steps": { "type": "array", "description": "First actions worth taking. Keep to three or fewer; a longer list reads as homework.", "default": [], "example": [{ "text": "Connect your domain", "detail": "Takes about two minutes" }, { "text": "Invite a teammate", "detail": "Collaboration is where this gets useful" }, { "text": "Send a test message", "detail": "Confirm everything works end to end" }] },
-        "account_details": { "type": "array", "description": "Reference details worth restating, e.g. the login address and plan.", "default": [], "example": [{ "label": "Signed in as", "value": "ada@example.com" }, { "label": "Plan", "value": "Starter trial, 14 days" }] },
-        "closing": { "type": "text", "description": "Sign-off.", "default": "If anything looks off, just reply to this email -- it reaches a person." }
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "eyebrow": {
+            "type": "string",
+            "description": "Small label above the headline.",
+            "default": "Welcome"
+        },
+        "heading_text": {
+            "type": "string",
+            "description": "The headline, set at 34px across two lines. Write it to break well.",
+            "default": "Your account is ready"
+        },
+        "body": {
+            "type": "text",
+            "description": "The paragraph under the headline. Say what the first action gets them, not that they should take it.",
+            "default": "Connect a sending domain and you can have a real message out the door in the next few minutes."
+        },
+        "hero_image": {
+            "type": "url",
+            "description": "Image for the opening split. A screenshot of the product beats a photograph; use a photograph only when you have nothing real to show, and never use decoration that says nothing.",
+            "default": "",
+            "example": "https://example.com/hero.jpg"
+        },
+        "action_url": {
+            "type": "url",
+            "description": "The one action this email is for. Stated once, not repeated in every band.",
+            "required": true,
+            "example": "https://example.com/setup/domain"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Connect your domain"
+        },
+        "capabilities_heading": {
+            "type": "string",
+            "description": "Heading for the capability row.",
+            "default": "What your account can do now"
+        },
+        "capabilities": {
+            "type": "array",
+            "description": "Two or three capabilities as `heading` / `text` pairs, shown side by side. Concrete abilities, not adjectives, and no icons — platform emoji render differently everywhere and read as juvenile.",
+            "default": [],
+            "example": [
+                {
+                    "heading": "Send from your domain",
+                    "text": "Recipients see you, not us."
+                }
+            ]
+        },
+        "steps_heading": {
+            "type": "string",
+            "description": "Heading for the ordered first-run list.",
+            "default": "A sensible order to do things in"
+        },
+        "steps": {
+            "type": "array",
+            "description": "First actions worth taking, in order, as `text` / optional `detail`. Three or fewer; a longer list reads as homework.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Connect your domain",
+                    "detail": "Takes about two minutes"
+                }
+            ]
+        },
+        "account_rows": {
+            "type": "array",
+            "description": "The facts a new user comes back to this email for: which address they signed up with, which plan, when a trial ends.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Signed in as",
+                    "value": "ada@example.com"
+                }
+            ]
+        },
+        "help_heading": {
+            "type": "string",
+            "description": "Heading for the closing band.",
+            "default": "If you get stuck"
+        },
+        "help_text": {
+            "type": "text",
+            "description": "The closing offer. A named person outperforms a help-centre link, which is why this is a sentence rather than a button.",
+            "default": "Reply to this email and it reaches the team that built this, not a ticket queue. We read everything."
+        },
+        "help_url": {
+            "type": "url",
+            "description": "Optional documentation link for people who would rather not write to anyone.",
+            "default": "",
+            "example": "https://example.com/docs"
+        },
+        "help_link_label": {
+            "type": "string",
+            "description": "Label for the documentation link.",
+            "default": "Read the docs instead"
+        }
     }
 }

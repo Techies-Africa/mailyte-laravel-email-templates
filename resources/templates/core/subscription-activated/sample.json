@@ -1,0 +1,45 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "plan_name": "Pro",
+        "amount": "$29.00",
+        "period": "per month",
+        "renews_at": "24 September 2026",
+        "seats": "5 seats",
+        "action_url": "https://example.com/app",
+        "billing_url": "https://example.com/billing",
+        "unlocked": [
+            {
+                "text": "Custom sending domains",
+                "detail": "Up to three, each with its own reputation"
+            },
+            {
+                "text": "Review before send",
+                "detail": "Wording changes go through an approver"
+            },
+            {
+                "text": "Priority support",
+                "detail": "Replies inside four working hours"
+            }
+        ]
+    },
+    "annual": {
+        "user": {
+            "first_name": ""
+        },
+        "plan_name": "Scale",
+        "amount": "$2,400.00",
+        "period": "per year",
+        "renews_at": "24 August 2027",
+        "seats": "25 seats",
+        "action_url": "https://example.com/app",
+        "billing_url": "",
+        "unlocked": [
+            {
+                "text": "SSO and audit logs"
+            }
+        ]
+    }
+}

@@ -1,0 +1,58 @@
+{#  siren — the alarm is a band, not a badge. The headline is reversed out of
+    oxblood, a thick rule seals it off, and the page underneath stays white and
+    factual so the reader can actually read the metadata they are being asked
+    to judge. A charcoal band closes on what this message is, so the last thing
+    seen is a record rather than a demand.
+
+    Severity is never colour alone: the square mark, the word in `status_label`,
+    the rule, and only then the colour. #}
+
+{% set alarm %}
+    {{ note({
+        tone: 'plain',
+        mark: '■',
+        strong_text: status_label,
+        mark_color: '#F2C7CB',
+        text_color: '#FFFFFF',
+        space_below: '14px'
+    }) }}
+
+    {{ heading({ text: heading_text, level: '1', color: '#FFFFFF', space_above: '0', space_below: '10px' }) }}
+
+    {{ text({ text: band_line, size: 'small', color: '#EFD3D5', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'dark', background: '#6B0F1A', text_color: '#FFFFFF', padding_y: '32px', slot: alarm }) }}
+
+{{ divider({ style: 'thick', color: theme('color.danger'), space_above: '0', space_below: '26px' }) }}
+
+{% if user.first_name %}
+    {{ text({ text: user.first_name ~ ',', space_below: '6px' }) }}
+{% endif %}
+
+{{ text({ text: body, space_below: '24px' }) }}
+
+{% if attempt %}
+    {{ heading({ text: attempt_label, level: '3', space_above: '0', space_below: '6px' }) }}
+
+    {{ key_value({ rows: attempt, label_width: '38%', space_below: '10px' }) }}
+
+    {{ text({ text: location_caveat, size: 'small', muted: true, space_below: '26px' }) }}
+{% endif %}
+
+{% if confirm_url %}
+    {{ button_group({ items: [
+        { label: secure_label, url: secure_url, variant: 'danger' },
+        { label: confirm_label, url: confirm_url, variant: 'outline' }
+    ], shape: 'square', space_below: '14px' }) }}
+{% else %}
+    {{ button({ label: secure_label, url: secure_url, variant: 'danger', align: 'left', shape: 'square', space_below: '14px' }) }}
+{% endif %}
+
+{{ text({ text: choice_note, size: 'small', muted: true, space_below: '30px' }) }}
+
+{% set record %}
+    {{ text({ text: record_note, size: 'footer', color: '#D8CDCE', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'dark', background: '#241C1D', text_color: '#D8CDCE', padding_y: '20px', slot: record }) }}

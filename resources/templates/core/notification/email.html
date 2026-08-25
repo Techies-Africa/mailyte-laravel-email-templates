@@ -1,0 +1,45 @@
+{# A single-event notice is read in about two seconds on a phone, so the fact
+   still leads and the action still sits close to it. What changed: the template
+   now scales with how much the sender actually has to say. Given only a line
+   and a link it collapses to four elements; given detail rows and a deadline it
+   carries them without a second template. Every visible string is a variable,
+   so one bundle serves any event. #}
+
+{% if context_label %}
+    {{ heading({ text: context_label, level: '3', space_above: '0', space_below: '10px' }) }}
+{% endif %}
+
+{{ heading({ text: event_line, level: '1', space_above: '0', space_below: (event_detail ? '8px' : '20px') }) }}
+
+{% if event_detail %}
+    {{ text({ text: event_detail, space_below: '22px' }) }}
+{% endif %}
+
+{% if details %}
+    {# The facts a recipient forwards to someone else, or comes back for. #}
+    {{ key_value({ rows: details, label_width: '42%', space_below: '22px' }) }}
+{% endif %}
+
+{% if deadline_text %}
+    {# A notification with an expiry has exactly one job beyond the action:
+       make the expiry impossible to miss. #}
+    {{ note({ tone: 'soft', strong_text: deadline_label, text: deadline_text, space_below: '22px' }) }}
+{% endif %}
+
+{% if secondary_url %}
+    {{ button_group({ items: [
+        { label: action_label, url: action_url, variant: 'primary' },
+        { label: secondary_label, url: secondary_url, variant: 'outline' }
+    ], space_below: '18px' }) }}
+{% else %}
+    {{ button({ label: action_label, url: action_url, align: 'left', space_below: '18px' }) }}
+{% endif %}
+
+{% if notification_settings_url %}
+    {{ divider({ style: 'solid', space_above: '4px', space_below: '14px' }) }}
+
+    {# Muted ink rather than link blue: the frequency control has to be findable
+       without ever competing with the one action above it. #}
+    {{ text({ text: settings_prompt, size: 'small', muted: true, space_below: '6px' }) }}
+    {{ button({ label: notification_settings_label, url: notification_settings_url, variant: 'link', color: theme('color.text_muted'), align: 'left', space_below: '0' }) }}
+{% endif %}

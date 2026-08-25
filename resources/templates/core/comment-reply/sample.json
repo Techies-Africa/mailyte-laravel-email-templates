@@ -1,0 +1,34 @@
+{
+    "default": {
+        "thread_title": "Deploy pipeline times out on large migrations",
+        "reply_author": "Tomás Beltrán",
+        "reply_text": "It's the migration lock, not the pipeline. I raised the statement timeout to 300s on staging and the same job finished in four minutes. Happy to roll that to production tomorrow if nobody objects.",
+        "reply_time": "Today at 09:02",
+        "parent_label": "In reply to",
+        "parent_author": "Ada Lovelace",
+        "parent_text": "Anyone seen the importer hang at 40%? Third time this week, always on the same account.",
+        "reply_label": "Write a reply",
+        "reply_url": "https://example.com/threads/882#reply",
+        "thread_label": "Read the thread",
+        "thread_url": "https://example.com/threads/882",
+        "thread_meta": "4 people in this thread. You are following it because you commented.",
+        "notification_settings_url": "https://example.com/settings/notifications",
+        "notification_settings_label": "Change how often you get these"
+    },
+    "thread-opener": {
+        "thread_title": "Weekly on-call handover",
+        "reply_author": "Ines Okonjo",
+        "reply_text": "Nothing broke. One alert at 03:10 that cleared itself before anyone got to it — I have left a note on the runbook.",
+        "reply_time": "",
+        "parent_label": "In reply to",
+        "parent_author": "",
+        "parent_text": "",
+        "reply_label": "Reply",
+        "reply_url": "https://example.com/threads/903#reply",
+        "thread_label": "Read the thread",
+        "thread_url": "",
+        "thread_meta": "",
+        "notification_settings_url": "https://example.com/settings/notifications",
+        "notification_settings_label": "Get these once a day instead"
+    }
+}

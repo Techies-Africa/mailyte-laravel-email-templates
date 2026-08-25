@@ -1,0 +1,44 @@
+{# Batched mail is the one place where front-loading a button would be wrong:
+   nothing here is urgent, and the lists are the message. So the shape is a
+   dashboard read top to bottom — the window covered, the figures for it, then
+   the activity grouped by what it is, and only then a route into the app.
+
+   The frequency control gets a band of its own at the bottom rather than a line
+   of grey text, because this template exists so the individual notifications
+   behind it can be switched off, and an offer nobody can find is not an offer. #}
+
+{{ heading({ text: period_label, level: '3', space_above: '0', space_below: '10px' }) }}
+
+{{ heading({ text: digest_title, level: '1', space_above: '0', space_below: (digest_summary ? '8px' : '26px') }) }}
+
+{% if digest_summary %}
+    {{ text({ text: digest_summary, muted: true, space_below: '26px' }) }}
+{% endif %}
+
+{% if stats %}
+    {{ stat_row({ items: stats, boxed: true, space_below: '30px' }) }}
+{% endif %}
+
+{% if groups %}
+    {% for group in groups %}
+        {{ heading({ text: group.title, level: '3', space_above: '0', space_below: '12px' }) }}
+
+        {{ list({ items: group.items, style: 'plain', space_below: (loop.last ? '26px' : '18px') }) }}
+
+        {% if not loop.last %}
+            {{ divider({ space_above: '0', space_below: '22px' }) }}
+        {% endif %}
+    {% endfor %}
+{% else %}
+    {{ text({ text: empty_text, muted: true, space_below: '28px' }) }}
+{% endif %}
+
+{{ button({ label: action_label, url: action_url, align: 'left', space_below: '34px' }) }}
+
+{% set frequency_band %}
+    {{ heading({ text: frequency_title, level: '3', space_above: '0', space_below: '10px' }) }}
+    {{ text({ text: frequency_text, size: 'small', muted: true, space_below: '20px' }) }}
+    {{ button({ label: frequency_label, url: notification_settings_url, variant: 'outline', align: 'left', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '30px', space_above: '0', space_below: '0', slot: frequency_band }) }}

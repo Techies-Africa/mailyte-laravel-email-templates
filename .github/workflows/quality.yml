@@ -1,0 +1,85 @@
+name: quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+    name: Static analysis
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: dom, libxml, mbstring, json
+          coverage: none
+      - run: composer install --prefer-dist --no-interaction
+      - run: vendor/bin/phpstan analyse --error-format=github --no-progress
+
+  code-style:
+    runs-on: ubuntu-latest
+    name: Code style
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: composer install --prefer-dist --no-interaction
+      - run: vendor/bin/pint --test
+
+  catalog:
+    runs-on: ubuntu-latest
+    name: Catalog lint
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: dom, libxml, mbstring, json
+          coverage: none
+      - run: composer install --prefer-dist --no-interaction
+      # Warnings fail here. A template that ships to thousands of inboxes has
+      # no business carrying a subject line that will be cut off.
+      - run: vendor/bin/testbench mailyte:lint --strict
+      # What a spam filter reads off the rendered message. Cannot check SPF,
+      # DKIM or reputation -- see docs/deliverability.md.
+      - run: vendor/bin/testbench mailyte:deliverability --strict
+      # The notification shell is deliberately absent from the catalog, so
+      # enumeration skips it. Name it explicitly.
+      - run: vendor/bin/testbench mailyte:lint laravel-notification --strict
+      - run: vendor/bin/testbench mailyte:deliverability laravel-notification --strict
+
+  gallery:
+    runs-on: ubuntu-latest
+    name: Gallery coverage
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      # No rendering here -- this only asks whether every template has a preview
+      # for every layout it declares, in both schemes, and a page of its own.
+      - run: python3 .github/scripts/check-gallery.py
+
+  composer-validate:
+    runs-on: ubuntu-latest
+    name: Composer manifest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: composer validate --strict

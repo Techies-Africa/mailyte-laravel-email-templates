@@ -1,0 +1,22 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "workspace_name": "Acme Production",
+        "retention_days": 30,
+        "deletion_date": "23 September 2026",
+        "action_url": "https://example.com/billing/plans",
+        "export_url": "https://example.com/settings/export"
+    },
+    "minimal": {
+        "user": {
+            "first_name": ""
+        },
+        "workspace_name": "",
+        "retention_days": 14,
+        "deletion_date": "",
+        "action_url": "https://example.com/billing/plans",
+        "export_url": ""
+    }
+}

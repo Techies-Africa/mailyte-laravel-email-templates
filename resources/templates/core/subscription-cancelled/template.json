@@ -1,0 +1,117 @@
+{
+    "slug": "subscription-cancelled",
+    "name": "Subscription cancelled",
+    "description": "Confirms a cancellation the customer asked for: when access ends, what they keep, what stops, and how to come back if they choose to.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "billing",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "billing",
+        "subscription",
+        "cancellation",
+        "offboarding"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: wind-down ledger — kept above ending in one banded pair, every line dated, no retention plea anywhere on the page."
+    },
+    "subject": "Your {{ plan_name }} plan is cancelled",
+    "preheader": "Full access until {{ ends_on }}, then here is exactly what changes.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "list",
+        "note",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "plan_name": {
+            "type": "string",
+            "description": "The plan being cancelled, named the way the customer knows it, so a person with two subscriptions can tell which one this is.",
+            "required": true,
+            "example": "Studio"
+        },
+        "ends_on": {
+            "type": "date",
+            "description": "The day access actually stops. It is the fact the whole email hangs on, and it appears both in the opening sentence and as the heading over the ending column — a customer who reads one line should still read the right date.",
+            "required": true,
+            "example": "3 October 2026"
+        },
+        "access_note": {
+            "type": "text",
+            "description": "The half-sentence after the end date, covering the paid period and the absence of a further charge. It is a variable because an immediate cancellation and an end-of-term one are two different facts, and one sentence cannot be true of both.",
+            "default": "Until then everything works exactly as it does now — that period is already paid for, and there is no further charge."
+        },
+        "kept_items": {
+            "type": "array",
+            "description": "Everything that survives the cancellation, as `text` with an optional `detail` line. List it first and list it honestly: a free tier, exports, invoices, the account itself. This half is why the email is not frightening.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Your account and login",
+                    "detail": "Moves to the free tier, nothing is deleted"
+                }
+            ]
+        },
+        "ending_items": {
+            "type": "array",
+            "description": "Everything that stops, as `text` with an optional `detail` giving the date or the consequence. Include the unglamorous ones — seats, integrations, scheduled jobs — because the ones you leave out are the ones that break someone's Monday.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Team seats",
+                    "detail": "Eleven colleagues lose access"
+                }
+            ]
+        },
+        "export_url": {
+            "type": "url",
+            "description": "Where the customer downloads their own data. Offering it in the cancellation email, rather than waiting to be asked, is the difference between an offboarding and a hostage situation.",
+            "default": "",
+            "example": "https://example.com/account/export"
+        },
+        "export_until": {
+            "type": "date",
+            "description": "How long the export stays available. A deadline stated here is a deadline they can meet; one discovered later is a complaint.",
+            "default": "",
+            "example": "3 January 2027"
+        },
+        "return_note": {
+            "type": "text",
+            "description": "What restarting actually involves — same account, same data, or not. Written as a fact and kept short, because this is the paragraph most likely to be rewritten into a plea.",
+            "default": "Restarting puts everything back as it was, on the same account, at the price of the plan you choose then. Nothing is deleted in the meantime."
+        },
+        "reactivate_url": {
+            "type": "url",
+            "description": "Self-serve path back, set as a plain link rather than a button so it reads as an option rather than an ask. Leave it empty where restarting means talking to someone.",
+            "default": "",
+            "example": "https://example.com/billing/plans"
+        }
+    }
+}

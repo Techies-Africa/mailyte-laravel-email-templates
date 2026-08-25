@@ -1,0 +1,164 @@
+{
+    "slug": "two-factor-enabled",
+    "name": "Two-step verification changed",
+    "description": "Confirms that two-step verification was switched on — or off — says what changes at the next sign-in, points at the recovery codes, and explains how to reverse it.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "security",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "security",
+        "two-factor",
+        "account",
+        "settings",
+        "recovery-codes"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: shield — no alarm and no table. A state bar under the headline, the deltas as a check list, an anti-phishing pair set side by side, and the recovery codes given a pale band of their own."
+    },
+    "subject": "{{ product.name }} two-step verification: {{ state_word }}",
+    "preheader": "What changes at your next sign-in, where the recovery codes are, and how to reverse it.",
+    "blocks_used": [
+        "button",
+        "columns",
+        "divider",
+        "heading",
+        "list",
+        "note",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Names the person, so a settings change reads as something that happened to their account rather than an announcement. Omitted cleanly when unknown.",
+            "default": "",
+            "example": "Ada"
+        },
+        "enabled": {
+            "type": "boolean",
+            "description": "True when the control was switched on, false when it was switched off. Drives the mark and the colour of the state bar; it does not write any copy, so the wording stays yours.",
+            "default": true
+        },
+        "state_word": {
+            "type": "string",
+            "description": "The state in one word, set in bold beside the mark and reused in the subject line. It is the reading that has to survive a greyscale screen, so it can never be implied by colour alone.",
+            "default": "On"
+        },
+        "state_detail": {
+            "type": "text",
+            "description": "The consequence, continuing the sentence the state word starts. Begin it with a dash so the bar reads as one line.",
+            "default": "— your password on its own will no longer sign you in."
+        },
+        "heading_text": {
+            "type": "string",
+            "description": "The headline. Name the control and its new state; a reader scanning a notification list should not have to open the mail to learn which way it went.",
+            "default": "Two-step verification is on"
+        },
+        "body": {
+            "type": "text",
+            "description": "What the change means in practice, before any list of details. Say what is now required and what was left alone.",
+            "default": "Signing in to this account now takes two things: your password, and a code from the authenticator app you just registered. Nothing else about the account has changed."
+        },
+        "change_line": {
+            "type": "string",
+            "description": "Who made the change and when, if you record it. Provenance is what lets someone recognise a change they did not make; leave it empty rather than guess.",
+            "default": "",
+            "example": "Changed 24 August 2026, 11:02 UTC from a signed-in session on macOS."
+        },
+        "changes_title": {
+            "type": "string",
+            "description": "Heading above the list of deltas. Kept separate because teams word it differently — \"What changed\", \"Summary\", \"Applied\".",
+            "default": "What changed"
+        },
+        "changes": {
+            "type": "array",
+            "description": "One entry per setting that actually moved, as `text` with an optional `detail` line under it. Listing only real deltas keeps the mail short enough that people read it.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Two-step verification is on",
+                    "detail": "Applies to every sign-in on the web and in the mobile apps."
+                }
+            ]
+        },
+        "expectations": {
+            "type": "array",
+            "description": "Two cells set side by side, each `heading` plus `text`: what you will ask for, and what you will never ask for. This is the anti-phishing pair, and it belongs in the one email that teaches someone what a code request looks like. Two items only — three do not fit a 320px screen.",
+            "default": [],
+            "example": [
+                {
+                    "heading": "We will ask for",
+                    "text": "Your password, then the six-digit code your authenticator app is showing."
+                }
+            ]
+        },
+        "recovery_title": {
+            "type": "string",
+            "description": "Heading for the recovery-codes band.",
+            "default": "Recovery codes"
+        },
+        "recovery_text": {
+            "type": "text",
+            "description": "Why the codes matter and where to keep them. Most lockouts after a second factor is enabled are people who never read this paragraph.",
+            "default": "Ten single-use codes are waiting behind the link below. Print them, or keep them in a password manager — they are the only way back in if the phone is lost."
+        },
+        "recovery_url": {
+            "type": "url",
+            "description": "Where the codes can be viewed or regenerated. Omit it if your product shows the codes only once at setup, and the band will state the fact without offering a link.",
+            "default": "",
+            "example": "https://example.com/security/recovery-codes"
+        },
+        "recovery_label": {
+            "type": "string",
+            "description": "Label for the recovery-codes action — the only filled button in this email, because it is the only thing worth doing today.",
+            "default": "View recovery codes"
+        },
+        "undo_text": {
+            "type": "text",
+            "description": "How to reverse the change, including what it will cost them. A security control nobody can find the off switch for is a support ticket.",
+            "default": "You can turn two-step verification off again in security settings. You will need your password and a current code to do it."
+        },
+        "settings_url": {
+            "type": "url",
+            "description": "Deep link to the security settings page. Rendered as an underlined link rather than a button so it never competes with the recovery codes.",
+            "default": "",
+            "example": "https://example.com/settings/security"
+        },
+        "settings_label": {
+            "type": "string",
+            "description": "Label for the settings link.",
+            "default": "Open security settings"
+        },
+        "not_you_text": {
+            "type": "text",
+            "description": "The line for the reader who did not make this change. It sits last and stays plain: if it were styled as an alarm, the ninety-nine people who did make the change would read the whole email as one.",
+            "default": "If you did not make this change, someone else can reach your account. Change your password straight away and get in touch with us."
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "default": {
+        "user": {
+            "first_name": "Ada"
+        },
+        "amount": "$29.00",
+        "card_last4": "4242",
+        "failure_reason": "The card was declined by your bank",
+        "retry_at": "27 August",
+        "grace_ends_at": "7 September",
+        "action_url": "https://example.com/billing/payment-method",
+        "help_url": "https://example.com/help/billing"
+    },
+    "no-retry": {
+        "user": {
+            "first_name": ""
+        },
+        "amount": "€49.00",
+        "card_last4": "",
+        "failure_reason": "",
+        "retry_at": "",
+        "grace_ends_at": "in 14 days",
+        "action_url": "https://example.com/billing/payment-method",
+        "help_url": ""
+    }
+}

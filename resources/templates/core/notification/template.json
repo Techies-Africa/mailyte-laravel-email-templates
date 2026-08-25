@@ -1,0 +1,134 @@
+{
+    "slug": "notification",
+    "name": "Notification",
+    "description": "The generic single-event notification: what happened, the facts worth keeping, and one action. Scales from four elements to a full record depending on what the sender supplies.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "notifications",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "notification",
+        "alert",
+        "generic",
+        "event"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: plain notice — scales with the sender, collapses to four elements when there is little to say."
+    },
+    "subject": "{{ event_line }}",
+    "preheader": "Everything worth saying is in the first line, and the link goes straight to the thing itself.",
+    "blocks_used": [
+        "heading",
+        "text",
+        "key_value",
+        "note",
+        "button",
+        "button_group",
+        "divider"
+    ],
+    "variables": {
+        "context_label": {
+            "type": "string",
+            "description": "Small label naming the area this concerns, e.g. \"Export\" or \"Billing\". Lets someone triage the message before reading it. Omit for the barest version.",
+            "default": "",
+            "example": "Export"
+        },
+        "event_line": {
+            "type": "string",
+            "description": "What happened, as a complete statement rather than a topic. This is the subject line by default, so write it once and well.",
+            "required": true,
+            "example": "Your export finished"
+        },
+        "event_detail": {
+            "type": "text",
+            "description": "One sentence of context under the headline. What it means, or what happens next.",
+            "default": "",
+            "example": "12,480 rows, ready to download."
+        },
+        "details": {
+            "type": "array",
+            "description": "Facts worth keeping or forwarding, as `label`/`value` pairs. Set `mono` on references someone may need to read character by character. Omit entirely for a bare notice.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Rows",
+                    "value": "12,480"
+                }
+            ]
+        },
+        "deadline_label": {
+            "type": "string",
+            "description": "Bold lead-in on the deadline bar.",
+            "default": "Available until"
+        },
+        "deadline_text": {
+            "type": "string",
+            "description": "When the thing expires. A notification with an expiry has exactly one job beyond the action: make the expiry impossible to miss.",
+            "default": "",
+            "example": "31 August, then the file is deleted"
+        },
+        "action_label": {
+            "type": "string",
+            "description": "The one action. Name the outcome, not the mechanism.",
+            "default": "Open it",
+            "example": "Download the file"
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the action goes — straight to the thing, never a generic dashboard.",
+            "required": true,
+            "example": "https://example.com/exports/9f42c1b7"
+        },
+        "secondary_label": {
+            "type": "string",
+            "description": "Label for an optional second action of lesser weight.",
+            "default": "View details"
+        },
+        "secondary_url": {
+            "type": "url",
+            "description": "Optional second action. Leave empty and the primary stands alone, which is usually right.",
+            "default": "",
+            "example": "https://example.com/exports"
+        },
+        "settings_prompt": {
+            "type": "text",
+            "description": "Line above the frequency control, so the link is not left to speak for itself.",
+            "default": "You get one of these each time this happens."
+        },
+        "notification_settings_url": {
+            "type": "url",
+            "description": "Where notification frequency is changed. Offering it is what keeps a notification a notification rather than an imposition.",
+            "default": "",
+            "example": "https://example.com/settings/notifications"
+        },
+        "notification_settings_label": {
+            "type": "string",
+            "description": "Label for the frequency control.",
+            "default": "Change how often you get these"
+        }
+    }
+}

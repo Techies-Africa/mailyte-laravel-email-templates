@@ -1,0 +1,93 @@
+{
+    "slug": "setup-incomplete",
+    "name": "Setup incomplete",
+    "description": "A single nudge for an account that signed up and stopped halfway, naming the one step that is actually blocking them.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "onboarding",
+    "supported_layouts": [
+        "plain",
+        "minimal"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "friendly",
+    "tags": [
+        "onboarding",
+        "activation",
+        "reminder"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: personal letter — no canvas, no logo, no social chrome, serif body, one underlined link instead of a button."
+    },
+    "subject": "One step left: {{ blocking_step }}",
+    "preheader": "It's the only thing standing between your account and a first send.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "blocking_step": {
+            "type": "string",
+            "description": "The single step that is blocking them. One, not a list — a nudge that names three things gets ignored.",
+            "required": true,
+            "example": "verify your sending domain"
+        },
+        "time_estimate": {
+            "type": "string",
+            "description": "Honest time estimate, set beside the step. Overstating it is better than understating it.",
+            "default": "about two minutes"
+        },
+        "why_it_matters": {
+            "type": "text",
+            "description": "What that step unlocks. Motivation beats instruction.",
+            "default": "Until it's done, anything you send goes out from our shared domain, which hurts delivery and looks generic to the people receiving it."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Direct link to the blocking step, not to a generic dashboard.",
+            "required": true,
+            "example": "https://example.com/setup/domain"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Call to action, rendered as a plain underlined link in keeping with the letter format.",
+            "default": "Finish setup"
+        },
+        "sender_name": {
+            "type": "string",
+            "description": "Who the note is from. A real name outperforms a team name here, which is the entire point of this design.",
+            "default": "",
+            "example": "Sam"
+        },
+        "opt_out_text": {
+            "type": "text",
+            "description": "Way out of the nudge sequence. Offering it is what keeps it a nudge.",
+            "default": "Not ready yet? We'll stop reminding you after this one."
+        }
+    }
+}

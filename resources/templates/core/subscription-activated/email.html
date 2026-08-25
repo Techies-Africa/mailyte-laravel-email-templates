@@ -1,0 +1,30 @@
+{% set opening %}
+    {{ heading({ text: 'Plan activated', level: '3', space_above: '0', space_below: '10px', color: '#CBEADC' }) }}
+    {{ heading({ text: plan_name ~ ' is live', level: '1', space_above: '0', space_below: '8px', color: '#FFFFFF' }) }}
+    {{ text({ text: (user.first_name ? 'Thanks, ' ~ user.first_name ~ '. ' : '') ~ amount ~ ' ' ~ period ~ (seats ? ', ' ~ seats : '') ~ '.', color: '#D9F0E5', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'accent', padding_y: '34px', slot: opening }) }}
+
+{% if unlocked %}
+    {% set gains %}
+        {{ heading({ text: 'What just unlocked', level: '2', space_above: '0', space_below: '16px' }) }}
+        {{ list({ items: unlocked, style: 'check', space_below: '22px' }) }}
+        {{ button({ label: button_label, url: action_url, align: 'left', shape: 'pill', space_below: '0' }) }}
+    {% endset %}
+    {{ section({ tone: 'surface', padding_y: '30px', slot: gains }) }}
+{% endif %}
+
+{% set billing %}
+    {{ heading({ text: 'Billing', level: '3', space_above: '0', space_below: '8px' }) }}
+    {{ key_value({ rows: [
+        { label: 'Plan', value: plan_name },
+        { label: 'Price', value: amount ~ ' ' ~ period },
+        { label: 'Renews', value: renews_at }
+    ], label_width: '36%', space_below: (billing_url ? '14px' : '0') }) }}
+    {% if billing_url %}
+        {{ button({ label: 'Manage billing and invoices', url: billing_url, variant: 'link', align: 'left', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '26px', slot: billing }) }}

@@ -1,0 +1,120 @@
+{
+    "slug": "seat-limit-reached",
+    "name": "Seat limit reached",
+    "description": "Sent when someone tries to add a teammate and every seat on the plan is taken, offering the two ways out at equal weight.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "collaboration",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "professional-services"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "seats",
+        "team",
+        "limits",
+        "collaboration"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: capacity — the seat count as the headline, then two matched panels with identical outline buttons so neither remedy outranks the other."
+    },
+    "subject": "Your {{ product.name }} team is out of seats",
+    "preheader": "Buy another seat or free one up — both take about a minute.",
+    "blocks_used": [
+        "button",
+        "card",
+        "heading",
+        "text"
+    ],
+    "variables": {
+        "seats_used": {
+            "type": "string",
+            "description": "Seats currently filled, as a string so \"9\" and \"unlimited pooled\" can both be rendered. It leads the headline because the count is the entire fact.",
+            "required": true,
+            "example": "9"
+        },
+        "seat_total": {
+            "type": "string",
+            "description": "Seats the plan includes. Stating both halves of the fraction stops the reader wondering whether they are one seat short or ten.",
+            "required": true,
+            "example": "9"
+        },
+        "plan_name": {
+            "type": "string",
+            "description": "The plan the limit belongs to, so an admin with several workspaces knows which one filled up.",
+            "required": true,
+            "example": "Team"
+        },
+        "invited_email": {
+            "type": "string",
+            "description": "The person who could not be added. Naming them turns an abstract limit into the specific thing the admin was trying to do, and confirms the invitation was not lost. Leave empty when the limit was hit by an API call or a bulk import.",
+            "default": "",
+            "example": "rosa@example.com"
+        },
+        "options_intro": {
+            "type": "text",
+            "description": "The line that frames the two panels. It exists to say out loud that neither option is the recommended one — removing a colleague is a legitimate answer to a seat limit, and an email that pretends otherwise is selling.",
+            "default": "There are two ways forward, and one is not better than the other."
+        },
+        "add_note": {
+            "type": "text",
+            "description": "What buying a seat costs and when it is charged, in plain money terms. Prorating is where trust is lost, so say how the first partial period is billed.",
+            "default": "Seats are charged at the plan rate and prorated to the end of the current period, so a seat added today costs only the days that are left.",
+            "example": "A tenth seat is $12.00 a month, prorated to 11 September."
+        },
+        "add_url": {
+            "type": "url",
+            "description": "Where a seat is bought. Leave it empty on plans where seats are fixed for the term — the panel then explains that instead of offering a button that leads to a dead end.",
+            "default": "",
+            "example": "https://example.com/billing/seats"
+        },
+        "add_label": {
+            "type": "string",
+            "description": "Label for the buy action. Name the unit, not the upgrade.",
+            "default": "Add a seat"
+        },
+        "manage_note": {
+            "type": "text",
+            "description": "What removing someone actually does to their work. People hesitate here because they assume deletion follows, so answer that before they ask.",
+            "default": "Removing someone frees their seat immediately. Their work stays where it is and their account keeps existing — they simply lose access to this workspace."
+        },
+        "manage_url": {
+            "type": "url",
+            "description": "The member list, which is the honest counterpart to the upgrade link and is always available even when buying seats is not.",
+            "required": true,
+            "example": "https://example.com/team/members"
+        },
+        "manage_label": {
+            "type": "string",
+            "description": "Label for the member-list action.",
+            "default": "Open the member list"
+        },
+        "pending_note": {
+            "type": "text",
+            "description": "What becomes of the held invitation and how long it waits. Without it the admin has to guess whether to send the invite again, and usually sends three.",
+            "default": "",
+            "example": "The invitation is held for 14 days and sends itself as soon as a seat is free."
+        }
+    }
+}

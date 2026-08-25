@@ -1,0 +1,47 @@
+{
+    "default": {
+        "member_name": "Kwame Mensah",
+        "workspace_name": "Northwind Studio",
+        "intro": "They accepted the invitation you sent on 14 September, and their access is already active — there is no approval step waiting on you.",
+        "joined_at": "17 September, 08:24",
+        "role_name": "Editor",
+        "member_email": "kwame@northwind.example.com",
+        "member_count": "9",
+        "seats_value": "1",
+        "seats_caption": "The next person moves you to the next tier",
+        "next_text": "New members stay active when they have something of their own in the first week. Assign them the campaign you invited them for rather than waiting for them to find it.",
+        "primary_url": "https://example.com/app/team/kwame",
+        "secondary_url": "https://example.com/app/team/kwame/permissions",
+        "pending": [
+            {
+                "text": "dayo@northwind.example.com",
+                "detail": "Invited 4 days ago as an Editor, expires on 21 September"
+            },
+            {
+                "text": "l.fontaine@northwind.example.com",
+                "detail": "Invited 11 days ago as a Viewer, expires tomorrow"
+            }
+        ],
+        "members_caption": "Two owners, six editors, one viewer"
+    },
+    "unmetered-nothing-pending": {
+        "member_name": "Ada Okonjo",
+        "workspace_name": "Ledger Ops",
+        "intro": "They accepted this morning, on the second attempt — the first invitation went to an address they no longer read.",
+        "joined_label": "Joined",
+        "joined_at": "2 October, 09:03",
+        "role_name": "Owner",
+        "member_email": "ada.okonjo@ledgerops.example.com",
+        "member_count": "3",
+        "members_label": "people in Ledger Ops",
+        "seats_value": "",
+        "next_heading": "One thing to check",
+        "next_text": "Owners can change billing and remove other owners, including you. If that is more than you meant to grant, move them to Administrator before they sign in.",
+        "primary_label": "Review what an Owner can do",
+        "primary_url": "https://example.com/app/team/ada/permissions",
+        "secondary_url": "",
+        "pending": [],
+        "closing": "Every owner of this workspace got this email, so you may not be the only one acting on it.",
+        "members_caption": "All three are owners"
+    }
+}

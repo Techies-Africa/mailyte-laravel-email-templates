@@ -1,0 +1,164 @@
+{
+    "slug": "team-invitation",
+    "name": "Team invitation",
+    "description": "Invites someone into a workspace: who invited them, what they will be able to do, one action to accept, and the date the invitation stops working.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "collaboration",
+    "supported_layouts": [
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "professional-services",
+        "community"
+    ],
+    "tone": "friendly",
+    "tags": [
+        "invitation",
+        "team",
+        "workspace",
+        "onboarding"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: invitation card — the workspace set as the largest thing on the page, the inviter present as a quoted voice, one action and an expiry."
+    },
+    "subject": "{{ inviter_name }} invited you to join {{ workspace_name }}",
+    "preheader": "One action to accept, and what the invitation lets you do once you are in.",
+    "credits": [
+        {
+            "kind": "photo",
+            "author": "Jack Sparrow",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/man-having-online-meeting-in-office-5918384/",
+            "asset_url": "https://images.pexels.com/photos/5918384/pexels-photo-5918384.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Man having an online meeting in an office"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "list",
+        "quote",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "eyebrow": {
+            "type": "string",
+            "description": "Small label above the workspace name. It does the work of a subject line for anyone who reads the email before the header.",
+            "default": "You have been invited"
+        },
+        "workspace_name": {
+            "type": "string",
+            "description": "The workspace, team or organisation being joined, set as the largest thing on the page. People accept an invitation to a place they recognise, so this is the name they know it by rather than an account slug.",
+            "required": true,
+            "example": "Northwind Studio"
+        },
+        "inviter_name": {
+            "type": "string",
+            "description": "Who is inviting them, by name. An invitation from a person converts; an invitation from a product does not, which is why the name leads the subject line as well.",
+            "required": true,
+            "example": "Priya Raman"
+        },
+        "role_name": {
+            "type": "string",
+            "description": "The role they are being given, in the product's own vocabulary and without an article — the sentence supplies its own. It sets the expectation that the permissions list then keeps.",
+            "required": true,
+            "example": "Editor"
+        },
+        "message": {
+            "type": "text",
+            "description": "The inviter's own note, shown as a quotation in their voice. Optional, and worth prompting for in the product — a sentence of context is the difference between an invitation and a system message.",
+            "default": "",
+            "example": "We are moving the September campaign in here this week, so you will want to be in before Thursday."
+        },
+        "inviter_role": {
+            "type": "string",
+            "description": "The inviter's job or role, shown under their name on the quotation. It answers the recipient's first question, which is whether this person can actually grant access.",
+            "default": "",
+            "example": "Head of Marketing, Northwind Studio"
+        },
+        "inviter_avatar": {
+            "type": "url",
+            "description": "Square photograph of the inviter, shown at 36px beside their name. Use a real photograph of the real person or leave it empty — a generated monogram in an email is a small lie that the reader can spot.",
+            "default": "",
+            "example": "https://example.com/avatars/priya.jpg"
+        },
+        "capabilities_heading": {
+            "type": "string",
+            "description": "Heading over the permissions list.",
+            "default": "What you will be able to do"
+        },
+        "capabilities": {
+            "type": "array",
+            "description": "What the role actually permits, as `text` and optional `detail`. Concrete abilities, and the notable limits too — someone who accepts expecting more than they get is a support ticket on their first day.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Write and edit campaigns",
+                    "detail": "Including everything already drafted"
+                }
+            ]
+        },
+        "accept_label": {
+            "type": "string",
+            "description": "Label for the one action this email exists for. Name the outcome — 'Accept and join Northwind' beats 'Continue'.",
+            "default": "Accept the invitation"
+        },
+        "accept_url": {
+            "type": "url",
+            "description": "The single-use acceptance link. This email carries one action and no competing links, because a second button measurably costs acceptances.",
+            "required": true,
+            "example": "https://example.com/invitations/8f21c4"
+        },
+        "expiry_label": {
+            "type": "string",
+            "description": "Lead-in for the expiry.",
+            "default": "The invitation expires"
+        },
+        "expires_at": {
+            "type": "string",
+            "description": "When the link stops working, stated as a date rather than a countdown so it is still true when the email is read a week later. An invitation with no expiry is a credential with no expiry.",
+            "required": true,
+            "example": "on 21 September"
+        },
+        "ignore_text": {
+            "type": "text",
+            "description": "What to do if the invitation was unexpected. Saying that nothing happens until they accept is what makes it safe to ignore, and what makes the email look unlike a phishing attempt.",
+            "default": "If you were not expecting this, you can ignore it. Nothing is created in your name until you accept, and the link stops working on its own."
+        },
+        "sender_label": {
+            "type": "string",
+            "description": "Lead-in for the sender address line.",
+            "default": "Sent by"
+        },
+        "inviter_email": {
+            "type": "email",
+            "description": "The inviter's address, printed in full so the recipient can check it against someone they already correspond with before clicking anything.",
+            "required": true,
+            "example": "priya@northwind.example.com"
+        }
+    }
+}

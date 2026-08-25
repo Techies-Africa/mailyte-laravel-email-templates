@@ -1,0 +1,20 @@
+{{ heading({ text: (receipt_number ? 'Receipt ' ~ receipt_number : 'Receipt'), level: '1', space_above: '0', space_below: '10px' }) }}
+
+{{ divider({ style: 'thick', color: theme('color.text'), space_above: '0', space_below: '18px' }) }}
+
+{{ stat_row({ items: [{ value: amount, label: (description ?: 'Payment received') }], size: 'display', space_below: '18px' }) }}
+
+{{ note({ tone: 'plain', mark: '✓', strong_text: 'Paid ' ~ paid_at ~ '.', text: (card_last4 ? card_brand ~ ' ending ' ~ card_last4 : 'No further action needed.'), space_below: '20px' }) }}
+
+{% if line_items %}
+    {{ key_value({ rows: line_items, figures: true, emphasise_last: true, label_width: '62%' }) }}
+{% endif %}
+
+{% if invoice_url %}
+    {{ button({ label: button_label, url: invoice_url, align: 'left', shape: 'square' }) }}
+{% endif %}
+
+{% if footer_legal %}
+    {{ divider({ style: 'dotted', space_above: '8px', space_below: '14px' }) }}
+    {{ text({ text: footer_legal, size: 'footer', muted: true, space_below: '0' }) }}
+{% endif %}

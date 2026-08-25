@@ -1,0 +1,76 @@
+{
+    "default": {
+        "impact_headline": "Sending failed in the EU region",
+        "resolved_at": "14 September, 15:12",
+        "timezone": "UTC (GMT+0)",
+        "opening": "For 90 minutes on 14 September, every message sent through our EU region failed with a 500. This was our fault, it was caused by a change we released, and it was not detected by our own monitoring — a customer told us first.",
+        "duration_value": "90 minutes",
+        "scope_value": "18,400",
+        "timeline": [
+            {
+                "label": "13:30",
+                "value": "A change to connection pooling was released to the EU region."
+            },
+            {
+                "label": "13:42",
+                "value": "Sends through the EU region began failing. No alert fired."
+            },
+            {
+                "label": "14:06",
+                "value": "A customer reported the failures. We opened an incident."
+            },
+            {
+                "label": "14:20",
+                "value": "We published the first notice and began rolling back."
+            },
+            {
+                "label": "15:12",
+                "value": "The rollback completed and the queued sends drained."
+            }
+        ],
+        "cause_text": "The change assumed one database host per region. The EU region runs two, so half of every connection pool pointed at a host that was accepting reads but not writes. Sends read their template successfully and then failed on the write, which is why the failure looked intermittent for the first few minutes.",
+        "remedies": [
+            {
+                "text": "Pool sizing is derived from the region's host list rather than a constant",
+                "detail": "Shipped 14 September, in the rollback"
+            },
+            {
+                "text": "Send failure rate now pages on a one-minute window, per region",
+                "detail": "The old alert averaged across regions, which is why it never fired"
+            },
+            {
+                "text": "Region-shaped changes go out to one region behind a flag first",
+                "detail": "In effect from 22 September"
+            }
+        ],
+        "closing": "We are sorry. The 18,400 messages that failed were queued and have since been delivered, so nothing needs resending. If the delay cost you something a resend does not fix, reply to this email and we will credit the account without you having to make a case for it.",
+        "report_url": "https://status.example.com/incidents/eu-sending"
+    },
+    "cause-not-yet-known": {
+        "impact_headline": "Search results were up to an hour stale",
+        "resolved_at": "2 October, 09:41",
+        "timezone": "Africa/Lagos (GMT+1)",
+        "opening": "Between 07:10 and 09:41 on 2 October, records saved to your account did not appear in search for up to an hour. Nothing was lost and nothing failed — the index was simply behind, and it has caught up.",
+        "duration_value": "",
+        "scope_value": "",
+        "timeline": [
+            {
+                "label": "07:10",
+                "value": "The search index began falling behind writes."
+            },
+            {
+                "label": "08:05",
+                "value": "Our lag alert fired and we opened an incident."
+            },
+            {
+                "label": "09:41",
+                "value": "The index caught up on its own after we paused the nightly rebuild."
+            }
+        ],
+        "cause_text": "",
+        "remedies": [],
+        "closing": "We are sorry for the confusion this caused, particularly for anyone who saved a record twice because the first one did not appear. We will send one more email when we know what happened.",
+        "report_label": "Follow the open investigation",
+        "report_url": "https://status.example.com/incidents/search-lag"
+    }
+}

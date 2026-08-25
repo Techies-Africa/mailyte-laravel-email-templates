@@ -54,7 +54,7 @@ final class StatusBannerBlock extends Block
             'background' => $this->string($props, 'background', (string) $theme->get('color.surface_alt')),
             'color' => (string) $theme->get('color.text'),
             'type' => $theme->get('type.body', []),
-            'space_above' => $this->string($props, 'space_above', (string) $theme->get('spacing.sm')),
+            'space_above' => $this->string($props, 'space_above', '0'),
             'space_below' => $this->string($props, 'space_below', (string) $theme->get('spacing.md')),
         ];
     }

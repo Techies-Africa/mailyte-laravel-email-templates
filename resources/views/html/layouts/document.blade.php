@@ -36,7 +36,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="m-gutter" style="padding:0 {{ $t['layout.gutter'] ?? '24px' }};">
+                    {{-- No horizontal padding here on purpose: each block applies the
+                         gutter itself (see BlockRegistry::render), so a full-bleed
+                         section can reach the edges of the canvas while ordinary
+                         blocks stay inside the measure. --}}
+                    <td style="padding:0;">
                         @yield('content')
                     </td>
                 </tr>

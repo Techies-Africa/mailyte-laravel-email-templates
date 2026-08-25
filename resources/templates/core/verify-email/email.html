@@ -1,25 +1,22 @@
-{{ heading({ text: heading_text, level: '1' }) }}
+{{ heading({ text: 'verify', level: '3', space_above: '0', space_below: '12px' }) }}
+
+{{ heading({ text: heading_text, level: '1', space_above: '0' }) }}
 
 {% if user.first_name %}
-    {{ text({ text: 'Hi ' ~ user.first_name ~ ',' }) }}
+    {{ text({ text: 'Hi ' ~ user.first_name ~ ',', space_below: '4px' }) }}
 {% endif %}
 
 {{ text({ text: body }) }}
 
-{{ code({
-    code: verification_code,
-    label: 'Verification code',
-    note: 'This code expires in ' ~ expires_in ~ '.'
-}) }}
+{% set panel %}
+    {{ code({ code: verification_code, label: 'Verification code', space_above: '0', space_below: (action_url ? '20px' : '0') }) }}
+    {% if action_url %}
+        {{ button({ label: button_label, url: action_url, variant: 'outline', align: 'center', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
 
-{% if action_url %}
-    {{ button({
-        label: button_label,
-        url: action_url,
-        fallback_text: 'Or paste this link into your browser:'
-    }) }}
-{% endif %}
+{{ section({ tone: 'alt', padding_y: '26px', align: 'center', space_below: '18px', slot: panel }) }}
 
-{{ divider() }}
+{{ note({ tone: 'outline', mark: '◷', strong_text: 'Expires in ' ~ expires_in ~ '.', text: 'Request a new one if it runs out.' }) }}
 
-{{ text({ text: security_note, size: 'small', muted: true }) }}
+{{ text({ text: security_note, size: 'small', muted: true, space_below: '0' }) }}

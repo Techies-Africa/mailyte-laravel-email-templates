@@ -1,0 +1,25 @@
+{# A mention is worth an email only because of the sentence it happened in, so
+   the sentence gets the largest type on the page and everything else is set
+   around it: who, in a plain statement above; where, whispered under that;
+   when, attached to the quotation as attribution. The quoted words are visually
+   separated by the quote block's own rule rather than by quotation marks, which
+   survive neither forwarding nor a screen reader. #}
+
+{{ heading({ text: author_name ~ ' mentioned you', level: '1', space_above: '0', space_below: (mention_location ? '4px' : '20px') }) }}
+
+{% if mention_location %}
+    {{ text({ text: mention_location, size: 'small', muted: true, space_below: '24px' }) }}
+{% endif %}
+
+{{ quote({ text: mention_text, author: author_name, role: mention_time, size: 'large', space_above: '0', space_below: '28px' }) }}
+
+{{ button({ label: action_label, url: action_url, shape: 'pill', align: 'left', space_below: '26px' }) }}
+
+{{ note({ tone: 'soft', text: context_note, space_below: '26px' }) }}
+
+{% if notification_settings_url %}
+    {{ divider({ style: 'dotted', space_above: '0', space_below: '16px' }) }}
+
+    {# Muted ink, so the way out is legible without ever outranking the way in. #}
+    {{ button({ label: notification_settings_label, url: notification_settings_url, variant: 'link', color: theme('color.text_muted'), align: 'left', space_below: '0' }) }}
+{% endif %}

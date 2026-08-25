@@ -1,0 +1,40 @@
+{# Capacity. The count is the headline, because a seat limit is arithmetic and
+   not an incident. The two ways out are drawn as a matched pair of panels with
+   the same border, the same type and the same outline button — an upsell put
+   in a filled button beside a grey link is not a choice, it is a nudge. #}
+
+{{ heading({ text: 'Team seats', level: '3', space_above: '0', space_below: '12px' }) }}
+
+{{ heading({ text: seats_used ~ ' of ' ~ seat_total ~ ' seats are in use', level: '1', space_above: '0', space_below: '10px' }) }}
+
+{{ text({
+    text: 'That is every seat on the ' ~ plan_name ~ ' plan'
+        ~ (invited_email
+            ? ', so the invitation to ' ~ invited_email ~ ' is being held rather than sent.'
+            : ', so nobody new can be added until something changes.'),
+    space_below: '8px'
+}) }}
+
+{{ text({ text: options_intro, space_below: '22px' }) }}
+
+{% set add_panel %}
+    {{ heading({ text: 'Buy another seat', level: '2', space_above: '0', space_below: '8px' }) }}
+    {{ text({ text: add_note, size: 'small', space_below: (add_url ? '16px' : '0') }) }}
+    {% if add_url %}
+        {{ button({ label: add_label, url: add_url, variant: 'outline', align: 'left', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ card({ slot: add_panel, padding: '22px', space_below: '14px' }) }}
+
+{% set free_panel %}
+    {{ heading({ text: 'Free up a seat', level: '2', space_above: '0', space_below: '8px' }) }}
+    {{ text({ text: manage_note, size: 'small', space_below: '16px' }) }}
+    {{ button({ label: manage_label, url: manage_url, variant: 'outline', align: 'left', space_below: '0' }) }}
+{% endset %}
+
+{{ card({ slot: free_panel, padding: '22px', space_below: '24px' }) }}
+
+{% if pending_note %}
+    {{ text({ text: pending_note, size: 'small', muted: true, space_below: '0' }) }}
+{% endif %}

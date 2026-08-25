@@ -1,0 +1,58 @@
+{
+    "default": {
+        "eyebrow": "August release",
+        "headline": "Three upgrades you can ship without a developer",
+        "intro": "Each of these is a switch in your settings rather than a project. None of them need a release.",
+        "hero_image": "https://images.pexels.com/photos/3865639/pexels-photo-3865639.jpeg?auto=compress&cs=tinysrgb&w=560&h=620&fit=crop",
+        "action_url": "https://example.com/settings/features",
+        "closing_text": "All three are included on every plan from Starter upwards, and they take effect on your next send.",
+        "features": [
+            {
+                "image": "https://images.pexels.com/photos/23496662/pexels-photo-23496662.jpeg?auto=compress&cs=tinysrgb&w=460&h=340&fit=crop",
+                "chip": "Included in all plans",
+                "title": "Saved rows your team can reuse",
+                "text": "Build a header once, then drop it into any template. Editing the saved row updates every template that uses it.",
+                "action_label": "Enable now",
+                "action_url": "https://example.com/settings/saved-rows",
+                "learn_label": "Learn more",
+                "learn_url": "https://example.com/docs/saved-rows"
+            },
+            {
+                "image": "https://images.pexels.com/photos/5918384/pexels-photo-5918384.jpeg?auto=compress&cs=tinysrgb&w=460&h=340&fit=crop",
+                "chip": "Pro and above",
+                "title": "Review before send",
+                "text": "Wording changes go to a reviewer the same way code does, with a diff of exactly what changed.",
+                "action_label": "Turn on review",
+                "action_url": "https://example.com/settings/review",
+                "learn_label": "See how it works",
+                "learn_url": "https://example.com/docs/review"
+            },
+            {
+                "image": "https://images.pexels.com/photos/10375961/pexels-photo-10375961.jpeg?auto=compress&cs=tinysrgb&w=460&h=340&fit=crop",
+                "chip": "Included in all plans",
+                "title": "Dark mode previews",
+                "text": "See what a message looks like in the clients that force their own inversion, before it goes out rather than after.",
+                "action_label": "Preview a template",
+                "action_url": "https://example.com/app/templates"
+            }
+        ]
+    },
+    "single-feature": {
+        "eyebrow": "New",
+        "headline": "Send-time review is here",
+        "intro": "One change, and it is the one people kept asking for.",
+        "hero_image": "",
+        "action_url": "https://example.com/settings/review",
+        "closing_text": "",
+        "features": [
+            {
+                "image": "",
+                "chip": "Pro and above",
+                "title": "Review before send",
+                "text": "Wording changes go to a reviewer the same way code does, with a diff of exactly what changed.",
+                "action_label": "Turn on review",
+                "action_url": "https://example.com/settings/review"
+            }
+        ]
+    }
+}

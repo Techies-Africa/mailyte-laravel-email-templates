@@ -1,0 +1,54 @@
+{# Built like a ticket. The navy face carries the four things a ticket carries —
+   what kind of event, what it is called, what day, what time — with the date in
+   saffron because that is the field people photograph. A dashed rule runs under
+   it where a perforation would be, and everything below that rule is the stub:
+   the ask, the answer to "I'm busy that day", and the small print in two cells.
+
+   Colours on the band are passed as props rather than inherited: the slot is
+   already rendered by the time the section wraps it, so ink that is legible on
+   navy has to arrive with each block. #}
+
+{% if hero_image %}
+    {{ image({ src: hero_image, alt: hero_alt, width: '600', height: '270', radius: '0', bleed: true, space_below: '0' }) }}
+{% endif %}
+
+{% set ticket_face %}
+    {{ heading({ text: event_kind, level: '3', color: '#F2B441', space_above: '0', space_below: '14px' }) }}
+
+    {{ heading({ text: event_title, level: '1', color: '#FFFFFF', space_above: '0', space_below: '20px' }) }}
+
+    {{ heading({ text: date_line, level: '2', color: '#F2B441', space_above: '0', space_below: '6px' }) }}
+
+    {{ text({ text: time_line ~ ' · ' ~ duration_label, color: '#C7CEDC', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'dark', background: '#16233F', padding_y: '36px', space_below: '0', slot: ticket_face }) }}
+
+{# The perforation. #}
+{{ divider({ style: 'dashed', space_above: '0', space_below: '28px' }) }}
+
+{% if event_description %}
+    {{ text({ text: event_description, space_below: '28px' }) }}
+{% endif %}
+
+{{ button({ label: rsvp_label, url: rsvp_url, shape: 'pill', align: 'left', space_below: '22px' }) }}
+
+{{ note({ tone: 'soft', text: replay_text, space_below: '30px' }) }}
+
+{% if speaker_name %}
+    {{ columns({ count: 2, items: [
+        { heading: speaker_name, text: speaker_bio },
+        { heading: joining_title, text: joining_text }
+    ], space_below: '26px' }) }}
+{% else %}
+    {{ heading({ text: joining_title, level: '3', space_above: '0', space_below: '8px' }) }}
+    {{ text({ text: joining_text, size: 'small', muted: true, space_below: '26px' }) }}
+{% endif %}
+
+{{ divider({ style: 'dotted', space_above: '0', space_below: '16px' }) }}
+
+{{ text({ text: permission_note, size: 'footer', muted: true, space_below: (unsubscribe_url ? '10px' : '0') }) }}
+
+{% if unsubscribe_url %}
+    {{ button({ label: 'Stop invitations like this one', url: unsubscribe_url, variant: 'link', color: theme('color.text_muted'), align: 'left', space_below: '0' }) }}
+{% endif %}

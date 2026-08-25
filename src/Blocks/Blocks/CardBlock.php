@@ -27,7 +27,9 @@ final class CardBlock extends Block
             'border_color' => $this->string($props, 'border_color', (string) $theme->get('color.border')),
             'padding' => $this->string($props, 'padding', (string) $theme->get('spacing.md')),
             'radius' => (string) $theme->get('radius.lg'),
-            'space_above' => $this->string($props, 'space_above', (string) $theme->get('spacing.md')),
+            'shadow' => (string) $theme->get('shadow.card', ''),
+            'accent' => $this->string($props, 'accent'),
+            'space_above' => $this->string($props, 'space_above', '0'),
             'space_below' => $this->string($props, 'space_below', (string) $theme->get('spacing.md')),
         ];
     }

@@ -1,0 +1,135 @@
+{
+    "slug": "comment-reply",
+    "name": "New reply in a thread",
+    "description": "Delivers a reply in a discussion, with the comment it answers carried underneath it so the whole exchange reads in the inbox.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "notifications",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "community",
+        "developer-tools"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "reply",
+        "comment",
+        "thread",
+        "collaboration"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: thread — the new reply first in full ink behind an accent rule, the comment it answers set back beneath it in a bar-marked card, two actions of unequal weight between them."
+    },
+    "subject": "New reply from {{ reply_author }}",
+    "preheader": "The reply and the comment it answers are both here, so the thread reads without a login.",
+    "blocks_used": [
+        "button",
+        "button_group",
+        "card",
+        "divider",
+        "heading",
+        "quote",
+        "text"
+    ],
+    "variables": {
+        "thread_title": {
+            "type": "string",
+            "description": "What the discussion is called. Set as the eyebrow so a reader with four of these in their inbox can tell them apart before opening any of them.",
+            "required": true,
+            "example": "Deploy pipeline times out on large migrations"
+        },
+        "reply_author": {
+            "type": "string",
+            "description": "Who wrote the new reply.",
+            "required": true,
+            "example": "Tomás Beltrán"
+        },
+        "reply_text": {
+            "type": "text",
+            "description": "The reply in full. Truncating it defeats the point of the email — the reader would have to open the app, which is the trip this message exists to save.",
+            "required": true,
+            "example": "It's the migration lock, not the pipeline. I raised the statement timeout to 300s on staging and the same job finished in four minutes."
+        },
+        "reply_time": {
+            "type": "string",
+            "description": "When the reply was posted, in the recipient's timezone if you know it. Attached to the quotation, because it dates the words rather than the delivery.",
+            "default": "",
+            "example": "Today at 09:02"
+        },
+        "parent_label": {
+            "type": "string",
+            "description": "The line that introduces the quoted parent. Two words, lower case, doing the job a threading indent does on screen.",
+            "default": "In reply to"
+        },
+        "parent_author": {
+            "type": "string",
+            "description": "Who wrote the comment being answered. Often the recipient, which is exactly why it has to be named rather than assumed.",
+            "default": "",
+            "example": "Ada Lovelace"
+        },
+        "parent_text": {
+            "type": "text",
+            "description": "The comment the reply answers. Leave it empty when the reply opens a thread and there is nothing to quote; the whole quoted block then disappears rather than showing an empty box.",
+            "default": "",
+            "example": "Anyone seen the importer hang at 40%? Third time this week on the same account."
+        },
+        "reply_label": {
+            "type": "string",
+            "description": "Label on the action that continues the conversation. This is the one the sender wants pressed, so it carries the filled button.",
+            "default": "Write a reply"
+        },
+        "reply_url": {
+            "type": "url",
+            "description": "Deep link that opens the composer on this thread, not the thread's top.",
+            "required": true,
+            "example": "https://example.com/threads/882#reply"
+        },
+        "thread_label": {
+            "type": "string",
+            "description": "Label on the quieter action, for people who want to read the rest before answering.",
+            "default": "Read the thread"
+        },
+        "thread_url": {
+            "type": "url",
+            "description": "The whole discussion, for the replies that did not make it into this email.",
+            "default": "",
+            "example": "https://example.com/threads/882"
+        },
+        "thread_meta": {
+            "type": "string",
+            "description": "One closing line of provenance — how many people are in the thread, and why the recipient is one of them. It answers \"why am I getting this\" before the reader has to ask it.",
+            "default": "",
+            "example": "4 people in this thread. You are following it because you commented."
+        },
+        "notification_settings_url": {
+            "type": "url",
+            "description": "Where thread notifications get batched or switched off. A busy thread can send a dozen of these in an afternoon, so the escape has to be in every one of them.",
+            "default": "",
+            "example": "https://example.com/settings/notifications"
+        },
+        "notification_settings_label": {
+            "type": "string",
+            "description": "Wording of that link. Offer less noise, not a settings screen.",
+            "default": "Change how often you get these"
+        }
+    }
+}

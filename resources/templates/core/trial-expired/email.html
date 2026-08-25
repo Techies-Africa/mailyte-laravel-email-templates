@@ -1,0 +1,24 @@
+{{ heading({ text: (user.first_name ? 'That\'s the trial done, ' ~ user.first_name : 'That\'s the trial done'), level: '1', space_above: '0' }) }}
+
+{{ text({ text: current_state }) }}
+
+{{ note({
+    tone: 'soft',
+    strong_text: (deletion_date ? 'Your data is kept until ' ~ deletion_date ~ '.' : 'Your data is kept for ' ~ retention_days ~ ' more days.'),
+    text: 'Nothing is deleted before then, and starting a plan restores everything as it was.'
+}) }}
+
+{% if workspace_name %}
+    {{ heading({ text: 'For your records', level: '3', space_below: '4px' }) }}
+    {{ key_value({ rows: [
+        { label: 'Workspace', value: workspace_name },
+        { label: 'Status', value: 'Read-only' },
+        { label: 'Data kept until', value: (deletion_date ?: retention_days ~ ' days from today') }
+    ], label_width: '40%' }) }}
+{% endif %}
+
+{{ button({ label: button_label, url: action_url, align: 'left' }) }}
+
+{% if export_url %}
+    {{ button({ label: 'Export everything instead', url: export_url, variant: 'link', align: 'left', space_above: '2px', space_below: '0' }) }}
+{% endif %}

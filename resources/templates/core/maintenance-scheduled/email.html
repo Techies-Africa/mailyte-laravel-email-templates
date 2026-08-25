@@ -1,0 +1,58 @@
+{# Notice board. A steel masthead states the window once for the reader who
+   goes no further; the table restates it in parts, with the timezone given a
+   row of its own so it can never be inferred wrongly. Nothing here is red. #}
+
+{% set masthead %}
+    {{ heading({ text: eyebrow, level: '3', space_above: '0', space_below: '12px', color: '#93B7CA' }) }}
+    {{ heading({ text: headline, level: '1', space_above: '0', space_below: '12px', color: '#F2F6F8' }) }}
+    {{ text({ text: window_summary, color: '#C3D5DF', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'dark', background: '#1E2A33', padding_y: '34px', space_below: '28px', slot: masthead }) }}
+
+{{ text({ text: intro, space_below: '26px' }) }}
+
+{{ heading({ text: window_heading, level: '3', space_above: '0', space_below: '6px' }) }}
+
+{% if duration %}
+    {{ key_value({ rows: [
+        { label: date_label, value: window_date },
+        { label: start_label, value: window_start, mono: true },
+        { label: end_label, value: window_end, mono: true },
+        { label: duration_label, value: duration },
+        { label: timezone_label, value: timezone }
+    ], label_width: '40%', space_below: '26px' }) }}
+{% else %}
+    {{ key_value({ rows: [
+        { label: date_label, value: window_date },
+        { label: start_label, value: window_start, mono: true },
+        { label: end_label, value: window_end, mono: true },
+        { label: timezone_label, value: timezone }
+    ], label_width: '40%', space_below: '26px' }) }}
+{% endif %}
+
+{% if affected %}
+    {{ heading({ text: affected_heading, level: '3', space_above: '0', space_below: '12px' }) }}
+    {{ list({ items: affected, style: 'bullet', space_below: (unaffected_text ? '18px' : '26px') }) }}
+{% endif %}
+
+{% if unaffected_text %}
+    {{ note({ tone: 'outline', strong_text: unaffected_label, text: unaffected_text, space_below: '28px' }) }}
+{% endif %}
+
+{% if prepare %}
+    {% set before %}
+        {{ heading({ text: prepare_heading, level: '3', space_above: '0', space_below: '12px' }) }}
+        {{ list({ items: prepare, style: 'check', space_below: '0' }) }}
+    {% endset %}
+
+    {{ section({ tone: 'alt', padding_y: '28px', space_below: '28px', slot: before }) }}
+{% endif %}
+
+{% if status_url %}
+    {{ button({ label: status_label, url: status_url, variant: 'outline', align: 'left', shape: 'square', space_below: '26px' }) }}
+{% endif %}
+
+{{ divider({ style: 'solid', space_above: '0', space_below: '14px' }) }}
+
+{{ text({ text: closing, size: 'footer', muted: true, space_below: '0' }) }}

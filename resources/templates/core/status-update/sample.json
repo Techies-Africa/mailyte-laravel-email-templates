@@ -1,0 +1,53 @@
+{
+    "default": {
+        "item_name": "Q3 revenue export",
+        "state_label": "In progress",
+        "headline": "Compiling 48,000 records",
+        "position_text": "Stage 2 of 4",
+        "summary": "Nothing is needed from you while this runs. We will send one more email when the file is ready, and one if anything stops it.",
+        "stages": [
+            {
+                "text": "Queued",
+                "detail": "Accepted 09:14 UTC"
+            },
+            {
+                "text": "Compiling records",
+                "detail": "Running now, started 09:16 UTC"
+            },
+            {
+                "text": "Building the file",
+                "detail": "Not started"
+            },
+            {
+                "text": "Ready to download",
+                "detail": "Not started — the link lasts seven days"
+            }
+        ],
+        "reference": "exp_9f42c1b7",
+        "eta_value": "around 16:30 UTC today",
+        "action_url": "https://example.com/app/exports/9f42c1b7",
+        "button_label": "Follow it live"
+    },
+    "no-estimate": {
+        "item_name": "Access request for the billing dashboard",
+        "state_label": "Waiting on a reviewer",
+        "headline": "Sent to Priya Raman for approval",
+        "position_text": "",
+        "summary": "This one is with a person rather than a machine, so we would rather say nothing about timing than guess. You will hear from us either way.",
+        "stages": [
+            {
+                "text": "Submitted",
+                "detail": "By you, 11 September"
+            },
+            {
+                "text": "With a reviewer",
+                "detail": "Priya Raman, since 11 September"
+            }
+        ],
+        "reference_label": "Request",
+        "reference": "REQ-4471",
+        "eta_value": "",
+        "action_url": "",
+        "footer_text": "You get one of these each time the request changes hands, and nothing in between."
+    }
+}

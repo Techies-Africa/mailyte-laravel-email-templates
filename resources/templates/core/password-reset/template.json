@@ -1,0 +1,102 @@
+{
+    "slug": "password-reset",
+    "name": "Reset your password",
+    "description": "Sent the moment someone asks to reset a password: one time-boxed link, the raw URL underneath it, and nothing else competing for the click.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "account",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools",
+        "ecommerce"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "password",
+        "reset",
+        "account",
+        "security"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: stark utility — square corners, no accent colour, no social chrome, the greeting demoted above the headline so the message reads as one instruction."
+    },
+    "subject": "Reset your {{ product.name }} password",
+    "preheader": "Good for {{ expires_in }} and one use. Ignore it and nothing changes.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name. Absent for accounts that never collected one, which is common on password reset — the design drops the greeting rather than guessing.",
+            "default": "",
+            "example": "Ada"
+        },
+        "heading_text": {
+            "type": "string",
+            "description": "The headline. Keep it to the instruction itself: this email is scanned, not read.",
+            "default": "Reset your password"
+        },
+        "body": {
+            "type": "text",
+            "description": "The single explanatory sentence. Say what was asked for, so a recipient who did not ask knows immediately that something is off.",
+            "default": "You asked to set a new password. Open the link below and choose one."
+        },
+        "reset_url": {
+            "type": "url",
+            "description": "The one-time reset link. It carries the token, so it is also printed in full underneath the button for clients that strip or rewrite it.",
+            "required": true,
+            "example": "https://example.com/reset/2f9c41ab"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Label on the only action in the message. Name the outcome, not the mechanism.",
+            "default": "Choose a new password"
+        },
+        "fallback_note": {
+            "type": "string",
+            "description": "Introduces the printed URL. Security gateways routinely rewrite or break buttons, and a reset with no visible link is a dead end.",
+            "default": "If the button does not work, paste this into your browser:"
+        },
+        "expires_in": {
+            "type": "string",
+            "description": "How long the link stays valid, stated as a duration because the recipient is reading this within minutes of asking for it.",
+            "default": "60 minutes",
+            "example": "60 minutes"
+        },
+        "expiry_note": {
+            "type": "text",
+            "description": "What happens after a single use. Worth saying: people forward these to a second device and then wonder why the link is dead.",
+            "default": "It stops working as soon as it is used once."
+        },
+        "not_you_note": {
+            "type": "text",
+            "description": "The line for the recipient who did not ask. It has to reassure and advise in the same breath, because a stream of unrequested resets is itself a signal.",
+            "default": "Didn't ask for this? Ignore this email and your password stays as it is. If these keep arriving, someone knows your address — turning on two-factor authentication will stop them getting further."
+        }
+    }
+}

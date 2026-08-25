@@ -38,7 +38,7 @@ final class ListBlock extends Block
             'style' => $this->enum($props, 'style', ['bullet', 'number', 'check', 'plain'], 'bullet'),
             'type' => $theme->get('type.body', []),
             'color' => $this->string($props, 'color', (string) $theme->get('color.text')),
-            'muted_color' => (string) $theme->get('color.text_muted'),
+            'muted_color' => $this->string($props, 'muted_color', (string) $theme->get('color.text_muted')),
             'space_below' => $this->string($props, 'space_below', (string) $theme->get('spacing.md')),
         ];
     }

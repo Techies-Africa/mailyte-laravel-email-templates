@@ -1,0 +1,52 @@
+{# What you missed. Editorial: sans display over a serif body, one picture, and
+   the whole page given over to product changes rather than to feelings about
+   the reader's absence. The exit sits above the footer at readable size — a
+   dormant contact who can leave in one click is the reason the rest of the
+   message is allowed to make a claim on their attention. #}
+
+{{ heading({ text: 'Since ' ~ away_since, level: '3', space_above: '0', space_below: '14px' }) }}
+
+{{ heading({ text: headline, level: '1', space_above: '0', space_below: '14px' }) }}
+
+{{ text({ text: intro, space_below: '28px' }) }}
+
+{% if highlight_title %}
+    {% if highlight_image %}
+        {{ media({
+            image: highlight_image,
+            image_alt: highlight_image_alt,
+            eyebrow: highlight_eyebrow,
+            title: highlight_title,
+            text: highlight_text,
+            link_label: 'Read the note',
+            link_url: highlight_url,
+            reverse: true,
+            image_percent: 44,
+            space_below: '28px'
+        }) }}
+    {% else %}
+        {{ heading({ text: highlight_title, level: '2', space_above: '0', space_below: '8px' }) }}
+        {{ text({ text: highlight_text, size: 'small', space_below: '14px' }) }}
+        {{ button({ label: 'Read the note', url: highlight_url, variant: 'link', align: 'left', space_below: '28px' }) }}
+    {% endif %}
+{% endif %}
+
+{% if changes %}
+    {{ divider({ style: 'solid', space_above: '0', space_below: '20px' }) }}
+    {{ heading({ text: 'Also different now', level: '3', space_above: '0', space_below: '16px' }) }}
+    {{ list({ items: changes, style: 'plain', space_below: '28px' }) }}
+{% endif %}
+
+{{ button({ label: button_label, url: action_url, align: 'left', space_below: '10px' }) }}
+
+{{ text({ text: action_note, size: 'small', muted: true, space_below: '26px' }) }}
+
+{{ divider({ style: 'dotted', space_above: '0', space_below: '16px' }) }}
+
+{{ heading({ text: 'Or leave for good', level: '3', space_above: '0', space_below: '8px' }) }}
+
+{{ text({ text: leaving_note, size: 'small', space_below: (unsubscribe_url ? '12px' : '0') }) }}
+
+{% if unsubscribe_url %}
+    {{ button({ label: 'Stop emails like this one', url: unsubscribe_url, variant: 'link', align: 'left', space_below: '0' }) }}
+{% endif %}

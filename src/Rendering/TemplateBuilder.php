@@ -7,10 +7,12 @@ namespace Mailyte\EmailTemplates\Rendering;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Mail;
 use Mailyte\EmailTemplates\Exceptions\RenderFailed;
 use Mailyte\EmailTemplates\Mail\TemplateMailable;
 use Mailyte\EmailTemplates\Sources\SourceChain;
 use Mailyte\EmailTemplates\Templates\TemplateManifest;
+use Mailyte\EmailTemplates\Themes\BrandTokens;
 use Mailyte\EmailTemplates\Themes\Theme;
 use Mailyte\EmailTemplates\Themes\ThemeRepository;
 use Mailyte\EmailTemplates\Themes\TokenSanitizer;
@@ -47,6 +49,7 @@ final class TemplateBuilder
         private readonly RenderPipeline $pipeline,
         private readonly TokenSanitizer $sanitizer,
         private readonly Config $config,
+        private readonly BrandTokens $brand,
     ) {}
 
     /**
@@ -123,14 +126,52 @@ final class TemplateBuilder
         return $this->sources->get($this->slug);
     }
 
+    /**
+     * The theme this template would render with, after every layer of
+     * precedence has been applied.
+     *
+     * Exposed because more than rendering needs it: `mailyte:adopt` compiles a
+     * stylesheet for Laravel's markdown mailables from exactly these tokens,
+     * and it has to be the resolved set rather than the raw design.json, or the
+     * application's own brand would be missing from it.
+     */
+    public function resolvedTheme(): Theme
+    {
+        return $this->buildTheme(
+            $this->manifest(),
+            $this->sanitizer->sanitize($this->themeOverrides),
+        );
+    }
+
+    /**
+     * Precedence, innermost last: the theme sets the house style, the bundle's
+     * design.json makes this template look like itself, the application's brand
+     * config supplies the assets and links that are the same in every message,
+     * and a per-send override still beats all three.
+     *
+     * A community bundle's design is sanitised on the same path as tenant input
+     * -- it is a stranger's file too.
+     *
+     * @param  array<string, mixed>  $sanitized
+     */
+    private function buildTheme(TemplateManifest $manifest, array $sanitized): Theme
+    {
+        $design = $this->sanitizer->sanitize($manifest->design());
+        $brand = $this->sanitizer->sanitize($this->brand->toTokens());
+
+        return $this->resolveTheme()
+            ->merge($design['tokens'])
+            ->merge($brand['tokens'])
+            ->merge($sanitized['tokens']);
+    }
+
     public function render(): RenderedEmail
     {
         $manifest = $this->manifest();
         $layout = $this->resolveLayout($manifest);
 
         $sanitized = $this->sanitizer->sanitize($this->themeOverrides);
-
-        $theme = $this->resolveTheme()->merge($sanitized['tokens']);
+        $theme = $this->buildTheme($manifest, $sanitized);
 
         $data = $this->resolveData($manifest);
 
@@ -145,6 +186,50 @@ final class TemplateBuilder
             warnings: $sanitized['warnings'],
             forceScheme: $this->forceScheme,
         );
+    }
+
+    /**
+     * Render and send in one step.
+     *
+     * The common case is one template, some data and one recipient, so it
+     * should read that way. Anything Laravel's `Mail::to()` accepts works
+     * here -- a string, an array, a Mailable-aware user model, a collection.
+     *
+     * Reach for `toMailable()` instead when you need the mailable itself: to
+     * attach a file, add a cc, or hand it to a queue with your own options.
+     *
+     * @param  mixed  $to
+     */
+    public function send($to): RenderedEmail
+    {
+        $email = $this->render();
+
+        Mail::to($to)->send($email->toMailableFrom());
+
+        return $email;
+    }
+
+    /**
+     * Render now, deliver later.
+     *
+     * Rendering happens here rather than in the job, so a template that would
+     * fail on missing data fails in the request that queued it, not silently
+     * on a worker at three in the morning.
+     *
+     * @param  mixed  $to
+     */
+    public function queue($to, ?string $queue = null): RenderedEmail
+    {
+        $email = $this->render();
+        $mailable = $email->toMailableFrom();
+
+        if ($queue !== null) {
+            $mailable->onQueue($queue);
+        }
+
+        Mail::to($to)->queue($mailable);
+
+        return $email;
     }
 
     public function toMailable(): TemplateMailable

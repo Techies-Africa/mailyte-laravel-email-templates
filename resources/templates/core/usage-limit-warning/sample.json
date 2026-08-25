@@ -1,0 +1,19 @@
+{
+    "default": {
+        "limit_name": "monthly send allowance",
+        "used_percent": "82%",
+        "used_label": "8,200 of 10,000 messages",
+        "resets_at": "1 September",
+        "upgrade_url": "https://example.com/billing/plans",
+        "usage_url": "https://example.com/app/usage"
+    },
+    "hard-limit": {
+        "limit_name": "API rate limit",
+        "used_percent": "96%",
+        "used_label": "48 of 50 requests per second",
+        "resets_at": "",
+        "at_limit_behaviour": "requests are rejected with a 429 until the rate drops",
+        "upgrade_url": "https://example.com/billing/plans",
+        "usage_url": ""
+    }
+}

@@ -1,0 +1,55 @@
+{{ split({
+    tone: 'alt',
+    eyebrow: offer_eyebrow,
+    title: offer_headline,
+    text: offer_text,
+    image: hero_image,
+    image_alt: offer_headline,
+    button_label: button_label,
+    button_url: action_url,
+    reverse: true,
+    image_percent: 42
+}) }}
+
+{% if promo_code %}
+    {% set code_band %}
+        {{ note({
+            tone: 'outline',
+            align: 'center',
+            mark: '#',
+            strong_text: promo_code,
+            text: 'at checkout, until ' ~ expires_text,
+            space_below: '0'
+        }) }}
+    {% endset %}
+    {{ section({ tone: 'surface', padding_y: '22px', align: 'center', slot: code_band }) }}
+{% else %}
+    {% set deadline %}
+        {{ note({ tone: 'outline', align: 'center', strong_text: 'Ends ' ~ expires_text, text: '', space_below: '0' }) }}
+    {% endset %}
+    {{ section({ tone: 'surface', padding_y: '22px', align: 'center', slot: deadline }) }}
+{% endif %}
+
+{% if products %}
+    {% set shelf %}
+        {{ heading({ text: products_heading, level: '2', space_above: '0', space_below: '18px' }) }}
+        {{ product_grid({ items: products, count: 3, link_label: 'Shop', space_below: '0' }) }}
+    {% endset %}
+    {{ section({ tone: 'surface', padding_y: '10px', slot: shelf }) }}
+{% endif %}
+
+{% set closing %}
+    {{ heading({ text: help_heading, level: '2', space_above: '0', space_below: '10px', color: '#FFFFFF' }) }}
+    {{ text({ text: help_text, color: '#C9C6C2', space_below: (help_url ? '18px' : '0') }) }}
+    {% if help_url %}
+        {{ button({ label: 'Read the FAQ', url: help_url, variant: 'outline', color: '#FFFFFF', align: 'left', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'dark', padding_y: '34px', space_below: '24px', slot: closing }) }}
+
+{% if terms %}
+    {{ text({ text: terms, size: 'footer', muted: true, space_below: '6px' }) }}
+{% endif %}
+
+{{ text({ text: footer_note, size: 'footer', muted: true, space_below: '0' }) }}

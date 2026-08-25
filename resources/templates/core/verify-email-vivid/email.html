@@ -1,0 +1,18 @@
+{% set opening %}
+    {{ heading({ text: (user.first_name ? 'Almost there, ' ~ user.first_name : 'Almost there'), level: '3', space_above: '0', space_below: '10px', color: '#C9C6FA' }) }}
+    {{ heading({ text: heading_text, level: '1', space_above: '0', space_below: '10px', color: '#FFFFFF' }) }}
+    {{ text({ text: body, color: '#D5D3F7', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'accent', padding_y: '34px', slot: opening }) }}
+
+{% set panel %}
+    {{ code({ code: verification_code, label: 'Your code', note: 'Expires in ' ~ expires_in, space_above: '0', space_below: (action_url ? '20px' : '0') }) }}
+    {% if action_url %}
+        {{ button({ label: button_label, url: action_url, align: 'center', shape: 'pill', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'surface', padding_y: '30px', align: 'center', space_below: '16px', slot: panel }) }}
+
+{{ text({ text: security_note, size: 'small', muted: true, space_below: '0' }) }}

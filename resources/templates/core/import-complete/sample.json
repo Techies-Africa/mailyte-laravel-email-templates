@@ -1,0 +1,35 @@
+{
+    "default": {
+        "source_name": "Mailchimp",
+        "imported_count": "4,820",
+        "total_count": "4,855",
+        "failed_count": 35,
+        "duration": "6 minutes",
+        "action_url": "https://example.com/app/contacts",
+        "error_report_url": "https://example.com/imports/42/errors.csv",
+        "failures": [
+            {
+                "label": "Missing email address",
+                "value": "28"
+            },
+            {
+                "label": "Duplicate of an existing record",
+                "value": "5"
+            },
+            {
+                "label": "Malformed date field",
+                "value": "2"
+            }
+        ]
+    },
+    "clean-run": {
+        "source_name": "a CSV upload",
+        "imported_count": "312",
+        "total_count": "312",
+        "failed_count": 0,
+        "duration": "under a minute",
+        "action_url": "https://example.com/app/contacts",
+        "error_report_url": "",
+        "failures": []
+    }
+}

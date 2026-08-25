@@ -1,0 +1,18 @@
+{
+    "default": {
+        "card_brand": "Visa",
+        "card_last4": "4242",
+        "expires_on": "October 2026",
+        "next_charge_on": "1 October 2026",
+        "update_url": "https://example.com/billing/payment-method"
+    },
+    "unknown-brand-no-schedule": {
+        "card_brand": "",
+        "card_last4": "1881",
+        "expires_on": "this month",
+        "next_charge_on": "",
+        "body": "Your card expires at the end of the month. You are on pay-as-you-go, so nothing is scheduled and nothing will fail on a date — but the next thing you buy will need a card that works.",
+        "update_url": "https://example.com/billing/payment-method",
+        "button_label": "Add a new card"
+    }
+}

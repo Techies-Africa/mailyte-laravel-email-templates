@@ -1,0 +1,35 @@
+{# Before and after. The two addresses are the whole message, so they are set
+   as a two-row comparison inside an accented card and nothing else on the page
+   is allowed to be bigger. Both addresses receive this, which is stated up
+   front — otherwise the copy that reaches the old inbox reads as a mistake. #}
+{{ heading({ text: heading_text, level: '1', space_above: '0', space_below: '6px' }) }}
+
+{{ text({ text: dual_delivery_note, size: 'small', muted: true, space_below: '20px' }) }}
+
+{{ text({ text: body, space_below: '22px' }) }}
+
+{% set comparison %}
+    {{ key_value({
+        rows: [
+            { label: current_label, value: old_email, mono: true },
+            { label: new_label, value: new_email, mono: true }
+        ],
+        label_width: '30%',
+        emphasise_last: true,
+        space_below: '0'
+    }) }}
+{% endset %}
+
+{{ card({ accent: theme('color.primary'), padding: '18px 20px 4px', slot: comparison, space_below: '22px' }) }}
+
+{% if cancel_deadline %}
+    {{ note({ tone: 'soft', strong_text: stop_by_label ~ ' ' ~ cancel_deadline ~ '.', text: deadline_note, space_below: '20px' }) }}
+{% endif %}
+
+{% if cancel_url %}
+    {{ button({ label: cancel_label, url: cancel_url, variant: 'danger', align: 'left', space_below: '22px' }) }}
+{% endif %}
+
+{{ divider({ style: 'dashed', space_above: '0', space_below: '14px' }) }}
+
+{{ text({ text: no_action_note, size: 'small', muted: true, space_below: '0' }) }}

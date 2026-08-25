@@ -6,28 +6,109 @@
     "engine": "^1.0",
     "tier": "core",
     "type": "transactional",
-    "category": "account",
-    "supported_layouts": ["plain", "minimal", "branded"],
-    "audience": ["saas", "fintech", "developer-tools"],
+    "category": "security",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "developer-tools"
+    ],
     "tone": "urgent",
-    "tags": ["security", "login", "alert"],
-    "authors": [{ "name": "Mailyte", "url": "https://mailyte.com" }],
+    "tags": [
+        "security",
+        "login",
+        "alert",
+        "account"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
     "license": "MIT",
-    "origin": { "kind": "original" },
-
+    "origin": {
+        "kind": "original",
+        "note": "Design: bulletin — rule-led, monospace metadata, two actions of deliberately unequal weight, no imagery."
+    },
     "subject": "New sign-in to your {{ product.name }} account",
-    "preheader": "If this was you, no action is needed.",
-
-    "blocks_used": ["status_banner", "heading", "text", "key_value", "button", "divider"],
-
+    "preheader": "If this was you, nothing to do. If it wasn't, secure the account now.",
+    "blocks_used": [
+        "button",
+        "button_group",
+        "divider",
+        "heading",
+        "key_value",
+        "status_banner",
+        "text"
+    ],
     "variables": {
-        "user.first_name": { "type": "string", "description": "Recipient's first name.", "default": "", "example": "Ada" },
-        "heading_text": { "type": "string", "description": "Main headline.", "default": "New sign-in to your account" },
-        "body": { "type": "text", "description": "Opening paragraph.", "default": "We noticed a sign-in from a device we haven't seen before. If that was you, there's nothing to do." },
-        "details": { "type": "array", "description": "Sign-in provenance. Naming the device, place and time is what lets someone judge whether it was them.", "default": [], "example": [{ "label": "When", "value": "24 August 2026 at 14:07 UTC" }, { "label": "Device", "value": "Chrome on macOS" }, { "label": "Near", "value": "Lagos, Nigeria" }, { "label": "IP address", "value": "102.89.34.12", "mono": true }] },
-        "location_caveat": { "type": "text", "description": "Honesty note about IP-based geolocation, which is routinely wrong by a city or more.", "default": "Location is approximate, based on IP address." },
-        "action_url": { "type": "url", "description": "Where to go to secure the account.", "required": true, "example": "https://example.com/security" },
-        "button_label": { "type": "string", "description": "CTA label.", "default": "Secure your account" },
-        "security_note": { "type": "text", "description": "Closing line.", "default": "If this wasn't you, change your password now and sign out of all devices." }
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "heading_text": {
+            "type": "string",
+            "description": "Main headline.",
+            "default": "New sign-in to your account"
+        },
+        "body": {
+            "type": "text",
+            "description": "Opening paragraph explaining what triggered the alert.",
+            "default": "Someone signed in from a device we haven't seen on this account before. The details are below."
+        },
+        "details": {
+            "type": "array",
+            "description": "Sign-in metadata as `label` / `value`. Set `mono` on values a person may need to read character by character, such as an IP address.",
+            "default": [],
+            "example": [
+                {
+                    "label": "Device",
+                    "value": "Chrome on macOS"
+                }
+            ]
+        },
+        "location_caveat": {
+            "type": "text",
+            "description": "Why the location may look wrong. Omitting this generates support tickets — IP geolocation is routinely off by a city.",
+            "default": "Location is estimated from the IP address and can be inaccurate, especially on mobile networks or a VPN."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where to secure the account. This is the urgent path and gets the filled button.",
+            "required": true,
+            "example": "https://example.com/security"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Label for the urgent action.",
+            "default": "Secure your account"
+        },
+        "confirm_url": {
+            "type": "url",
+            "description": "Optional \"this was me\" acknowledgement, which stops the alert repeating and is worth offering.",
+            "default": "",
+            "example": "https://example.com/security/confirm"
+        },
+        "confirm_label": {
+            "type": "string",
+            "description": "Label for the reassuring action.",
+            "default": "This was me"
+        },
+        "security_note": {
+            "type": "text",
+            "description": "What happens if they do nothing. Reassurance belongs after the action, not before it.",
+            "default": "You don't have to do anything if this was you. This message is a record, not a request."
+        }
     }
 }

@@ -1,0 +1,111 @@
+{
+    "slug": "payment-failed",
+    "name": "Payment failed",
+    "description": "A charge did not go through: what failed, what happens next, and the deadline before service is affected.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "transactional",
+    "category": "billing",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech"
+    ],
+    "tone": "urgent",
+    "tags": [
+        "billing",
+        "payment",
+        "dunning",
+        "failure"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: dunning notice — amber alert, the deadline as the largest element, one repair action."
+    },
+    "subject": "We couldn't take your payment for {{ product.name }}",
+    "preheader": "Your account keeps working until {{ grace_ends_at }}. Updating the card takes a minute.",
+    "blocks_used": [
+        "button",
+        "heading",
+        "section",
+        "stat_row",
+        "status_banner",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name.",
+            "default": "",
+            "example": "Ada"
+        },
+        "amount": {
+            "type": "money",
+            "description": "The amount that failed.",
+            "required": true,
+            "example": "$29.00"
+        },
+        "card_last4": {
+            "type": "string",
+            "description": "Last four digits of the card that failed, so they know which one to fix.",
+            "default": "",
+            "example": "4242"
+        },
+        "failure_reason": {
+            "type": "string",
+            "description": "What the processor said, translated into something a person can act on. \"Insufficient funds\" is useful; \"do_not_honor\" is not.",
+            "default": "",
+            "example": "The card was declined by your bank"
+        },
+        "retry_at": {
+            "type": "date",
+            "description": "When the charge will be attempted again, if it will be.",
+            "default": "",
+            "example": "27 August"
+        },
+        "grace_ends_at": {
+            "type": "date",
+            "description": "When service is actually affected. This is the fact the email exists to communicate.",
+            "required": true,
+            "example": "7 September"
+        },
+        "consequence": {
+            "type": "text",
+            "description": "What happens at that deadline, stated plainly.",
+            "default": "After that the workspace becomes read-only. Nothing is deleted, and paying restores it immediately."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where to update the payment method.",
+            "required": true,
+            "example": "https://example.com/billing/payment-method"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Primary button label.",
+            "default": "Update payment method"
+        },
+        "help_url": {
+            "type": "url",
+            "description": "Optional link for people whose card is fine and who think this is a mistake.",
+            "default": "",
+            "example": "https://example.com/help/billing"
+        }
+    }
+}

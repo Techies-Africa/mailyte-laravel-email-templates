@@ -1,31 +1,32 @@
-{{ heading({ text: heading_text ~ ' ' ~ invoice.number, level: '1' }) }}
+{{ heading({ text: heading_text ~ ' ' ~ invoice.number, level: '1', space_above: '0', space_below: '4px' }) }}
 
-{{ text({ text: body }) }}
+{% if invoice.date %}
+    {{ text({ text: 'Issued ' ~ invoice.date, size: 'small', muted: true, space_below: '22px' }) }}
+{% endif %}
 
-{{ card({ slot:
-    key_value({ rows: [
-        { label: 'Amount due', value: invoice.total },
-        { label: 'Due by', value: invoice.due_date }
-    ], space_above: '0', space_below: '0' })
-}) }}
+{{ divider({ style: 'thick', color: theme('color.text'), space_above: '0', space_below: '20px' }) }}
 
-{{ button({ label: button_label, url: pay_url }) }}
+{{ stat_row({ items: [{ value: invoice.total, label: 'Due ' ~ invoice.due_date }], size: 'display', space_below: '22px' }) }}
+
+{{ button({ label: button_label, url: pay_url, align: 'left', shape: 'square', space_below: '30px' }) }}
 
 {% if line_items %}
-    {{ heading({ text: 'Details', level: '3' }) }}
-    {{ key_value({ rows: line_items }) }}
+    {{ heading({ text: 'Detail', level: '3', space_above: '0', space_below: '10px' }) }}
+    {{ key_value({ rows: line_items, figures: true, label_width: '62%', space_below: '0' }) }}
 {% endif %}
 
 {% if totals %}
-    {{ key_value({ rows: totals, space_above: '0' }) }}
+    {{ key_value({ rows: totals, figures: true, emphasise_last: true, label_width: '62%' }) }}
 {% endif %}
 
-{{ divider() }}
+{% if body %}
+    {{ text({ text: body, size: 'small', muted: true }) }}
+{% endif %}
 
 {% if manage_subscription_url %}
-    {{ text({ text: 'You can review or cancel your subscription at any time.', size: 'small', muted: true }) }}
+    {{ button({ label: 'Review or cancel your subscription', url: manage_subscription_url, variant: 'link', align: 'left', space_above: '18px', space_below: '10px' }) }}
 {% endif %}
 
 {% if footer_legal %}
-    {{ text({ text: footer_legal, size: 'small', muted: true }) }}
+    {{ text({ text: footer_legal, size: 'footer', muted: true, space_below: '0' }) }}
 {% endif %}

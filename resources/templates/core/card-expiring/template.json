@@ -1,0 +1,99 @@
+{
+    "slug": "card-expiring",
+    "name": "Card expiring soon",
+    "description": "Sent weeks before the card on file expires, while everything is still working, so the customer can replace it without a failed charge.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "billing",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "fintech",
+        "ecommerce"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "billing",
+        "card",
+        "expiry",
+        "payment-method"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: wallet — the card drawn as a panel above the sentence, warm stone and bronze, no alert colour anywhere."
+    },
+    "subject": "Your card ending {{ card_last4 }} expires soon",
+    "preheader": "Nothing has failed. Replacing it now keeps the next charge from bouncing.",
+    "blocks_used": [
+        "button",
+        "card",
+        "divider",
+        "heading",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "card_brand": {
+            "type": "string",
+            "description": "Brand shown on the panel so the customer recognises which of their cards this is. Omit it when the processor did not report one — the panel reads correctly without it.",
+            "default": "",
+            "example": "Visa"
+        },
+        "card_last4": {
+            "type": "string",
+            "description": "The last four digits, which is how a person identifies a card and how they tell a real notice from a phishing one. Never send more of the number than this.",
+            "required": true,
+            "example": "4242"
+        },
+        "expires_on": {
+            "type": "string",
+            "description": "The expiry printed on the card itself, written the way the card writes it. It appears in the heading as well as the panel, so it is the one date the reader cannot miss.",
+            "required": true,
+            "example": "October 2026"
+        },
+        "next_charge_on": {
+            "type": "date",
+            "description": "The first charge that would be attempted with the dead card. It turns an abstract expiry into a deadline; leave it empty on accounts that are not on a schedule.",
+            "default": "",
+            "example": "1 October 2026"
+        },
+        "body": {
+            "type": "text",
+            "description": "The calm explanation under the heading. It exists so the tone of this email is editable — the failure email is elsewhere, and this one must not borrow its voice.",
+            "default": "Cards expire on a schedule, not because anything went wrong. Your plan, your data and your team are unaffected, and there is nothing to do until you have the new card in your hand."
+        },
+        "update_url": {
+            "type": "url",
+            "description": "The billing page where a card is replaced. One action only — a second link would invite the reader to weigh options they do not have.",
+            "required": true,
+            "example": "https://example.com/billing/payment-method"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Label for the single action. Say what happens, not \"click here\".",
+            "default": "Replace the card"
+        },
+        "security_note": {
+            "type": "text",
+            "description": "The anti-phishing footer. Card-expiry mail is impersonated constantly, so the honest version says what it will never ask for and offers a route that does not involve trusting a link.",
+            "default": "We will never ask for card details by email, and no reply to this message should ever contain them. If you would rather not follow a link, sign in and open Billing yourself — the same page is there."
+        }
+    }
+}

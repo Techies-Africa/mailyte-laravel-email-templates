@@ -1,0 +1,57 @@
+{
+    "default": {
+        "plan_name": "Studio",
+        "ends_on": "3 October 2026",
+        "kept_items": [
+            {
+                "text": "Your account and everything in it",
+                "detail": "Moves to the free tier on 3 October, nothing is deleted"
+            },
+            {
+                "text": "All 14 invoices and receipts",
+                "detail": "Still downloadable from Billing"
+            },
+            {
+                "text": "Your two published sites",
+                "detail": "Stay online with Acme branding in the footer"
+            }
+        ],
+        "ending_items": [
+            {
+                "text": "Eleven team seats",
+                "detail": "Your colleagues lose access on 3 October"
+            },
+            {
+                "text": "Scheduled exports and the API",
+                "detail": "Keys stop working at 23:59 UTC on 3 October"
+            },
+            {
+                "text": "Version history beyond 30 days",
+                "detail": "Older versions are removed after 3 November"
+            }
+        ],
+        "export_url": "https://example.com/account/export",
+        "export_until": "3 January 2027",
+        "reactivate_url": "https://example.com/billing/plans"
+    },
+    "immediate-no-free-tier": {
+        "plan_name": "Studio",
+        "ends_on": "24 August 2026",
+        "access_note": "The cancellation took effect straight away at your request, so there is no remaining paid period and no further charge.",
+        "kept_items": [],
+        "ending_items": [
+            {
+                "text": "Access to the workspace",
+                "detail": "Ended when you confirmed the cancellation"
+            },
+            {
+                "text": "The three integrations you connected",
+                "detail": "Disconnected, and their tokens revoked"
+            }
+        ],
+        "export_url": "",
+        "export_until": "",
+        "return_note": "There is no free tier on this product, so the workspace is closed rather than downgraded. We hold the data for 30 days in case you restart, and delete it after that.",
+        "reactivate_url": ""
+    }
+}

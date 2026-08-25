@@ -1,0 +1,62 @@
+{% set masthead %}
+    {{ heading({ text: (issue_number and issue_date ? issue_number ~ ' · ' ~ issue_date : issue_number ~ issue_date), level: '3', align: 'center', space_above: '0', space_below: '12px' }) }}
+    {{ divider({ style: 'double', space_above: '0', space_below: '26px' }) }}
+    {{ heading({ text: issue_title, level: '1', space_above: '0', space_below: '14px' }) }}
+    {% if issue_standfirst %}
+        {{ text({ text: issue_standfirst, muted: true, space_below: '22px' }) }}
+    {% endif %}
+    {{ button({ label: cover_cta, url: cover_url, align: 'left', shape: 'square', space_below: '0' }) }}
+{% endset %}
+
+{% if cover_image %}
+    {{ image({ src: cover_image, alt: issue_title, width: '620', height: '300', radius: '0', bleed: true, space_below: '0' }) }}
+{% endif %}
+
+{{ section({ tone: 'surface', padding_y: '34px', slot: masthead }) }}
+
+{% if stat_items %}
+    {% set figures %}
+        {{ stat_row({ items: stat_items, space_below: '0' }) }}
+    {% endset %}
+    {{ section({ tone: 'alt', padding_y: '28px', slot: figures }) }}
+{% endif %}
+
+{% if items %}
+    {% set stories %}
+        {{ heading({ text: 'Also this month', level: '3', space_above: '0', space_below: '20px' }) }}
+        {% for item in items %}
+            {{ media({
+                image: item.image,
+                image_alt: item.title,
+                eyebrow: item.eyebrow,
+                title: item.title,
+                text: item.text,
+                link_label: 'Read',
+                link_url: item.url,
+                reverse: loop.index is even,
+                space_below: (loop.last ? '0' : '26px')
+            }) }}
+        {% endfor %}
+    {% endset %}
+    {{ section({ tone: 'surface', padding_y: '32px', slot: stories }) }}
+{% endif %}
+
+{% if quote_text %}
+    {% set pull %}
+        {{ quote({ text: quote_text, author: quote_author, role: quote_role, size: 'large', space_above: '0', space_below: '0' }) }}
+    {% endset %}
+    {{ section({ tone: 'alt', padding_y: '32px', slot: pull }) }}
+{% endif %}
+
+{% if closing_text %}
+    {% set outro %}
+        {{ heading({ text: closing_title, level: '2', space_above: '0', space_below: '10px', color: '#FFFDF9' }) }}
+        {{ text({ text: closing_text, color: '#CFC7BC', space_below: (closing_url ? '18px' : '0') }) }}
+        {% if closing_url %}
+            {{ button({ label: closing_cta, url: closing_url, variant: 'outline', color: '#FFFDF9', align: 'left', shape: 'square', space_below: '0' }) }}
+        {% endif %}
+    {% endset %}
+    {{ section({ tone: 'dark', background: '#1C1A16', padding_y: '34px', space_below: '22px', slot: outro }) }}
+{% endif %}
+
+{{ text({ text: footer_note, size: 'footer', muted: true, space_below: '0' }) }}

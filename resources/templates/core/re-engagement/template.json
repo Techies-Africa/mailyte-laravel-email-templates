@@ -1,0 +1,158 @@
+{
+    "slug": "re-engagement",
+    "name": "What changed while you were away",
+    "description": "Sent to a dormant account, leading with what the product has actually changed since their last visit and offering an unsubscribe as prominently as the invitation back.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "marketing",
+    "category": "marketing",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "community"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "re-engagement",
+        "dormant",
+        "winback",
+        "product-updates"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: what you missed — sans display over a serif measure, one picture, the changes as the argument and the unsubscribe given a heading of its own."
+    },
+    "subject": "What changed in {{ product.name }} since {{ away_since }}",
+    "preheader": "A short list of what is actually different, and an easy way out if it is not for you.",
+    "headers": {
+        "suggested": {
+            "List-Unsubscribe": "<{{ unsubscribe_url }}>",
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+        }
+    },
+    "credits": [
+        {
+            "kind": "photo",
+            "title": "A desk with a monitor showing a dashboard",
+            "author": "Huy Phan",
+            "source": "Unsplash",
+            "url": "https://unsplash.com/photos/a-modern-desk-setup-with-a-keyboard-and-monitor-Wqfpx-QnT-g",
+            "asset_url": "https://images.unsplash.com/photo-1742198865450-cf9ce4335a33",
+            "license": "Unsplash License",
+            "license_url": "https://unsplash.com/license",
+            "usage": "sample data only"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "list",
+        "media",
+        "text"
+    ],
+    "variables": {
+        "away_since": {
+            "type": "string",
+            "description": "When they were last active, written as a period rather than a timestamp — \"March\" reads as context, \"14 March 2026, 09:12 UTC\" reads as surveillance. It opens the email and appears in the subject.",
+            "required": true,
+            "example": "March"
+        },
+        "headline": {
+            "type": "string",
+            "description": "The headline, which must be about the product and never about the reader's absence. \"We miss you\" asks them to manage your feelings; a list of changes gives them something to evaluate.",
+            "default": "The product you left is not the one that is here now"
+        },
+        "intro": {
+            "type": "text",
+            "description": "One paragraph setting up the list. Its job is to be free of guilt, urgency and flattery, so that the changes below are read as information rather than as a pitch.",
+            "default": "Your account is still here, still yours, and nothing in it has been touched. Rather than ask you to come back, here is what is genuinely different — enough to judge the current version instead of the one you remember."
+        },
+        "highlight_eyebrow": {
+            "type": "string",
+            "description": "A short label over the lead change: the month it shipped, or the area it belongs to.",
+            "default": "",
+            "example": "Shipped in June"
+        },
+        "highlight_title": {
+            "type": "string",
+            "description": "The one change most likely to matter to a lapsed user. Everything else is a list; this one gets the picture and the space. Leave it empty and the section disappears cleanly.",
+            "default": "",
+            "example": "Reports you can actually read"
+        },
+        "highlight_text": {
+            "type": "text",
+            "description": "Two sentences on what the lead change does for them. Describe the difference, not the feature name — a returning user has no idea what your release notes call it.",
+            "default": "",
+            "example": "The old reporting page took a minute to load and told you very little. The new one answers the three questions people were exporting to a spreadsheet to answer."
+        },
+        "highlight_image": {
+            "type": "url",
+            "description": "Picture for the lead change. Sample data only — a shipped default must never hotlink someone else's file, and the layout is designed to read correctly with images blocked.",
+            "default": "",
+            "example": "https://images.example.com/reports.jpg"
+        },
+        "highlight_image_alt": {
+            "type": "string",
+            "description": "What the picture shows, for the many readers who will never see it. Describe the scene, not the marketing claim.",
+            "default": "",
+            "example": "A desk with a monitor showing a dashboard"
+        },
+        "highlight_url": {
+            "type": "url",
+            "description": "Where the lead change is explained in full, usually a changelog entry rather than a landing page.",
+            "default": "",
+            "example": "https://example.com/changelog/reports"
+        },
+        "changes": {
+            "type": "array",
+            "description": "The rest of what changed, as `text` with an optional `detail`. Keep them concrete and countable; four true small changes are more persuasive than one vague large one. An empty list is a legitimate state — send the lead change alone rather than padding it.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Imports no longer time out",
+                    "detail": "A 200,000-row file now takes about 40 seconds"
+                }
+            ]
+        },
+        "action_url": {
+            "type": "url",
+            "description": "The single way back in. One action only: a dormant reader given three links picks none of them.",
+            "required": true,
+            "example": "https://example.com/login"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Label for the way back. Describe the destination rather than issuing an instruction.",
+            "default": "Open your account"
+        },
+        "action_note": {
+            "type": "text",
+            "description": "The small print under the action — what state their account is actually in. Someone who has been away for a year is mostly wondering whether their data survived.",
+            "default": "Everything you made is where you left it. Nothing has been deleted and your plan has not changed."
+        },
+        "leaving_note": {
+            "type": "text",
+            "description": "The honest exit. Placed under its own heading rather than hidden in the footer, because a one-click unsubscribe costs a name and a buried one costs a spam complaint — and because a message that makes leaving easy is the only kind entitled to argue for staying.",
+            "default": "If this is not something you use any more, one click stops it. No survey, no last offer, and no further email about it."
+        }
+    }
+}

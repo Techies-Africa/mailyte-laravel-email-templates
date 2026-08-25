@@ -1,0 +1,24 @@
+{
+    "default": {
+        "author_name": "Priya Raman",
+        "mention_text": "Can we get Ada to sign off the migration plan before Thursday? She wrote the original importer and will spot anything we have missed.",
+        "mention_location": "Q3 roadmap planning, in the Product space",
+        "mention_time": "Today at 11:42",
+        "action_label": "Read it in context",
+        "action_url": "https://example.com/docs/roadmap-q3#c-4821",
+        "context_note": "Replying to this email won't post anything. Use the link above to answer where the conversation is.",
+        "notification_settings_url": "https://example.com/settings/notifications",
+        "notification_settings_label": "Change how often you get these"
+    },
+    "no-context": {
+        "author_name": "sam@northwind.example",
+        "mention_text": "@ada",
+        "mention_location": "",
+        "mention_time": "",
+        "action_label": "Open the comment",
+        "action_url": "https://example.com/app/comments/91",
+        "context_note": "Replying to this email won't post anything. Use the link above to answer where the conversation is.",
+        "notification_settings_url": "https://example.com/settings/notifications",
+        "notification_settings_label": "Change how often you get these"
+    }
+}

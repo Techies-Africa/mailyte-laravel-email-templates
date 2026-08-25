@@ -1,0 +1,30 @@
+{
+    "default": {
+        "context_label": "Export",
+        "event_line": "Your export finished",
+        "event_detail": "12,480 rows, compiled from the Q3 revenue report.",
+        "details": [
+            { "label": "File", "value": "q3-revenue.csv" },
+            { "label": "Rows", "value": "12,480" },
+            { "label": "Reference", "value": "exp_9f42c1b7", "mono": true }
+        ],
+        "deadline_label": "Available until",
+        "deadline_text": "31 August, after which the file is deleted.",
+        "action_label": "Download the file",
+        "action_url": "https://example.com/exports/9f42c1b7",
+        "secondary_label": "See all exports",
+        "secondary_url": "https://example.com/exports",
+        "notification_settings_url": "https://example.com/settings/notifications"
+    },
+    "bare": {
+        "context_label": "",
+        "event_line": "Ada Lovelace commented on Q3 planning",
+        "event_detail": "",
+        "details": [],
+        "deadline_text": "",
+        "action_label": "Read the comment",
+        "action_url": "https://example.com/docs/q3-planning#c-4821",
+        "secondary_url": "",
+        "notification_settings_url": ""
+    }
+}

@@ -1,0 +1,175 @@
+{
+    "slug": "product-tips",
+    "name": "Product tips and updates",
+    "description": "Announces two or three things worth turning on, each with what it does, who gets it, and the one action that enables it.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "marketing",
+    "category": "marketing",
+    "supported_layouts": [
+        "minimal",
+        "branded",
+        "editorial"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools"
+    ],
+    "tone": "friendly",
+    "tags": [
+        "education",
+        "product-update",
+        "tips",
+        "announcement"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: feature briefing — split opening, per-feature rows with availability chips and paired actions."
+    },
+    "subject": "{{ headline }}",
+    "preheader": "Three things you can switch on today, none of which need a developer.",
+    "credits": [
+        {
+            "kind": "photo",
+            "author": "Olly",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/cheerful-diverse-colleagues-of-different-ages-working-on-laptop-during-startup-project-3865639/",
+            "asset_url": "https://images.pexels.com/photos/3865639/pexels-photo-3865639.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Cheerful diverse colleagues working on a laptop during a startup project"
+        },
+        {
+            "kind": "photo",
+            "author": "Silverkblack",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/office-workers-discussing-at-a-table-with-a-laptop-and-color-swatches-23496662/",
+            "asset_url": "https://images.pexels.com/photos/23496662/pexels-photo-23496662.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Office workers discussing at a table with a laptop and colour swatches"
+        },
+        {
+            "kind": "photo",
+            "author": "Jack Sparrow",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/man-having-online-meeting-in-office-5918384/",
+            "asset_url": "https://images.pexels.com/photos/5918384/pexels-photo-5918384.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "Man having an online meeting in an office"
+        },
+        {
+            "kind": "photo",
+            "author": "RDNE",
+            "source": "Pexels",
+            "url": "https://www.pexels.com/photo/people-brainstorming-in-office-10375961/",
+            "asset_url": "https://images.pexels.com/photos/10375961/pexels-photo-10375961.jpeg",
+            "license": "Pexels License",
+            "license_url": "https://www.pexels.com/license/",
+            "usage": "sample data only",
+            "title": "People brainstorming in an office"
+        }
+    ],
+    "blocks_used": [
+        "button",
+        "button_group",
+        "divider",
+        "heading",
+        "media",
+        "note",
+        "section",
+        "split",
+        "text"
+    ],
+    "headers": {
+        "suggested": {
+            "List-Unsubscribe": "<{{ unsubscribe_url }}>",
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+        }
+    },
+    "variables": {
+        "eyebrow": {
+            "type": "string",
+            "description": "Small label above the headline, naming the release or the month.",
+            "default": "Product update"
+        },
+        "headline": {
+            "type": "string",
+            "description": "What the whole email is about, in one claim. Also the subject line by default.",
+            "required": true,
+            "example": "Three upgrades you can ship without a developer"
+        },
+        "intro": {
+            "type": "text",
+            "description": "One paragraph setting up the list. Say what they have in common.",
+            "default": "Each of these is a switch in your settings rather than a project. None of them need a release.",
+            "example": "Each of these is a switch, not a project."
+        },
+        "hero_image": {
+            "type": "url",
+            "description": "Image for the opening split. A screenshot of the product beats a photograph of people; use a photograph only if you have nothing real to show.",
+            "default": "",
+            "example": "https://example.com/release.png"
+        },
+        "features": {
+            "type": "array",
+            "description": "One entry per thing being announced: `image`, `chip` (who gets it), `title`, `text`, `action_label`, `action_url`, and optional `learn_label` / `learn_url` for the secondary action.",
+            "default": [],
+            "example": [
+                {
+                    "title": "A feature",
+                    "text": "What it does.",
+                    "action_label": "Enable now",
+                    "action_url": "https://example.com/x"
+                }
+            ]
+        },
+        "closing_heading": {
+            "type": "string",
+            "description": "Heading for the closing band.",
+            "default": "Ready to turn these on?"
+        },
+        "closing_text": {
+            "type": "text",
+            "description": "Closing paragraph, restating what is included.",
+            "default": ""
+        },
+        "action_url": {
+            "type": "url",
+            "description": "Where the closing button goes.",
+            "required": true,
+            "example": "https://example.com/settings"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Closing button label.",
+            "default": "Open settings"
+        },
+        "reply_note": {
+            "type": "text",
+            "description": "The reply invitation. Sending from a monitored address and saying so measurably raises replies.",
+            "default": "Questions? Reply to this email and it reaches the team that built these."
+        },
+        "unsubscribe_note": {
+            "type": "text",
+            "description": "How to stop these without leaving the product. Required in spirit on anything classed as marketing.",
+            "default": "You're getting this because you have an account. You can stop product updates and keep your account email."
+        }
+    }
+}

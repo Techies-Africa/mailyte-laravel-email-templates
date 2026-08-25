@@ -1,0 +1,37 @@
+{
+    "default": {
+        "amount": "$29.00",
+        "paid_at": "24 August 2026",
+        "description": "Pro plan, monthly",
+        "card_brand": "Visa",
+        "card_last4": "4242",
+        "receipt_number": "RCP-2026-0184",
+        "invoice_url": "https://example.com/invoices/RCP-2026-0184",
+        "footer_legal": "VAT ID EX123456789. This receipt is issued electronically and is valid without signature.",
+        "line_items": [
+            {
+                "label": "Pro plan, 1 month",
+                "value": "$25.00"
+            },
+            {
+                "label": "Additional seat",
+                "value": "$4.00"
+            },
+            {
+                "label": "Total paid",
+                "value": "$29.00"
+            }
+        ]
+    },
+    "single-charge": {
+        "amount": "£9.00",
+        "paid_at": "24 August 2026",
+        "description": "Starter plan, monthly",
+        "card_brand": "",
+        "card_last4": "",
+        "receipt_number": "",
+        "invoice_url": "",
+        "footer_legal": "",
+        "line_items": []
+    }
+}

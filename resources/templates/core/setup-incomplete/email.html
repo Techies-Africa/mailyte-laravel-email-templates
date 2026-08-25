@@ -1,0 +1,19 @@
+{{ text({ text: (user.first_name ? 'Hi ' ~ user.first_name ~ ',' : 'Hi,'), space_below: '18px' }) }}
+
+{{ text({ text: 'There is one thing left on your account:', space_below: '6px' }) }}
+
+{{ heading({ text: blocking_step, level: '1', space_above: '0', space_below: '4px' }) }}
+
+{{ text({ text: 'Takes ' ~ time_estimate ~ '.', size: 'small', muted: true }) }}
+
+{{ text({ text: why_it_matters }) }}
+
+{{ button({ label: button_label, url: action_url, variant: 'link', align: 'left', space_below: '26px' }) }}
+
+{% if sender_name %}
+    {{ text({ text: '— ' ~ sender_name, space_below: '22px' }) }}
+{% endif %}
+
+{{ divider({ style: 'solid', width: '80px', space_above: '0', space_below: '16px' }) }}
+
+{{ text({ text: opt_out_text, size: 'footer', muted: true, space_below: '0' }) }}

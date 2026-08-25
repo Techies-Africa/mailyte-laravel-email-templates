@@ -1,0 +1,96 @@
+{
+    "slug": "verify-email-link",
+    "name": "Verify email address",
+    "description": "Confirms an address with a single click and no code, for flows where verification always completes on the device that opened the email.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "variant_of": "verify-email",
+    "variant_label": "Link only",
+    "type": "transactional",
+    "category": "account",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "ecommerce",
+        "community"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "verification",
+        "account",
+        "signup",
+        "magic-link"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: single action — one button, nothing competing with it, raw URL underneath because a stripped button leaves nothing else."
+    },
+    "subject": "Confirm your email address",
+    "preheader": "One click and you're done. The link is good for {{ expires_in }}.",
+    "blocks_used": [
+        "button",
+        "heading",
+        "note",
+        "text"
+    ],
+    "variables": {
+        "user.first_name": {
+            "type": "string",
+            "description": "Recipient's first name. Falls back to a generic greeting when absent.",
+            "default": "",
+            "example": "Ada"
+        },
+        "heading_text": {
+            "type": "string",
+            "description": "Main headline.",
+            "default": "Confirm your email address"
+        },
+        "body": {
+            "type": "text",
+            "description": "Opening paragraph. With no code to fall back on, say plainly what the button does.",
+            "default": "Click the button below and your address is confirmed. Nothing else to enter."
+        },
+        "action_url": {
+            "type": "url",
+            "description": "The verification link. Required here — this variant has no code, so there is no second path.",
+            "required": true,
+            "example": "https://example.com/verify/abc123"
+        },
+        "button_label": {
+            "type": "string",
+            "description": "Call to action.",
+            "default": "Confirm my email"
+        },
+        "expires_in": {
+            "type": "string",
+            "description": "How long the link stays valid.",
+            "default": "1 hour"
+        },
+        "fallback_note": {
+            "type": "text",
+            "description": "Line above the raw URL. Not optional in a link-only flow: a stripped or rewritten button leaves the recipient with nothing.",
+            "default": "If the button doesn't work, copy this link into your browser:"
+        },
+        "security_note": {
+            "type": "text",
+            "description": "Closing reassurance.",
+            "default": "If you didn't create an account, ignore this email and nothing will happen."
+        }
+    }
+}

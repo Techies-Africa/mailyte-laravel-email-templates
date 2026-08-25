@@ -1,0 +1,60 @@
+{{ split({
+    tone: 'alt',
+    eyebrow: eyebrow,
+    title: headline,
+    text: intro,
+    image: hero_image,
+    image_alt: headline,
+    image_percent: 40
+}) }}
+
+{% if features %}
+    {% set rows %}
+        {% for feature in features %}
+            {{ media({
+                image: feature.image,
+                image_alt: feature.title,
+                eyebrow: feature.chip,
+                title: feature.title,
+                text: feature.text,
+                image_percent: 38,
+                space_below: '18px'
+            }) }}
+
+            {% if feature.action_url %}
+                {% if feature.learn_url %}
+                    {{ button_group({ items: [
+                        { label: feature.action_label, url: feature.action_url, variant: 'primary' },
+                        { label: feature.learn_label, url: feature.learn_url, variant: 'outline' }
+                    ], space_below: (loop.last ? '0' : '26px') }) }}
+                {% else %}
+                    {{ button({ label: feature.action_label, url: feature.action_url, align: 'left', space_below: (loop.last ? '0' : '26px') }) }}
+                {% endif %}
+            {% endif %}
+
+            {% if not loop.last %}
+                {{ divider({ space_above: '0', space_below: '26px' }) }}
+            {% endif %}
+        {% endfor %}
+    {% endset %}
+
+    {{ section({ tone: 'surface', padding_y: '34px', slot: rows }) }}
+{% endif %}
+
+{% set closing %}
+    {{ heading({ text: closing_heading, level: '2', space_above: '0', space_below: '10px' }) }}
+    {% if closing_text %}
+        {{ text({ text: closing_text, muted: true, space_below: '20px' }) }}
+    {% endif %}
+    {{ button({ label: button_label, url: action_url, align: 'left', shape: 'pill', space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '32px', slot: closing }) }}
+
+{% set outro %}
+    {{ note({ tone: 'plain', mark: '↩', text: reply_note, space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'surface', padding_y: '22px', space_below: '18px', slot: outro }) }}
+
+{{ text({ text: unsubscribe_note, size: 'footer', muted: true, space_below: '0' }) }}

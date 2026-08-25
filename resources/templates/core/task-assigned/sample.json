@@ -1,0 +1,42 @@
+{
+    "default": {
+        "task_title": "Rewrite the CSV importer's retry logic",
+        "project_name": "Ingest reliability",
+        "assigned_by": "Priya Raman",
+        "assigned_at": "24 August, 09:20",
+        "task_reference": "ENG-2043",
+        "task_description": "The current backoff is exponential in name only and fires three retries inside a second. Move it to a real backoff with jitter, cap total retry time at two minutes, and surface the final failure on the import report rather than in the logs.",
+        "priority_level": "danger",
+        "priority_label": "High",
+        "priority_text": "Blocking the September release",
+        "due_label": "Due",
+        "due_at": "Thursday 11 September",
+        "due_relative": "In four working days",
+        "no_due_text": "No date set. Ask whoever assigned it before you plan around it.",
+        "estimate": "About half a day",
+        "action_label": "Open the task",
+        "action_url": "https://example.com/projects/ingest/tasks/2043",
+        "notification_settings_url": "https://example.com/settings/notifications",
+        "notification_settings_label": "Change how often you get these"
+    },
+    "no-due-date": {
+        "task_title": "Review the onboarding copy when you get a chance",
+        "project_name": "",
+        "assigned_by": "",
+        "assigned_at": "",
+        "task_reference": "",
+        "task_description": "",
+        "priority_level": "neutral",
+        "priority_label": "Whenever",
+        "priority_text": "",
+        "due_label": "Due",
+        "due_at": "",
+        "due_relative": "",
+        "no_due_text": "No date set. Ask whoever assigned it before you plan around it.",
+        "estimate": "",
+        "action_label": "Open the task",
+        "action_url": "https://example.com/projects/marketing/tasks/77",
+        "notification_settings_url": "https://example.com/settings/notifications",
+        "notification_settings_label": "Send me a daily list instead"
+    }
+}

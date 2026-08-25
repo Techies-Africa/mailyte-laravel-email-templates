@@ -1,0 +1,198 @@
+{
+    "slug": "maintenance-scheduled",
+    "name": "Scheduled maintenance",
+    "description": "Announces planned downtime ahead of time: the window with its timezone, what will be unavailable, and what is worth doing before it starts.",
+    "version": "1.0.0",
+    "engine": "^1.0",
+    "tier": "core",
+    "type": "notification",
+    "category": "system",
+    "supported_layouts": [
+        "plain",
+        "minimal",
+        "branded"
+    ],
+    "audience": [
+        "saas",
+        "developer-tools",
+        "fintech"
+    ],
+    "tone": "neutral",
+    "tags": [
+        "maintenance",
+        "downtime",
+        "planned",
+        "status"
+    ],
+    "authors": [
+        {
+            "name": "Confidence Ugolo",
+            "url": "https://www.linkedin.com/in/confidence-ugolo"
+        },
+        {
+            "name": "Joel Omojefe",
+            "url": "https://www.linkedin.com/in/joel-omojefe"
+        }
+    ],
+    "license": "MIT",
+    "origin": {
+        "kind": "original",
+        "note": "Design: notice board — a steel masthead, the window set as a mono table with its timezone spelled out, and no alarm anywhere."
+    },
+    "subject": "Scheduled maintenance on {{ window_date }}",
+    "preheader": "The window, the timezone it is stated in, and what is worth doing before it starts.",
+    "blocks_used": [
+        "button",
+        "divider",
+        "heading",
+        "key_value",
+        "list",
+        "note",
+        "section",
+        "text"
+    ],
+    "variables": {
+        "eyebrow": {
+            "type": "string",
+            "description": "Small label above the headline. It exists so the reader can classify the email before reading a word of it.",
+            "default": "Scheduled maintenance"
+        },
+        "headline": {
+            "type": "string",
+            "description": "What is being worked on, in plain words. Name the system rather than the ticket — 'Database upgrade' beats 'Change window CHG-2211'.",
+            "required": true,
+            "example": "Database upgrade"
+        },
+        "window_date": {
+            "type": "string",
+            "description": "The day the window falls on. It carries the subject line and the first row of the table, because the date is what decides whether the reader needs to act at all.",
+            "required": true,
+            "example": "Sunday 14 September"
+        },
+        "window_summary": {
+            "type": "string",
+            "description": "The whole window on one line, timezone included, for the reader who gets no further than the masthead.",
+            "required": true,
+            "example": "Sunday 14 September, 02:00 to 04:00 UTC"
+        },
+        "intro": {
+            "type": "text",
+            "description": "Why the window exists and what it buys. Planned work is easier to accept when the reason is stated once, plainly, without apology.",
+            "required": true,
+            "example": "We are moving the primary database onto newer hardware. It is the last step of a migration that has been running for six weeks, and it needs a short window with nothing writing to it."
+        },
+        "window_heading": {
+            "type": "string",
+            "description": "Heading over the window table.",
+            "default": "The window"
+        },
+        "start_label": {
+            "type": "string",
+            "description": "Label for the start row.",
+            "default": "Starts"
+        },
+        "date_label": {
+            "type": "string",
+            "description": "Label for the date row.",
+            "default": "Date"
+        },
+        "window_start": {
+            "type": "string",
+            "description": "The clock time the window opens, on the date above. Set in the mono face so start and end line up under each other and can be compared at a glance.",
+            "required": true,
+            "example": "02:00"
+        },
+        "end_label": {
+            "type": "string",
+            "description": "Label for the end row.",
+            "default": "Ends"
+        },
+        "window_end": {
+            "type": "string",
+            "description": "The clock time the window closes. State a planned end even if the work may finish sooner — an open-ended window is unplannable.",
+            "required": true,
+            "example": "04:00"
+        },
+        "timezone_label": {
+            "type": "string",
+            "description": "Label for the timezone row.",
+            "default": "Stated in"
+        },
+        "timezone": {
+            "type": "string",
+            "description": "The timezone the two times above are given in, with its offset. Never leave this implicit: a maintenance email is read in every timezone you have customers in.",
+            "required": true,
+            "example": "UTC (GMT+0)"
+        },
+        "duration_label": {
+            "type": "string",
+            "description": "Label for the duration row.",
+            "default": "Expected outage"
+        },
+        "duration": {
+            "type": "string",
+            "description": "How much of the window is actual downtime, which is often much less than the window itself. Leave empty if the whole window is unavailable.",
+            "default": "",
+            "example": "Up to 20 minutes, near the start"
+        },
+        "affected_heading": {
+            "type": "string",
+            "description": "Heading over the list of things that stop working.",
+            "default": "What will be unavailable"
+        },
+        "affected": {
+            "type": "array",
+            "description": "Each service that goes down, as `text` (the service) and `detail` (what a request to it does meanwhile — a 503, a queue, a silent retry). The detail is the part that saves a support ticket.",
+            "default": [],
+            "example": [
+                {
+                    "text": "The dashboard",
+                    "detail": "Returns a maintenance page"
+                }
+            ]
+        },
+        "unaffected_label": {
+            "type": "string",
+            "description": "Lead-in for the line about what keeps running.",
+            "default": "Still running"
+        },
+        "unaffected_text": {
+            "type": "text",
+            "description": "What is not affected. Saying this explicitly stops readers assuming the whole product is down for two hours.",
+            "default": "",
+            "example": "Inbound email, webhooks and scheduled sends carry on as normal."
+        },
+        "prepare_heading": {
+            "type": "string",
+            "description": "Heading over the preparation band.",
+            "default": "Worth doing before it starts"
+        },
+        "prepare": {
+            "type": "array",
+            "description": "What a customer should do beforehand, as `text` and optional `detail`. Keep it to things that genuinely help; a list of busywork trains people to ignore the next one.",
+            "default": [],
+            "example": [
+                {
+                    "text": "Finish anything mid-edit",
+                    "detail": "Drafts are saved, but unsaved edits are not"
+                }
+            ]
+        },
+        "status_url": {
+            "type": "url",
+            "description": "The status page, so the reader has somewhere to look during the window instead of writing to support.",
+            "default": "",
+            "example": "https://status.example.com"
+        },
+        "status_label": {
+            "type": "string",
+            "description": "Label for the status page action.",
+            "default": "Follow the status page"
+        },
+        "closing": {
+            "type": "text",
+            "description": "The closing line. Say whether another email is coming when the work is done — most people want the all-clear more than the warning.",
+            "default": "We will send one short note when the window closes and everything is back."
+        }
+    }
+}

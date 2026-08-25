@@ -6,3 +6,8 @@ composer.lock
 .phpunit.result.cache
 .DS_Store
 /workbench
+
+# Reference screenshots and local build artefacts, not package content
+/samples
+/storage
+/art/*.html

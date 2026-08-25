@@ -1,0 +1,37 @@
+{# Wind-down. Serif set at a regular weight throughout, wide margins, and no
+   accent colour anywhere: this email has nothing to sell and should not look
+   as though it does. The recovery deadline is the largest thing on the page,
+   larger than the headline, because it is the only fact worth acting on.
+   What goes and what stays are set as prose, not as ticked lists — a list of
+   deletions reads like a feature comparison. #}
+{{ heading({ text: heading_text, level: '1', space_above: '0', space_below: '16px' }) }}
+
+{{ text({ text: body, space_below: '32px' }) }}
+
+{% set window %}
+    {% if recovery_label %}
+        {{ text({ text: recovery_label, size: 'small', muted: true, space_below: '6px' }) }}
+    {% endif %}
+    {{ heading({ text: (recovery_deadline ?: no_recovery_text), level: '2', space_above: '0', space_below: '10px' }) }}
+    {{ text({ text: recovery_note, size: 'small', muted: true, space_below: '0' }) }}
+{% endset %}
+
+{{ section({ tone: 'alt', padding_y: '34px', space_above: '0', space_below: '34px', slot: window }) }}
+
+{{ heading({ text: deleted_label, level: '3', space_above: '0', space_below: '10px' }) }}
+{{ text({ text: deleted_text, space_below: '28px' }) }}
+
+{{ heading({ text: kept_label, level: '3', space_above: '0', space_below: '10px' }) }}
+{{ text({ text: kept_text, space_below: '30px' }) }}
+
+{% if export_url %}
+    {{ button({ label: export_label, url: export_url, variant: 'link', align: 'left', space_below: '8px' }) }}
+{% endif %}
+
+{% if cancel_url %}
+    {{ button({ label: cancel_label, url: cancel_url, variant: 'link', align: 'left', space_below: '8px' }) }}
+{% endif %}
+
+{{ divider({ style: 'solid', width: '72px', space_above: '22px', space_below: '18px' }) }}
+
+{{ text({ text: closing_note, size: 'small', muted: true, space_below: '0' }) }}

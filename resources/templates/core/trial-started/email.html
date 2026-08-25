@@ -1,0 +1,34 @@
+{{ split({
+    tone: 'alt',
+    eyebrow: plan_name ~ ' trial',
+    title: (user.first_name ? 'You\'re in, ' ~ user.first_name : 'You\'re in'),
+    text: 'Full access for ' ~ trial_days ~ ' days, through ' ~ trial_ends_at ~ '.',
+    image: hero_image,
+    image_alt: '',
+    button_label: button_label,
+    button_url: action_url,
+    image_percent: 40
+}) }}
+
+{% set unlocked %}
+    {% if included %}
+        {{ heading({ text: included_heading, level: '2', space_above: '0', space_below: '16px' }) }}
+        {{ list({ items: included, style: 'check', space_below: '22px' }) }}
+    {% endif %}
+
+    {{ note({
+        tone: 'soft',
+        mark: '◷',
+        strong_text: 'Ends ' ~ trial_ends_at ~ '.',
+        text: (card_required ? 'Your card is charged after that unless you cancel.' : 'After that the account drops to the free plan. No charge, nothing to cancel.'),
+        space_below: (plans_url ? '20px' : '0')
+    }) }}
+
+    {% if plans_url %}
+        {{ button({ label: 'See what the plans cost', url: plans_url, variant: 'link', align: 'left', space_below: '0' }) }}
+    {% endif %}
+{% endset %}
+
+{{ section({ tone: 'surface', padding_y: '32px', space_below: '18px', slot: unlocked }) }}
+
+{{ text({ text: closing, size: 'footer', muted: true, space_below: '0' }) }}

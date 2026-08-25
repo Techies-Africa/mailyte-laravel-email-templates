@@ -1,0 +1,51 @@
+{# Roster. A narrow measure and no display type: this is a record of an arrival,
+   not an announcement. Three ruled facts, two boxed counts, one thing to do
+   with the new arrival, and the invitations still waiting kept as a ledger at
+   the foot — which is the part that gets a stalled rollout finished. #}
+
+{{ heading({ text: eyebrow, level: '3', space_above: '0', space_below: '10px', color: theme('color.text_muted') }) }}
+
+{{ heading({ text: member_name ~ ' joined ' ~ workspace_name, level: '1', space_above: '0', space_below: '10px' }) }}
+
+{{ text({ text: intro, space_below: '22px' }) }}
+
+{{ key_value({ rows: [
+    { label: joined_label, value: joined_at },
+    { label: role_label, value: role_name },
+    { label: email_label, value: member_email, mono: true }
+], label_width: '34%', space_below: '24px' }) }}
+
+{% if seats_value %}
+    {{ stat_row({ items: [
+        { value: member_count, label: members_label, caption: members_caption },
+        { value: seats_value, label: seats_label, caption: seats_caption }
+    ], boxed: true, space_below: '28px' }) }}
+{% else %}
+    {{ stat_row({ items: [{ value: member_count, label: members_label, caption: members_caption }], boxed: true, space_below: '28px' }) }}
+{% endif %}
+
+{{ heading({ text: next_heading, level: '2', space_above: '0', space_below: '10px' }) }}
+
+{{ text({ text: next_text, space_below: '22px' }) }}
+
+{% if secondary_url %}
+    {{ button_group({ items: [
+        { label: primary_label, url: primary_url, variant: 'primary' },
+        { label: secondary_label, url: secondary_url, variant: 'outline' }
+    ], align: 'left', space_below: '30px' }) }}
+{% else %}
+    {{ button({ label: primary_label, url: primary_url, align: 'left', space_below: '30px' }) }}
+{% endif %}
+
+{% if pending %}
+    {% set ledger %}
+        {{ heading({ text: pending_heading, level: '3', space_above: '0', space_below: '12px' }) }}
+        {{ list({ items: pending, style: 'plain', space_below: '14px' }) }}
+        {{ text({ text: closing, size: 'footer', muted: true, space_below: '0' }) }}
+    {% endset %}
+
+    {{ section({ tone: 'alt', padding_y: '26px', slot: ledger }) }}
+{% else %}
+    {{ divider({ style: 'dotted', space_above: '0', space_below: '14px' }) }}
+    {{ text({ text: closing, size: 'footer', muted: true, space_below: '0' }) }}
+{% endif %}

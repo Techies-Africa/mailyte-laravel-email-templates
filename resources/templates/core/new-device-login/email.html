@@ -1,21 +1,28 @@
-{{ status_banner({
-    level: 'warning',
-    label: 'Security alert',
-    text: 'A new device signed in to your account.'
-}) }}
+{{ status_banner({ level: 'danger', label: 'Security alert', text: 'Unrecognised sign-in detected.' }) }}
 
-{{ heading({ text: heading_text, level: '1' }) }}
+{{ heading({ text: heading_text, level: '1', space_above: '0' }) }}
 
-{% if user.first_name %}{{ text({ text: 'Hi ' ~ user.first_name ~ ',' }) }}{% endif %}
+{% if user.first_name %}
+    {{ text({ text: user.first_name ~ ',', space_below: '4px' }) }}
+{% endif %}
 
 {{ text({ text: body }) }}
 
-{% if details %}{{ key_value({ rows: details }) }}{% endif %}
+{% if details %}
+    {{ heading({ text: 'Sign-in detail', level: '3', space_below: '6px' }) }}
+    {{ key_value({ rows: details, label_width: '36%' }) }}
+    {{ text({ text: location_caveat, size: 'small', muted: true }) }}
+{% endif %}
 
-{{ text({ text: location_caveat, size: 'small', muted: true }) }}
+{% if confirm_url %}
+    {{ button_group({ items: [
+        { label: button_label, url: action_url, variant: 'danger' },
+        { label: confirm_label, url: confirm_url, variant: 'outline' }
+    ], shape: 'square' }) }}
+{% else %}
+    {{ button({ label: button_label, url: action_url, variant: 'danger', align: 'left', shape: 'square' }) }}
+{% endif %}
 
-{{ button({ label: button_label, url: action_url, variant: 'danger' }) }}
+{{ divider({ space_above: '4px' }) }}
 
-{{ divider() }}
-
-{{ text({ text: security_note, size: 'small', muted: true }) }}
+{{ text({ text: security_note, size: 'small', muted: true, space_below: '0' }) }}
