@@ -347,7 +347,19 @@ class DeliverabilityAudit
         $html = mb_strtolower($email->html);
 
         if (! str_contains($html, 'unsubscribe') && ! str_contains($html, 'preferences')) {
-            $issues[] = Issue::error($slug, 'MT063', 'a '.$manifest->type().' message with no unsubscribe or preferences link in the rendered output');
+            $message = 'no unsubscribe or preferences link in the rendered output'
+                .' -- set mailyte.globals.unsubscribe_url or mailyte.brand.footer, or pass it per send';
+
+            // The severity follows the compliance class, which is what the
+            // manifest schema promises: marketing mail is legally required to
+            // carry an unsubscribe route, so that is an error. For a
+            // notification it is good practice and a deliverability help, but
+            // not a legal duty -- and raising it as an error meant a clean
+            // install failed `--strict` before the application had configured
+            // anything.
+            $issues[] = $manifest->type() === 'marketing'
+                ? Issue::error($slug, 'MT063', 'marketing mail with '.$message)
+                : Issue::warning($slug, 'MT063', 'a notification with '.$message);
         }
 
         if ($manifest->type() === 'marketing' && $email->willBeClippedByGmail()) {

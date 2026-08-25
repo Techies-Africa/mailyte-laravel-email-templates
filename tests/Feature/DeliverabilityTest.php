@@ -219,6 +219,24 @@ it('catches an empty subject', function () {
     expect(codes($this->audit->audit(fakeEmail(['subject' => '']), fakeManifest())))->toContain('MT062');
 });
 
+it('grades the missing-unsubscribe rule by compliance class, as the schema promises', function () {
+    // marketing: legally required, so an error. notification: good practice,
+    // so a warning -- otherwise a clean install fails --strict before the
+    // application has configured an unsubscribe URL at all.
+    $marketing = $this->audit->audit(fakeEmail(), fakeManifest('marketing'));
+    $notification = $this->audit->audit(fakeEmail(), fakeManifest('notification'));
+
+    $pick = fn (array $issues) => array_values(array_filter(
+        $issues, static fn (Issue $i): bool => $i->rule === 'MT063'
+    ));
+
+    expect($pick($marketing))->toHaveCount(1)
+        ->and($pick($marketing)[0]->severity)->toBe(Issue::ERROR)
+        ->and($pick($notification))->toHaveCount(1)
+        ->and($pick($notification)[0]->severity)->toBe(Issue::WARNING)
+        ->and($pick($notification)[0]->isError())->toBeFalse();
+});
+
 it('requires a marketing message to carry an unsubscribe route in the rendered output', function () {
     $bare = $this->audit->audit(fakeEmail(), fakeManifest('marketing'));
     $withLink = $this->audit->audit(fakeEmail([

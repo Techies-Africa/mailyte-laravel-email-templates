@@ -60,7 +60,7 @@ warnings too, which is what CI runs.
 | `MT060` | Shouting subject lines | `ALL CAPS`, `!!!` and `$$` are scored on their own |
 | `MT061` | `<script>`, `<iframe>`, `<form>`, event handlers | Every major client strips these, and their presence raises the score on the way past |
 | `MT062` | Empty subject, missing preheader | The subject is not optional; the preheader decides what the inbox preview says |
-| `MT063` | Bulk mail with no unsubscribe route in the rendered output | Required by CAN-SPAM and by Gmail's and Yahoo's bulk sender rules |
+| `MT063` | No unsubscribe route in the rendered output | An error for `marketing`, which is required to carry one by CAN-SPAM and by Gmail's and Yahoo's bulk sender rules; a warning for `notification`, where it helps deliverability but is not a legal duty. `transactional` is exempt |
 
 A template that genuinely does not need a rule waives it in its own manifest,
 with a written reason:
