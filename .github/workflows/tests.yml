@@ -15,22 +15,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.2', '8.3', '8.4']
-        laravel: ['11.*', '12.*', '13.*']
-        stability: [prefer-stable]
-        exclude:
-          # Laravel 13 requires PHP 8.3.
-          - php: '8.2'
-            laravel: '13.*'
+        # framework and testbench are pinned together: a loose cross-product
+        # lets Composer choose a testbench that wants a different framework
+        # major than the one under test, and the install fails.
+        #
+        # Laravel 11 is absent deliberately -- it is past security support, and
+        # its releases are blocked by Composer's advisory audit.
         include:
-          # One run against the oldest dependencies each constraint allows, so
-          # a version floor that is quietly wrong fails here rather than in
-          # someone's application.
-          - php: '8.2'
-            laravel: '11.*'
-            stability: prefer-lowest
+          - { php: '8.2', laravel: '12.*', testbench: '10.*' }
+          - { php: '8.3', laravel: '12.*', testbench: '10.*' }
+          - { php: '8.4', laravel: '12.*', testbench: '10.*' }
+          - { php: '8.3', laravel: '13.*', testbench: '11.*' }
+          - { php: '8.4', laravel: '13.*', testbench: '11.*' }
+          # Oldest dependencies the constraints allow, so a version floor that
+          # is quietly wrong fails here rather than in someone's application.
+          - { php: '8.2', laravel: '12.*', testbench: '10.*', stability: 'prefer-lowest' }
 
-    name: PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }} ${{ matrix.stability }}
+    name: PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }} ${{ matrix.stability || 'prefer-stable' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -46,12 +47,12 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
-          key: composer-${{ matrix.php }}-${{ matrix.laravel }}-${{ matrix.stability }}-${{ hashFiles('composer.json') }}
+          key: composer-${{ matrix.php }}-${{ matrix.laravel }}-${{ matrix.stability || 'prefer-stable' }}-${{ hashFiles('composer.json') }}
 
       - name: Install dependencies
         run: |
-          composer require "illuminate/support:${{ matrix.laravel }}" "illuminate/mail:${{ matrix.laravel }}" "illuminate/view:${{ matrix.laravel }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.stability || 'prefer-stable' }} --prefer-dist --no-interaction
 
       - name: Run the test suite
         run: vendor/bin/pest --ci

@@ -8,7 +8,7 @@
   <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-DBA500.svg?style=flat-square"></a>
   <img alt="50 templates" src="https://img.shields.io/badge/templates-50-1F1B17.svg?style=flat-square">
   <img alt="PHP 8.2+" src="https://img.shields.io/badge/php-8.2%2B-1F1B17.svg?style=flat-square">
-  <img alt="Laravel 11, 12, 13" src="https://img.shields.io/badge/laravel-11%20%7C%2012%20%7C%2013-1F1B17.svg?style=flat-square">
+  <img alt="Laravel 12, 13" src="https://img.shields.io/badge/laravel-12%20%7C%2013-1F1B17.svg?style=flat-square">
 </p>
 
 # Mailyte Email Templates — free HTML email templates for Laravel
@@ -265,7 +265,10 @@ php artisan vendor:publish --tag=mailyte-mail-themes   # themes
 
 ## Requirements
 
-PHP 8.2+, Laravel 11, 12 or 13. (Laravel 13 requires PHP 8.3+.)
+PHP 8.2+, Laravel 12 or 13. (Laravel 13 requires PHP 8.3+.)
+
+Laravel 11 is not supported: it is past security support, and Composer's
+advisory audit blocks its releases.
 
 ## Contributing
 

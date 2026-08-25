@@ -17,6 +17,12 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 
 - Laravel 13 support.
 
+### Removed
+
+- Laravel 11 support. It is past security support, and Composer's advisory
+  audit blocks every `laravel/framework` and `illuminate/mail` 11.x release, so
+  the package could not honestly claim to work there.
+
 ## [1.0.0] - 2026-08-25
 
 First public release. Created by [Confidence Ugolo](https://www.linkedin.com/in/confidence-ugolo),
