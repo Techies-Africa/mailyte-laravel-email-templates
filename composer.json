@@ -79,8 +79,7 @@
         "orchestra/testbench": "^9.0|^10.0|^11.0",
         "pestphp/pest": "^3.0",
         "pestphp/pest-plugin-laravel": "^3.0",
-        "phpstan/phpstan": "^2.0",
-        "spatie/pest-plugin-snapshots": "^2.2"
+        "phpstan/phpstan": "^2.0"
     },
     "suggest": {
         "ext-intl": "Locale-aware currency and number formatting in billing templates. Without it a table-driven fallback formatter is used."
