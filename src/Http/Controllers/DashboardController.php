@@ -141,11 +141,28 @@ class DashboardController
         uasort($usage, static fn (array $a, array $b): int => $b['count'] <=> $a['count']);
 
         $catalog = $this->mailyte->catalog();
+
+        // Anything with recorded sends that the catalog does not list: the
+        // notification shell, which resolves by slug but is deliberately
+        // unlisted, and any template that was renamed or removed after it had
+        // already sent. Without these the page counts sends in its totals that
+        // no row accounts for, which is worse than not counting them at all.
+        $untracked = [];
+
+        foreach (array_keys($usage) as $slug) {
+            if (isset($catalog[$slug])) {
+                continue;
+            }
+
+            $untracked[$slug] = $this->mailyte->sources()->find($slug);
+        }
+
         $total = array_sum(array_column($usage, 'count'));
 
         return view('mailyte::dashboard.usage', [
             'usage' => $usage,
             'catalog' => $catalog,
+            'untracked' => $untracked,
             'total' => $total,
             'trackedCount' => count($usage),
             'catalogCount' => count($catalog),

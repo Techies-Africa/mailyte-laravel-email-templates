@@ -13,6 +13,9 @@
         <div class="kpi"><b>{{ number_format($total) }}</b><span>Sends recorded</span></div>
         <div class="kpi"><b>{{ $trackedCount }}</b><span>Templates used at least once</span></div>
         <div class="kpi"><b>{{ $catalogCount }}</b><span>Templates in the catalog</span></div>
+        @if($untracked !== [])
+            <div class="kpi"><b>{{ count($untracked) }}</b><span>Sending, but not in the catalog</span></div>
+        @endif
     </div>
 
     <div class="panel">
@@ -46,6 +49,30 @@
                                     <span class="badge-zero">&mdash;</span>
                                 @endif
                             </td>
+                            <td>
+                                @if($row)
+                                    <div class="bar-track"><div class="bar-fill" style="width:{{ (int) round($row['count'] / $max * 100) }}%;"></div></div>
+                                @endif
+                            </td>
+                            <td style="color:var(--muted);">{{ $row && $row['last_used_at'] ? \Illuminate\Support\Carbon::parse($row['last_used_at'])->diffForHumans() : '—' }}</td>
+                        </tr>
+                    @endforeach
+                    {{-- Recorded sends the catalog cannot account for: the
+                         notification shell, which resolves by slug but is
+                         deliberately unlisted, and anything renamed or removed
+                         after it had already sent. Listed so the totals above
+                         always reconcile with the rows below. --}}
+                    @foreach($untracked as $slug => $manifest)
+                        @php($row = $usage[$slug] ?? null)
+                        <tr>
+                            <td><code>{{ $slug }}</code></td>
+                            <td style="color:var(--faint);">
+                                {{ $manifest?->category() ?? '—' }}
+                                <span class="badge-zero" title="{{ $manifest ? 'Resolvable, but not listed in the catalog' : 'No longer installed' }}">
+                                    {{ $manifest ? 'unlisted' : 'not installed' }}
+                                </span>
+                            </td>
+                            <td>@if($row)<strong>{{ number_format($row['count']) }}</strong>@else<span class="badge-zero">&mdash;</span>@endif</td>
                             <td>
                                 @if($row)
                                     <div class="bar-track"><div class="bar-fill" style="width:{{ (int) round($row['count'] / $max * 100) }}%;"></div></div>
