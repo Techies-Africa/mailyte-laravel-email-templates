@@ -220,7 +220,6 @@ blockquote {
 }
 
 .inner-body a {
-    color: {$link};
     word-break: break-word;
 }
 
@@ -239,6 +238,12 @@ blockquote {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
+}
+
+.button,
+.inner-body a.button,
+.action a.button {
+    color: {$primaryInk};
 }
 
 .button {
@@ -390,8 +395,12 @@ blockquote {
         color: {$theme->get('color.text_muted', $muted, 'dark')} !important;
     }
 
-    a, .inner-body a, .header a {
+    a:not(.button), .inner-body a:not(.button), .header a {
         color: {$theme->get('color.link', $link, 'dark')} !important;
+    }
+
+    .button, .inner-body a.button {
+        color: {$theme->get('color.primary_text', $primaryInk, 'dark')} !important;
     }
 
     .subcopy, .table th, .table td, blockquote {

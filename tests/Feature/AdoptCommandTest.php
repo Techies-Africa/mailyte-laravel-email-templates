@@ -355,3 +355,36 @@ it('stays quiet about the brand once it is configured', function () {
         ->doesntExpectOutputToContain('Finish the look')
         ->assertExitCode(0);
 });
+
+/**
+ * The generated markdown theme has to survive Laravel's own selector
+ * specificity. `.inner-body a` outranks `.button`, so putting the link colour
+ * there paints button labels the link colour -- and for a design whose link and
+ * primary are the same hue, that is an invisible label on a same-coloured
+ * plate. It shipped that way once; this pins it.
+ */
+it('keeps the markdown button label readable against its own plate', function () {
+    $theme = Mailyte::template('newsletter')->resolvedTheme();
+    $css = (new MarkdownThemeCompiler)->compile($theme, 'newsletter');
+
+    // newsletter's link and primary are the same red, which is what made the
+    // collision visible in the first place.
+    expect($theme->get('color.link'))->toBe($theme->get('color.primary'));
+
+    // The link colour must not be set on a selector that outranks .button.
+    expect($css)->not->toMatch('/\.inner-body a \{[^}]*color:/');
+
+    // And the label colour must be stated on a selector that does outrank it.
+    expect($css)->toContain('.inner-body a.button');
+});
+
+it('does not let dark mode repaint button labels as links', function () {
+    $css = (new MarkdownThemeCompiler)->compile(
+        Mailyte::template('newsletter')->resolvedTheme(), 'newsletter'
+    );
+
+    $dark = substr($css, (int) strpos($css, '@media (prefers-color-scheme: dark)'));
+
+    expect($dark)->toContain('a:not(.button)')
+        ->and($dark)->toContain('.inner-body a.button');
+});
