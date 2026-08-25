@@ -62,6 +62,21 @@ final class TokenSanitizer
     }
 
     /**
+     * Loopback and developer TLDs, which cannot resolve for a recipient.
+     */
+    private function isLocalHost(string $host): bool
+    {
+        $host = strtolower($host);
+
+        return in_array($host, ['localhost', '127.0.0.1', '::1', '0.0.0.0'], true)
+            || str_ends_with($host, '.test')
+            || str_ends_with($host, '.local')
+            || str_ends_with($host, '.localhost')
+            || preg_match('/^(?:10|127)\./', $host) === 1
+            || preg_match('/^192\.168\./', $host) === 1;
+    }
+
+    /**
      * @param  array<int, string>  $warnings
      * @return string|array<string, string>
      */
@@ -120,7 +135,14 @@ final class TokenSanitizer
             );
         }
 
-        if (strtolower($parts['scheme']) !== 'https') {
+        // A loopback or `.test` host over http is somebody previewing against
+        // their own machine, which is the normal way to check a logo before it
+        // is hosted anywhere. It can never reach a real recipient, so there is
+        // nothing to protect them from -- and blocking it meant the render threw
+        // and fell back to Laravel's own rendering, which looks like adoption
+        // silently not working. The deliverability audit already exempts these
+        // hosts from its own http rule; this matches it.
+        if (strtolower($parts['scheme']) !== 'https' && ! $this->isLocalHost($parts['host'])) {
             throw new InvalidThemeOverride(
                 "Theme override [{$path}] must use https. Plain http assets are blocked or flagged "
                 .'by most mail clients.'

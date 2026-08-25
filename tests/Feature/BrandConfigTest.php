@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Mailyte\EmailTemplates\Exceptions\InvalidThemeOverride;
 use Mailyte\EmailTemplates\Facades\Mailyte;
 
 /**
@@ -87,4 +88,34 @@ it('leaves the theme alone for anything left null', function () {
 
     // Falls back to the address configured in globals.
     expect($html)->toContain('1 Example Way, Springfield');
+});
+
+/**
+ * Previewing against your own machine is the normal way to check a logo before
+ * it is hosted. Rejecting it meant the render threw, the notification channel
+ * caught it and fell back to Laravel's rendering, and adoption looked like it
+ * had silently stopped working -- with the reason only in the log.
+ */
+it('allows a loopback asset URL over http, so local previews work', function () {
+    foreach ([
+        'http://127.0.0.1:8000/logo.png',
+        'http://localhost:8000/logo.png',
+        'http://acme.test/logo.png',
+        'http://192.168.1.20/logo.png',
+    ] as $url) {
+        $email = Mailyte::template('welcome')
+            ->with(Mailyte::catalog()['welcome']->samples()['default'] ?? [])
+            ->theme(['logo.url' => $url])
+            ->render();
+
+        expect($email->html)->toContain($url);
+    }
+});
+
+it('still refuses plain http for a host a recipient could actually reach', function () {
+    expect(fn () => Mailyte::template('welcome')
+        ->with(Mailyte::catalog()['welcome']->samples()['default'] ?? [])
+        ->theme(['logo.url' => 'http://cdn.example.com/logo.png'])
+        ->render())
+        ->toThrow(InvalidThemeOverride::class);
 });
