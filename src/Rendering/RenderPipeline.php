@@ -59,6 +59,7 @@ final class RenderPipeline
             'globals' => $this->globals($data),
             'title' => $subject,
             'locale' => $locale,
+            'direction' => $this->direction($locale),
             'preheaderHtml' => $preheader === ''
                 ? ''
                 : $this->blocks->render('preheader', ['text' => $preheader], $theme, $layout),
@@ -223,6 +224,25 @@ final class RenderPipeline
         }
 
         return $view;
+    }
+
+    /**
+     * Reading direction for the locale.
+     *
+     * The `dir` attribute alone, which is what makes the bidi algorithm place
+     * punctuation and mixed Latin runs correctly in Arabic or Hebrew. It is not
+     * full mirroring: a template that sets `align: 'left'` still aligns left,
+     * because that is a per-template design decision rather than something to
+     * rewrite here.
+     */
+    private function direction(string $locale): string
+    {
+        $language = strtolower(explode('_', str_replace('-', '_', $locale))[0]);
+
+        return in_array($language, [
+            'ar', 'arc', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', 'ku',
+            'ps', 'sd', 'ur', 'yi',
+        ], true) ? 'rtl' : 'ltr';
     }
 
     /**

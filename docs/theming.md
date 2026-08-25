@@ -171,3 +171,18 @@ The dashboard renders any template across every theme, layout, width and colour 
 ```
 
 Switch **Theme** to compare your palette against the catalog's, and **Scheme** to check dark mode. The width buttons (320 / 375 / 600 / 1024) are the ones worth spending time in — 320px is where a design either holds together or does not.
+
+## Right-to-left locales
+
+`->locale('ar')` sets `dir="rtl"` on the message alongside `lang`, which is what
+makes the bidirectional algorithm place punctuation and mixed Latin runs
+correctly.
+
+It is not full mirroring. A template that asks for `align: 'left'` still aligns
+left, because alignment is a design decision each template made rather than
+something the renderer should rewrite underneath it. If you need a mirrored
+layout, publish the template and set the alignments you want:
+
+```bash
+php artisan mailyte:publish-template welcome --as=welcome-rtl
+```

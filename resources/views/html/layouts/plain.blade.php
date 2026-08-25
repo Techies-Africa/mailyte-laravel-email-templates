@@ -2,7 +2,7 @@
      The safest thing to send for security-critical mail, and the layout to
      reach for when deliverability matters more than presentation. --}}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ $locale ?? 'en' }}">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ $locale ?? 'en' }}" dir="{{ $direction ?? 'ltr' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

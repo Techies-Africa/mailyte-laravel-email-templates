@@ -16,6 +16,8 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 ### Added
 
 - Laravel 13 support.
+- `dir` on the rendered message, derived from the locale, so right-to-left
+  languages get correct bidirectional text.
 
 ### Removed
 
