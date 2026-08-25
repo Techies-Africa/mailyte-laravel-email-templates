@@ -146,6 +146,13 @@ exactly what they said before.
 - **A `toMail()` that returns a `Mailable`.** That is a different code path
   entirely, and yours.
 
+### Adopted mail still counts
+
+`php artisan mailyte:usage` counts adopted notifications alongside direct
+sends, so the figures cover everything the application sends rather than only
+the calls that name a template. Counting is local and off-switchable
+(`mailyte.usage.enabled`).
+
 ### If rendering fails, the email still sends
 
 A missing template or a bad token falls back to Laravel's own rendering and

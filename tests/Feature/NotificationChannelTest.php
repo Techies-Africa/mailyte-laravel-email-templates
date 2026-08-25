@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Notification as NotificationFacade;
 use Mailyte\EmailTemplates\EmailTemplatesServiceProvider;
 use Mailyte\EmailTemplates\Facades\Mailyte;
 use Mailyte\EmailTemplates\Linting\TemplateLinter;
+use Mailyte\EmailTemplates\Listeners\RecordTemplateUsage;
 use Mailyte\EmailTemplates\Sources\SourceChain;
+use Mailyte\EmailTemplates\Usage\UsageRecorder;
 use Symfony\Component\Mime\Email;
 
 /**
@@ -267,4 +269,67 @@ it('lets the commands reach the shell by name even though it is unlisted', funct
 
     $this->artisan('mailyte:lint', ['slug' => ['no-such-thing']])
         ->assertExitCode(1);
+});
+
+/**
+ * Usage is counted from a marker header that RecordTemplateUsage reads and then
+ * strips. A direct send gets it from TemplateMailable; a notification rendered
+ * by this channel did not, so `mailyte:usage` reported zero for any application
+ * that had adopted -- blind to the templates doing the most work.
+ */
+describe('usage counting for adopted notifications', function () {
+    beforeEach(function (): void {
+        config()->set('mailyte.notifications.enabled', true);
+        config()->set('mailyte.usage.enabled', true);
+        config()->set('mailyte.usage.driver', 'cache');
+        // The default store here is the database one, whose table this suite
+        // does not migrate.
+        config()->set('cache.default', 'array');
+        app()->forgetInstance(UsageRecorder::class);
+        app()->forgetInstance(ChannelManager::class);
+        NotificationFacade::clearResolvedInstances();
+        (new EmailTemplatesServiceProvider(app()))->boot();
+        app(UsageRecorder::class)->flush();
+    });
+
+    it('counts an adopted notification against the template that rendered it', function () {
+        (new Recipient)->notify(new OrdinaryNotification);
+
+        $recorder = app(UsageRecorder::class);
+
+        expect($recorder->countFor('laravel-notification'))->toBe(1);
+    });
+
+    it('counts each send, not just the first', function () {
+        (new Recipient)->notify(new OrdinaryNotification);
+        (new Recipient)->notify(new OrdinaryNotification);
+
+        expect(app(UsageRecorder::class)->countFor('laravel-notification'))
+            ->toBe(2);
+    });
+
+    it('strips the marker so it never reaches a recipient', function () {
+        (new Recipient)->notify(new OrdinaryNotification);
+
+        $headers = sentEmail()->getHeaders();
+
+        expect($headers->has(RecordTemplateUsage::HEADER))->toBeFalse()
+            ->and($headers->has(RecordTemplateUsage::VERSION_HEADER))->toBeFalse();
+    });
+
+    it('counts nothing when usage tracking is switched off', function () {
+        config()->set('mailyte.usage.enabled', false);
+
+        (new Recipient)->notify(new OrdinaryNotification);
+
+        expect(app(UsageRecorder::class)->countFor('laravel-notification'))
+            ->toBe(0);
+    });
+
+    it('counts nothing for a notification it did not render', function () {
+        (new Recipient)->notify(new OwnMarkdownNotification);
+
+        expect(app(UsageRecorder::class)->countFor('laravel-notification'))
+            ->toBe(0);
+    });
 });

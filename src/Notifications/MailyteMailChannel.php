@@ -10,7 +10,9 @@ use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Mail\Markdown;
 use Illuminate\Notifications\Channels\MailChannel;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
+use Mailyte\EmailTemplates\Listeners\RecordTemplateUsage;
 use Mailyte\EmailTemplates\MailyteManager;
 use Mailyte\EmailTemplates\Rendering\RenderedEmail;
 
@@ -36,6 +38,12 @@ use Mailyte\EmailTemplates\Rendering\RenderedEmail;
  */
 class MailyteMailChannel extends MailChannel
 {
+    /**
+     * The message rendered for the notification in flight, so the usage marker
+     * headers can be attached to the outgoing mail.
+     */
+    private ?RenderedEmail $rendered = null;
+
     public function __construct(
         MailFactory|Mailer $mailer,
         Markdown $markdown,
@@ -51,6 +59,10 @@ class MailyteMailChannel extends MailChannel
      */
     protected function buildView($message)
     {
+        // Cleared every time: the manager caches this channel, so a message
+        // that falls back must not inherit the previous one's marker.
+        $this->rendered = null;
+
         if (! $this->shouldRender($message)) {
             return parent::buildView($message);
         }
@@ -66,10 +78,50 @@ class MailyteMailChannel extends MailChannel
             return parent::buildView($message);
         }
 
+        $this->rendered = $email;
+
         return [
             'html' => fn (): HtmlString => new HtmlString($email->html),
             'text' => fn (): HtmlString => new HtmlString($email->text),
         ];
+    }
+
+    /**
+     * Mark the outgoing message with the template it came from.
+     *
+     * Usage is counted at send time from a header that RecordTemplateUsage
+     * reads and then strips, so it never reaches a recipient or a relay. A
+     * direct `Mailyte::template(...)->send()` gets that header from
+     * TemplateMailable; a notification rendered here would not, which meant
+     * `mailyte:usage` under-reported to zero for any application that had
+     * adopted -- the templates doing the most work were the ones it could not
+     * see.
+     *
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
+     * @param  MailMessage  $message
+     * @return \Closure
+     */
+    protected function messageBuilder($notifiable, $notification, $message)
+    {
+        $parent = parent::messageBuilder($notifiable, $notification, $message);
+        $rendered = $this->rendered;
+
+        if ($rendered === null || $rendered->slug === '') {
+            return $parent;
+        }
+
+        return function ($mailMessage) use ($parent, $rendered): void {
+            $parent($mailMessage);
+
+            if (! $this->config->get('mailyte.usage.enabled', true)) {
+                return;
+            }
+
+            $headers = $mailMessage->getSymfonyMessage()->getHeaders();
+            $headers->addTextHeader(RecordTemplateUsage::HEADER, $rendered->slug);
+            $headers->addTextHeader(RecordTemplateUsage::VERSION_HEADER, $rendered->templateVersion);
+        };
     }
 
     private function shouldRender(MailMessage $message): bool
