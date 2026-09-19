@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Mailyte\EmailTemplates\Blocks\Block;
 use Mailyte\EmailTemplates\Blocks\BlockRegistry;
 use Mailyte\EmailTemplates\Blocks\Prop;
+use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
  * `schema()` is hand-written, and a hand-written description of what a method
@@ -54,12 +55,7 @@ function propsReadBy(Block $block): array
 /** @return array<int, Block> */
 function packagedBlocks(): array
 {
-    $registry = app(BlockRegistry::class);
-
-    return array_map(
-        static fn (string $name): Block => $registry->get($name),
-        $registry->names(),
-    );
+    return array_values(app(BlockRegistry::class)->all());
 }
 
 it('declares a schema for every packaged block', function () {
@@ -239,4 +235,33 @@ it('gives most blocks something to write in', function () {
     }
 
     expect($wordless)->toBe(['divider', 'spacer']);
+});
+
+/**
+ * The surface an editor builds against, rather than 25 separate lookups.
+ */
+it('hands over every block schema in one call', function () {
+    $schemas = app(BlockRegistry::class)->schemas();
+
+    expect($schemas)->toHaveCount(25);
+    expect(array_keys($schemas))->toContain('heading', 'button', 'line_items');
+    expect($schemas['heading']['text']['label'])->toBe('Heading');
+
+    // A block registered from outside the package has no schema to give, and
+    // must still appear: it exists and it renders.
+    app(BlockRegistry::class)->register(new class extends Block
+    {
+        public function name(): string
+        {
+            return 'contributed';
+        }
+
+        public function normalize(array $props, Theme $theme): array
+        {
+            return [];
+        }
+    });
+
+    expect(app(BlockRegistry::class)->schemas())->toHaveKey('contributed');
+    expect(app(BlockRegistry::class)->schemas()['contributed'])->toBe([]);
 });

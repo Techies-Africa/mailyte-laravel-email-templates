@@ -15,6 +15,13 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 
 ### Added
 
+- `Block::schema()`: every packaged block now declares what it accepts -- 204
+  props across the 25 blocks, each with a type, a label and a group of
+  `content`, `style` or `spacing`. Only 69 of the 204 hold words, so an editor
+  can render the ones that do and put the other 135 behind a disclosure. Read
+  one with `Mailyte::blocks()->get('heading')->schema()`, or all of them with
+  `Mailyte::blocks()->schemas()`. See [docs/blocks.md](docs/blocks.md).
+- `BlockRegistry::all()` and `BlockRegistry::schemas()`.
 - Laravel 13 support.
 - `dir` on the rendered message, derived from the locale, so right-to-left
   languages get correct bidirectional text.
