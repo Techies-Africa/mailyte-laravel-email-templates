@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 final class CardBlock extends Block
@@ -17,6 +18,18 @@ final class CardBlock extends Block
     public function hasSlot(): bool
     {
         return true;
+    }
+
+    public function schema(): array
+    {
+        return [
+            'accent' => Prop::color('Accent stripe', 'A colour down the leading edge. Left empty, there is no stripe.'),
+            'background' => Prop::color('Background'),
+            'border_color' => Prop::color('Border colour'),
+            'padding' => Prop::length('Padding'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

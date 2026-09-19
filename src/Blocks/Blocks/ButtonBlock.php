@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -23,6 +24,26 @@ final class ButtonBlock extends Block
     public function name(): string
     {
         return 'button';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'label' => Prop::text('Label', default: 'Continue', required: true),
+            'url' => Prop::url('Links to', required: true),
+            'variant' => Prop::enum('Style', ['primary', 'secondary', 'danger', 'outline', 'link'], 'primary'),
+            'shape' => Prop::enum('Shape', ['default', 'square', 'pill'], 'default', 'Square corners are what classic Outlook shows whatever you pick here.'),
+            'align' => Prop::enum('Alignment', ['left', 'center', 'right'], 'center'),
+            'full_width' => Prop::bool('Full width'),
+            'color' => Prop::color('Label colour'),
+            'border_color' => Prop::color('Border colour', 'Used by the outline style only.'),
+            'fallback_text' => Prop::text(
+                'Fallback line',
+                'The raw URL repeated under the button, for anyone whose client will not render it. Optional on purpose -- shipped emails split evenly on whether to do this.',
+            ),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

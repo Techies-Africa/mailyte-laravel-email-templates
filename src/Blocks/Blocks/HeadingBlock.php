@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 final class HeadingBlock extends Block
@@ -12,6 +13,18 @@ final class HeadingBlock extends Block
     public function name(): string
     {
         return 'heading';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'text' => Prop::text('Heading', required: true),
+            'level' => Prop::enum('Level', ['1', '2', '3'], '1', 'How big it is set, and what it means in the document outline.'),
+            'align' => Prop::enum('Alignment', ['left', 'center', 'right'], 'left'),
+            'color' => Prop::color('Colour'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

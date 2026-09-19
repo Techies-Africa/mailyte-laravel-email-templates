@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -21,6 +22,25 @@ final class KeyValueBlock extends Block
     public function name(): string
     {
         return 'key_value';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'rows' => Prop::items('Rows', [
+                'label' => Prop::text('Label', required: true),
+                'value' => Prop::text('Value', required: true),
+                'mono' => Prop::bool('Fixed width', description: 'For reference numbers and codes, where the digits should line up.'),
+            ], required: true),
+            'figures' => Prop::bool('Align as figures', description: 'Right-aligns the values, which is what you want for money.'),
+            'emphasise_last' => Prop::bool('Emphasise the last row', description: 'For a total under a list of line items.'),
+            'label_width' => Prop::length('Label column width'),
+            'label_color' => Prop::color('Label colour'),
+            'value_color' => Prop::color('Value colour'),
+            'border_color' => Prop::color('Rule colour'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

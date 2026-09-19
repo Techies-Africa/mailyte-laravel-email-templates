@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -22,6 +23,25 @@ final class ImageBlock extends Block
     public function fullBleed(array $props = []): bool
     {
         return (bool) ($props['bleed'] ?? false);
+    }
+
+    public function schema(): array
+    {
+        return [
+            'src' => Prop::image('Image', required: true),
+            'alt' => Prop::text(
+                'Alt text',
+                'What the image says, for anyone whose client blocks images -- which is most of them, by default.',
+                required: true,
+            ),
+            'href' => Prop::url('Links to', 'Optional. Makes the whole image clickable.'),
+            'width' => Prop::length('Width', 'In pixels, without a unit. The content column is 552 wide.'),
+            'height' => Prop::length('Height', 'In pixels. Best left empty so the image keeps its proportions.'),
+            'align' => Prop::enum('Alignment', ['left', 'center', 'right'], 'center'),
+            'radius' => Prop::length('Corner radius'),
+            'bleed' => Prop::bool('Full width', description: 'Runs the image to the edges of the message rather than sitting in the gutter.'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

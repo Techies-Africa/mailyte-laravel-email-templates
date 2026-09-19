@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -23,6 +24,21 @@ final class ButtonGroupBlock extends Block
     public function name(): string
     {
         return 'button_group';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'items' => Prop::items('Buttons', [
+                'label' => Prop::text('Label', required: true),
+                'url' => Prop::url('Links to', required: true),
+                'variant' => Prop::enum('Style', ['primary', 'secondary', 'danger', 'outline'], 'outline', 'The first button defaults to primary, the rest to outline.'),
+            ], 'At most three. Beyond that the row wraps badly on a phone and nothing gets clicked.', required: true),
+            'align' => Prop::enum('Alignment', ['left', 'center'], 'left'),
+            'shape' => Prop::enum('Shape', ['default', 'square', 'pill'], 'default'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

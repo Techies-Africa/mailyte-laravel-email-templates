@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -21,6 +22,22 @@ final class MediaBlock extends Block
     public function name(): string
     {
         return 'media';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'image' => Prop::image('Image'),
+            'image_alt' => Prop::text('Image description', 'What the image says, for anyone whose client blocks it.'),
+            'eyebrow' => Prop::text('Eyebrow', 'A short line above the title.'),
+            'title' => Prop::text('Title', required: true),
+            'text' => Prop::richtext('Text'),
+            'link_label' => Prop::text('Link text'),
+            'link_url' => Prop::url('Links to'),
+            'reverse' => Prop::bool('Image on the right', description: 'Swaps the two columns. Useful for alternating a run of these.'),
+            'image_percent' => Prop::number('Image width', 30, 60, 'How much of the row the image takes, as a percentage.'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -23,6 +24,19 @@ final class StatusBannerBlock extends Block
     public function name(): string
     {
         return 'status_banner';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'text' => Prop::richtext('Text', required: true),
+            'label' => Prop::text('Label', 'The word in the tag. Defaults to the level, and is always set in capitals.'),
+            'level' => Prop::enum('Level', ['info', 'success', 'warning', 'danger', 'neutral'], 'info', 'Chooses the accent colour and the default marker.', Prop::CONTENT),
+            'glyph' => Prop::text('Marker', 'Overrides the shape the level would use.'),
+            'background' => Prop::color('Background'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

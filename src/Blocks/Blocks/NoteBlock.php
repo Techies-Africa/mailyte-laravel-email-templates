@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -20,6 +21,24 @@ final class NoteBlock extends Block
     public function name(): string
     {
         return 'note';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'text' => Prop::richtext('Text', required: true),
+            'strong_text' => Prop::text('Lead-in', 'Set bold at the start of the note -- "Heads up:".'),
+            'mark' => Prop::text('Marker', 'A short word or symbol set in the accent colour beside the text.'),
+            'icon_url' => Prop::image('Icon'),
+            'tone' => Prop::enum('Treatment', ['soft', 'outline', 'plain'], 'soft', 'Soft fills the panel, outline rules it, plain does neither.'),
+            'align' => Prop::enum('Alignment', ['left', 'center'], 'left'),
+            'background' => Prop::color('Background', 'Only used by the soft treatment.'),
+            'border_color' => Prop::color('Border colour', 'Ignored by the plain treatment, which has no border.'),
+            'text_color' => Prop::color('Text colour'),
+            'mark_color' => Prop::color('Marker colour'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

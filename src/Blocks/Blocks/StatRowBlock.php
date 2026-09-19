@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -20,6 +21,26 @@ final class StatRowBlock extends Block
     public function name(): string
     {
         return 'stat_row';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'items' => Prop::items('Figures', [
+                'value' => Prop::text('Figure', 'The number itself, formatted -- "1,204", "98.2%".', required: true),
+                'label' => Prop::text('Label', required: true),
+                'caption' => Prop::text('Caption', 'The comparison that makes the figure mean something.'),
+            ], 'At most four. A fifth is dropped rather than squeezed.', required: true),
+            'size' => Prop::enum('Size', ['regular', 'display'], 'regular'),
+            'align' => Prop::enum('Alignment', ['left', 'center'], 'left'),
+            'boxed' => Prop::bool('In a panel', description: 'Sets the figures on their own background.'),
+            'background' => Prop::color('Panel background'),
+            'value_color' => Prop::color('Figure colour'),
+            'label_color' => Prop::color('Label colour', 'Worth setting when this sits inside a dark band: the slot is rendered before the band wraps it, so it cannot inherit the band\'s text colour.'),
+            'caption_color' => Prop::color('Caption colour'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

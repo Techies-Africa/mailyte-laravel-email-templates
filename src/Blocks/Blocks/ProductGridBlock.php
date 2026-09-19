@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -21,6 +22,25 @@ final class ProductGridBlock extends Block
     public function name(): string
     {
         return 'product_grid';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'items' => Prop::items('Products', [
+                'title' => Prop::text('Name', required: true),
+                'meta' => Prop::text('Detail'),
+                'price' => Prop::text('Price', 'Formatted and with its currency symbol.'),
+                'was_price' => Prop::text('Was', 'Struck through beside the price.'),
+                'badge' => Prop::text('Badge', 'A short flag over the card -- "New", "-20%".'),
+                'image' => Prop::image('Image'),
+                'url' => Prop::url('Links to'),
+            ], required: true),
+            'count' => Prop::number('Per row', 2, 3, 'Products past this are dropped rather than wrapped.', Prop::CONTENT),
+            'link_label' => Prop::text('Link text', 'Under each product.'),
+            'show_links' => Prop::bool('Show links', true),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

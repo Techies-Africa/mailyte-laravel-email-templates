@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -19,6 +20,21 @@ final class CodeBlock extends Block
     public function name(): string
     {
         return 'code';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'code' => Prop::text('Code', 'The verification code or reference, set large and spaced out.', required: true),
+            'label' => Prop::text('Label', 'A line above the code saying what it is.'),
+            'note' => Prop::text('Note', 'A quieter line below -- when it expires, what to do if it was not you.'),
+            'align' => Prop::enum('Alignment', ['left', 'center'], 'center'),
+            'background' => Prop::color('Background'),
+            'color' => Prop::color('Code colour'),
+            'muted_color' => Prop::color('Note colour'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

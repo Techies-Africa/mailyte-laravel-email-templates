@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -21,6 +22,19 @@ final class HeroBlock extends Block
     public function name(): string
     {
         return 'hero';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'eyebrow' => Prop::text('Eyebrow', 'A short line above the title, usually set small and in capitals.'),
+            'title' => Prop::text('Title', required: true),
+            'subtitle' => Prop::richtext('Subtitle'),
+            'image' => Prop::image('Image'),
+            'image_alt' => Prop::text('Image description', 'What the image says, for anyone whose client blocks it.'),
+            'align' => Prop::enum('Alignment', ['left', 'center'], 'left'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

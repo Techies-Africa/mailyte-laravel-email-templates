@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -31,6 +32,27 @@ final class BannerBlock extends Block
     public function fullBleed(array $props = []): bool
     {
         return (bool) ($props['bleed'] ?? false);
+    }
+
+    public function schema(): array
+    {
+        return [
+            'image' => Prop::image('Background image', required: true),
+            'image_alt' => Prop::text('Image description', 'What the image says, for anyone whose client blocks it.'),
+            'eyebrow' => Prop::text('Eyebrow', 'A short line above the title.'),
+            'title' => Prop::text('Title', required: true),
+            'subtitle' => Prop::richtext('Subtitle'),
+            'button_label' => Prop::text('Button label'),
+            'button_url' => Prop::url('Button links to'),
+            'overlay' => Prop::enum('Overlay', ['dark', 'light', 'none'], 'dark', 'A wash over the image so the words stay readable on it.'),
+            'align' => Prop::enum('Alignment', ['left', 'center'], 'center'),
+            'height' => Prop::number('Height', 120, 600, 'In pixels.'),
+            'bleed' => Prop::bool('Full width', description: 'Runs the banner to the edges of the message rather than sitting in the gutter.'),
+            'text_color' => Prop::color('Text colour', 'Used when there is no overlay.'),
+            'fallback_color' => Prop::color('Fallback colour', 'Shown where the image does not load -- which is most inboxes, by default.'),
+            'button_background' => Prop::color('Button colour'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

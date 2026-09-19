@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 final class ListBlock extends Block
@@ -12,6 +13,20 @@ final class ListBlock extends Block
     public function name(): string
     {
         return 'list';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'items' => Prop::items('Items', [
+                'text' => Prop::text('Text', required: true),
+                'detail' => Prop::text('Detail', 'A quieter second line under the item.'),
+            ], required: true),
+            'style' => Prop::enum('Marker', ['bullet', 'number', 'check', 'plain'], 'bullet'),
+            'color' => Prop::color('Text colour'),
+            'muted_color' => Prop::color('Detail colour'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

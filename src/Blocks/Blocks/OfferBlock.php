@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -30,6 +31,28 @@ final class OfferBlock extends Block
     public function fullBleed(array $props = []): bool
     {
         return (bool) ($props['bleed'] ?? false);
+    }
+
+    public function schema(): array
+    {
+        return [
+            'eyebrow' => Prop::text('Eyebrow', 'A short line above the headline.'),
+            'headline' => Prop::text('Headline', required: true),
+            'text' => Prop::richtext('Text'),
+            'code' => Prop::text('Discount code', 'Set large and spaced out so it can be read off a phone.'),
+            'code_label' => Prop::text('Code label', default: 'Use code'),
+            'expires' => Prop::text('Expires', 'Written out -- the block does no date formatting.'),
+            'terms' => Prop::richtext('Terms', 'The small print under the offer.'),
+            'button_label' => Prop::text('Button label'),
+            'button_url' => Prop::url('Button links to'),
+            'tone' => Prop::enum('Treatment', ['accent', 'dark', 'light'], 'accent'),
+            'background' => Prop::color('Background'),
+            'button_background' => Prop::color('Button colour'),
+            'button_color' => Prop::color('Button label colour'),
+            'bleed' => Prop::bool('Full width', description: 'Runs the panel to the edges of the message.'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

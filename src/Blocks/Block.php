@@ -31,6 +31,36 @@ abstract class Block
      */
     abstract public function normalize(array $props, Theme $theme): array;
 
+    /**
+     * What this block accepts, declared rather than implied.
+     *
+     * Until this existed, every block knew exactly what it took and none of
+     * them could say so: the knowledge lived only as a run of
+     * `$this->string($props, 'x')` calls inside a method whose job is to
+     * render. Nothing could offer a block in a picker, build a form for one
+     * nobody had pre-filled, or validate a tree it had not authored.
+     *
+     * **This is not `normalize()`'s return type.** That array mixes accepted
+     * inputs with values computed for the view -- `button` takes `variant` and
+     * returns `background`, `radius`, `shadow` and `bare`, none of which a
+     * template may pass, while `border_color` is accepted and appears in the
+     * output under another name. The two sets overlap; neither contains the
+     * other. So this is written by hand, and `SchemaContractTest` is what stops
+     * it drifting from the reads `normalize()` actually performs.
+     *
+     * A slot is not listed here. `hasSlot()` already answers that, and saying
+     * it twice is one more thing to keep in step.
+     *
+     * Defaults to empty so a `Block` subclass outside this package keeps
+     * working without one; the packaged 25 all declare theirs.
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    public function schema(): array
+    {
+        return [];
+    }
+
     /** Whether the block wraps content, i.e. `{% card %}...{% endcard %}`. */
     public function hasSlot(): bool
     {
