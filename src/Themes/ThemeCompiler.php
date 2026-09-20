@@ -147,6 +147,12 @@ final class ThemeCompiler
                added *outside* the 100% width. That is the overflow you see as a
                sideways scrollbar on a stacked column. */
             .m-stack { display:block !important; width:100% !important; max-width:100% !important; box-sizing:border-box !important; }
+            /* The header lockup: the name drops under the mark rather than
+               beside it. Its own rule instead of .m-stack because the desktop
+               gap is a padding-left that has to become a padding-top -- kept as
+               .m-stack it would be added outside the stacked cell's 100% width,
+               which is the sideways scroll described above. */
+            .m-lockup-name { display:block !important; width:100% !important; max-width:100% !important; box-sizing:border-box !important; padding:8px 0 0 0 !important; }
             .m-center { text-align:center !important; }
             /* An image sized for its desktop column would otherwise keep that
                width once the column stacks, leaving a gap beside it. */

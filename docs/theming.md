@@ -140,8 +140,17 @@ until the reader asks for them.
 ->theme(['header.show_name' => true])
 ```
 
-Set it and the name is drawn beside the mark, so the message still identifies
-itself with images off.
+Set it and the name is drawn as text beside the mark, so the message still
+identifies itself with images off.
+
+The pair is a shrink-wrapped table carrying the alignment, so `logo.align`
+centres the lockup as one unit rather than centring each half in its own column.
+Below 480px the name drops underneath, where a wide mark and a long name
+together would otherwise run past the canvas.
+
+It applies to the `branded` and `editorial` layouts, which are the two that draw
+a logo at all. `minimal` already sets the name as text and never shows a logo,
+and `plain` has no header, so neither is affected.
 
 ## Per template: `design.json`
 

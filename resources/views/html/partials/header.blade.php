@@ -70,28 +70,38 @@
                     <tr>
                         <td align="{{ $align }}">
                             @if(($t['logo.url'] ?? null))
-                                {{-- A transparent logo with dark artwork disappears on an
-                                     inverted background, so themes should ship a mark with
-                                     a baked-in stroke or plate rather than relying on a
-                                     prefers-color-scheme swap that only Apple Mail honours. --}}
-                                <a href="{{ $productUrl }}" target="_blank" rel="noopener" style="text-decoration:none;">
-                                    <img class="m-logo m-logo-light" src="{{ $t['logo.url'] }}" alt="{{ $t['logo.alt'] ?: $productName }}" width="{{ $t['logo.width'] ?? '140' }}" style="display:block;border:0;width:100%;max-width:{{ $t['logo.width'] ?? '140' }}px;height:auto;margin:{{ $align === 'center' ? '0 auto' : ($align === 'right' ? '0 0 0 auto' : '0') }};">
-                                    @if(($t['logo.dark_url'] ?? null))
-                                        {{-- Swapped in by the dark-mode stylesheet. Hidden rather than
-                                             absent so clients that ignore the media query never show
-                                             two marks. --}}
-                                        <img class="m-logo m-logo-dark" src="{{ $t['logo.dark_url'] }}" alt="{{ $t['logo.alt'] ?: $productName }}" width="{{ $t['logo.width'] ?? '140' }}" style="display:none;border:0;width:100%;max-width:{{ $t['logo.width'] ?? '140' }}px;height:auto;margin:{{ $align === 'center' ? '0 auto' : ($align === 'right' ? '0 0 0 auto' : '0') }};mso-hide:all;">
-                                    @endif
-                                </a>
-
                                 @if(($t['header.show_name'] ?? false) && $productName !== '')
                                     {{-- The name as TEXT beside the mark, which is not
                                          decoration: most clients block images by default, and
                                          a logo-only header then arrives as an empty box with
-                                         nothing saying who sent it. Text survives that. --}}
-                                    <div style="margin-top:8px;">
-                                        <span style="font-family:{{ $t['font.heading'] }};font-size:17px;line-height:24px;font-weight:700;letter-spacing:-0.01em;color:{{ $t['color.text'] }};">{{ $productName }}</span>
-                                    </div>
+                                         nothing saying who sent it. Text survives that.
+
+                                         A shrink-wrapped table carrying `align` rather than a
+                                         full-width one: the pair has to centre as a UNIT, and a
+                                         100%-wide table would centre each half in its own column
+                                         instead, leaving the mark and the name far apart. It is
+                                         also the only construction Outlook honours -- no
+                                         inline-block, no flex.
+
+                                         The two cells stack below 480px, where a wide mark and a
+                                         long name together would otherwise run past the canvas. --}}
+                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="{{ $align }}" style="border-collapse:collapse;">
+                                        <tr>
+                                            <td class="m-stack" style="vertical-align:middle;">
+                                                @include('mailyte::html.partials.logo-mark', ['lockup' => true])
+                                            </td>
+                                            {{-- The gutter is padding here and nothing on mobile:
+                                                 a stacked cell is content-box, so padding-left
+                                                 would be added OUTSIDE its 100% width and show up
+                                                 as a sideways scroll. m-lockup-name zeroes it and
+                                                 puts the gap above instead. --}}
+                                            <td class="m-lockup-name" style="vertical-align:middle;padding-left:12px;">
+                                                <span style="font-family:{{ $t['font.heading'] }};font-size:17px;line-height:24px;font-weight:700;letter-spacing:-0.01em;color:{{ $t['color.text'] }};">{{ $productName }}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                @else
+                                    @include('mailyte::html.partials.logo-mark')
                                 @endif
                             @elseif($productName !== '')
                                 <span style="font-family:{{ $t['font.heading'] }};font-size:17px;line-height:24px;font-weight:700;letter-spacing:-0.01em;color:{{ $t['color.text'] }};">{{ $productName }}</span>

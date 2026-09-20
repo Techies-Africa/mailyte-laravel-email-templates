@@ -62,6 +62,23 @@ function logoTags(string $html): int
     return preg_match_all('~<img[^>]*class="[^"]*m-logo~', $html);
 }
 
+/**
+ * Whether the mark and the name are SIDE BY SIDE -- sibling cells of one row.
+ *
+ * The arrangement needs asserting, not just the presence of both: the name sat
+ * under the mark for a release, every count-based test here passed either way,
+ * and nothing failed when it moved. Two `<td>`s in one `<tr>` is the only thing
+ * that distinguishes a lockup from a stack in table markup.
+ */
+function nameIsBesideMark(string $html): bool
+{
+    return (bool) preg_match(
+        '~<tr>\s*<td class="m-stack"[^>]*>.*?<img[^>]*class="[^"]*m-logo.*?</td>\s*'
+        .'<td class="m-lockup-name"[^>]*>.*?'.preg_quote(NAME, '~').'.*?</td>\s*</tr>~s',
+        $html,
+    );
+}
+
 it('shows the logo alone by default', function () {
     $html = renderWelcome(['logo.url' => 'https://cdn.example/logo.png']);
 
@@ -74,6 +91,37 @@ it('shows the name beside the logo when the theme asks', function () {
 
     expect(logoTags($html))->toBe(1);
     expect(headerNameCount($html))->toBe(1);
+    expect(nameIsBesideMark($html))->toBeTrue();
+});
+
+/**
+ * A lockup centres as a UNIT. A full-width table would centre each half in its
+ * own column, putting the mark and the name at opposite ends of the header --
+ * which looks like a bug rather than a brand.
+ */
+it('shrink-wraps the lockup so it aligns as one', function () {
+    $html = renderWelcome([
+        'logo.url' => 'https://cdn.example/logo.png',
+        'header.show_name' => true,
+        'logo.align' => 'center',
+    ]);
+
+    expect($html)->toMatch('~<table[^>]*align="center"[^>]*>\s*<tr>\s*<td class="m-stack"~');
+    expect($html)->not->toMatch('~<table[^>]*width="100%"[^>]*align="center"[^>]*>\s*<tr>\s*<td class="m-stack"~');
+});
+
+/**
+ * Below 480px a wide mark and a long name together run past the canvas, so the
+ * name drops underneath. The rule has to actually ship in the stylesheet --
+ * the markup alone would overflow.
+ */
+it('stacks the lockup on a narrow screen', function () {
+    $html = renderWelcome(['logo.url' => 'https://cdn.example/logo.png', 'header.show_name' => true]);
+
+    expect($html)->toContain('.m-lockup-name');
+    // padding-left becomes padding-top: a stacked cell is content-box, so the
+    // desktop gutter would be added outside its 100% width and scroll sideways.
+    expect($html)->toMatch('~\.m-lockup-name\s*\{[^}]*padding:8px 0 0 0~');
 });
 
 /** The old behaviour, untouched: no logo means the name carries the header. */

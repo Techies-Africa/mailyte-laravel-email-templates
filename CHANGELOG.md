@@ -13,6 +13,20 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-09-20
+
+### Fixed
+
+- `header.show_name` drew the company name *under* the mark. It is now beside
+  it, which is what this file, the docs and the block comment all said it did.
+  The pair is a shrink-wrapped table carrying the alignment, so `logo.align`
+  centres the lockup as one unit rather than centring each half in its own
+  column; below 480px the name drops underneath, where a wide mark and a long
+  name together would run past the canvas.
+
+  Safe to take: the option is off unless a theme asks for it, so a message that
+  does not set it is byte-identical to 1.1.0.
+
 ## [1.1.0] - 2026-09-20
 
 ### Added
@@ -24,8 +38,11 @@ one, which is what the `engine` constraint in every manifest is there to catch.
   one with `Mailyte::blocks()->get('heading')->schema()`, or all of them with
   `Mailyte::blocks()->schemas()`. See [docs/blocks.md](docs/blocks.md).
 - `BlockRegistry::all()` and `BlockRegistry::schemas()`.
-- `header.show_name`: draws the company name as text beside the logo
-  rather than instead of it. Off by default, so nothing already sent changes shape. The
+- `header.show_name`: draws the company name as text as well as the logo rather
+  than instead of it. Applies to the `branded` and `editorial` layouts, the two
+  that draw a logo at all. (It drew the name under the mark rather than beside
+  it; see 1.1.1.)
+  Off by default, so nothing already sent changes shape. The
   header was strictly either/or, which suits a logo that contains the name and
   leaves a logo-only header as an empty box in the many clients that block
   images by default.
