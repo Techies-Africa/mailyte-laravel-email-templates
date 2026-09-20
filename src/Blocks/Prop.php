@@ -18,8 +18,8 @@ namespace Mailyte\EmailTemplates\Blocks;
  * Every prop is `content`, `style` or `spacing`, and the split is the whole
  * point of declaring any of this. A block picker offering somebody 17 inputs
  * for a split panel is the flat-form problem again one level down; offering the
- * four that hold words, with the other thirteen behind "appearance", is a form
- * a person can use. `spacing` is separate from `style` because it is the group
+ * seven that hold words, with the other ten behind "appearance", is a form a
+ * person can use. `spacing` is separate from `style` because it is the group
  * an editor is most likely to hide outright.
  */
 final class Prop

@@ -214,6 +214,32 @@ takes precedence everywhere that slug is already used, with no code changes.
 
 `--as=my-slug` keeps the original and gives you a second template instead.
 
+### Or build an editor on it
+
+Templates are composed from 25 blocks, and every one of them declares what it
+accepts:
+
+```php
+Mailyte::blocks()->get('heading')->schema();
+Mailyte::blocks()->schemas();          // all 25, keyed by name
+```
+
+```php
+'text'  => ['type' => 'text', 'label' => 'Heading', 'group' => 'content', 'required' => true],
+'level' => ['type' => 'enum', 'label' => 'Level', 'group' => 'style',
+            'default' => '1', 'options' => ['1', '2', '3']],
+// align, color, space_above, space_below
+```
+
+That is enough to offer blocks in a picker, generate a form for one nobody has
+pre-filled, and validate a tree you did not author. The `group` is the part that
+matters: of the 204 props across the 25 blocks, **only 69 hold words**. An
+editor that renders all of a block's inputs together hands somebody 17 controls
+for a split panel, only seven of which hold words — rendering the `content`
+props with `style` and `spacing` behind a disclosure is a form a person can use.
+
+See **[Blocks](docs/blocks.md)**.
+
 ---
 
 ## The preview gallery
@@ -257,6 +283,7 @@ php artisan vendor:publish --tag=mailyte-mail-themes   # themes
 - [Laravel integration](docs/laravel-integration.md) — one email, one Mailable, or every notification you already send
 - [Sending](docs/sending.md) — the three ways in, and publishing a template
 - [Theming](docs/theming.md) — brand config, design tokens, per-tenant branding
+- [Blocks](docs/blocks.md) — the 25 blocks, what each accepts, and writing your own
 - [Catalog plan](docs/catalog-plan.md) — what is here and why
 - [Credits](CREDITS.md) — every third-party asset, its author and its licence
 - [Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)

@@ -115,6 +115,7 @@ A theme is a token tree. The ones you will actually reach for:
 | `spacing.xs` … `xl` | Vertical rhythm |
 | `layout.width` / `layout.gutter` | Canvas width and the measure inside it |
 | `logo.url` / `logo.dark_url` / `logo.align` | The mark in the header, and whether it sits left, centre or right |
+| `header.show_name` | Draw the company name as text *beside* the logo rather than instead of it. Off by default |
 | `social` | The accounts in the footer, as `{name, url}` |
 | `footer.show_social` / `show_address` / `show_copyright` | Switch footer sections off |
 
@@ -127,6 +128,20 @@ Every colour token accepts either a single value or a light/dark pair:
 ```
 
 Give a single string and the dark variant is kept rather than dropped, so setting a brand colour never costs you dark-mode handling by accident.
+
+### The name in the header
+
+The header is either/or by default: a logo if you have one, the company name as
+text if you do not. That suits a mark with the name already drawn into it, and
+leaves a logo-only header as an empty box in the many clients that block images
+until the reader asks for them.
+
+```php
+->theme(['header.show_name' => true])
+```
+
+Set it and the name is drawn beside the mark, so the message still identifies
+itself with images off.
 
 ## Per template: `design.json`
 

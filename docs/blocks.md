@@ -59,9 +59,9 @@ Of the 204 props across the 25 blocks, **only 69 hold words**. Ninety-four are
 appearance and 41 are spacing.
 
 An editor that renders all of a block's inputs together hands somebody 17
-controls for a split panel, most of them colours. Rendering the `content` props,
-with `style` and `spacing` behind a disclosure, is a form a person can use. That
-split is the reason the group exists; it is not decoration.
+controls for a split panel, only seven of which hold words. Rendering the
+`content` props, with `style` and `spacing` behind a disclosure, is a form a
+person can use. That split is the reason the group exists; it is not decoration.
 
 ### What the schema is not
 

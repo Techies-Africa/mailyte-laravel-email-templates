@@ -29,15 +29,9 @@ one, which is what the `engine` constraint in every manifest is there to catch.
   header was strictly either/or, which suits a logo that contains the name and
   leaves a logo-only header as an empty box in the many clients that block
   images by default.
-- Laravel 13 support.
 - `dir` on the rendered message, derived from the locale, so right-to-left
-  languages get correct bidirectional text.
-
-### Removed
-
-- Laravel 11 support. It is past security support, and Composer's advisory
-  audit blocks every `laravel/framework` and `illuminate/mail` 11.x release, so
-  the package could not honestly claim to work there.
+  languages get correct bidirectional text. See
+  [docs/theming.md](docs/theming.md).
 
 ## [1.0.0] - 2026-08-25
 
