@@ -13,8 +13,22 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-20
+
 ### Added
 
+- `Block::schema()`: every packaged block now declares what it accepts -- 204
+  props across the 25 blocks, each with a type, a label and a group of
+  `content`, `style` or `spacing`. Only 69 of the 204 hold words, so an editor
+  can render the ones that do and put the other 135 behind a disclosure. Read
+  one with `Mailyte::blocks()->get('heading')->schema()`, or all of them with
+  `Mailyte::blocks()->schemas()`. See [docs/blocks.md](docs/blocks.md).
+- `BlockRegistry::all()` and `BlockRegistry::schemas()`.
+- `header.show_name`: draws the company name as text beside the logo
+  rather than instead of it. Off by default, so nothing already sent changes shape. The
+  header was strictly either/or, which suits a logo that contains the name and
+  leaves a logo-only header as an empty box in the many clients that block
+  images by default.
 - Laravel 13 support.
 - `dir` on the rendered message, derived from the locale, so right-to-left
   languages get correct bidirectional text.

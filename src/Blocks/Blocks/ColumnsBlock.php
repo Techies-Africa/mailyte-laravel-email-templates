@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -20,6 +21,19 @@ final class ColumnsBlock extends Block
     public function name(): string
     {
         return 'columns';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'items' => Prop::items('Columns', [
+                'icon' => Prop::text('Icon', 'A character or short symbol above the heading.'),
+                'heading' => Prop::text('Heading', required: true),
+                'text' => Prop::richtext('Text'),
+            ], required: true),
+            'count' => Prop::number('How many', 2, 3, 'Anything past the count is dropped: four columns are unreadable on a phone.', Prop::CONTENT),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

@@ -74,7 +74,7 @@
                                      inverted background, so themes should ship a mark with
                                      a baked-in stroke or plate rather than relying on a
                                      prefers-color-scheme swap that only Apple Mail honours. --}}
-                                <a href="{{ $productUrl }}" target="_blank" rel="noopener">
+                                <a href="{{ $productUrl }}" target="_blank" rel="noopener" style="text-decoration:none;">
                                     <img class="m-logo m-logo-light" src="{{ $t['logo.url'] }}" alt="{{ $t['logo.alt'] ?: $productName }}" width="{{ $t['logo.width'] ?? '140' }}" style="display:block;border:0;width:100%;max-width:{{ $t['logo.width'] ?? '140' }}px;height:auto;margin:{{ $align === 'center' ? '0 auto' : ($align === 'right' ? '0 0 0 auto' : '0') }};">
                                     @if(($t['logo.dark_url'] ?? null))
                                         {{-- Swapped in by the dark-mode stylesheet. Hidden rather than
@@ -83,6 +83,16 @@
                                         <img class="m-logo m-logo-dark" src="{{ $t['logo.dark_url'] }}" alt="{{ $t['logo.alt'] ?: $productName }}" width="{{ $t['logo.width'] ?? '140' }}" style="display:none;border:0;width:100%;max-width:{{ $t['logo.width'] ?? '140' }}px;height:auto;margin:{{ $align === 'center' ? '0 auto' : ($align === 'right' ? '0 0 0 auto' : '0') }};mso-hide:all;">
                                     @endif
                                 </a>
+
+                                @if(($t['header.show_name'] ?? false) && $productName !== '')
+                                    {{-- The name as TEXT beside the mark, which is not
+                                         decoration: most clients block images by default, and
+                                         a logo-only header then arrives as an empty box with
+                                         nothing saying who sent it. Text survives that. --}}
+                                    <div style="margin-top:8px;">
+                                        <span style="font-family:{{ $t['font.heading'] }};font-size:17px;line-height:24px;font-weight:700;letter-spacing:-0.01em;color:{{ $t['color.text'] }};">{{ $productName }}</span>
+                                    </div>
+                                @endif
                             @elseif($productName !== '')
                                 <span style="font-family:{{ $t['font.heading'] }};font-size:17px;line-height:24px;font-weight:700;letter-spacing:-0.01em;color:{{ $t['color.text'] }};">{{ $productName }}</span>
                             @endif

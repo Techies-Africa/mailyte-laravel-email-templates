@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -25,6 +26,29 @@ final class SplitBlock extends Block
     public function fullBleed(array $props = []): bool
     {
         return ! isset($props['inset']) || ! $props['inset'];
+    }
+
+    public function schema(): array
+    {
+        return [
+            'eyebrow' => Prop::text('Eyebrow', 'A short line above the title.'),
+            'title' => Prop::text('Title', required: true),
+            'text' => Prop::richtext('Text'),
+            'image' => Prop::image('Image', required: true),
+            'image_alt' => Prop::text('Image description', 'What the image says, for anyone whose client blocks it.'),
+            'button_label' => Prop::text('Button label'),
+            'button_url' => Prop::url('Button links to'),
+            'reverse' => Prop::bool('Image on the right', description: 'Swaps the two halves.'),
+            'image_percent' => Prop::number('Image width', 30, 60, 'How much of the row the image takes, as a percentage.'),
+            'tone' => Prop::enum('Treatment', ['alt', 'accent', 'dark', 'custom'], 'alt'),
+            'background' => Prop::color('Background', 'Used by the dark and custom treatments.'),
+            'text_color' => Prop::color('Text colour', 'Used by the dark treatment; the others pick a legible colour themselves.'),
+            'button_background' => Prop::color('Button colour'),
+            'button_color' => Prop::color('Button label colour'),
+            'inset' => Prop::bool('Inset', description: 'Pulls the panel in from the edges instead of running it full width.'),
+            'padding' => Prop::length('Padding', group: Prop::SPACING),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

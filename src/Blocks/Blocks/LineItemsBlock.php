@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -20,6 +21,23 @@ final class LineItemsBlock extends Block
     public function name(): string
     {
         return 'line_items';
+    }
+
+    public function schema(): array
+    {
+        return [
+            'items' => Prop::items('Line items', [
+                'title' => Prop::text('Name', required: true),
+                'meta' => Prop::text('Detail', 'Quantity, size, variant -- whatever sits under the name.'),
+                'price' => Prop::text('Price', 'Formatted and with its currency symbol: the block does no arithmetic.'),
+                'image' => Prop::image('Thumbnail'),
+                'url' => Prop::url('Links to'),
+            ], required: true),
+            'show_thumbs' => Prop::bool('Show thumbnails', true, 'Ignored when no item has an image.'),
+            'thumb_size' => Prop::number('Thumbnail size', 24, 96, 'In pixels, square.'),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mailyte\EmailTemplates\Blocks\Blocks;
 
 use Mailyte\EmailTemplates\Blocks\Block;
+use Mailyte\EmailTemplates\Blocks\Prop;
 use Mailyte\EmailTemplates\Themes\Theme;
 
 /**
@@ -37,6 +38,32 @@ final class SectionBlock extends Block
         // A section is full-bleed unless it is explicitly asked to sit inside
         // the measure, which is occasionally what you want for an inset panel.
         return ! isset($props['inset']) || ! $props['inset'];
+    }
+
+    public function schema(): array
+    {
+        return [
+            'tone' => Prop::enum(
+                'Band',
+                ['surface', 'alt', 'accent', 'dark', 'custom'],
+                'alt',
+                'Which background the band takes. Accent and dark also switch the text to something legible on it.',
+            ),
+            'background' => Prop::color('Background', 'Used by the dark and custom bands only.'),
+            'text_color' => Prop::color('Text colour', 'Used by the dark band only; the others pick a legible colour themselves.'),
+            'border_color' => Prop::color('Border colour'),
+            'align' => Prop::enum('Alignment', ['left', 'center'], 'left'),
+            'radius' => Prop::length('Corner radius'),
+            'inset' => Prop::bool('Inset', description: 'Pulls the band in from the edges instead of running it full width.'),
+            'padding_y' => Prop::length('Padding, top and bottom', group: Prop::SPACING),
+            'padding_x' => Prop::length(
+                'Padding, left and right',
+                'Zero by default: the blocks inside already carry the layout gutter, so adding more insets them twice.',
+                group: Prop::SPACING,
+            ),
+            'space_above' => Prop::spacing('Space above'),
+            'space_below' => Prop::spacing('Space below'),
+        ];
     }
 
     public function normalize(array $props, Theme $theme): array

@@ -80,6 +80,37 @@ final class BlockRegistry
     }
 
     /**
+     * Every registered block, keyed by name.
+     *
+     * @return array<string, Block>
+     */
+    public function all(): array
+    {
+        return $this->blocks;
+    }
+
+    /**
+     * What every block accepts, keyed by block name.
+     *
+     * The surface an editor builds against: one call answers "which blocks
+     * exist, and what may each be given", which is the question a block picker
+     * and a JSON-tree validator both start from.
+     *
+     * A block registered from outside this package that has not declared a
+     * schema appears with an empty one rather than being left out -- it exists
+     * and can be rendered, it just cannot describe itself yet.
+     *
+     * @return array<string, array<string, array<string, mixed>>>
+     */
+    public function schemas(): array
+    {
+        return array_map(
+            static fn (Block $block): array => $block->schema(),
+            $this->blocks,
+        );
+    }
+
+    /**
      * Render one block to HTML.
      *
      * @param  array<string, mixed>  $props
