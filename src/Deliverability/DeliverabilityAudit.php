@@ -331,6 +331,16 @@ class DeliverabilityAudit
             $issues[] = Issue::warning($slug, 'MT062', 'no preheader, so the inbox preview shows whatever text comes first');
         }
 
+        // rspamd scores every text block whose font size is zero (ZERO_FONT,
+        // up to a point) and counts it as hidden as well (MANY_INVISIBLE_PARTS).
+        // The old Outlook spacer trick -- an &nbsp; in a font-size:0 cell --
+        // trips both for nothing: a 1px font in a cell whose height and
+        // line-height are fixed draws exactly the same.
+        $zero = preg_match_all('/font-size\s*:\s*0(?![.\d])/i', $email->html);
+        if ($zero > 0) {
+            $issues[] = Issue::warning($slug, 'MT064', "{$zero} element(s) set font-size:0, which spam filters score as hidden text; use 1px with a fixed line-height");
+        }
+
         return $issues;
     }
 

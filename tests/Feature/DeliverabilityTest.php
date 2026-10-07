@@ -215,6 +215,27 @@ it('catches an inline event handler', function () {
     expect(codes($issues))->toContain('MT061');
 });
 
+it('catches text set to font size zero', function () {
+    $issues = $this->audit->audit(fakeEmail([
+        'html' => '<p>'.str_repeat('Body copy. ', 20).'</p><table><tr><td style="height:8px;line-height:8px;font-size:0;">&nbsp;</td></tr></table>',
+    ]), fakeManifest());
+
+    expect(codes($issues))->toContain('MT064');
+    expect(codes($this->audit->audit(fakeEmail(), fakeManifest())))->not->toContain('MT064');
+});
+
+it('draws no design in the catalog with a zero font size', function (string $slug) {
+    $manifest = Mailyte::catalog()[$slug];
+    $samples = $manifest->samples();
+    $data = $samples['default'] ?? reset($samples) ?: [];
+
+    foreach ($manifest->supportedLayouts() as $layout) {
+        $email = Mailyte::template($slug)->with($data)->layout($layout)->render();
+
+        expect(codes($this->audit->audit($email, $manifest)))->not->toContain('MT064', "{$slug}/{$layout}");
+    }
+})->with('catalog');
+
 it('catches an empty subject', function () {
     expect(codes($this->audit->audit(fakeEmail(['subject' => '']), fakeManifest())))->toContain('MT062');
 });

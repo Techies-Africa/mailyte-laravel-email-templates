@@ -13,6 +13,23 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-10-07
+
+### Fixed
+
+- No design draws text at `font-size:0` any more. Spacers, dividers, the card
+  and status-banner accent bars, the header accent bar and the footer rule all
+  used the old Outlook trick of an `&nbsp;` in a zero-size cell, and rspamd
+  scores every such cell twice: as zero-size text (`ZERO_FONT`) and as hidden
+  (`MANY_INVISIBLE_PARTS`). They now use a 1px font with
+  `mso-line-height-rule:exactly`; the cell's `height` and `line-height` were
+  already what set its size, so nothing moves.
+
+### Added
+
+- Deliverability rule `MT064` (warning): an element set to `font-size:0`.
+  Every design in the catalog is tested free of it.
+
 ## [1.1.2] - 2026-10-07
 
 ### Fixed
