@@ -61,7 +61,7 @@
             "type": "string",
             "description": "Who wrote the new reply.",
             "required": true,
-            "example": "Tomás Beltrán"
+            "example": "Kemi Adeyemi"
         },
         "reply_text": {
             "type": "text",

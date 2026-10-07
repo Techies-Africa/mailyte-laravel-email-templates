@@ -215,16 +215,22 @@ it('catches an inline event handler', function () {
     expect(codes($issues))->toContain('MT061');
 });
 
-it('catches text set to font size zero', function () {
-    $issues = $this->audit->audit(fakeEmail([
-        'html' => '<p>'.str_repeat('Body copy. ', 20).'</p><table><tr><td style="height:8px;line-height:8px;font-size:0;">&nbsp;</td></tr></table>',
-    ]), fakeManifest());
+it('catches text set below 3px, which filters count as hidden', function () {
+    $cell = static fn (string $size): string => '<p>'.str_repeat('Body copy. ', 20).'</p>'
+        .'<table><tr><td style="height:8px;line-height:8px;font-size:'.$size.';">&nbsp;</td></tr></table>';
 
-    expect(codes($issues))->toContain('MT064');
-    expect(codes($this->audit->audit(fakeEmail(), fakeManifest())))->not->toContain('MT064');
+    foreach (['0', '0px', '1px', '2px'] as $size) {
+        expect(codes($this->audit->audit(fakeEmail(['html' => $cell($size)]), fakeManifest())))->toContain('MT064');
+    }
+
+    expect(codes($this->audit->audit(fakeEmail(['html' => $cell('3px')]), fakeManifest())))->not->toContain('MT064');
+    // The preheader is hidden on purpose; its 1px is not this rule's business.
+    expect(codes($this->audit->audit(fakeEmail([
+        'html' => '<div style="display:none;font-size:1px;line-height:1px;">Preview</div><p>'.str_repeat('Body copy. ', 20).'</p>',
+    ]), fakeManifest())))->not->toContain('MT064');
 });
 
-it('draws no design in the catalog with a zero font size', function (string $slug) {
+it('draws no design in the catalog with text below 3px', function (string $slug) {
     $manifest = Mailyte::catalog()[$slug];
     $samples = $manifest->samples();
     $data = $samples['default'] ?? reset($samples) ?: [];

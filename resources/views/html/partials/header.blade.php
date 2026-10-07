@@ -20,7 +20,7 @@
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
     @if($accentBar)
         <tr>
-            <td height="3" style="height:3px;line-height:3px;font-size:1px;mso-line-height-rule:exactly;background:{{ $accentBar }};background-color:{{ $t['color.primary'] }};border-radius:{{ $t['radius.lg'] ?? '10px' }} {{ $t['radius.lg'] ?? '10px' }} 0 0;">&nbsp;</td>
+            <td height="3" style="height:3px;line-height:3px;font-size:3px;mso-line-height-rule:exactly;background:{{ $accentBar }};background-color:{{ $t['color.primary'] }};border-radius:{{ $t['radius.lg'] ?? '10px' }} {{ $t['radius.lg'] ?? '10px' }} 0 0;">&nbsp;</td>
         </tr>
     @endif
 

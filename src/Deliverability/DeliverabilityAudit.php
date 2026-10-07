@@ -331,14 +331,25 @@ class DeliverabilityAudit
             $issues[] = Issue::warning($slug, 'MT062', 'no preheader, so the inbox preview shows whatever text comes first');
         }
 
-        // rspamd scores every text block whose font size is zero (ZERO_FONT,
-        // up to a point) and counts it as hidden as well (MANY_INVISIBLE_PARTS).
-        // The old Outlook spacer trick -- an &nbsp; in a font-size:0 cell --
-        // trips both for nothing: a 1px font in a cell whose height and
-        // line-height are fixed draws exactly the same.
-        $zero = preg_match_all('/font-size\s*:\s*0(?![.\d])/i', $email->html);
-        if ($zero > 0) {
-            $issues[] = Issue::warning($slug, 'MT064', "{$zero} element(s) set font-size:0, which spam filters score as hidden text; use 1px with a fixed line-height");
+        // rspamd counts every text block set below 3px as hidden
+        // (MANY_INVISIBLE_PARTS, up to 1 point) and one at 0 twice over
+        // (ZERO_FONT as well), measured on its own scanner 2026-10-07: 0, 1
+        // and 2px count, 3px does not, and an empty cell counts the same as
+        // one holding &nbsp;. The old Outlook spacer trick -- a font-size:0
+        // cell -- trips it for nothing: 3px in a cell whose height and
+        // line-height are fixed draws exactly the same. A block already
+        // hidden with display:none (the preheader) is a different question.
+        $tiny = 0;
+        preg_match_all('/\sstyle\s*=\s*"([^"]*)"/i', $email->html, $styles);
+        foreach ($styles[1] as $style) {
+            if (preg_match('/font-size\s*:\s*([\d.]+)(px)?\s*(?:;|$|!)/i', $style, $size) === 1
+                && (float) $size[1] < 3
+                && preg_match('/display\s*:\s*none/i', $style) !== 1) {
+                $tiny++;
+            }
+        }
+        if ($tiny > 0) {
+            $issues[] = Issue::warning($slug, 'MT064', "{$tiny} element(s) set a font size under 3px, which spam filters count as hidden text; use 3px with a fixed line-height");
         }
 
         return $issues;
