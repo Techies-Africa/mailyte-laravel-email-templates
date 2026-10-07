@@ -13,6 +13,8 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-10-07
+
 ### Fixed
 
 - `product_grid` no longer wraps each product's picture in a link. The title
