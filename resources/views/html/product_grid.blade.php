@@ -12,10 +12,13 @@
             <!--<![endif]-->
             @foreach($props['items'] as $item)
                 <td class="m-stack" valign="top" width="{{ $props['width_percent'] }}%" style="width:{{ $props['width_percent'] }}%;padding:0 {{ $props['gutter'] }} {{ $props['gutter'] }} 0;">
+                    {{-- The picture is not a link. The title and the "Shop" link below
+                         already go to the same page, and an image wrapped in a link
+                         with little text around it is a spam rule of its own
+                         (rspamd HTML_SHORT_LINK_IMG_1, 2 points: the promotion
+                         design's whole score). --}}
                     @if($item['image'])
-                        @if($item['url'])<a href="{{ $item['url'] }}" target="_blank" rel="noopener" style="text-decoration:none;">@endif
                         <img class="m-img-fill" src="{{ $item['image'] }}" alt="{{ $item['title'] }}" width="{{ $props['image_width'] }}" height="{{ $props['image_height'] }}" style="display:block;border:0;width:100%;max-width:{{ $props['image_width'] }}px;height:auto;border-radius:{{ $props['radius'] }};">
-                        @if($item['url'])</a>@endif
                     @endif
 
                     @if($props['has_badges'])

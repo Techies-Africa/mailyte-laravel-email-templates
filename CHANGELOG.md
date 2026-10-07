@@ -13,6 +13,14 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 
 ## [Unreleased]
 
+### Fixed
+
+- `product_grid` no longer wraps each product's picture in a link. The title
+  and the "Shop" link already go to the same page, and an image that is a link
+  with little text around it is a spam rule of its own: rspamd's
+  `HTML_SHORT_LINK_IMG_1` gave the `promotion` design 2 points, its whole
+  score (1.4 → 0.4 without it). Every other design is byte-identical.
+
 ## [1.1.1] - 2026-09-20
 
 ### Fixed
