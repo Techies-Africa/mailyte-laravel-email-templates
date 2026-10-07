@@ -39,8 +39,8 @@
         "kind": "original",
         "note": "Design: docket — narrow measure, mono figures, dotted rules, the amount stated once and large."
     },
-    "subject": "Receipt for {{ amount }} — {{ product.name }}",
-    "preheader": "Paid on {{ paid_at }}. Keep this for your records.",
+    "subject": "Your receipt from {{ product.name }}",
+    "preheader": "{{ amount }} paid on {{ paid_at }}. Keep this for your records.",
     "blocks_used": [
         "button",
         "divider",

@@ -61,6 +61,7 @@ warnings too, which is what CI runs.
 | `MT061` | `<script>`, `<iframe>`, `<form>`, event handlers | Every major client strips these, and their presence raises the score on the way past |
 | `MT062` | Empty subject, missing preheader | The subject is not optional; the preheader decides what the inbox preview says |
 | `MT063` | No unsubscribe route in the rendered output | An error for `marketing`, which is required to carry one by CAN-SPAM and by Gmail's and Yahoo's bulk sender rules; a warning for `notification`, where it helps deliverability but is not a legal duty. `transactional` is exempt |
+| `MT064` | Text set below 3px | Spam filters count it as hidden (rspamd: `MANY_INVISIBLE_PARTS` under 3px, `ZERO_FONT` at 0). The old Outlook `font-size:0` spacer trick trips it for nothing — 3px in a cell with a fixed `line-height` draws the same. A block hidden with `display:none` (the preheader) is exempt |
 
 A template that genuinely does not need a rule waives it in its own manifest,
 with a written reason:

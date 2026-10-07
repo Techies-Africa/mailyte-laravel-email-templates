@@ -13,6 +13,33 @@ one, which is what the `engine` constraint in every manifest is there to catch.
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-10-07
+
+Every design measured against rspamd before and after: 47 of 50 now carry
+nothing but the preheader's 0.05, and the other three reach the same once a
+customer's own words replace the samples.
+
+### Fixed
+
+- No design draws text below 3px any more. Spacers, dividers, the card and
+  status-banner accent bars, the header accent bar and the footer rule all used
+  the old Outlook trick of an `&nbsp;` in a `font-size:0` cell. rspamd counts
+  any text block under 3px as hidden (`MANY_INVISIBLE_PARTS`) and one at 0 as
+  zero-size text too (`ZERO_FONT`) -- measured: 0, 1 and 2px count, 3px does
+  not, and an empty cell counts the same. They now use 3px with
+  `mso-line-height-rule:exactly`; the cell's `height` and `line-height` were
+  already what set its size, so nothing moves.
+- `receipt` and `refund-issued` no longer put the amount in the subject
+  (`SUBJECT_HAS_CURRENCY`, a full point). The subject says whose receipt it is;
+  the amount moved to the start of the preheader, where the inbox still shows it.
+- `comment-reply`'s sample author is now "Kemi Adeyemi": the accented sample
+  name tripped `R_MIXED_CHARSET` (1.25) in the subject.
+
+### Added
+
+- Deliverability rule `MT064` (warning): text set below 3px outside a block
+  hidden with `display:none`. Every design in the catalog is tested free of it.
+
 ## [1.1.2] - 2026-10-07
 
 ### Fixed

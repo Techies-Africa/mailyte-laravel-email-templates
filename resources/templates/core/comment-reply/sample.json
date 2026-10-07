@@ -1,7 +1,7 @@
 {
     "default": {
         "thread_title": "Deploy pipeline times out on large migrations",
-        "reply_author": "Tomás Beltrán",
+        "reply_author": "Kemi Adeyemi",
         "reply_text": "It's the migration lock, not the pipeline. I raised the statement timeout to 300s on staging and the same job finished in four minutes. Happy to roll that to production tomorrow if nobody objects.",
         "reply_time": "Today at 09:02",
         "parent_label": "In reply to",

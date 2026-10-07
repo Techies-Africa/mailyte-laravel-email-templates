@@ -23,7 +23,7 @@
     <tr>
         <td style="padding:20px 0 0;">
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
-                <tr><td class="m-divider" height="1" style="height:1px;line-height:1px;font-size:0;background-color:{{ $t['color.border'] }};">&nbsp;</td></tr>
+                <tr><td class="m-divider" height="1" style="height:1px;line-height:1px;font-size:3px;mso-line-height-rule:exactly;background-color:{{ $t['color.border'] }};">&nbsp;</td></tr>
             </table>
         </td>
     </tr>

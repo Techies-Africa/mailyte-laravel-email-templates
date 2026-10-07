@@ -39,8 +39,8 @@
         "kind": "original",
         "note": "Design: credit note — the invoice read backwards, serif on blue-grey stock, one negative line in the tabular column, the bank's delay printed on the page."
     },
-    "subject": "Refund of {{ amount }} from {{ company.name }}",
-    "preheader": "Released on {{ issued_on }}. Your bank decides the day it lands, not us.",
+    "subject": "Your refund from {{ company.name }}",
+    "preheader": "{{ amount }} released on {{ issued_on }}. Your bank decides the day it lands, not us.",
     "blocks_used": [
         "button",
         "divider",

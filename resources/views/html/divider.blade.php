@@ -9,9 +9,9 @@
                         {{-- A dotted or dashed rule has to be a border, not a background:
                              Outlook renders border-style faithfully and would show a solid
                              band for a background-image dash pattern. --}}
-                        <td class="m-divider" style="font-size:0;line-height:0;border-top:{{ $props['style'] === 'double' ? '3px double' : '1px '.$props['style'] }} {{ $props['color'] }};">&nbsp;</td>
+                        <td class="m-divider" style="font-size:3px;mso-line-height-rule:exactly;line-height:0;border-top:{{ $props['style'] === 'double' ? '3px double' : '1px '.$props['style'] }} {{ $props['color'] }};">&nbsp;</td>
                     @else
-                        <td class="m-divider" height="{{ $height }}" style="height:{{ $height }}px;line-height:{{ $height }}px;font-size:0;background-color:{{ $props['color'] }};">&nbsp;</td>
+                        <td class="m-divider" height="{{ $height }}" style="height:{{ $height }}px;line-height:{{ $height }}px;font-size:3px;mso-line-height-rule:exactly;background-color:{{ $props['color'] }};">&nbsp;</td>
                     @endif
                 </tr>
             </table>
